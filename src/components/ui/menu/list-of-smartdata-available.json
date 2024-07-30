@@ -1,0 +1,172 @@
+{
+  "economy": [
+    {
+      "id": "economy_growth",
+      "name": "Economic Growth",
+      "link": "/smartdata/economic-growth",
+      "available": true
+    },
+    {
+      "id": "gdp_leading",
+      "name": "GDP Leading",
+      "link": "/smartdata/gdp-leading",
+      "available": true
+    },
+    {
+      "id": "gdp_nowcast",
+      "name": "GDP Nowcast",
+      "link": "/smartdata/gdp-nowcast",
+      "available": true
+    },
+    {
+      "id": "inflation",
+      "name": "Global CPI",
+      "link": "/smartdata/global-cpi",
+      "available": true
+    },
+    {
+      "id": "employment",
+      "name": "Job Openings",
+      "link": "/smartdata/job-openings",
+      "available": true
+    },
+    {
+      "id": "risk_on_off",
+      "name": "Risk On - Risk Off",
+      "link": "/smartdata/risk-on-off",
+      "available": true
+    },
+    {
+      "id": "dynamic_quadrant",
+      "name": "Dynamic Quadrant",
+      "link": "/smartdata/dynamic-quadrant",
+      "available": true
+    }
+  ],
+  "commodity": [
+    {
+      "id": "agriculture",
+      "name": "Agriculture",
+      "link": "/smartdata/agriculture",
+      "available": true
+    },
+    {
+      "id": "drought_country",
+      "name": "Drought",
+      "link": "/smartdata/drought",
+      "available": true
+    }
+  ],
+  "industrial activity": [
+    {
+      "id": "pollution",
+      "name": "Air Pollution",
+      "link": "/smartdata/pollution",
+      "available": true
+    },
+    {
+      "id": "industrial_production",
+      "name": "Industrial Production",
+      "link": "/smartdata/industrial-production",
+      "available": true
+    },
+    {
+      "id": "qmn",
+      "name": "Manufacturing Nowcast",
+      "link": "/smartdata/manufacturing-nowcast",
+      "available": true
+    }
+  ],
+  "trade": [
+    {
+      "id": "trade_international",
+      "name": "International Trade",
+      "link": "/smartdata/international-trade",
+      "available": true
+    },
+    {
+      "id": "trade_commodity",
+      "name": "Commodity Trade",
+      "link": "/smartdata/commodity-trade",
+      "available": true
+    },
+    {
+      "id": "trade_automotive",
+      "name": "Automotive Exports",
+      "link": "/smartdata/automotive-exports",
+      "available": true
+    },
+    {
+      "id": "trade_congestion",
+      "name": "Congestion",
+      "link": "/smartdata/congestion",
+      "available": true
+    }
+  ],
+  "consumption": [
+    {
+      "id": "consumption",
+      "name": "Consumption",
+      "link": "/smartdata/consumption",
+      "available": true
+    },
+    {
+      "id": "air_traffic",
+      "name": "Air Traffic",
+      "link": "/smartdata/air-traffic",
+      "available": true
+    },
+    {
+      "id": "international_tourism",
+      "name": "Chinese Outbound Tourism",
+      "link": "/smartdata/chinese-outbound-tourism",
+      "available": true
+    }
+  ],
+  "political risk": [
+    {
+      "id": "country_risk",
+      "name": "Country Risk",
+      "link": "/smartdata/country-risk",
+      "available": true
+    },
+    {
+      "id": "food_anxiety",
+      "name": "Food Anxiety",
+      "link": "/smartdata/food-anxiety",
+      "available": true
+    }
+  ],
+  "JERA": [
+    {
+      "id": "industrial_activity",
+      "name": "Industrial Activity",
+      "link": "/smartdata/industrial-activity",
+      "available": true
+    },
+    {
+      "id": "regional_trade",
+      "name": "Regional Trade",
+      "link": "/smartdata/regional-trade",
+      "available": true
+    },
+    {
+      "id": "meteo_demand",
+      "name": "Meteo Demand",
+      "link": "/smartdata/meteo-demand",
+      "available": true
+    },
+    {
+      "id": "electricity_production",
+      "name": "Electricity Production",
+      "link": "/smartdata/electricity-production",
+      "available": true
+    },
+    {
+      "id": "lng_inventory",
+      "name": "LNG Inventory",
+      "link": "/smartdata/lng-inventory",
+      "available": true
+    }
+  ]
+}

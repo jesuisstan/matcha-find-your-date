@@ -1,0 +1,49 @@
+.radio {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid hsl(222.2, 84%, 4.9%);
+  border-radius: 50%;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio:checked::before {
+  content: '';
+  display: block;
+  width: 50%;
+  height: 50%;
+  background-color: hsl(222.2, 84%, 4.9%);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio:checked::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: hsl(222.2, 84%, 4.9%);
+  animation: pulse 1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 hsl(204, 13%, 37%);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 7px hsla(0, 0%, 0%, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 hsla(0, 0%, 0%, 0);
+  }
+}
