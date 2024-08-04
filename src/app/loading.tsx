@@ -6,7 +6,7 @@ const Loading = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center text-center text-foreground">
       <Image
-        src="/identity/logo-loading.svg"
+        src="/identity/logo-loading.png"
         alt="loading"
         width="0"
         height="0"
