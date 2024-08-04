@@ -6,7 +6,7 @@ import { Open_Sans } from 'next/font/google';
 import clsx from 'clsx';
 
 import '@/styles/globals.css';
-//import NextAuthProvider from '@/components/providers/next-auth-provider';
+import NextAuthProvider from '@/components/providers/next-auth-provider';
 
 const ThemeProvider = dynamic(() => import('@/components/providers/theme-provider'), {
   ssr: false,
@@ -36,9 +36,9 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           enableSystem
           disableTransitionOnChange
         >
-          {/*<NextAuthProvider>*/}
+          <NextAuthProvider>
             {children}
-          {/*</NextAuthProvider>*/}
+          </NextAuthProvider>
         </ThemeProvider>
       </body>
     </html>
