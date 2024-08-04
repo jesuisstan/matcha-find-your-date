@@ -1,19 +1,25 @@
 import { z } from 'zod';
 
-import { userSubscriptionSchema } from '@/types/user-subscription';
-
 export const userSchema = z.object({
+  id: z.number().nullable(),
   firstname: z.string(),
   lastname: z.string(),
+  nickname: z.string(),
+  email: z.string().email(),
+  confirmed: z.boolean(),
+  birthdate: z.string(),
+  sex: z.enum(['male', 'female']),
+  biography: z.string(),
+  tags: z.string(),
+  complete: z.boolean(),
+  latitude: z.number().nullable(),
+  longitude: z.number().nullable(),
+  trace: z.string(), // last visit
+  online: z.boolean(),
+  popularity: z.number(),
+  preferences: z.enum(['male', 'female', 'bisexual']),
+  avatars: z.array(z.string()),
   lang: z.string(),
-  subscription: z.custom((value) => {
-    const validationResult = userSubscriptionSchema.safeParse(value);
-    if (validationResult.success) {
-      return validationResult.data;
-    } else {
-      throw new Error(validationResult.error.message);
-    }
-  }),
 });
 
 export type TUser = z.infer<typeof userSchema>;

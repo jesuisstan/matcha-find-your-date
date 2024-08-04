@@ -30,6 +30,30 @@ async function seedUsers() {
   return insertedUsers;
 }
 
+/*
+Pure SQL version of the seedUsers function:
+-- Step 1: Create the UUID extension if it does not already exist
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Step 2: Create the 'users' table if it does not already exist
+CREATE TABLE IF NOT EXISTS users (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY, -- Unique identifier with default UUID generation
+  name VARCHAR(255) NOT NULL, -- User's name, cannot be null
+  email TEXT NOT NULL UNIQUE, -- User's email, must be unique and cannot be null
+  password TEXT NOT NULL -- User's password, cannot be null
+);
+
+-- Step 3: Insert data into the 'users' table
+-- The `ON CONFLICT (id) DO NOTHING` clause ensures that if a row with the same ID already exists,
+-- it will not be inserted again, thus avoiding duplicate entries
+INSERT INTO users (id, name, email, password)
+VALUES 
+  ('user-id-1', 'User Name 1', 'user1@example.com', 'hashed-password-1'), -- Example entry 1
+  ('user-id-2', 'User Name 2', 'user2@example.com', 'hashed-password-2') -- Example entry 2
+  -- Add additional rows here as needed
+ON CONFLICT (id) DO NOTHING;
+*/
+
 async function seedInvoices() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 

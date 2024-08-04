@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { TUser } from '@/types/user';
-import { TUserSubscription } from '@/types/user-subscription';
 
 type UserStore = {
   user: TUser;
@@ -14,10 +13,25 @@ const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
       user: {
+        id: null,
         firstname: '',
         lastname: '',
+        nickname: '',
+        email: '',
+        confirmed: false,
+        birthdate: '',
+        sex: 'male',
+        biography: '',
+        tags: '',
+        complete: false,
+        latitude: null,
+        longitude: null,
+        trace: '',
+        online: false,
+        popularity: 0,
+        preferences: 'bisexual',
+        avatars: [],
         lang: 'en',
-        subscription: {} as TUserSubscription,
       },
       setUser: (userData: TUser) => set({ user: userData }),
       setLang: (lang: string) =>
