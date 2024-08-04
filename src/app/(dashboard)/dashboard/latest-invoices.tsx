@@ -3,7 +3,7 @@ import Image from 'next/image';
 //import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
-import { LatestInvoice } from '@/lib/definitions';
+import { LatestInvoice } from '@/lib/types';
 
 export default async function LatestInvoices({
   latestInvoices,
