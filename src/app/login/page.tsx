@@ -57,11 +57,11 @@ export default function Login() {
       >
         <div className="relative h-full w-full">
           <Image
-            src="/identity/background.png"
+            src="/identity/background.jpg"
             alt="logo"
             fill
             placeholder="blur"
-            blurDataURL="/identity/background.png"
+            blurDataURL="/identity/background.jpg"
             className="z-0"
             sizes={'100vw'}
           />

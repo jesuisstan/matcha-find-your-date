@@ -32,33 +32,6 @@ const Dashboard = async () => {
       </h1>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
         <LatestInvoices latestInvoices={latestInvoices} />
-        {/*{availableCategories.map((category: string) => (
-          <React.Fragment key={category}>
-            {smartdataAvailable &&
-              smartdataAvailable[category as keyof typeof smartdataAvailable].map(
-                (item: TSmartdataIdentity) => (
-                  <React.Fragment key={item.id}>
-                    {item.available && (
-                      <Card>
-                        <CardHeader>
-                          <div className="flex items-center justify-between">
-                            <div className="mr-3">
-                              <CardTitle>{item.name}</CardTitle>
-                            </div>
-                            <Link href={`${item.link}`}>
-                              <Button className="md:w-18 flex items-center lg:w-16">
-                                <ChevronRight size={18} />
-                              </Button>
-                            </Link>
-                          </div>
-                        </CardHeader>
-                      </Card>
-                    )}
-                  </React.Fragment>
-                )
-              )}
-          </React.Fragment>
-        ))}*/}
         CONTENTTTTTTTTTTTTTTTT
       </div>
     </>
