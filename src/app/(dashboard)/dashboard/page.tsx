@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import LatestInvoices from './latest-invoices';
 
 import { fetchLatestInvoices } from '@/lib/data';
-import useUserStore from '@/stores/user';
+//import useUserStore from '@/stores/user';
 import { capitalize } from '@/utils/format-string';
 
 const Dashboard = async () => {

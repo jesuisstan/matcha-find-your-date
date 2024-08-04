@@ -15,7 +15,7 @@ import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
-import useUserStore from '@/stores/user';
+//import useUserStore from '@/stores/user';
 import { capitalize } from '@/utils/format-string';
 
 const Menu: React.FC = () => {
@@ -26,7 +26,9 @@ const Menu: React.FC = () => {
   //const user = session?.user;
   const user = { username: 'username', shortname: 'shortname', lang: 'en' };
 
-  const lang = useUserStore((state: any) => state?.user?.lang);
+  //const lang = useUserStore((state: any) => state?.user?.lang);
+  const lang = 'en'; // todo
+
 
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
