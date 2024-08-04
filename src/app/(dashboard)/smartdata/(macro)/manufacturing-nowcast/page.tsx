@@ -22,7 +22,7 @@ const ManufacturingNowcast = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false); // todo
 
-  const { getValueOfSmartdata } = useSmartdataFiltersStore();
+  //const { getValueOfSmartdata } = useSmartdataFiltersStore();
 
   // TODO: API call to get option
   const indicatorOptions = [{ value: 'nsa', label: t`common:selector.level` }];
@@ -42,12 +42,12 @@ const ManufacturingNowcast = () => {
     { value: 'RU', label: 'Russia' },
   ];
 
-  // Params from Smartdata store. (!) Default values are set in the store:
-  const smartdataName = extractSmartdataName(usePathname());
-  const frequency: string = getValueOfSmartdata(smartdataName, 'frequency') as string;
-  const indicator: string = getValueOfSmartdata(smartdataName, 'indicator') as string; // note: called 'seasAdj' in API data
-  const approach: string = getValueOfSmartdata(smartdataName, 'approach') as string; // note: called 'unit' in API data
-  const geoIds: string[] = getValueOfSmartdata(smartdataName, 'countries') as string[];
+  //// Params from Smartdata store. (!) Default values are set in the store:
+  //const smartdataName = extractSmartdataName(usePathname());
+  //const frequency: string = getValueOfSmartdata(smartdataName, 'frequency') as string;
+  //const indicator: string = getValueOfSmartdata(smartdataName, 'indicator') as string; // note: called 'seasAdj' in API data
+  //const approach: string = getValueOfSmartdata(smartdataName, 'approach') as string; // note: called 'unit' in API data
+  //const geoIds: string[] = getValueOfSmartdata(smartdataName, 'countries') as string[];
 
   return (
     <div>

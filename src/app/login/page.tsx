@@ -4,12 +4,11 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { signIn, useSession } from 'next-auth/react';
 
+//import { signIn } from 'next-auth/react';
 import clsx from 'clsx';
 
-import LoginButton from './login-button';
-
+//import LoginButton from './login-button';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -21,21 +20,21 @@ export default function Login() {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const currentForm = formRef.current;
-    if (currentForm == null) return;
-    const formData = new FormData(currentForm);
-    if (!formData.get('username') || !formData.get('password')) return;
+    //const currentForm = formRef.current;
+    //if (currentForm == null) return;
+    //const formData = new FormData(currentForm);
+    //if (!formData.get('username') || !formData.get('password')) return;
 
-    const response = await signIn('login', {
-      username: formData.get('username'),
-      password: formData.get('password'),
-      redirect: false,
-    });
+    //const response = await signIn('login', {
+    //  username: formData.get('username'),
+    //  password: formData.get('password'),
+    //  redirect: false,
+    //});
 
-    if (response?.error) {
-      setError(response.error);
-      return;
-    }
+    //if (response?.error) {
+    //  setError(response.error);
+    //  return;
+    //}
 
     // router.push(response?.url || '/');
     router.push('/dashboard');

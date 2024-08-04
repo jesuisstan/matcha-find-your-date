@@ -22,8 +22,9 @@ const Menu: React.FC = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
 
-  const { data: session } = useSession();
-  const user = session?.user;
+  //const { data: session } = useSession();
+  //const user = session?.user;
+  const user = { username: 'username', shortname: 'shortname', lang: 'en' };
 
   const lang = useUserStore((state: any) => state?.user?.lang);
 
