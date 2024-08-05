@@ -11,12 +11,12 @@ const Loading = () => {
         width="0"
         height="0"
         sizes="100vw"
-        className="h-[346px] w-[1042px]"
+        className="h-80 w-80"
       />
       <p className="mb-[76px] text-4xl font-normal leading-[48px] tracking-wider">
-        Macro Intelligence Platform
+        Because, love too can be industrialized
       </p>
-      <p className="mb-[14px] animate-pulse text-2xl font-normal leading-[29px]">Loading data...</p>
+      <p className="mb-[14px] animate-pulse text-2xl font-normal leading-[29px]">Loading...</p>
       <Spinner size={16} />
       <p className="mt-[14px] animate-pulse text-base font-normal leading-[19px]">Please wait</p>
     </div>

@@ -1,9 +1,9 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { jwtVerify } from 'jose';
+import { JWTPayload, jwtVerify } from 'jose';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'secret-key';
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;
@@ -14,7 +14,13 @@ export async function middleware(req: NextRequest) {
 
   try {
     const secretKey = new TextEncoder().encode(JWT_SECRET);
-    await jwtVerify(token, secretKey);
+    const { payload } = await jwtVerify(token, secretKey);
+    const userId = (payload as JWTPayload & { userId: string }).userId;
+
+    if (userId) {
+      req.nextUrl.searchParams.set('userId', userId);
+    }
+
     return NextResponse.next();
   } catch (error) {
     console.error('JWT verification failed:', error);
@@ -25,24 +31,3 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|identity|favicon.ico|login|register).*)'],
 };
-
-
-//import { NextRequest } from 'next/server'
-
-//import { isAuthenticated } from '@/lib/jwtTokenControl'
-
-//// Limit the middleware to paths starting with `/api/`
-//// matcher: ['/about/:path*', '/dashboard/:path*'],
-//export const config = {
-//  matcher: '/api/v1/:function*'
-//  //matcher: ['/((?!api|_next/static|_next/image|identity|favicon.ico|login|register).*)'],
-
-//}
-
-//export async function middleware(request: NextRequest) {
-//  const result = await isAuthenticated(request)
-//console.log('result', result)
-//  if (!result) {
-//    return Response.json({ success: false, message: 'Invalid token. Paths starting with `/api/v1/`' }, { status: 401 })
-//  }
-//}

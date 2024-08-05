@@ -54,7 +54,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { TUser } from '@/types/user';
 
 type UserStore = {
-  user: TUser | null; // Обновляем состояние для возможности null
+  user: TUser | null; 
   setUser: (userData: TUser) => void;
   clearUser: () => void;
   setLang: (lang: string) => void;
@@ -63,9 +63,9 @@ type UserStore = {
 const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
-      user: null, // Изначально пользователь не авторизован
+      user: null,
       setUser: (userData: TUser) => set({ user: userData }),
-      clearUser: () => set({ user: null }), // Очистка состояния пользователя
+      clearUser: () => set({ user: null }),
       setLang: (lang: string) =>
         set((state) => ({ user: state.user ? { ...state.user, lang } : null })),
     }),

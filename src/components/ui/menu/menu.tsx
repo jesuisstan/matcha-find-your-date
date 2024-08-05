@@ -14,20 +14,13 @@ import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
-//import useUserStore from '@/stores/user';
-import { capitalize } from '@/utils/format-string';
+import useUserStore from '@/stores/user';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
-
-  //const { data: session } = useSession();
-  //const user = session?.user;
-  const user = { username: 'username', shortname: 'shortname', lang: 'en' };
-
-  //const lang = useUserStore((state: any) => state?.user?.lang);
-  const lang = 'en'; // todo
-
+  const user = useUserStore((state) => state.user);
+  const lang = user?.lang || 'en';
 
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -137,14 +130,7 @@ const Menu: React.FC = () => {
                 )}
               </div>
 
-              <SideBarHeader
-                name={
-                  user?.username != undefined && user?.username?.length <= 9
-                    ? capitalize(user?.username)
-                    : user?.shortname?.toUpperCase()
-                }
-                translate={t}
-              />
+              <SideBarHeader name={user?.nickname || user?.firstname} translate={t} />
 
               {/* DASHBOARD LINK */}
               <div
@@ -177,7 +163,6 @@ const Menu: React.FC = () => {
               <div>Link 1</div>
               <div>Link 1</div>
               <div>Link 1</div>
-
 
               <TermsConditionBlock translate={t} />
             </div>

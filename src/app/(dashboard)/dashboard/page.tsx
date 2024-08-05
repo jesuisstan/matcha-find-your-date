@@ -1,15 +1,17 @@
-//'use client';
+'use client';
+
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import LatestInvoices from './latest-invoices';
 
 import { fetchLatestInvoices } from '@/lib/data';
-//import useUserStore from '@/stores/user';
+import useUserStore from '@/stores/user';
 import { capitalize } from '@/utils/format-string';
 
-const Dashboard = async () => {
+const Dashboard = () => {
   const { t } = useTranslation('dashboard');
+  const user = useUserStore((state) => state.user);
   //const { data: session } = useSession();
   //const [smartdataAvailable, setSmartdataAvailable] = useState<any[]>([]);
   //const accessToken = session?.user?.access_token;
@@ -23,15 +25,15 @@ const Dashboard = async () => {
   //  return <DashboardSkeleton />;
   //}
 
-  const latestInvoices = await fetchLatestInvoices();
+  //const latestInvoices = await fetchLatestInvoices();
 
   return (
     <>
       <h1 className="mb-4 text-2xl md:text-3xl lg:text-4xl">
-        {t('welcome')}, {capitalize('name')}!
+        {t('welcome')}, {capitalize(user!.firstname)}!
       </h1>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-        <LatestInvoices latestInvoices={latestInvoices} />
+        {/*<LatestInvoices latestInvoices={latestInvoices} />*/}
         CONTENTTTTTTTTTTTTTTTT
       </div>
     </>
