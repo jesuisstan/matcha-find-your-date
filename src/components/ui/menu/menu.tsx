@@ -11,12 +11,12 @@ import clsx from 'clsx';
 import { ChevronLeft, MenuIcon, Rows3 } from 'lucide-react';
 
 import ClearLocalStorageButton from '../clear-storage-btn/clear-storage-btn';
+import ContactSupportBlock from './contact-support-block';
 import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
 import useUserStore from '@/stores/user';
-import ContactSupportBlock from './contact-support-block';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
