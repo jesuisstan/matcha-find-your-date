@@ -16,7 +16,7 @@ const Loading = () => {
       <p className="mb-[76px] text-4xl font-normal leading-[48px] tracking-wider">
         Because, love too can be industrialized
       </p>
-      <p className="mb-[14px] animate-pulse text-2xl font-normal leading-[29px]">Loading...</p>
+      <p className="mb-[14px] animate-pulse text-2xl font-normal leading-[29px]">Loading</p>
       <Spinner size={16} />
       <p className="mt-[14px] animate-pulse text-base font-normal leading-[19px]">Please wait</p>
     </div>
