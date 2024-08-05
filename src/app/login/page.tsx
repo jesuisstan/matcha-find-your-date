@@ -192,14 +192,12 @@ const Login = () => {
         {error && <p className="mb-4 text-center text-sm text-negative">{error}</p>}
         <div className="flex justify-center">
           <Button variant="link" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin
-              ? 'Do not have an account yet? Create an account'
-              : 'Already have an account? Sign in'}
+            {isLogin ? 'Create an account' : 'Already have an account? Sign in'}
           </Button>
         </div>
         <a
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
-          className="my-2 text-right text-sm text-secondary"
+          className="my-2 text-right text-sm text-secondary hover:text-negative"
         >
           Need help? Contact Support
         </a>
