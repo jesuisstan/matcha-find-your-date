@@ -1,6 +1,5 @@
 import { UserNameSkeleton } from './menu-skeleton';
 
-import ClearLocalStorageButton from '@/components/ui/clear-storage-btn/clear-storage-btn';
 import LanguageSelector from '@/components/ui/menu/language-selector';
 import ThemeToggler from '@/components/ui/theme-toggler';
 import { formatUserName, formatUserNameOneLetter } from '@/utils/format-string';
@@ -13,7 +12,7 @@ const SideBarHeader = ({
   translate: (key: string) => string;
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center align-middle">
+    <div className="flex flex-col items-center justify-center gap-2 align-middle">
       <div
         title={name}
         className="flex items-center justify-center space-x-4 align-middle font-bold "
@@ -32,7 +31,8 @@ const SideBarHeader = ({
           )}
         </div>
       </div>
-      <div className="flex flex-col text-center text-xs font-normal text-foreground">
+
+      <div className="flex flex-col gap-2 text-center text-xs font-normal text-foreground">
         <div className="items-center">
           <ThemeToggler />
         </div>
@@ -48,12 +48,9 @@ const SideBarHeader = ({
         </div>
         <LanguageSelector />
         <div className="items-center">
-          <button className="pb-1 hover:text-negative" onClick={() => console.log("signOut()")}>
+          <button className="pb-1 hover:text-negative" onClick={() => console.log('signOut()')}>
             {translate(`common:log-out`)}
           </button>
-        </div>
-        <div className="items-center">
-          <ClearLocalStorageButton />
         </div>
 
         {/* horizontal divider */}

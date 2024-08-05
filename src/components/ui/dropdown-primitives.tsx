@@ -39,7 +39,7 @@ const DropdownMenuSelector = React.forwardRef<
     >
       {startIcon}
       <div className="truncate">{value || 'Select'}</div>
-      <ChevronRight
+      <ChevronDown
         className="relative top-[1px] h-4 text-secondary transition-transform ease-in group-data-[state=open]:-rotate-180"
         aria-hidden
       />

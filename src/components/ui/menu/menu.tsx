@@ -10,6 +10,7 @@ import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import { ChevronLeft, MenuIcon, Rows3 } from 'lucide-react';
 
+import ClearLocalStorageButton from '../clear-storage-btn/clear-storage-btn';
 import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
@@ -163,7 +164,9 @@ const Menu: React.FC = () => {
               <div>Link 1</div>
               <div>Link 1</div>
               <div>Link 1</div>
-
+              <div className="items-center">
+                <ClearLocalStorageButton />
+              </div>
               <TermsConditionBlock translate={t} />
             </div>
           </div>

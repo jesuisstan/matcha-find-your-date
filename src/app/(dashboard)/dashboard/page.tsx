@@ -3,9 +3,8 @@
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import LatestInvoices from './latest-invoices';
+import DashboardSkeleton from './dashboard-skeleton';
 
-import { fetchLatestInvoices } from '@/lib/data';
 import useUserStore from '@/stores/user';
 import { capitalize } from '@/utils/format-string';
 
@@ -27,7 +26,9 @@ const Dashboard = () => {
 
   //const latestInvoices = await fetchLatestInvoices();
 
-  return (
+  return !user ? (
+    <DashboardSkeleton />
+  ) : (
     <>
       <h1 className="mb-4 text-2xl md:text-3xl lg:text-4xl">
         {t('welcome')}, {capitalize(user!.firstname)}!
