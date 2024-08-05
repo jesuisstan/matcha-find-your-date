@@ -1,10 +1,8 @@
-// src/app/api/login/route.ts
-
 import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { SignJWT } from 'jose';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-key';
 
@@ -25,8 +23,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
   }
 
-  // Создание токена
-  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+  // Создание токена с использованием jose
+  const iat = Math.floor(Date.now() / 1000);
+  const exp = iat + 60 * 60; // Token expires in 1 hour
+  const secretKey = new TextEncoder().encode(JWT_SECRET);
+
+  const token = await new SignJWT({ userId: user.id })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt(iat)
+    .setExpirationTime(exp)
+    .sign(secretKey);
 
   return NextResponse.json({ token });
 }
