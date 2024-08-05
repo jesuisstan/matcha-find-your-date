@@ -16,6 +16,7 @@ import TermsConditionBlock from './terms-condition-block';
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
 import useUserStore from '@/stores/user';
+import ContactSupportBlock from './contact-support-block';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
@@ -122,7 +123,7 @@ const Menu: React.FC = () => {
                     title="Close smartdata menu"
                     className={clsx(
                       `absolute left-72 top-1/2 z-50 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-secondary bg-card text-foreground opacity-90`,
-                      `hover:text-negative hover:opacity-100`,
+                      `hover:text-c42orange hover:opacity-100`,
                       `lg:hidden`
                     )}
                   >
@@ -143,7 +144,7 @@ const Menu: React.FC = () => {
                   href={`/dashboard?lang=${lang}`}
                   className={clsx(
                     `flex w-full items-center text-secondary transition duration-75`,
-                    `hover:text-negative`,
+                    `hover:text-c42orange`,
                     pathname === '/landing' && 'font-bold'
                   )}
                   onClick={() => {
@@ -168,6 +169,7 @@ const Menu: React.FC = () => {
                 <ClearLocalStorageButton />
               </div>
               <TermsConditionBlock translate={t} />
+              <ContactSupportBlock translate={t} />
             </div>
           </div>
         </>

@@ -35,18 +35,12 @@ module.exports = {
         },
       },
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         positive: 'hsl(var(--positive))',
         negative: 'hsl(var(--negative))',
-
-        stagflation: 'hsl(var(--stagflation))',
-        heatingup: 'hsl(var(--heatingup))',
-        goldilocks: 'hsl(var(--goldilocks))',
-        slowgrowth: 'hsl(var(--slowgrowth))',
+        card: 'hsl(var(--card))',
+        c42orange: 'hsl(var(--c42orange))',
 
         primary: {
           DEFAULT: 'hsl(var(--primary))',
@@ -64,18 +58,13 @@ module.exports = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
       },
+      //backgroundImage: {
+      //  'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      //  'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      //},
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'identity-background': "url('/identity/background.jpg')",
       },
       borderRadius: {
         lg: 'var(--radius)',

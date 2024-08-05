@@ -29,7 +29,7 @@ const LanguageSelector: React.FC = () => {
           asChild
           value={langList[lang as keyof typeof langList]}
           startIcon={<LanguagesIcon className="text-secondary" size={21} />}
-          className="w-24 border-0 hover:text-negative"
+          className="w-24 border-0 hover:text-c42orange"
         />
         <DropdownMenuPortal>
           <DropdownMenuContent sideOffset={5}>
@@ -42,7 +42,7 @@ const LanguageSelector: React.FC = () => {
                 Français
               </DropdownMenuItem>
 
-              <DropdownMenuItem onClick={() => setLanguage('cn')} className="justify-center">
+              <DropdownMenuItem onClick={() => setLanguage('ru')} className="justify-center">
                 Русский
               </DropdownMenuItem>
             </DropdownMenuGroup>

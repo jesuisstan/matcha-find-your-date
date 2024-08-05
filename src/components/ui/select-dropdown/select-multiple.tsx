@@ -131,11 +131,14 @@ const SelectMultiple = ({
           )}
           {selection && (
             <div className="flex flex-row gap-7 text-xs font-normal text-secondary">
-              <button className="min-w-fit text-left hover:text-negative" onClick={handleSelectAll}>
+              <button
+                className="hover:text-c42orange min-w-fit text-left"
+                onClick={handleSelectAll}
+              >
                 {t`common:selector.show-all`}
               </button>
               <button
-                className="min-w-fit text-left hover:text-negative"
+                className="hover:text-c42orange min-w-fit text-left"
                 onClick={handleUnselectAll}
               >
                 {t`common:selector.hide-all`}

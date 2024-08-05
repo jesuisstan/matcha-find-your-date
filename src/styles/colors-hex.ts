@@ -1,5 +1,4 @@
-/* colorsHEX is used to set colors' values in case "hsl(var(--<global-name-of-color>))"-approach does NOT work
-    (for example, for "exporting" in StockChart component) */
+/* colorsHEX is used to set colors' values in case "hsl(var(--<global-name-of-color>))"-approach does NOT work */
 
 export const colorsHEX = {
   light: {
@@ -10,10 +9,6 @@ export const colorsHEX = {
     positive: '#4BBB3A',
     negative: '#B72F2D',
     muted: '#BEC6CA',
-    stagflation: '#f7ad00',
-    heatingup: '#174f1e',
-    goldilocks: '#629d11',
-    slowgrowth: '#7f1b0b',
   },
   dark: {
     foreground: '#D9D9D9',
@@ -23,9 +18,19 @@ export const colorsHEX = {
     positive: '#4BBB3A',
     negative: '#B72F2D',
     muted: '#1E293B',
-    stagflation: '#f7ad00',
-    heatingup: '#174f1e',
-    goldilocks: '#629d11',
-    slowgrowth: '#7f1b0b',
   },
 };
+
+export const C42_GREEN = '#00babc';
+export const C42_GREEN_DARK = '#01a2a4';
+export const C42_ORANGE = '#ED8179';
+export const C42_ORANGE_DARK = '#da5a51';
+export const C42_GREY = '#c0c0c0';
+export const C42_GREY_DARK = '#aaaaaa';
+export const C42_VIOLET = '#a2b3e5';
+export const C42_VIOLET_DARK = '#7e93d4';
+export const C42_TEXT = '#2c2c34';
+export const C42_TEXT_DARK = '#c0c0c0';
+export const C42_BACKGROUND = '#F5F5F5';
+export const C42_BACKGROUND_DARK = '#2c2c34';
+export const C42_RED = '#ce3a49';

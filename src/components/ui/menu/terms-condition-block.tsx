@@ -20,7 +20,7 @@ const TermsConditionBlock = ({ translate }: { translate: (key: string) => string
         <span
           className={clsx(
             `group flex w-full cursor-pointer items-center text-secondary transition duration-75`,
-            `hover:text-negative`
+            `hover:text-c42orange`
           )}
           onClick={() => {
             setOpen(true);

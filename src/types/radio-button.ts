@@ -9,7 +9,7 @@ const radioOptionSchema = z.object({
 
 export const radioGroupPropsSchema = z.object({
   name: z.string(),
-  label: z.string(),
+  label: z.string().optional(),
   options: z.array(radioOptionSchema),
   defaultValue: z.string().optional(),
 });

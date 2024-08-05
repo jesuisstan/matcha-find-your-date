@@ -47,20 +47,11 @@ const SideBarHeader = ({
         <div className="items-center">
           <ThemeToggler />
         </div>
-        <div className="items-center">
-          <a
-            href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="items-center hover:text-negative"
-          >
-            {translate(`common:contact-support`)}
-          </a>
-        </div>
+
         <LanguageSelector />
         <div className="items-center">
-          <button className="pb-1 hover:text-negative" onClick={handleLogout}>
-            {translate(`common:log-out`)}
+          <button className="hover:text-c42orange pb-1" onClick={handleLogout}>
+            {translate(`common:logout`)}
           </button>
         </div>
 

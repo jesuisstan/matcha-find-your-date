@@ -77,7 +77,7 @@ const Login = () => {
           'lg:flex lg:w-3/4'
         )}
       >
-        <div className="relative h-full w-full">
+        <div className="relative h-full w-full bg-card">
           <Image
             src="/identity/background.jpg"
             alt="hearts"
@@ -87,15 +87,31 @@ const Login = () => {
             className="z-0"
             sizes={'100vw'}
           />
-          <div className="absolute bottom-0 z-10 w-4/6 p-4">
-            <h2 className="mb-2 text-4xl text-card">Make love, not war</h2>
-            <p className="text-sm text-card">
-              This service is provided by Stan Krivtsoff. © 2024 - All rights reserved.
+          <div className="absolute bottom-0 z-10 bg-card p-4 text-foreground opacity-80">
+            <h2 className="mb-2 text-4xl">Make love, not war</h2>
+            <p className="text-sm">
+              {t`common:service-provided`}{' '}
+              <a
+                href={`https://www.krivtsoff.site/`}
+                target="_blank"
+                className="hover:text-c42orange my-6 text-center text-sm text-secondary"
+              >
+                Stan Krivtsoff
+              </a>
+              {'. '}
+              {t`common:rights-reserved`}
+              {'.'}
             </p>
           </div>
         </div>
       </div>
-      <div className={clsx('m-auto flex h-full w-full flex-col p-8', 'md:w-1/3', 'lg:w-1/4')}>
+      <div
+        className={clsx(
+          'm-auto flex h-full w-full flex-col overflow-y-scroll p-8',
+          'md:w-1/3',
+          'lg:w-1/4'
+        )}
+      >
         <Image
           src="/identity/logo-transparent.png"
           className="z-10 m-auto mb-2 mt-0 w-44"
@@ -112,94 +128,106 @@ const Login = () => {
           {!isLogin && (
             <>
               <Label htmlFor="firstname" className="mb-2">
-                First Name
+                {t`common:firstname`}
               </Label>
               <RequiredInput
                 type="text"
                 id="firstname"
                 name="firstname"
-                placeholder="First Name"
+                placeholder={t`common:firstname`}
                 className="mb-6"
               />
               <Label htmlFor="lastname" className="mb-2">
-                Last Name
+                {t`common:lastname`}
               </Label>
               <RequiredInput
                 type="text"
                 id="lastname"
                 name="lastname"
-                placeholder="Last Name"
+                placeholder={t`common:lastname`}
                 className="mb-6"
               />
               <Label htmlFor="nickname" className="mb-2">
-                Nickname
+                {t`common:nickname`}
               </Label>
               <RequiredInput
                 type="text"
                 id="nickname"
                 name="nickname"
-                placeholder="Nickname"
+                placeholder={t`common:nickname`}
                 className="mb-6"
               />
-              <Label htmlFor="birthdate" className="mb-2">
-                Birthdate
-              </Label>
-              <RequiredInput
-                type="date"
-                id="birthdate"
-                name="birthdate"
-                placeholder="Birthdate"
-                className="mb-6"
-              />
-              <div className="mb-6">
-                <RadioGroup
-                  name="sex"
-                  label={t`common:selector.select-sex`}
-                  options={[
-                    { value: 'male', label: t`common:male` },
-                    { value: 'female', label: t`common:female` },
-                  ]}
-                  defaultValue="male"
-                />
+              <div className="flex flex-row gap-6">
+                <div className="flex flex-col">
+                  <Label htmlFor="birthdate" className="mb-2">
+                    {t`common:birthdate`}
+                  </Label>
+                  <RequiredInput
+                    type="date"
+                    id="birthdate"
+                    name="birthdate"
+                    placeholder={t`common:birthdate`}
+                    className="mb-6"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <Label htmlFor="sex" className="mb-2">
+                    {t`common:selector.select-sex`}
+                  </Label>
+                  <RadioGroup
+                    name="sex"
+                    options={[
+                      { value: 'male', label: t`common:male` },
+                      { value: 'female', label: t`common:female` },
+                    ]}
+                    defaultValue="male"
+                  />
+                </div>
               </div>
             </>
           )}
           <Label htmlFor="email" className="mb-2">
-            Email
+            {t`common:email`}
           </Label>
           <RequiredInput
             type="email"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder={t`common:email`}
             className="mb-6"
             autoComplete="email"
           />
           <Label htmlFor="password" className="mb-2">
-            Password
+            {t`common:password`}
           </Label>
           <RequiredInput
             type="password"
             id="password"
             name="password"
-            placeholder="Password"
+            placeholder={t`common:password`}
             className="mb-6"
           />
           <Button type="submit" className="mb-4">
-            {isLogin ? 'Sign in' : 'Register'}
+            {isLogin ? t`common:sign-in` : t`common:register`}
           </Button>
         </form>
         {error && <p className="mb-4 text-center text-sm text-negative">{error}</p>}
         <div className="flex justify-center">
-          <Button variant="link" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Create an account' : 'Already have an account? Sign in'}
+          <Button
+            variant="link"
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setError('');
+            }}
+          >
+            {isLogin ? t`common:create-account` : t`common:back-to-login`}
           </Button>
         </div>
         <a
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
-          className="my-6 text-center text-sm text-secondary hover:text-negative"
+          className="hover:text-c42orange my-6 text-center text-sm text-secondary"
         >
-          Need help? Contact Support
+          {t`common:need-help`}
         </a>
       </div>
     </div>
