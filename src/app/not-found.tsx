@@ -7,7 +7,8 @@ import useUserStore from '@/stores/user';
 
 const NotFound = () => {
   const { t } = useTranslation();
-  const lang = useUserStore((state) => state?.user.lang);
+  //const lang = useUserStore((state) => state?.user.lang);
+  const lang = 'en'; // todo
 
   return (
     <div className="flex h-screen flex-col items-center justify-center text-center">

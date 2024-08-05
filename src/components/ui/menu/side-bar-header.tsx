@@ -1,5 +1,3 @@
-import { signOut } from 'next-auth/react';
-
 import { UserNameSkeleton } from './menu-skeleton';
 
 import ClearLocalStorageButton from '@/components/ui/clear-storage-btn/clear-storage-btn';
@@ -38,8 +36,7 @@ const SideBarHeader = ({
         <div className="items-center">
           <ThemeToggler />
         </div>
-        <div className="mb-2 items-center">
-          {/* todo: delete "mb-2 from className up when LanguageSelector returnes back to layout*/}
+        <div className="items-center">
           <a
             href="mailto:support@q3-technology.com"
             target="_blank"
@@ -49,9 +46,9 @@ const SideBarHeader = ({
             {translate(`common:contact-support`)}
           </a>
         </div>
-        {/*<LanguageSelector />*/}
+        <LanguageSelector />
         <div className="items-center">
-          <button className="pb-1 hover:text-negative" onClick={() => signOut()}>
+          <button className="pb-1 hover:text-negative" onClick={() => console.log("signOut()")}>
             {translate(`common:log-out`)}
           </button>
         </div>
