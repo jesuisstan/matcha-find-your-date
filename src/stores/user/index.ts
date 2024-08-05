@@ -1,63 +1,14 @@
-//import { create } from 'zustand';
-//import { createJSONStorage, persist } from 'zustand/middleware';
-
-//import { TUser } from '@/types/user';
-
-//type UserStore = {
-//  user: TUser;
-//  setUser: (userData: TUser) => void;
-//  setLang: (lang: string) => void;
-//};
-
-//const useUserStore = create<UserStore>()(
-//  persist(
-//    (set) => ({
-//      user: {
-//        id: null,
-//        firstname: '',
-//        lastname: '',
-//        nickname: '',
-//        email: '',
-//        confirmed: false,
-//        birthdate: '',
-//        sex: 'male',
-//        biography: '',
-//        tags: '',
-//        complete: false,
-//        latitude: null,
-//        longitude: null,
-//        trace: '',
-//        online: false,
-//        popularity: 0,
-//        preferences: 'bisexual',
-//        avatars: [],
-//        lang: 'en',
-//      },
-//      setUser: (userData: TUser) => set({ user: userData }),
-//      setLang: (lang: string) =>
-//        set((state) => {
-//          return { user: { ...state.user, lang } };
-//        }),
-//    }),
-//    {
-//      name: 'user-storage',
-//      storage: createJSONStorage(() => localStorage),
-//    }
-//  )
-//);
-
-//export default useUserStore;
-
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { TUser } from '@/types/user';
 
 type UserStore = {
-  user: TUser | null; 
+  user: TUser | null;
   setUser: (userData: TUser) => void;
   clearUser: () => void;
   setLang: (lang: string) => void;
+  logout: () => void;
 };
 
 const useUserStore = create<UserStore>()(
@@ -68,6 +19,10 @@ const useUserStore = create<UserStore>()(
       clearUser: () => set({ user: null }),
       setLang: (lang: string) =>
         set((state) => ({ user: state.user ? { ...state.user, lang } : null })),
+      logout: () => {
+        set({ user: null });
+        document.cookie = 'token=; Max-Age=0; path=/';
+      },
     }),
     {
       name: 'user-storage',

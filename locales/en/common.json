@@ -1,6 +1,16 @@
 {
-  "discretionnary": "Discretionnary Offer",
   "dashboard": "Dashboard",
+  "male": "Male",
+  "female": "Female",
+  "password": "Password",
+  "email": "Email",
+  "last-name": "Last name",
+  "first-name": "First name",
+  "nickname": "Nickname",
+  "birthday": "Birthday",
+  "sexual-orientation": "Sexual Orientation",
+  "sexual-preferences": "Sexual Preferences",
+
   "overview": "Overview",
   "chart": "Chart",
   "table": "Table",
@@ -29,29 +39,12 @@
     "discover-use-case": "Discover use case"
   },
   "menu": {
-    "economic-growth-indicator": "Economique Growth Nowcast",
-    "gdp-leading": "Leading Eco Growth",
-    "gdp-nowcast": "GDP Nowcast",
-    "international-trade": "International Trade",
-    "commodity-trade": "Commodity Trade",
-    "air-traffic": "Air Traffic",
-    "tourism-index": "Tourism Index",
-    "chinese-market-index": "Chinese Market Index",
-    "crude-oil-sent": "Crude Oil Sent",
-    "crude-oil-risk-sent": "Crude Oil Risk Sent",
-    "inflation": "Inflation",
-    "global-cpi": "Global CPI",
-    "manufacturing-nowcast": "Manufacturing Nowcast",
-    "congestion": "Congestion Index",
-    "consumption": "Consumption",
-    "agriculture": "Agriculture",
-    "food-anxiety": "Food Anxiety",
-    "risk-on-off": "Risk On - Risk Off",
-    "meteo-demand": "Meteo Demand",
-    "electricity-production": "Electricity Production",
-    "lng-inventory": "LNG Inventory"
+    "manufacturing-nowcast": "Manufacturing Nowcast"
   },
   "selector": {
+    "select-sex": "Select sex",
+    "select-preferences": "Select sexual preferences",
+
     "overview": "Overview",
     "show-all": "Select all",
     "hide-all": "Unselect all",
@@ -111,12 +104,7 @@
     "select-city": "Select a city",
     "select-vessel-type": "Select a vessel type",
     "select-topic": "Select a topic",
-    "select-window": "Select a Window",
-    "heating": "Heating",
-    "cooling": "Cooling",
-    "maximum-capacity": "News Monitoring",
-    "powerplant-activity": "Satellite Monitoring",
-    "scale": "Scale"
+    "select-window": "Select a Window"
   },
   "not-found": {
     "title": "Page not found",

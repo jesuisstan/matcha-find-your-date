@@ -8,7 +8,7 @@ const radioOptionSchema = z.object({
 });
 
 export const radioGroupPropsSchema = z.object({
-  smartdataFilterKey: z.string(),
+  name: z.string(),
   label: z.string(),
   options: z.array(radioOptionSchema),
   defaultValue: z.string().optional(),
@@ -21,6 +21,7 @@ export const radioOptionPropsSchema = z.object({
   isSelected: z.boolean(),
   onSelect: z.function(z.tuple([z.string()], z.void())),
   children: z.custom<ReactNode>(),
+  name: z.string(),
 });
 
 export type TRadioOptionProps = z.infer<typeof radioOptionPropsSchema>;

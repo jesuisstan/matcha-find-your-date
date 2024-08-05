@@ -68,19 +68,20 @@ const Menu: React.FC = () => {
           aria-controls="default-sidebar"
           type="button"
           onClick={toggleSidebar}
-          title="Open smartdata menu"
+          title="Open menu"
           className="flex flex-row items-center space-x-3"
         >
           <MenuIcon />
           {isClient && (
             <Image
-              src="/identity/logo-transparent.png"
-              alt="Q3"
+              src="/identity/logo-title-only.png"
+              alt="Matcha"
               width={0}
               height={0}
-              sizes="100px"
-              className={clsx(`h-auto w-36`, theme === 'dark' ? 'darkmode-logo' : '')}
-              style={{ height: 'auto', minWidth: '9rem' }}
+              sizes="100vw"
+              className={clsx(`h-auto w-24`, theme === 'dark' ? 'darkmode-logo' : '')}
+              placeholder="blur"
+              blurDataURL={'/identity/logo-transparent.png'}
             />
           )}
         </button>
@@ -89,7 +90,6 @@ const Menu: React.FC = () => {
       {/* Menu Sidebar */}
       {isClient ? (
         <>
-          <div className="w-[280px]"></div>
           <div
             id="sidebar"
             className={clsx(
@@ -106,7 +106,7 @@ const Menu: React.FC = () => {
               <div className="flex justify-center">
                 <Image
                   src="/identity/logo-transparent.png"
-                  alt="Q3"
+                  alt="Matcha"
                   width={0}
                   height={0}
                   sizes="100vw"

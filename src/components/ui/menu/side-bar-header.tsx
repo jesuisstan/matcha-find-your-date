@@ -1,7 +1,10 @@
+import { useRouter } from 'next/navigation';
+
 import { UserNameSkeleton } from './menu-skeleton';
 
 import LanguageSelector from '@/components/ui/menu/language-selector';
 import ThemeToggler from '@/components/ui/theme-toggler';
+import useUserStore from '@/stores/user';
 import { formatUserName, formatUserNameOneLetter } from '@/utils/format-string';
 
 const SideBarHeader = ({
@@ -11,6 +14,14 @@ const SideBarHeader = ({
   name?: string;
   translate: (key: string) => string;
 }) => {
+  const logout = useUserStore((state) => state.logout);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push('/login'); // Перенаправляем на страницу входа после выхода из системы
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-2 align-middle">
       <div
@@ -38,7 +49,7 @@ const SideBarHeader = ({
         </div>
         <div className="items-center">
           <a
-            href="mailto:support@q3-technology.com"
+            href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
             target="_blank"
             rel="noopener noreferrer"
             className="items-center hover:text-negative"
@@ -48,7 +59,7 @@ const SideBarHeader = ({
         </div>
         <LanguageSelector />
         <div className="items-center">
-          <button className="pb-1 hover:text-negative" onClick={() => console.log('signOut()')}>
+          <button className="pb-1 hover:text-negative" onClick={handleLogout}>
             {translate(`common:log-out`)}
           </button>
         </div>

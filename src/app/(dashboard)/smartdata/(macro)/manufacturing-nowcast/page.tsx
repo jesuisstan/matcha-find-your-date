@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
 import useTranslation from 'next-translate/useTranslation';
 
 import clsx from 'clsx';
@@ -14,8 +13,6 @@ import UseCaseButton from '@/components/ui/download-buttons/use-case-button';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
-import useSmartdataFiltersStore from '@/stores/smartdata';
-import { extractSmartdataName } from '@/utils/format-string';
 
 const ManufacturingNowcast = () => {
   // Translate hook
@@ -100,7 +97,7 @@ const ManufacturingNowcast = () => {
             <h3 className="text-3xl">{t`common:overview`}</h3>
             <div className="mt-4">
               <RadioGroup
-                smartdataFilterKey="frequency"
+                name="frequency"
                 label={t`common:selector.frequency`}
                 options={frequencyOptions}
                 defaultValue={'daily'}
@@ -108,7 +105,7 @@ const ManufacturingNowcast = () => {
             </div>
             <div className="mt-4">
               <RadioGroup
-                smartdataFilterKey="approach"
+                name="approach"
                 label={t`common:selector.approach`}
                 options={approachOptions}
                 defaultValue={'standardized'}
@@ -132,7 +129,7 @@ const ManufacturingNowcast = () => {
             <div className={clsx('m-5 hidden w-[1px] bg-secondary opacity-40', 'xl:block')} />
             <div className={clsx('m-4', 'xl:w-1/2')}>
               <RadioGroup
-                smartdataFilterKey="indicator"
+                name="indicator"
                 label={t`common:selector.indicator`}
                 options={indicatorOptions}
                 defaultValue={'level'}

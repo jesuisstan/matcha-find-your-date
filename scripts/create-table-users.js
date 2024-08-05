@@ -16,6 +16,21 @@ async function createTables() {
     // Create the UUID extension if it does not already exist
     await client.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
+    // Create enum types if they do not already exist
+    await client.query(`
+      DO $$ BEGIN
+        CREATE TYPE sex_enum AS ENUM ('male', 'female');
+      EXCEPTION
+        WHEN duplicate_object THEN null;
+      END $$;
+
+      DO $$ BEGIN
+        CREATE TYPE preferences_enum AS ENUM ('male', 'female', 'bisexual');
+      EXCEPTION
+        WHEN duplicate_object THEN null;
+      END $$;
+    `);
+
     // Create the 'users' table if it does not already exist
     await client.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -23,20 +38,20 @@ async function createTables() {
         firstname VARCHAR(255) NOT NULL,
         lastname VARCHAR(255) NOT NULL,
         nickname VARCHAR(255) NOT NULL,
+        birthdate DATE NOT NULL,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
         confirmed BOOLEAN DEFAULT false,
-        birthdate DATE NOT NULL,
-        sex VARCHAR(10) NOT NULL,
+        sex sex_enum NOT NULL,
         biography TEXT,
-        tags TEXT,
+        tags TEXT[],
         complete BOOLEAN DEFAULT false,
         latitude DOUBLE PRECISION,
         longitude DOUBLE PRECISION,
         lastVisit TIMESTAMP,
         online BOOLEAN DEFAULT false,
         popularity INT DEFAULT 0,
-        preferences VARCHAR(20) DEFAULT 'bisexual',
+        preferences preferences_enum DEFAULT 'bisexual',
         avatars TEXT[],
         lang VARCHAR(10) DEFAULT 'en'
       );
@@ -58,7 +73,7 @@ async function createTables() {
 }
 
 // Execute the function and handle any errors
-createTables().catch(error => {
+createTables().catch((error) => {
   console.error('Error in createTables:', error);
   process.exit(1); // Ensure the script exits with an error code
 });

@@ -10,7 +10,7 @@ export const userSchema = z.object({
   birthdate: z.string(),
   sex: z.enum(['male', 'female']),
   biography: z.string(),
-  tags: z.string(),
+  tags: z.array(z.string()),
   complete: z.boolean(),
   latitude: z.number().nullable(),
   longitude: z.number().nullable(),

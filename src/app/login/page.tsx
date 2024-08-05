@@ -3,15 +3,18 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import useTranslation from 'next-translate/useTranslation';
 
 import clsx from 'clsx';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import RadioGroup from '@/components/ui/radio/radio-group';
+import { RequiredInput } from '@/components/ui/required-input';
 import useUserStore from '@/stores/user';
 
 const Login = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const [isLogin, setIsLogin] = React.useState(true);
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -46,7 +49,6 @@ const Login = () => {
           nickname: formData.get('nickname'),
           birthdate: formData.get('birthdate'),
           sex: formData.get('sex'),
-          avatars: [formData.get('avatar')],
         }),
       });
     }
@@ -103,88 +105,85 @@ const Login = () => {
           placeholder="blur"
           blurDataURL="/identity/logo-transparent.png"
         />
-        <p className="mb-6 text-sm text-secondary">
-          {isLogin ? 'Sign into your account' : 'Register for an account'}
-        </p>
+        <h2 className="mb-6 text-center text-3xl text-secondary">
+          {isLogin ? 'Sign into your account' : 'Register a new account'}
+        </h2>
         <form className="flex flex-col" onSubmit={handleSubmit} ref={formRef}>
           {!isLogin && (
             <>
               <Label htmlFor="firstname" className="mb-2">
                 First Name
               </Label>
-              <Input
+              <RequiredInput
                 type="text"
                 id="firstname"
                 name="firstname"
                 placeholder="First Name"
-                className="mb-2"
+                className="mb-6"
               />
               <Label htmlFor="lastname" className="mb-2">
                 Last Name
               </Label>
-              <Input
+              <RequiredInput
                 type="text"
                 id="lastname"
                 name="lastname"
                 placeholder="Last Name"
-                className="mb-2"
+                className="mb-6"
               />
               <Label htmlFor="nickname" className="mb-2">
                 Nickname
               </Label>
-              <Input
+              <RequiredInput
                 type="text"
                 id="nickname"
                 name="nickname"
                 placeholder="Nickname"
-                className="mb-2"
+                className="mb-6"
               />
               <Label htmlFor="birthdate" className="mb-2">
                 Birthdate
               </Label>
-              <Input
+              <RequiredInput
                 type="date"
                 id="birthdate"
                 name="birthdate"
                 placeholder="Birthdate"
-                className="mb-2"
+                className="mb-6"
               />
-              <Label htmlFor="sex" className="mb-2">
-                Sex
-              </Label>
-              <Input type="text" id="sex" name="sex" placeholder="Sex" className="mb-2" />
-              <Label htmlFor="avatar" className="mb-2">
-                Avatar URL
-              </Label>
-              <Input
-                type="text"
-                id="avatar"
-                name="avatar"
-                placeholder="Avatar URL"
-                className="mb-4"
-              />
+              <div className="mb-6">
+                <RadioGroup
+                  name="sex"
+                  label={t`common:selector.select-sex`}
+                  options={[
+                    { value: 'male', label: t`common:male` },
+                    { value: 'female', label: t`common:female` },
+                  ]}
+                  defaultValue="male"
+                />
+              </div>
             </>
           )}
           <Label htmlFor="email" className="mb-2">
             Email
           </Label>
-          <Input
+          <RequiredInput
             type="email"
             id="email"
             name="email"
             placeholder="Email"
-            className="mb-2"
+            className="mb-6"
             autoComplete="email"
           />
           <Label htmlFor="password" className="mb-2">
             Password
           </Label>
-          <Input
+          <RequiredInput
             type="password"
             id="password"
             name="password"
             placeholder="Password"
-            className="mb-4"
+            className="mb-6"
           />
           <Button type="submit" className="mb-4">
             {isLogin ? 'Sign in' : 'Register'}
@@ -193,11 +192,13 @@ const Login = () => {
         {error && <p className="mb-4 text-center text-sm text-negative">{error}</p>}
         <div className="flex justify-center">
           <Button variant="link" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Create an account' : 'Already have an account? Sign in'}
+            {isLogin
+              ? 'Do not have an account yet? Create an account'
+              : 'Already have an account? Sign in'}
           </Button>
         </div>
         <a
-          href="mailto:support@q3-technology.com"
+          href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
           className="my-2 text-right text-sm text-secondary"
         >
           Need help? Contact Support

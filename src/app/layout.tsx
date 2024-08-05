@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { Open_Sans } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 
 import clsx from 'clsx';
 
@@ -11,7 +11,10 @@ const ThemeProvider = dynamic(() => import('@/components/providers/theme-provide
   ssr: false,
 });
 
-const openSans = Open_Sans({ subsets: ['latin'] });
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['500'],
+});
 
 export const metadata: Metadata = {
   title: 'Matcha',
@@ -28,7 +31,7 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning>
-      <body className={clsx(openSans.className, 'flex min-h-screen flex-col')}>
+      <body className={clsx(montserrat.className, 'flex min-h-screen flex-col')}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

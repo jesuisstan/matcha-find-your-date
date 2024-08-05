@@ -12,9 +12,10 @@ import clsx from 'clsx';
 import styles from '@/styles/radio-button.module.css';
 import { radioOptionPropsSchema, TRadioOptionProps } from '@/types/radio-button';
 
-const RadioOption = ({ value, isSelected, onSelect, children }: TRadioOptionProps) => {
+const RadioOption = ({ name, value, isSelected, onSelect, children }: TRadioOptionProps) => {
   /* Verifying the passed Props of the component */
   const verif = radioOptionPropsSchema.safeParse({
+    name,
     value,
     isSelected,
     onSelect,
@@ -34,6 +35,7 @@ const RadioOption = ({ value, isSelected, onSelect, children }: TRadioOptionProp
       <input
         id={value}
         type="radio"
+        name={name}
         value={value}
         checked={isSelected}
         className={clsx(
