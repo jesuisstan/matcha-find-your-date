@@ -58,7 +58,7 @@ const Login = () => {
     if (response.ok) {
       if (isLogin) {
         document.cookie = `token=${result.token}; path=/`;
-        setUser(result.user); // setUser is a function from useUserStore
+        setUser(result.user);
         router.push('/dashboard');
       } else {
         setIsLogin(true);
@@ -197,7 +197,7 @@ const Login = () => {
         </div>
         <a
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
-          className="my-2 text-right text-sm text-secondary hover:text-negative"
+          className="my-6 text-center text-sm text-secondary hover:text-negative"
         >
           Need help? Contact Support
         </a>
