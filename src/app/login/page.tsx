@@ -87,14 +87,14 @@ const Login = () => {
             className="z-0"
             sizes={'100vw'}
           />
-          <div className="absolute bottom-0 z-10 bg-card p-4 text-foreground opacity-80">
+          <div className="absolute bottom-0 z-10 bg-card/85 p-4 text-foreground">
             <h2 className="mb-2 text-4xl">Make love, not war</h2>
             <p className="text-sm">
               {t`common:service-provided`}{' '}
               <a
                 href={`https://www.krivtsoff.site/`}
                 target="_blank"
-                className="hover:text-c42orange my-6 text-center text-sm text-secondary"
+                className="my-6 text-center text-sm text-positive hover:text-c42orange"
               >
                 Stan Krivtsoff
               </a>
@@ -225,7 +225,7 @@ const Login = () => {
         </div>
         <a
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
-          className="hover:text-c42orange my-6 text-center text-sm text-secondary"
+          className="my-6 text-center text-sm text-secondary hover:text-c42orange"
         >
           {t`common:need-help`}
         </a>

@@ -10,7 +10,7 @@ const Footer = () => {
       <a
         href={`https://www.krivtsoff.site/`}
         target="_blank"
-        className="hover:text-c42orange my-6 text-center text-sm text-secondary"
+        className="my-6 text-center text-sm text-positive hover:text-c42orange"
       >
         Stan Krivtsoff
       </a>
