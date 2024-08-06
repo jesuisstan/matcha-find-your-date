@@ -53,7 +53,8 @@ async function createTables() {
         popularity INT DEFAULT 0,
         preferences preferences_enum DEFAULT 'bisexual',
         avatars TEXT[],
-        lang VARCHAR(10) DEFAULT 'en'
+        lang VARCHAR(10) DEFAULT 'en',
+        confirmation_token TEXT
       );
     `);
 

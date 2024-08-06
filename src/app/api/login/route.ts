@@ -23,6 +23,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
   }
 
+  // Check if email is confirmed
+  if (!user.confirmed) {
+    return NextResponse.json(
+      { error: 'Please confirm your email address before logging in.' },
+      { status: 401 }
+    );
+  }
+
   // Create JWT token
   const iat = Math.floor(Date.now() / 1000);
   const exp = iat + 60 * 60; // Token expires in 1 hour

@@ -27,15 +27,11 @@
   "service-provided": "This service is provided by",
   "rights-reserved": "© 2024 - All rights reserved",
   "terms-condition": "Terms and Conditions",
+  "go-to-home": "Go to home",
 
-  "menu": {
-    "home": "Home",
-    "profile": "Profile",
-    "search": "Search",
-    "chat": "Chat",
-    "notifications": "Notifications",
-    "settings": "Settings"
-  },
+  "invalid-token": "Invalid token",
+  "email-confirmed-successfully": "Email confirmed successfully",
+  "failed-to-confirm-email": "Failed to confirm email",
 
   "selector": {
     "select-sex": "Select sex",
@@ -44,5 +40,8 @@
   "not-found": {
     "title": "Page not found",
     "content": "The page, you are looking for, does not exist."
-  }
+  },
+
+  "error": "Error",
+  "success": "Success"
 }

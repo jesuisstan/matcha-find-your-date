@@ -19,10 +19,14 @@ const Login = () => {
   const [isLogin, setIsLogin] = React.useState(true);
   const formRef = React.useRef<HTMLFormElement>(null);
   const [error, setError] = React.useState('');
+  const [successMessage, setSuccessMessage] = React.useState('');
   const setUser = useUserStore((state) => state.setUser);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setSuccessMessage('');
+
     const currentForm = formRef.current;
     if (!currentForm) return;
     const formData = new FormData(currentForm);
@@ -57,10 +61,17 @@ const Login = () => {
 
     if (response.ok) {
       if (isLogin) {
-        document.cookie = `token=${result.token}; path=/`;
-        setUser(result.user);
-        router.push('/dashboard');
+        if (result.user.confirmed) {
+          document.cookie = `token=${result.token}; path=/`;
+          setUser(result.user);
+          router.push('/dashboard');
+        } else {
+          setError('Please confirm your email address before logging in.');
+        }
       } else {
+        setSuccessMessage(
+          'Registration successful! Please check your email to confirm your account.'
+        );
         setIsLogin(true);
       }
     } else {
@@ -212,12 +223,16 @@ const Login = () => {
           </Button>
         </form>
         {error && <p className="mb-4 text-center text-sm text-negative">{error}</p>}
+        {successMessage && (
+          <p className="mb-4 text-center text-sm text-positive">{successMessage}</p>
+        )}
         <div className="flex justify-center">
           <Button
             variant="link"
             onClick={() => {
               setIsLogin(!isLogin);
               setError('');
+              setSuccessMessage('');
             }}
           >
             {isLogin ? t`common:create-account` : t`common:back-to-login`}

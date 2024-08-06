@@ -27,15 +27,11 @@
   "service-provided": "Услугу предоставляет",
   "rights-reserved": "© 2024 - Все права защищены",
   "terms-condition": "Условия и положения",
+  "go-to-home": "На главную",
 
-  "menu": {
-    "home": "Главная",
-    "profile": "Профиль",
-    "search": "Поиск",
-    "chat": "Чат",
-    "notifications": "Уведомления",
-    "settings": "Настройки"
-  },
+  "invalid-token": "Неверный токен",
+  "email-confirmed-successfully": "Email успешно подтвержден",
+  "failed-to-confirm-email": "Не удалось подтвердить email",
 
   "selector": {
     "select-sex": "Выберите пол",
@@ -44,5 +40,8 @@
   "not-found": {
     "title": "Страница не найдена",
     "content": "Страница, которую вы ищете, не существует."
-  }
+  },
+
+  "error": "Ошибка",
+  "success": "Успех"
 }
