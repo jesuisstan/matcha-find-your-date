@@ -9,7 +9,6 @@ export default function useSetLanguage() {
   const setLang = useUserStore((state) => state.setLang);
 
   return (locale: string) => {
-    // now you got a read/write object
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
 
     current.set('lang', locale);

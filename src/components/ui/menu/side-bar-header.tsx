@@ -17,9 +17,11 @@ const SideBarHeader = ({
   const logout = useUserStore((state) => state.logout);
   const router = useRouter();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     logout();
-    router.push('/login'); // Перенаправляем на страницу входа после выхода из системы
+    // wait for some time to ensure logout is processed
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    router.push('/login');
   };
 
   return (
@@ -50,7 +52,7 @@ const SideBarHeader = ({
 
         <LanguageSelector />
         <div className="items-center">
-          <button className="hover:text-c42orange pb-1" onClick={handleLogout}>
+          <button className="pb-1 hover:text-c42orange" onClick={handleLogout}>
             {translate(`common:auth.logout`)}
           </button>
         </div>

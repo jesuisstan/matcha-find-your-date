@@ -20,7 +20,17 @@ const Login = () => {
   const formRef = React.useRef<HTMLFormElement>(null);
   const [error, setError] = React.useState('');
   const [successMessage, setSuccessMessage] = React.useState('');
-  const setUser = useUserStore((state) => state.setUser);
+  const { user, setUser } = useUserStore((state) => ({
+    user: state.user,
+    setUser: state.setUser,
+  }));
+
+  // Redirect to dashboard if user is already logged in
+  React.useEffect(() => {
+    if (user) {
+      router.push('/dashboard');
+    }
+  }, [user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

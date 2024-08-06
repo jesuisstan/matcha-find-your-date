@@ -6,7 +6,5 @@ module.exports = {
     '*': ['common'],
     // DASHBOARD
     '/(dashboard)/dashboard': ['dashboard'],
-    // SMARTDATA MACRO
-    '/(dashboard)/smartdata/(macro)/manufacturing-nowcast': ['smartdata', 'countries'],
   },
 };
