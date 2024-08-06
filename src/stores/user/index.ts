@@ -7,7 +7,6 @@ type UserStore = {
   user: TUser | null;
   setUser: (userData: TUser) => void;
   clearUser: () => void;
-  setLang: (lang: string) => void;
   logout: () => void;
 };
 
@@ -17,8 +16,6 @@ const useUserStore = create<UserStore>()(
       user: null,
       setUser: (userData: TUser) => set({ user: userData }),
       clearUser: () => set({ user: null }),
-      setLang: (lang: string) =>
-        set((state) => ({ user: state.user ? { ...state.user, lang } : null })),
       logout: () => {
         set({ user: null });
         document.cookie = 'token=; Max-Age=0; path=/';

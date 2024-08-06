@@ -9,8 +9,10 @@ import clsx from 'clsx';
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import LanguageSelector from '@/components/ui/menu/language-selector';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
+import useLanguage from '@/hooks/useLanguage';
 import useUserStore from '@/stores/user';
 
 const Login = () => {
@@ -24,6 +26,7 @@ const Login = () => {
     user: state.user,
     setUser: state.setUser,
   }));
+  const { lang } = useLanguage();
 
   // Redirect to dashboard if user is already logged in
   React.useEffect(() => {
@@ -92,7 +95,6 @@ const Login = () => {
           if (result.user.confirmed) {
             document.cookie = `token=${result.token}; path=/`;
             setUser(result.user);
-            const lang = result.user.lang ?? 'en';
             router.push(`/dashboard?lang=${lang}`);
           } else {
             setError('Please confirm your email address before logging in.');
@@ -170,10 +172,10 @@ const Login = () => {
           blurDataURL="/identity/logo-transparent.png"
         />
         <h2 className="mb-6 text-center text-3xl text-foreground">
-          {pageLayout === 'login' && 'Sign into your account'}
-          {pageLayout === 'register' && 'Register a new account'}
-          {pageLayout === 'confirmation' && 'Resend Confirmation Email'}
-          {pageLayout === 'forgot' && 'Forgot Password'}
+          {pageLayout === 'login' && t`common:auth.sign-in`}
+          {pageLayout === 'register' && t`common:auth.register-new`}
+          {pageLayout === 'confirmation' && t`common:auth.confirme-email`}
+          {pageLayout === 'forgot' && t`common:auth.reset-password`}
         </h2>
         <form className="flex flex-col" onSubmit={handleSubmit} ref={formRef}>
           {pageLayout === 'register' && (
@@ -328,6 +330,7 @@ const Login = () => {
         >
           {t`common:need-help`}
         </a>
+        <LanguageSelector />
       </div>
     </div>
   );

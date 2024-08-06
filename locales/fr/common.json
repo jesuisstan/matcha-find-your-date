@@ -34,12 +34,14 @@
     "sign-in": "Se connecter",
     "sign-up": "S'inscrire",
     "register": "S'enregistrer",
+    "register-new": "Enregistrer un nouveau compte",
     "forgot-password": "Mot de passe oublié",
     "reset-password": "Réinitialiser le mot de passe",
     "send-reset-link": "Envoyer le lien de réinitialisation",
     "resend-confirmation-email": "Renvoyer l'email de confirmation",
     "invalid-token": "Jeton invalide",
     "email-confirmed-successfully": "Email confirmé avec succès",
-    "failed-to-confirm-email": "Échec de la confirmation de l'email"
+    "failed-to-confirm-email": "Échec de la confirmation de l'email",
+    "confirme-email": "Confirmer l'email"
   }
 }

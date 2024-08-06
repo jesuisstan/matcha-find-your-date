@@ -4,11 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import useUserStore from '@/stores/user';
+import useLanguage from '@/hooks/useLanguage';
 
 const EmailConfirmation = () => {
   const { t } = useTranslation();
-  const lang = useUserStore((state) => state?.user?.lang) || 'en';
+  const { lang } = useLanguage();
 
   const query = new URLSearchParams(window.location.search);
   const message = query.get('message') || '';

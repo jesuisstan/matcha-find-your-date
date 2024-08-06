@@ -34,12 +34,14 @@
     "sign-in": "Sign in",
     "sign-up": "Sign up",
     "register": "Register",
+    "register-new": "Register a new account",
     "forgot-password": "Forgot password",
     "reset-password": "Reset password",
     "send-reset-link": "Send reset link",
     "resend-confirmation-email": "Resend confirmation email",
     "invalid-token": "Invalid token",
     "email-confirmed-successfully": "Email confirmed successfully",
-    "failed-to-confirm-email": "Failed to confirm email"
+    "failed-to-confirm-email": "Failed to confirm email",
+    "confirme-email": "Confirm email"
   }
 }

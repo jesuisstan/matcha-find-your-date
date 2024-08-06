@@ -19,7 +19,6 @@ export const userSchema = z.object({
   popularity: z.number(),
   preferences: z.enum(['male', 'female', 'bisexual']),
   avatars: z.array(z.string()),
-  lang: z.string(),
 });
 
 export type TUser = z.infer<typeof userSchema>;

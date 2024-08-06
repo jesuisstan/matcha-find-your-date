@@ -16,13 +16,14 @@ import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
+import useLanguage from '@/hooks/useLanguage';
 import useUserStore from '@/stores/user';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
   const { t } = useTranslation();
   const user = useUserStore((state) => state.user);
-  const lang = user?.lang || 'en';
+  const { lang } = useLanguage();
 
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

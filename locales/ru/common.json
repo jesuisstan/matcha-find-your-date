@@ -34,12 +34,14 @@
     "sign-in": "Войти",
     "sign-up": "Зарегистрироваться",
     "register": "Зарегистрироваться",
+    "register-new": "Зарегистрировать новый аккаунт",
     "forgot-password": "Забыли пароль",
     "reset-password": "Сбросить пароль",
     "send-reset-link": "Отправить ссылку для сброса",
     "resend-confirmation-email": "Отправить письмо с подтверждением повторно",
     "invalid-token": "Неверный токен",
     "email-confirmed-successfully": "Электронная почта успешно подтверждена",
-    "failed-to-confirm-email": "Не удалось подтвердить электронную почту"
+    "failed-to-confirm-email": "Не удалось подтвердить электронную почту",
+    "confirme-email": "Подтвердить электронную почту"
   }
 }

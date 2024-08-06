@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, useEffect } from 'react';
 
 import { LanguagesIcon } from 'lucide-react';
 
@@ -10,17 +10,15 @@ import {
   DropdownMenuPortal,
   DropdownMenuSelector,
 } from '@/components/ui/dropdown-primitives';
-import useSetLanguage from '@/hooks/useSetLanguage';
-import useUserStore from '@/stores/user';
+import useLanguage, { langList } from '@/hooks/useLanguage';
 
-const LanguageSelector: React.FC = () => {
-  const langList = {
-    fr: 'Français',
-    en: 'English',
-    ru: 'Русский',
-  };
-  const lang = useUserStore((state) => state?.user?.lang);
-  const setLanguage = useSetLanguage();
+const LanguageSelector: FC = () => {
+  const { lang, setLang } = useLanguage();
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem('lang') ?? 'en';
+    setLang(savedLang);
+  }, []);
 
   return (
     <DropdownMenu>
@@ -29,22 +27,20 @@ const LanguageSelector: React.FC = () => {
           asChild
           value={langList[lang as keyof typeof langList]}
           startIcon={<LanguagesIcon className="text-secondary" size={21} />}
-          className="w-24 border-0 hover:text-c42orange"
+          className="w-40 border-0 hover:text-c42orange"
         />
         <DropdownMenuPortal>
           <DropdownMenuContent sideOffset={5}>
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => setLanguage('en')} className="justify-center">
-                English
-              </DropdownMenuItem>
-
-              <DropdownMenuItem onClick={() => setLanguage('fr')} className="justify-center">
-                Français
-              </DropdownMenuItem>
-
-              <DropdownMenuItem onClick={() => setLanguage('ru')} className="justify-center">
-                Русский
-              </DropdownMenuItem>
+              {Object.keys(langList).map((key) => (
+                <DropdownMenuItem
+                  key={key}
+                  onClick={() => setLang(key)}
+                  className={`justify-center ${lang === key ? 'font-bold' : ''}`}
+                >
+                  {langList[key]}
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenuPortal>
