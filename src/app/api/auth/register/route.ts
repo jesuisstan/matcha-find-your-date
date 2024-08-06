@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     // Define the confirmation URL
     const { origin } = new URL(req.url);
-    const confirmationUrl = `${origin}/api/confirm-email?token=${confirmationToken}`;
+    const confirmationUrl = `${origin}/api/auth/confirm-email?token=${confirmationToken}`;
 
     if (!process.env.NEXT_PUBLIC_SUPPORT_EMAIL || !process.env.SUPPORT_EMAIL_PASSWORD) {
       throw new Error('Missing email credentials');

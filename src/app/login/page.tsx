@@ -33,7 +33,7 @@ const Login = () => {
 
     let response;
     if (isLogin) {
-      response = await fetch('/api/login', {
+      response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -42,7 +42,7 @@ const Login = () => {
         }),
       });
     } else {
-      response = await fetch('/api/register', {
+      response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -64,7 +64,8 @@ const Login = () => {
         if (result.user.confirmed) {
           document.cookie = `token=${result.token}; path=/`;
           setUser(result.user);
-          router.push('/dashboard');
+          const lang = result.user.lang ?? 'en';
+          router.push(`/dashboard?lang=${lang}`);
         } else {
           setError('Please confirm your email address before logging in.');
         }

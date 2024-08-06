@@ -7,7 +7,7 @@ export async function GET(req: Request) {
   const token = url.searchParams.get('token');
 
   if (!token) {
-    return NextResponse.redirect(new URL('/email-confirmation?error=Invalid%20token', req.url));
+    return NextResponse.redirect(new URL('/email-confirmation?error=invalid-token', req.url));
   }
 
   const client = await db.connect();
