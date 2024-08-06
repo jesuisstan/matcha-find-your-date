@@ -25,15 +25,19 @@ export async function POST(req: Request) {
     // Generate a new confirmation token
     const confirmationToken = uuidv4();
 
+    // Update the user with the new confirmation token
     const result = await client.sql`
       UPDATE users
       SET confirmation_token = ${confirmationToken}
-      WHERE email = ${email}
+      WHERE email = ${email} AND confirmed = false
       RETURNING *;
     `;
 
     if (result.rowCount === 0) {
-      return NextResponse.json({ error: 'Email not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Email not found or user already confirmed' },
+        { status: 404 }
+      );
     }
 
     const user = result.rows[0];
