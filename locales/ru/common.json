@@ -1,38 +1,21 @@
 {
-  "dashboard": "Главная",
+  "dashboard": "Панель управления",
   "male": "Мужчина",
   "female": "Женщина",
-  "password": "Пароль",
-  "email": "Эл. почта",
   "lastname": "Фамилия",
   "firstname": "Имя",
   "nickname": "Псевдоним",
   "birthdate": "Дата рождения",
   "sexual-orientation": "Сексуальная ориентация",
   "sexual-preferences": "Сексуальные предпочтения",
-
-  "login": "Вход",
-  "logout": "Выход",
-  "back-to-login": "Уже есть аккаунт? Войти",
-  "create-account": "Создать аккаунт",
-  "sign-in": "Войти",
-  "register": "Регистрация",
-  "forgot-password": "Забыли пароль",
-  "reset-password": "Сбросить пароль",
-  "send-reset-link": "Отправить ссылку для сброса",
-
   "need-help": "Нужна помощь? Свяжитесь с поддержкой",
   "contact-support": "Связаться с поддержкой",
-
-  "service-provided": "Услугу предоставляет",
+  "error": "Ошибка",
+  "success": "Успех",
+  "service-provided": "Эта услуга предоставляется",
   "rights-reserved": "© 2024 - Все права защищены",
   "terms-condition": "Условия и положения",
-  "go-to-home": "На главную",
-
-  "invalid-token": "Неверный токен",
-  "email-confirmed-successfully": "Email успешно подтвержден",
-  "failed-to-confirm-email": "Не удалось подтвердить email",
-
+  "go-to-home": "Перейти на главную",
   "selector": {
     "select-sex": "Выберите пол",
     "select-preferences": "Выберите сексуальные предпочтения"
@@ -41,7 +24,22 @@
     "title": "Страница не найдена",
     "content": "Страница, которую вы ищете, не существует."
   },
-
-  "error": "Ошибка",
-  "success": "Успех"
+  "auth": {
+    "password": "Пароль",
+    "email": "Электронная почта",
+    "login": "Войти",
+    "logout": "Выйти",
+    "back-to-login": "Вернуться ко Входу",
+    "create-account": "Создать аккаунт",
+    "sign-in": "Войти",
+    "sign-up": "Зарегистрироваться",
+    "register": "Зарегистрироваться",
+    "forgot-password": "Забыли пароль",
+    "reset-password": "Сбросить пароль",
+    "send-reset-link": "Отправить ссылку для сброса",
+    "resend-confirmation-email": "Отправить письмо с подтверждением повторно",
+    "invalid-token": "Неверный токен",
+    "email-confirmed-successfully": "Электронная почта успешно подтверждена",
+    "failed-to-confirm-email": "Не удалось подтвердить электронную почту"
+  }
 }

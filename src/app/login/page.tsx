@@ -16,7 +16,7 @@ import useUserStore from '@/stores/user';
 const Login = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const [isLogin, setIsLogin] = React.useState(true);
+  const [pageLayout, setPageLayout] = React.useState('login');
   const formRef = React.useRef<HTMLFormElement>(null);
   const [error, setError] = React.useState('');
   const [successMessage, setSuccessMessage] = React.useState('');
@@ -32,48 +32,74 @@ const Login = () => {
     const formData = new FormData(currentForm);
 
     let response;
-    if (isLogin) {
-      response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.get('email'),
-          password: formData.get('password'),
-        }),
-      });
-    } else {
-      response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.get('email'),
-          password: formData.get('password'),
-          firstname: formData.get('firstname'),
-          lastname: formData.get('lastname'),
-          nickname: formData.get('nickname'),
-          birthdate: formData.get('birthdate'),
-          sex: formData.get('sex'),
-        }),
-      });
+    switch (pageLayout) {
+      case 'login':
+        response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.get('email'),
+            password: formData.get('password'),
+          }),
+        });
+        break;
+      case 'register':
+        response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.get('email'),
+            password: formData.get('password'),
+            firstname: formData.get('firstname'),
+            lastname: formData.get('lastname'),
+            nickname: formData.get('nickname'),
+            birthdate: formData.get('birthdate'),
+            sex: formData.get('sex'),
+          }),
+        });
+        break;
+      case 'confirmation':
+        response = await fetch('/api/auth/resend-confirmation-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.get('email'),
+          }),
+        });
+        break;
+      case 'forgot':
+        // Implement forgot password logic here
+        break;
     }
+
+    if (!response) return;
 
     const result = await response.json();
 
     if (response.ok) {
-      if (isLogin) {
-        if (result.user.confirmed) {
-          document.cookie = `token=${result.token}; path=/`;
-          setUser(result.user);
-          const lang = result.user.lang ?? 'en';
-          router.push(`/dashboard?lang=${lang}`);
-        } else {
-          setError('Please confirm your email address before logging in.');
-        }
-      } else {
-        setSuccessMessage(
-          'Registration successful! Please check your email to confirm your account.'
-        );
-        setIsLogin(true);
+      switch (pageLayout) {
+        case 'login':
+          if (result.user.confirmed) {
+            document.cookie = `token=${result.token}; path=/`;
+            setUser(result.user);
+            const lang = result.user.lang ?? 'en';
+            router.push(`/dashboard?lang=${lang}`);
+          } else {
+            setError('Please confirm your email address before logging in.');
+          }
+          break;
+        case 'register':
+          setSuccessMessage(
+            'Registration successful! Please check your email to confirm your account.'
+          );
+          setPageLayout('login');
+          break;
+        case 'confirmation':
+          setSuccessMessage('Confirmation email sent successfully.');
+          break;
+        case 'forgot':
+          setSuccessMessage('Password reset email sent successfully.');
+          break;
       }
     } else {
       setError(result.error);
@@ -133,11 +159,14 @@ const Login = () => {
           placeholder="blur"
           blurDataURL="/identity/logo-transparent.png"
         />
-        <h2 className="mb-6 text-center text-3xl text-secondary">
-          {isLogin ? 'Sign into your account' : 'Register a new account'}
+        <h2 className="mb-6 text-center text-3xl text-foreground">
+          {pageLayout === 'login' && 'Sign into your account'}
+          {pageLayout === 'register' && 'Register a new account'}
+          {pageLayout === 'confirmation' && 'Resend Confirmation Email'}
+          {pageLayout === 'forgot' && 'Forgot Password'}
         </h2>
         <form className="flex flex-col" onSubmit={handleSubmit} ref={formRef}>
-          {!isLogin && (
+          {pageLayout === 'register' && (
             <>
               <Label htmlFor="firstname" className="mb-2">
                 {t`common:firstname`}
@@ -199,28 +228,36 @@ const Login = () => {
             </>
           )}
           <Label htmlFor="email" className="mb-2">
-            {t`common:email`}
+            {t`common:auth.email`}
           </Label>
           <RequiredInput
             type="email"
             id="email"
             name="email"
-            placeholder={t`common:email`}
+            placeholder={t`common:auth.email`}
             className="mb-6"
             autoComplete="email"
           />
-          <Label htmlFor="password" className="mb-2">
-            {t`common:password`}
-          </Label>
-          <RequiredInput
-            type="password"
-            id="password"
-            name="password"
-            placeholder={t`common:password`}
-            className="mb-6"
-          />
+          {pageLayout !== 'confirmation' && pageLayout !== 'forgot' && (
+            <>
+              <Label htmlFor="password" className="mb-2">
+                {t`common:auth.password`}
+              </Label>
+              <RequiredInput
+                type="password"
+                id="password"
+                name="password"
+                placeholder={t`common:auth.password`}
+                className="mb-6"
+                autoComplete="current-password"
+              />
+            </>
+          )}
           <Button type="submit" className="mb-4">
-            {isLogin ? t`common:sign-in` : t`common:register`}
+            {pageLayout === 'login' && t`common:auth.sign-in`}
+            {pageLayout === 'register' && t`common:auth.sign-up`}
+            {pageLayout === 'confirmation' && t`common:auth.resend-confirmation-email`}
+            {pageLayout === 'forgot' && t`common:auth.send-reset-link`}
           </Button>
         </form>
         {error && <p className="mb-4 text-center text-sm text-negative">{error}</p>}
@@ -228,16 +265,52 @@ const Login = () => {
           <p className="mb-4 text-center text-sm text-positive">{successMessage}</p>
         )}
         <div className="flex justify-center">
-          <Button
-            variant="link"
-            onClick={() => {
-              setIsLogin(!isLogin);
-              setError('');
-              setSuccessMessage('');
-            }}
-          >
-            {isLogin ? t`common:create-account` : t`common:back-to-login`}
-          </Button>
+          {pageLayout !== 'login' && (
+            <Button
+              variant="link"
+              onClick={() => {
+                setPageLayout('login');
+                setError('');
+                setSuccessMessage('');
+              }}
+            >
+              {t`common:auth.back-to-login`}
+            </Button>
+          )}
+          {pageLayout === 'login' && (
+            <>
+              <Button
+                variant="link"
+                onClick={() => {
+                  setPageLayout('register');
+                  setError('');
+                  setSuccessMessage('');
+                }}
+              >
+                {t`common:auth.create-account`}
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => {
+                  setPageLayout('confirmation');
+                  setError('');
+                  setSuccessMessage('');
+                }}
+              >
+                {t`common:auth.resend-confirmation-email`}
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => {
+                  setPageLayout('forgot');
+                  setError('');
+                  setSuccessMessage('');
+                }}
+              >
+                {t`common:auth.forgot-password`}
+              </Button>
+            </>
+          )}
         </div>
         <a
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}

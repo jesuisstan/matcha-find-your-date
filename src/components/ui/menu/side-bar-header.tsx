@@ -51,7 +51,7 @@ const SideBarHeader = ({
         <LanguageSelector />
         <div className="items-center">
           <button className="hover:text-c42orange pb-1" onClick={handleLogout}>
-            {translate(`common:logout`)}
+            {translate(`common:auth.logout`)}
           </button>
         </div>
 

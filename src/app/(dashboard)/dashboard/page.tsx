@@ -11,20 +11,6 @@ import { capitalize } from '@/utils/format-string';
 const Dashboard = () => {
   const { t } = useTranslation('dashboard');
   const user = useUserStore((state) => state.user);
-  //const { data: session } = useSession();
-  //const [smartdataAvailable, setSmartdataAvailable] = useState<any[]>([]);
-  //const accessToken = session?.user?.access_token;
-
-  //const profiles = session?.user?.profiles;
-  //const name = session?.user?.username ?? '';
-  //const lang = useUserStore((state) => state?.user?.lang);
-  //const lang = useUserStore((state) => 'en');
-
-  //if (isLoading) {
-  //  return <DashboardSkeleton />;
-  //}
-
-  //const latestInvoices = await fetchLatestInvoices();
 
   return !user ? (
     <DashboardSkeleton />

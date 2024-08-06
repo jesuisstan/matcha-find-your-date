@@ -2,46 +2,44 @@
   "dashboard": "Tableau de bord",
   "male": "Homme",
   "female": "Femme",
-  "password": "Mot de passe",
-  "email": "Email",
-  "lastname": "Nom",
+  "lastname": "Nom de famille",
   "firstname": "Prénom",
   "nickname": "Surnom",
   "birthdate": "Date de naissance",
   "sexual-orientation": "Orientation sexuelle",
   "sexual-preferences": "Préférences sexuelles",
-
-  "login": "Connexion",
-  "logout": "Déconnexion",
-  "back-to-login": "Vous avez déjà un compte ? Connectez-vous",
-  "create-account": "Créer un compte",
-  "sign-in": "Se connecter",
-  "register": "Inscription",
-  "forgot-password": "Mot de passe oublié",
-  "reset-password": "Réinitialiser le mot de passe",
-  "send-reset-link": "Envoyer le lien de réinitialisation",
-
-  "need-help": "Besoin d'aide ? Contactez le support",
-  "contact-support": "Contacter le support",
-
-  "service-provided": "Service fourni par",
+  "need-help": "Besoin d'aide? Contactez le support",
+  "contact-support": "Contactez le support",
+  "error": "Erreur",
+  "success": "Succès",
+  "service-provided": "Ce service est fourni par",
   "rights-reserved": "© 2024 - Tous droits réservés",
-  "terms-condition": "Conditions d'utilisation",
-  "go-to-home": "Aller à la page d'accueil",
-
-  "invalid-token": "Token invalide",
-  "email-confirmed-successfully": "Email confirmé avec succès",
-  "failed-to-confirm-email": "Échec de la confirmation de l'email",
-
+  "terms-condition": "Conditions générales",
+  "go-to-home": "Aller à l'accueil",
   "selector": {
     "select-sex": "Sélectionnez le sexe",
     "select-preferences": "Sélectionnez les préférences sexuelles"
   },
   "not-found": {
     "title": "Page non trouvée",
-    "content": "La page, que vous cherchez, n'existe pas."
+    "content": "La page que vous recherchez n'existe pas."
   },
-
-  "error": "Erreur",
-  "success": "Succès"
+  "auth": {
+    "password": "Mot de passe",
+    "email": "Email",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "back-to-login": "Retour à la connexion",
+    "create-account": "Créer un compte",
+    "sign-in": "Se connecter",
+    "sign-up": "S'inscrire",
+    "register": "S'enregistrer",
+    "forgot-password": "Mot de passe oublié",
+    "reset-password": "Réinitialiser le mot de passe",
+    "send-reset-link": "Envoyer le lien de réinitialisation",
+    "resend-confirmation-email": "Renvoyer l'email de confirmation",
+    "invalid-token": "Jeton invalide",
+    "email-confirmed-successfully": "Email confirmé avec succès",
+    "failed-to-confirm-email": "Échec de la confirmation de l'email"
+  }
 }

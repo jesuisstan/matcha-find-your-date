@@ -21,7 +21,7 @@ const EmailConfirmation = () => {
     <div className="flex h-screen flex-col items-center justify-center bg-identity-background bg-cover bg-center text-center">
       <div className="flex min-w-56 flex-col items-center justify-center rounded-xl bg-card/90 p-4 text-foreground">
         <h1 className="text-2xl font-bold">{t(`common:${displayTitle.toLowerCase()}`)}</h1>
-        <p className="text-lg">{t(`common:${displayMessage}`)}</p>
+        <p className="text-lg">{t(`common:auth.${displayMessage}`)}</p>
         <Link href={`/dashboard?lang=${lang}`} className="mt-4 text-positive hover:text-c42orange">
           {t('common:go-to-home')}
         </Link>
