@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 import ChipsOption from '@/components/ui/chips/chips-option';
 import ChipsSkeleton from '@/components/ui/chips/chips-skeleton';
@@ -25,6 +26,7 @@ const ChipsGroup = ({
   errorMessage,
   versionLength,
 }: TChipGroupProps) => {
+  const t = useTranslations();
   const [hideAllClicked, setHideAllClicked] = useState(false);
   const optionsValues = options?.map((option) => option.value);
   const verifiedDefaultValues = verifyMultipleSelectorDefaultValues(options, defaultValues);
@@ -108,10 +110,10 @@ const ChipsGroup = ({
         {!singleSelection && (
           <div className="flex flex-row gap-7 text-xs font-normal text-secondary">
             <button className="min-w-fit text-left hover:text-c42orange" onClick={handleShowAll}>
-              {t`common:selector.show-all`}
+              {t(`selector.select-all`)}
             </button>
             <button className="min-w-fit text-left hover:text-c42orange" onClick={handleHideAll}>
-              {t`common:selector.hide-all`}
+              {t(`selector.unselect-all`)}
             </button>
           </div>
         )}

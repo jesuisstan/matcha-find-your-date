@@ -20,6 +20,8 @@
   "selector": {
     "select-sex": "Select sex",
     "select-preferences": "Select sexual preferences",
+    "select-all": "Select all",
+    "unselect-all": "Unselect all",
     "daily": "Daily",
     "monthly": "Monthly"
   },

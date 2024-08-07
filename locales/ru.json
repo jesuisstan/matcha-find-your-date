@@ -20,6 +20,8 @@
   "selector": {
     "select-sex": "Выберите пол",
     "select-preferences": "Выберите сексуальные предпочтения",
+    "select-all": "Выбрать все",
+    "unselect-all": "Отменить все",
     "daily": "Ежедневно",
     "monthly": "Ежемесячно"
   },
