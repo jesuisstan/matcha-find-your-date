@@ -1,3 +1,5 @@
+'use client'; // TO AVOID Error: Usage of next-intl APIs in Server Components currently opts into dynamic rendering
+
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
