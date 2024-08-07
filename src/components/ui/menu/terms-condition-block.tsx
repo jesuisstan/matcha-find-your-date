@@ -26,7 +26,7 @@ const TermsConditionBlock = ({ translate }: { translate: (key: string) => string
             setOpen(true);
           }}
         >
-          {translate(`common:terms-condition`)}
+          {translate(`terms-condition`)}
         </span>
       </div>
     </div>

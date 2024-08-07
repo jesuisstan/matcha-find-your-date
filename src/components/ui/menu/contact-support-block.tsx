@@ -10,7 +10,7 @@ const ContactSupportBlock = ({ translate }: { translate: (key: string) => string
         rel="noopener noreferrer"
         className="hover:text-c42orange items-center text-secondary"
       >
-        {translate(`common:contact-support`)}
+        {translate(`contact-support`)}
       </a>
     </div>
   );

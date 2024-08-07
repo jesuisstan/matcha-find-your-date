@@ -16,14 +16,14 @@ import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
-import useLanguage from '@/hooks/useLanguage';
 import useUserStore from '@/stores/user';
+import { getLocaleFromCookiesOnClientSide } from '@/utils/get-locale';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
   const t = useTranslations();
+  const locale = getLocaleFromCookiesOnClientSide() ?? 'en';
   const user = useUserStore((state) => state.user);
-  const { lang } = useLanguage();
 
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -142,18 +142,18 @@ const Menu: React.FC = () => {
               >
                 <Rows3 />
                 <Link
-                  href={`/dashboard?lang=${lang}`}
+                  href={`/dashboard`}
                   className={clsx(
                     `flex w-full items-center text-secondary transition duration-75`,
                     `hover:text-c42orange`,
-                    pathname === '/landing' && 'font-bold'
+                    pathname === `/${locale}/dashboard` && 'font-bold'
                   )}
                   onClick={() => {
                     if (isSidebarOpen) setIsSidebarOpen(false);
                   }}
                   scroll={false}
                 >
-                  {t(`common:dashboard`)}
+                  {t(`dashboard`)}
                 </Link>
               </div>
 
