@@ -15,6 +15,7 @@ const Loading = () => {
         height="0"
         sizes="100vw"
         className="h-80 w-80"
+        priority
       />
       <p className="mb-16 text-2xl font-normal leading-[48px] tracking-wider">
         {t(`slogan-subject`)}

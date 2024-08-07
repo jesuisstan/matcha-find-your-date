@@ -84,6 +84,7 @@ const Menu: React.FC = () => {
               className={clsx(`h-auto w-24`, theme === 'dark' ? 'darkmode-logo' : '')}
               placeholder="blur"
               blurDataURL={'/identity/logo-transparent.png'}
+              priority
             />
           )}
         </button>
@@ -115,6 +116,7 @@ const Menu: React.FC = () => {
                   className={clsx(`h-auto w-44`, theme === 'dark' ? 'darkmode-logo' : '')}
                   placeholder="blur"
                   blurDataURL={'/identity/logo-transparent.png'}
+                  priority
                 />
                 {/* Close-Sidebar button */}
                 {isSidebarOpen && (

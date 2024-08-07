@@ -7,12 +7,11 @@ import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
+import LocaleSwitcher from '@/components/LocaleSwitcher';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import LanguageSelector from '@/components/ui/menu/language-selector';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
-import useLanguage from '@/hooks/useLanguage';
 import useUserStore from '@/stores/user';
 
 const Login = () => {
@@ -27,7 +26,6 @@ const Login = () => {
     user: state.user,
     setUser: state.setUser,
   }));
-  const { lang } = useLanguage();
 
   // Redirect to dashboard if user is already logged in
   React.useEffect(() => {
@@ -96,7 +94,7 @@ const Login = () => {
           if (result.user.confirmed) {
             document.cookie = `token=${result.token}; path=/`;
             setUser(result.user);
-            router.push(`/dashboard?lang=${lang}`);
+            router.push(`/dashboard`);
           } else {
             setError(t('auth.please-confirm'));
           }
@@ -135,8 +133,10 @@ const Login = () => {
             blurDataURL="/identity/background.jpg"
             className="z-0"
             sizes={'100vw'}
+            priority
           />
           <div className="absolute bottom-0 z-10 bg-card/85 p-4 text-foreground">
+            <LocaleSwitcher />
             <h2 className="mb-2 text-4xl">Make love, not war</h2>
             <p className="text-sm">
               {t(`service-provided`)}{' '}
@@ -169,7 +169,9 @@ const Login = () => {
           height={200}
           placeholder="blur"
           blurDataURL="/identity/logo-transparent.png"
+          priority
         />
+        <LocaleSwitcher />
         <h2 className="mb-6 text-center text-3xl text-foreground">
           {pageLayout === 'login' && t(`auth.sign-in`)}
           {pageLayout === 'register' && t(`auth.register-new`)}
@@ -329,7 +331,6 @@ const Login = () => {
         >
           {t(`need-help`)}
         </a>
-        <LanguageSelector />
       </div>
     </div>
   );

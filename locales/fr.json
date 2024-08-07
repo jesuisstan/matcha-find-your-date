@@ -54,5 +54,8 @@
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",
-  "loading": "Chargement..."
+  "loading": "Chargement...",
+  "LocaleSwitcher": {
+    "switchLocale": "Passer à {locale, select, de {Allemand} en {Anglais} other {Inconnu}}"
+  }
 }

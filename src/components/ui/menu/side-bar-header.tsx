@@ -6,6 +6,7 @@ import LanguageSelector from '@/components/ui/menu/language-selector';
 import ThemeToggler from '@/components/ui/theme-toggler';
 import useUserStore from '@/stores/user';
 import { formatUserName, formatUserNameOneLetter } from '@/utils/format-string';
+import LocaleSwitcher from '@/components/LocaleSwitcher';
 
 const SideBarHeader = ({
   name,
@@ -50,7 +51,8 @@ const SideBarHeader = ({
           <ThemeToggler />
         </div>
 
-        <LanguageSelector />
+        {/*<LanguageSelector />*/}
+        <LocaleSwitcher />
         <div className="items-center">
           <button className="pb-1 hover:text-c42orange" onClick={handleLogout}>
             {translate(`auth.logout`)}

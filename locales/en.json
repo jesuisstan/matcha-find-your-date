@@ -54,5 +54,9 @@
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unknown}}"
+  }
 }

@@ -1,13 +1,8 @@
 const createNextIntlPlugin = require('next-intl/plugin');
 
-const withNextIntl = createNextIntlPlugin(
-  // custom path (default is '.src/i18n'):
-  './i18n.ts'
-);
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = withNextIntl({
-  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
-  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
   async redirects() {
     return [
       {
@@ -17,8 +12,6 @@ const nextConfig = withNextIntl({
       },
     ];
   },
-  // This is required to support PostHog trailing slash API requests
-  skipTrailingSlashRedirect: true,
 });
 
 module.exports = nextConfig;
