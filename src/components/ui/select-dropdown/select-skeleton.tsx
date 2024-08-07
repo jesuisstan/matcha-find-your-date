@@ -1,8 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
-
 const SelectSkeleton = ({ showLabel, showTitle }: { showLabel?: boolean; showTitle?: boolean }) => {
-  const { t } = useTranslation();
-
   return (
     <div className={'w-full'}>
       {showTitle && (
@@ -11,9 +7,9 @@ const SelectSkeleton = ({ showLabel, showTitle }: { showLabel?: boolean; showTit
         </div>
       )}
       <div className="h-[38px] w-40 animate-pulse rounded-full bg-muted" />
-      {showLabel && (
+      {/*{showLabel && (
         <div className="mt-1 text-xs text-secondary">{t`common:selector.select` + ' ...'}</div>
-      )}
+      )}*/}
     </div>
   );
 };
