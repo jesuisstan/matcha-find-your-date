@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import useTranslation from 'next-translate/useTranslation';
 
 import clsx from 'clsx';
 import { ChevronLeft, MenuIcon, Rows3 } from 'lucide-react';
@@ -21,7 +21,7 @@ import useUserStore from '@/stores/user';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
-  const { t } = useTranslation();
+  const t = useTranslations();
   const user = useUserStore((state) => state.user);
   const { lang } = useLanguage();
 

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const DescriptionWrapper = ({ smartdataDescription }: { smartdataDescription: string }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const animate = {

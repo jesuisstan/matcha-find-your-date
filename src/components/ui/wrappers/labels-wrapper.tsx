@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
@@ -24,7 +24,7 @@ const LabelsWrapper = ({
   baseIndex,
   loading,
 }: LabelsWrapperProps) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   // Function to render line breaks in any content string in case it's complex & too long (i.e., baseIndex string)
   const renderTextWithLineBreaks = (text: string | undefined) => {

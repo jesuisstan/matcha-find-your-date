@@ -1,20 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import useTranslation from 'next-translate/useTranslation';
 
 import ChipsOption from '@/components/ui/chips/chips-option';
 import ChipsSkeleton from '@/components/ui/chips/chips-skeleton';
 import Spinner from '@/components/ui/spinner';
-import useSmartdataFiltersStore from '@/stores/smartdata';
 import { chipsGroupPropsSchema, TChipGroupProps } from '@/types/chips';
 import {
   checkVersionLengthChips,
   processVersionsChips,
   verifyMultipleSelectorDefaultValues,
 } from '@/utils/format-array';
-import { capitalize, extractSmartdataName } from '@/utils/format-string';
+import { capitalize } from '@/utils/format-string';
 
 const ChipsGroup = ({
   smartdataFilterKey,
@@ -28,35 +25,27 @@ const ChipsGroup = ({
   errorMessage,
   versionLength,
 }: TChipGroupProps) => {
-  const { t } = useTranslation();
   const [hideAllClicked, setHideAllClicked] = useState(false);
   const optionsValues = options?.map((option) => option.value);
   const verifiedDefaultValues = verifyMultipleSelectorDefaultValues(options, defaultValues);
 
-  const {
-    getValueOfSmartdata,
-    addOneItemToSmartdata,
-    removeOneItemOfSmartdata,
-    clearAllItemsOfSmartdata,
-    replaceAllItemsOfSmartdata,
-  } = useSmartdataFiltersStore();
-  const smartdataName = extractSmartdataName(usePathname());
+  const smartdataName = 'usePathname()';
   const smartdataValue: string[] =
-    (getValueOfSmartdata(smartdataName, smartdataFilterKey, smartdataSubFilterKey) as string[]) ||
+    //(getValueOfSmartdata(smartdataName, smartdataFilterKey, smartdataSubFilterKey) as string[]) ||
     [];
 
   const handleShowAll = (event: React.FormEvent) => {
     event.preventDefault();
     setHideAllClicked(false);
     optionsValues.map((option) =>
-      addOneItemToSmartdata(smartdataName, smartdataFilterKey, option, smartdataSubFilterKey)
+      console.log(smartdataName, smartdataFilterKey, option, smartdataSubFilterKey)
     );
   };
 
   const handleHideAll = (event: React.FormEvent) => {
     event.preventDefault();
     setHideAllClicked(true);
-    clearAllItemsOfSmartdata!(smartdataName, smartdataFilterKey, smartdataSubFilterKey);
+    //clearAllItemsOfSmartdata!(smartdataName, smartdataFilterKey, smartdataSubFilterKey);
   };
 
   const handleChipSelect = (value: string) => {
@@ -66,12 +55,12 @@ const ChipsGroup = ({
         setHideAllClicked(true);
       }
       if (smartdataValue?.includes(value)) {
-        removeOneItemOfSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
+        //removeOneItemOfSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
       } else {
-        addOneItemToSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
+        //addOneItemToSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
       }
     } else {
-      replaceAllItemsOfSmartdata(smartdataName, smartdataFilterKey, [value], smartdataSubFilterKey);
+      //replaceAllItemsOfSmartdata(smartdataName, smartdataFilterKey, [value], smartdataSubFilterKey);
     }
   };
 
@@ -83,7 +72,8 @@ const ChipsGroup = ({
     ) {
       if (verifiedDefaultValues.length && verifiedDefaultValues.length > 0) {
         verifiedDefaultValues.map((value) => {
-          addOneItemToSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
+          //addOneItemToSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
+          console.log(value);
         });
       }
     }
