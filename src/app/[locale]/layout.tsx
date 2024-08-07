@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
+import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
@@ -32,15 +33,20 @@ export const metadata: Metadata = {
     This property only applies one level deep, so it won't block hydration warnings on other elements. */
 const RootLayout = async ({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) => {
-  const locales = await getMessages();
+  // Fetch the messages based on the locale
+  const locales = await getMessages({ locale: params.locale });
+
+  if (!locales) {
+    notFound(); // Trigger a 404 if the messages for the locale are not found
+  }
 
   return (
-    <html suppressHydrationWarning lang={locale}>
+    <html suppressHydrationWarning lang={params.locale}>
       <body className={clsx(montserrat.className, 'flex min-h-screen flex-col')}>
         <ThemeProvider
           attribute="class"
