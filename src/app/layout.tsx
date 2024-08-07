@@ -38,10 +38,10 @@ const RootLayout = async ({
   children: React.ReactNode;
   params: { locale: string };
 }) => {
-  // Fetch the messages based on the locale
-  const locales = await getMessages({ locale: params.locale });
+  // Fetch the messages based on the param.locale
+  const messages = await getMessages({ locale: params.locale });
 
-  if (!locales) {
+  if (!messages || Object.keys(messages).length === 0) {
     notFound(); // Trigger a 404 if the messages for the locale are not found
   }
 
@@ -54,7 +54,7 @@ const RootLayout = async ({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={locales}>{children}</NextIntlClientProvider>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>
