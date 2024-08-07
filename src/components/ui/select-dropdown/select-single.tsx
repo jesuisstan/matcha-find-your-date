@@ -1,8 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
-
 import SelectSkeleton from './select-skeleton';
 
 import {
@@ -13,9 +10,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSelector,
 } from '@/components/ui/dropdown-primitives';
-import useSmartdataFiltersStore from '@/stores/smartdata';
 import { SelectSinglePropsSchema, TSelectSingleProps } from '@/types/select-single';
-import { extractSmartdataName } from '@/utils/format-string';
 
 const SelectSingle = ({
   smartdataFilterKey,
@@ -31,34 +26,37 @@ const SelectSingle = ({
     ? defaultValue
     : options[0]?.value;
 
-  const { getValueOfSmartdata, setValueOfSmartdata } = useSmartdataFiltersStore();
-  const smartdataName = extractSmartdataName(usePathname());
-  const smartdataValue = getValueOfSmartdata(
-    smartdataName,
-    smartdataFilterKey,
-    smartdataSubFilterKey
-  ) as string;
+  //const { getValueOfSmartdata, setValueOfSmartdata } = useSmartdataFiltersStore();
+  const getValueOfSmartdata = () => {};
+  const setValueOfSmartdata = () => {};
+
+  const smartdataName = 'extractSmartdataName(usePathname())';
+  const smartdataValue = getValueOfSmartdata();
+  //smartdataName,
+  //smartdataFilterKey,
+  //smartdataSubFilterKey
 
   const updateSearchParams = (smartdataName: string, paramName: string, newValue: string) => {
-    setValueOfSmartdata(smartdataName, paramName, newValue, smartdataSubFilterKey);
+    //setValueOfSmartdata(smartdataName, paramName, newValue, smartdataSubFilterKey);
+    setValueOfSmartdata();
   };
 
   const handleSelect = (value: string) => {
     updateSearchParams(smartdataName, smartdataFilterKey, value);
   };
 
-  // initial setting of smartdata value:
-  useEffect(() => {
-    if (!smartdataValue) {
-      setValueOfSmartdata(
-        smartdataName,
-        smartdataFilterKey,
-        verifiedDefaultValue,
-        smartdataSubFilterKey
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [smartdataSubFilterKey, options]);
+  //// initial setting of smartdata value:
+  //useEffect(() => {
+  //  if (!smartdataValue) {
+  //    setValueOfSmartdata(
+  //      smartdataName,
+  //      smartdataFilterKey,
+  //      verifiedDefaultValue,
+  //      smartdataSubFilterKey
+  //    );
+  //  }
+  //  // eslint-disable-next-line react-hooks/exhaustive-deps
+  //}, [smartdataSubFilterKey, options]);
 
   /* Verifying the passed Props of the component */
   const verif = SelectSinglePropsSchema.safeParse({
@@ -80,12 +78,13 @@ const SelectSingle = ({
       <div className="flex flex-col items-start justify-start align-middle">
         <DropdownMenuSelector
           asChild
-          value={options.find((option) => option.value === smartdataValue)?.label || ''}
+          //value={options.find((option) => option.value === smartdataValue)?.label || ''}
+          value={''}
         />
         {label && <div className="mt-1 text-xs text-secondary">{label}</div>}
         <DropdownMenuPortal>
           <DropdownMenuContent sideOffset={5} side="right" align="start">
-            <DropdownMenuRadioGroup value={smartdataValue} onValueChange={handleSelect}>
+            <DropdownMenuRadioGroup value={'smartdataValue'} onValueChange={handleSelect}>
               {options.map((option) => {
                 return (
                   <DropdownMenuRadioItem key={option.value} value={option.value}>

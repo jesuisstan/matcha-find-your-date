@@ -21,7 +21,7 @@ const RadioGroup = ({ name, label, options, defaultValue }: TRadioGroupProps) =>
     setSelectedValue(value);
   };
 
-  // initial setting of smartdata value:
+  // initial setting of value:
   useEffect(() => {
     if (!selectedValue) {
       setSelectedValue(verifiedDefaultValue);

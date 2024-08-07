@@ -1,6 +1,11 @@
-const nextTranslate = require('next-translate-plugin');
+const createNextIntlPlugin = require('next-intl/plugin');
 
-const nextConfig = nextTranslate({
+const withNextIntl = createNextIntlPlugin(
+  // custom path (default is '.src/i18n'):
+  './i18n.ts'
+);
+
+const nextConfig = withNextIntl({
   output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
   output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
   async redirects() {

@@ -1,4 +1,5 @@
 {
+  "welcome": "Bienvenue sur Matcha",
   "dashboard": "Tableau de bord",
   "male": "Homme",
   "female": "Femme",
@@ -18,7 +19,9 @@
   "go-to-home": "Aller à l'accueil",
   "selector": {
     "select-sex": "Sélectionnez le sexe",
-    "select-preferences": "Sélectionnez les préférences sexuelles"
+    "select-preferences": "Sélectionnez les préférences sexuelles",
+    "daily": "Quotidien",
+    "monthly": "Mensuel"
   },
   "not-found": {
     "title": "Page non trouvée",
@@ -42,6 +45,12 @@
     "invalid-token": "Jeton invalide",
     "email-confirmed-successfully": "Email confirmé avec succès",
     "failed-to-confirm-email": "Échec de la confirmation de l'email",
-    "confirme-email": "Confirmer l'email"
-  }
+    "confirme-email": "Confirmer l'email",
+    "registration-success": "Inscription réussie! Veuillez vérifier votre email pour confirmer votre compte.",
+    "email-sent": "Email envoyé avec succès.",
+    "please-confirm": "Veuillez confirmer votre adresse email avant de vous connecter."
+  },
+  "slogan": "Trouvez votre date",
+  "slogan-subject": "Parce que l'amour aussi peut être industrialisé",
+  "loading": "Chargement..."
 }

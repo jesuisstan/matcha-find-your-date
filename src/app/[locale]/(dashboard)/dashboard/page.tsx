@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import useTranslation from 'next-translate/useTranslation';
+import {useTranslations} from 'next-intl';
 
 import DashboardSkeleton from './dashboard-skeleton';
 
@@ -9,7 +9,7 @@ import useUserStore from '@/stores/user';
 import { capitalize } from '@/utils/format-string';
 
 const Dashboard = () => {
-  const { t } = useTranslation('dashboard');
+  const t = useTranslations();
   const user = useUserStore((state) => state.user);
 
   return !user ? (
@@ -20,7 +20,6 @@ const Dashboard = () => {
         {t('welcome')}, {capitalize(user!.firstname)}!
       </h1>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {/*<LatestInvoices latestInvoices={latestInvoices} />*/}
         CONTENTTTTTTTTTTTTTTTT
       </div>
     </>

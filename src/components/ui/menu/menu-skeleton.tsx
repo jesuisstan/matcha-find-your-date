@@ -29,8 +29,6 @@ export const generateSkeletonItems = (count: number) => {
 };
 
 const MenuSkeleton = ({ isSidebarOpen }: { isSidebarOpen?: boolean }) => {
-  // Function to generate X number of fake Smartdata items
-
   return (
     <aside
       id="sidebar"

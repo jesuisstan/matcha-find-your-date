@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 import clsx from 'clsx';
 
@@ -28,9 +30,17 @@ export const metadata: Metadata = {
 
 /* Note! To avoid hydration warnings, add suppressHydrationWarning to <html>, because next-themes updates that element.
     This property only applies one level deep, so it won't block hydration warnings on other elements. */
-const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({
+  children,
+  params: { locale },
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) => {
+  const locales = await getMessages();
+
   return (
-    <html suppressHydrationWarning>
+    <html suppressHydrationWarning lang={locale}>
       <body className={clsx(montserrat.className, 'flex min-h-screen flex-col')}>
         <ThemeProvider
           attribute="class"
@@ -38,7 +48,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <NextIntlClientProvider messages={locales}>{children}</NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

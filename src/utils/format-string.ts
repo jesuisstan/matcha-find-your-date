@@ -43,11 +43,6 @@ export const spaceToSnake = (input: string): string => {
   return input.replace(/ /g, '_');
 };
 
-export const extractSmartdataName = (pathname: string): string => {
-  const smartDataString = pathname.split('/smartdata/')[1];
-  return kebabToSnake(smartDataString);
-};
-
 export const capitalizeEachWord = (str: string) => {
   if (!str) {
     return str; // Return the string as is if it's empty

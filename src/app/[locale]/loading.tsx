@@ -1,8 +1,11 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import Spinner from '@/components/ui/spinner';
 
 const Loading = () => {
+  const t = useTranslations();
+
   return (
     <div className="flex h-screen flex-col items-center justify-center text-center text-foreground">
       <Image
@@ -13,12 +16,11 @@ const Loading = () => {
         sizes="100vw"
         className="h-80 w-80"
       />
-      <p className="mb-[76px] text-4xl font-normal leading-[48px] tracking-wider">
-        Because, love too can be industrialized
+      <p className="mb-16 text-2xl font-normal leading-[48px] tracking-wider">
+        {t(`slogan-subject`)}
       </p>
-      <p className="mb-[14px] animate-pulse text-2xl font-normal leading-[29px]">Loading</p>
-      <Spinner size={16} />
-      <p className="mt-[14px] animate-pulse text-base font-normal leading-[19px]">Please wait</p>
+      <Spinner size={12} />
+      <p className="mt-[14px] animate-pulse text-base font-normal leading-[19px]">{t(`loading`)}</p>
     </div>
   );
 };

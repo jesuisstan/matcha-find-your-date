@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react';
+import {useLocale, useTranslations} from 'next-intl';
 
 import { LanguagesIcon } from 'lucide-react';
 
@@ -10,19 +11,30 @@ import {
   DropdownMenuPortal,
   DropdownMenuSelector,
 } from '@/components/ui/dropdown-primitives';
-import useLanguage, { langList } from '@/hooks/useLanguage';
+//import useLanguage, { langList } from '@/hooks/useLanguage';
+
+export const langList: { [key: string]: string } = {
+  fr: 'Français',
+  en: 'English',
+  ru: 'Русский',
+};
 
 const LanguageSelector: FC = () => {
-  const { lang, setLang } = useLanguage();
 
-  useEffect(() => {
-    const savedLang = localStorage.getItem('lang') ?? 'en';
-    setLang(savedLang);
-  }, []);
+  const locale = useLocale();
+  const otherLocale = locale === 'en' ? 'ru' : 'en';
+  //const pathname = usePathname();
+
+  //const { lang, setLang } = useLanguage();
+
+  //useEffect(() => {
+  //  const savedLang = localStorage.getItem('lang') ?? 'en';
+  //  setLang(savedLang);
+  //}, []);
 
   return (
     <DropdownMenu>
-      <div className="flex flex-row items-center justify-center align-middle">
+      {/*<div className="flex flex-row items-center justify-center align-middle">
         <DropdownMenuSelector
           asChild
           value={langList[lang as keyof typeof langList]}
@@ -44,7 +56,7 @@ const LanguageSelector: FC = () => {
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenuPortal>
-      </div>
+      </div>*/}
     </DropdownMenu>
   );
 };

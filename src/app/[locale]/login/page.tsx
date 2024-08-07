@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
@@ -16,7 +16,8 @@ import useLanguage from '@/hooks/useLanguage';
 import useUserStore from '@/stores/user';
 
 const Login = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
+
   const router = useRouter();
   const [pageLayout, setPageLayout] = React.useState('login');
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -97,20 +98,18 @@ const Login = () => {
             setUser(result.user);
             router.push(`/dashboard?lang=${lang}`);
           } else {
-            setError('Please confirm your email address before logging in.');
+            setError(t('auth.please-confirm'));
           }
           break;
         case 'register':
-          setSuccessMessage(
-            'Registration successful! Please check your email to confirm your account.'
-          );
+          setSuccessMessage(t('auth.registration-success'));
           setPageLayout('login');
           break;
         case 'confirmation':
-          setSuccessMessage('Confirmation email sent successfully.');
+          setSuccessMessage(t('auth.email-sent'));
           break;
         case 'forgot':
-          setSuccessMessage('Password reset email sent successfully.');
+          setSuccessMessage(t('auth.email-sent'));
           break;
       }
     } else {
@@ -140,7 +139,7 @@ const Login = () => {
           <div className="absolute bottom-0 z-10 bg-card/85 p-4 text-foreground">
             <h2 className="mb-2 text-4xl">Make love, not war</h2>
             <p className="text-sm">
-              {t`common:service-provided`}{' '}
+              {t(`service-provided`)}{' '}
               <a
                 href={`https://www.krivtsoff.site/`}
                 target="_blank"
@@ -149,7 +148,7 @@ const Login = () => {
                 Stan Krivtsoff
               </a>
               {'. '}
-              {t`common:rights-reserved`}
+              {t(`rights-reserved`)}
               {'.'}
             </p>
           </div>
@@ -172,66 +171,66 @@ const Login = () => {
           blurDataURL="/identity/logo-transparent.png"
         />
         <h2 className="mb-6 text-center text-3xl text-foreground">
-          {pageLayout === 'login' && t`common:auth.sign-in`}
-          {pageLayout === 'register' && t`common:auth.register-new`}
-          {pageLayout === 'confirmation' && t`common:auth.confirme-email`}
-          {pageLayout === 'forgot' && t`common:auth.reset-password`}
+          {pageLayout === 'login' && t(`auth.sign-in`)}
+          {pageLayout === 'register' && t(`auth.register-new`)}
+          {pageLayout === 'confirmation' && t(`auth.confirme-email`)}
+          {pageLayout === 'forgot' && t(`auth.reset-password`)}
         </h2>
         <form className="flex flex-col" onSubmit={handleSubmit} ref={formRef}>
           {pageLayout === 'register' && (
             <>
               <Label htmlFor="firstname" className="mb-2">
-                {t`common:firstname`}
+                {t(`firstname`)}
               </Label>
               <RequiredInput
                 type="text"
                 id="firstname"
                 name="firstname"
-                placeholder={t`common:firstname`}
+                placeholder={t(`firstname`)}
                 className="mb-6"
               />
               <Label htmlFor="lastname" className="mb-2">
-                {t`common:lastname`}
+                {t(`lastname`)}
               </Label>
               <RequiredInput
                 type="text"
                 id="lastname"
                 name="lastname"
-                placeholder={t`common:lastname`}
+                placeholder={t(`lastname`)}
                 className="mb-6"
               />
               <Label htmlFor="nickname" className="mb-2">
-                {t`common:nickname`}
+                {t(`nickname`)}
               </Label>
               <RequiredInput
                 type="text"
                 id="nickname"
                 name="nickname"
-                placeholder={t`common:nickname`}
+                placeholder={t(`nickname`)}
                 className="mb-6"
               />
               <div className="flex flex-row gap-6">
                 <div className="flex flex-col">
                   <Label htmlFor="birthdate" className="mb-2">
-                    {t`common:birthdate`}
+                    {t(`birthdate`)}
                   </Label>
                   <RequiredInput
                     type="date"
                     id="birthdate"
                     name="birthdate"
-                    placeholder={t`common:birthdate`}
+                    placeholder={t(`birthdate`)}
                     className="mb-6"
                   />
                 </div>
                 <div className="flex flex-col">
                   <Label htmlFor="sex" className="mb-2">
-                    {t`common:selector.select-sex`}
+                    {t(`selector.select-sex`)}
                   </Label>
                   <RadioGroup
                     name="sex"
                     options={[
-                      { value: 'male', label: t`common:male` },
-                      { value: 'female', label: t`common:female` },
+                      { value: 'male', label: t(`male`) },
+                      { value: 'female', label: t(`female`) },
                     ]}
                     defaultValue="male"
                   />
@@ -240,36 +239,36 @@ const Login = () => {
             </>
           )}
           <Label htmlFor="email" className="mb-2">
-            {t`common:auth.email`}
+            {t(`auth.email`)}
           </Label>
           <RequiredInput
             type="email"
             id="email"
             name="email"
-            placeholder={t`common:auth.email`}
+            placeholder={t(`auth.email`)}
             className="mb-6"
             autoComplete="email"
           />
           {pageLayout !== 'confirmation' && pageLayout !== 'forgot' && (
             <>
               <Label htmlFor="password" className="mb-2">
-                {t`common:auth.password`}
+                {t(`auth.password`)}
               </Label>
               <RequiredInput
                 type="password"
                 id="password"
                 name="password"
-                placeholder={t`common:auth.password`}
+                placeholder={t(`auth.password`)}
                 className="mb-6"
                 autoComplete="current-password"
               />
             </>
           )}
           <Button type="submit" className="mb-4">
-            {pageLayout === 'login' && t`common:auth.sign-in`}
-            {pageLayout === 'register' && t`common:auth.sign-up`}
-            {pageLayout === 'confirmation' && t`common:auth.resend-confirmation-email`}
-            {pageLayout === 'forgot' && t`common:auth.send-reset-link`}
+            {pageLayout === 'login' && t(`auth.sign-in`)}
+            {pageLayout === 'register' && t(`auth.sign-up`)}
+            {pageLayout === 'confirmation' && t(`auth.resend-confirmation-email`)}
+            {pageLayout === 'forgot' && t(`auth.send-reset-link`)}
           </Button>
         </form>
         {error && <p className="mb-4 text-center text-sm text-negative">{error}</p>}
@@ -286,7 +285,7 @@ const Login = () => {
                 setSuccessMessage('');
               }}
             >
-              {t`common:auth.back-to-login`}
+              {t(`auth.back-to-login`)}
             </Button>
           )}
           {pageLayout === 'login' && (
@@ -299,7 +298,7 @@ const Login = () => {
                   setSuccessMessage('');
                 }}
               >
-                {t`common:auth.create-account`}
+                {t(`auth.create-account`)}
               </Button>
               <Button
                 variant="link"
@@ -309,7 +308,7 @@ const Login = () => {
                   setSuccessMessage('');
                 }}
               >
-                {t`common:auth.resend-confirmation-email`}
+                {t(`auth.resend-confirmation-email`)}
               </Button>
               <Button
                 variant="link"
@@ -319,7 +318,7 @@ const Login = () => {
                   setSuccessMessage('');
                 }}
               >
-                {t`common:auth.forgot-password`}
+                {t(`auth.forgot-password`)}
               </Button>
             </>
           )}
@@ -328,7 +327,7 @@ const Login = () => {
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
           className="my-6 text-center text-sm text-secondary hover:text-c42orange"
         >
-          {t`common:need-help`}
+          {t(`need-help`)}
         </a>
         <LanguageSelector />
       </div>

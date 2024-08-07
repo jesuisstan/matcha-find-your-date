@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 import { PlaySquareIcon } from 'lucide-react';
@@ -9,24 +9,23 @@ import { PlaySquareIcon } from 'lucide-react';
 import HeaderSkeleton from '@/components/modules/header/header-skeleton';
 import { Button } from '@/components/ui/button';
 import ChipsGroup from '@/components/ui/chips/chips-group';
-import UseCaseButton from '@/components/ui/download-buttons/use-case-button';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 
 const ManufacturingNowcast = () => {
   // Translate hook
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [loading, setLoading] = useState(false); // todo
 
   //const { getValueOfSmartdata } = useSmartdataFiltersStore();
 
   // TODO: API call to get option
-  const indicatorOptions = [{ value: 'nsa', label: t`common:selector.level` }];
+  const indicatorOptions = [{ value: 'nsa', label: t(`selector.level`) }];
 
   const frequencyOptions = [
-    { value: 'daily', label: t`common:selector.daily` },
-    { value: 'monthly', label: t`common:selector.monthly` },
+    { value: 'daily', label: t(`selector.daily`) },
+    { value: 'monthly', label: t(`selector.monthly`) },
   ];
 
   const approachOptions = [
@@ -66,7 +65,6 @@ const ManufacturingNowcast = () => {
               <DescriptionWrapper smartdataDescription={'metadata?.description'} />
               {/* BUTTONS GROUP */}
               <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
-                <UseCaseButton url={'metadata?.documentation'} disabled={loading} />
                 <div className="flex w-full flex-row items-center justify-center gap-4">
                   <Button size="icon">
                     <PlaySquareIcon size={20} />

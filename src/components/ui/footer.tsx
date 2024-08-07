@@ -1,12 +1,12 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslations } from 'next-intl';
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="self-end p-1 text-right text-xs font-normal leading-4 tracking-normal">
       Matcha Dating App{'. '}
-      {t`common:service-provided`}{' '}
+      {t(`service-provided`)}{' '}
       <a
         href={`https://www.krivtsoff.site/`}
         target="_blank"
@@ -15,7 +15,7 @@ const Footer = () => {
         Stan Krivtsoff
       </a>
       {'. '}
-      {t`common:rights-reserved`}
+      {t(`rights-reserved`)}
       {'.'}
     </div>
   );

@@ -121,7 +121,7 @@ const Menu: React.FC = () => {
                   <button
                     id="close-sidebar-button"
                     onClick={toggleSidebar}
-                    title="Close smartdata menu"
+                    title="Close the menu"
                     className={clsx(
                       `absolute left-72 top-1/2 z-50 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-secondary bg-card text-foreground opacity-90`,
                       `hover:text-c42orange hover:opacity-100`,

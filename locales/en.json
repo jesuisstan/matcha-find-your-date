@@ -1,4 +1,5 @@
 {
+  "welcome": "Welcome to Matcha",
   "dashboard": "Dashboard",
   "male": "Male",
   "female": "Female",
@@ -18,7 +19,9 @@
   "go-to-home": "Go to home",
   "selector": {
     "select-sex": "Select sex",
-    "select-preferences": "Select sexual preferences"
+    "select-preferences": "Select sexual preferences",
+    "daily": "Daily",
+    "monthly": "Monthly"
   },
   "not-found": {
     "title": "Page not found",
@@ -42,6 +45,12 @@
     "invalid-token": "Invalid token",
     "email-confirmed-successfully": "Email confirmed successfully",
     "failed-to-confirm-email": "Failed to confirm email",
-    "confirme-email": "Confirm email"
-  }
+    "confirme-email": "Confirm email",
+    "registration-success": "Registration successful! Please check your email to confirm your account.",
+    "email-sent": "Email sent successfully.",
+    "please-confirm": "Please confirm your email address before logging in."
+  },
+  "slogan": "Find your date",
+  "slogan-subject": "Because, love too can be industrialized",
+  "loading": "Loading..."
 }
