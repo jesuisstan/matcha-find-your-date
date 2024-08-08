@@ -55,7 +55,10 @@ const SideBarHeader = ({
         </div>
 
         <div className="items-center">
-          <button className="pb-1 hover:text-c42orange" onClick={handleLogout}>
+          <button
+            className="pb-1 transition-all duration-300 ease-in-out hover:text-c42orange"
+            onClick={handleLogout}
+          >
             {translate(`auth.logout`)}
           </button>
         </div>

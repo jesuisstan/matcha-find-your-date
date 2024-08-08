@@ -143,7 +143,7 @@ const Menu: React.FC = () => {
                     onClick={toggleSidebar}
                     title="Close the menu"
                     className={clsx(
-                      `absolute left-72 top-1/2 z-50 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-secondary bg-card text-foreground opacity-90`,
+                      `absolute left-72 top-1/2 z-50 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-secondary bg-card text-foreground opacity-90 transition-all duration-300 ease-in-out`,
                       `hover:text-c42orange hover:opacity-100`,
                       `lg:hidden`
                     )}
@@ -164,7 +164,7 @@ const Menu: React.FC = () => {
                 <Link
                   href={`/dashboard`}
                   className={clsx(
-                    `flex w-full items-center text-secondary transition duration-75`,
+                    `flex w-full items-center text-secondary transition-all duration-300 ease-in-out`,
                     `hover:text-c42orange`,
                     pathname === `/${locale}/dashboard` && 'font-bold'
                   )}

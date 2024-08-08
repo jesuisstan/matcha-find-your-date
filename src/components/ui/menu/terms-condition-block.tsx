@@ -19,7 +19,7 @@ const TermsConditionBlock = ({ translate }: { translate: (key: string) => string
         <Handshake size={16} />
         <span
           className={clsx(
-            `group flex w-full cursor-pointer items-center text-secondary transition duration-75`,
+            `group flex w-full cursor-pointer items-center text-secondary transition-all duration-300 ease-in-out`,
             `hover:text-c42orange`
           )}
           onClick={() => {

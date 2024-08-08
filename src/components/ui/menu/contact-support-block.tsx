@@ -8,7 +8,7 @@ const ContactSupportBlock = ({ translate }: { translate: (key: string) => string
         href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:text-c42orange items-center text-secondary"
+        className="items-center text-secondary transition-all duration-300 ease-in-out hover:text-c42orange"
       >
         {translate(`contact-support`)}
       </a>

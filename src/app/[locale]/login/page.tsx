@@ -142,7 +142,7 @@ const Login = () => {
               <a
                 href={`https://www.krivtsoff.site/`}
                 target="_blank"
-                className="my-6 text-center text-sm text-positive hover:text-c42orange"
+                className="my-6 text-center text-sm text-positive transition-all duration-300 ease-in-out hover:text-c42orange"
               >
                 Stan Krivtsoff
               </a>
@@ -328,7 +328,7 @@ const Login = () => {
         </div>
         <a
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
-          className="my-6 text-center text-sm text-secondary hover:text-c42orange"
+          className="my-6 text-center text-sm text-secondary transition-all duration-300 ease-in-out hover:text-c42orange"
         >
           {t(`need-help`)}
         </a>

@@ -31,7 +31,7 @@ const DropdownMenuSelector = React.forwardRef<
     <div
       title={value || 'Select value'}
       className={clsx(
-        `group flex h-10 min-w-36 max-w-[300px] cursor-pointer select-none items-center justify-between gap-2 rounded-md border border-muted bg-transparent px-3 text-sm font-normal`,
+        `group flex h-10 min-w-36 max-w-[300px] cursor-pointer select-none items-center justify-between gap-2 rounded-md border border-muted bg-transparent px-3 text-sm font-normal transition-all duration-300 ease-in-out`,
         `hover:border-c42orange`,
         value ? 'text-foreground' : 'text-secondary',
         className
@@ -59,7 +59,7 @@ const DropdownMenuMultipleSelector = React.forwardRef<
     <div
       title={value || 'Select value'}
       className={clsx(
-        `group flex h-10 min-w-36 max-w-[300px] cursor-pointer select-none items-center justify-between gap-2 rounded-md border border-muted bg-transparent px-3 text-sm font-normal`,
+        `group flex h-10 min-w-36 max-w-[300px] cursor-pointer select-none items-center justify-between gap-2 rounded-md border border-muted bg-transparent px-3 text-sm font-normal transition-all duration-300 ease-in-out`,
         `hover:border-c42orange`,
         `xl: max-w-xl, lg: max-w-full`,
         value ? 'text-foreground' : 'text-secondary',
@@ -107,7 +107,7 @@ const DropdownMenuSubContent = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     className={clsx(
-      'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+      'bg-popover text-popover-foreground z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
       className
     )}
     {...props}
@@ -124,7 +124,7 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={clsx(
-        'z-50 max-h-96 min-w-[10rem] max-w-[242px] overflow-y-auto rounded-md border border-muted bg-card p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+        'text-popover-foreground z-50 max-h-96 min-w-[10rem] max-w-[242px] overflow-y-auto rounded-md border border-muted bg-card p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         `dark:border-secondary`,
         className
       )}

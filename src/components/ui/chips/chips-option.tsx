@@ -54,7 +54,7 @@ const ChipsOption = ({ paramName, value, isSelected, onSelect, children }: TChip
       aria-labelledby={value}
       title={getTitleFromChildren(children)}
       className={clsx(
-        `flex h-5 min-w-[54px] cursor-pointer flex-row items-center justify-center gap-1 whitespace-nowrap break-words rounded-3xl border-[1px] border-secondary px-[9px] py-[2px] text-center text-xs font-normal normal-case leading-loose`,
+        `flex h-5 min-w-[54px] cursor-pointer flex-row items-center justify-center gap-1 whitespace-nowrap break-words rounded-3xl border-[1px] border-secondary px-[9px] py-[2px] text-center text-xs font-normal normal-case leading-loose transition-all duration-300 ease-in-out`,
         `hover:border-c42orange`,
         isSelected ? 'bg-foreground text-card dark:bg-foreground' : 'bg-card text-foreground'
       )}
