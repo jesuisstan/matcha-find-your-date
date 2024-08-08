@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { PlaySquareIcon } from 'lucide-react';
 
-import HeaderSkeleton from '@/components/modules/header/header-skeleton';
+import HeaderSkeleton from '@/components/header-skeleton';
 import { Button } from '@/components/ui/button';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import RadioGroup from '@/components/ui/radio/radio-group';
