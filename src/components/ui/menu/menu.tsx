@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -27,6 +27,7 @@ const Menu: React.FC = () => {
 
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
   const [isClient, setIsClient] = useState(false);
 
   const toggleSidebar = () => {
@@ -53,6 +54,21 @@ const Menu: React.FC = () => {
       : (mainElement!.style.filter = 'none');
     return () => {
       window.removeEventListener('resize', handleWindowResize);
+    };
+  }, [isSidebarOpen]);
+
+  /* Event listener to close DropdownMenu when clicking outside */
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsSidebarOpen(false);
+      }
+    };
+    if (isSidebarOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
     };
   }, [isSidebarOpen]);
 
@@ -101,6 +117,7 @@ const Menu: React.FC = () => {
               isSidebarOpen ? 'translate-x-0 drop-shadow-2xl' : ' -translate-x-96' // Conditional style
             )}
             aria-label="Sidebar"
+            ref={dropdownRef}
           >
             <div
               id="rounded-menu-container"
@@ -118,8 +135,9 @@ const Menu: React.FC = () => {
                   blurDataURL={'/identity/logo-transparent.png'}
                   priority
                 />
+
                 {/* Close-Sidebar button */}
-                {isSidebarOpen && (
+                {/*{isSidebarOpen && (
                   <button
                     id="close-sidebar-button"
                     onClick={toggleSidebar}
@@ -132,7 +150,7 @@ const Menu: React.FC = () => {
                   >
                     <ChevronLeft />
                   </button>
-                )}
+                )}*/}
               </div>
 
               <SideBarHeader name={user?.nickname || user?.firstname} translate={t} />
