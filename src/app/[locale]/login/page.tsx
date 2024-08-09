@@ -103,22 +103,22 @@ const Login = () => {
             setUser(result.user);
             router.push(`/dashboard`);
           } else {
-            setError(t('auth.please-confirm'));
+            setError(t(`auth.${result.error}`));
           }
           break;
         case 'register':
-          setSuccessMessage(t('auth.registration-success'));
+          setSuccessMessage(t(`auth.${result.message}`));
           setPageLayout('login');
           break;
         case 'confirmation':
-          setSuccessMessage(t('auth.email-sent'));
+          setSuccessMessage(t(`auth.${result.message}`));
           break;
         case 'forgot':
-          setSuccessMessage(t('auth.email-sent'));
+          setSuccessMessage(t(`auth.${result.message}`));
           break;
       }
     } else {
-      setError(result.error);
+      setError(t(`auth.${result.error}`));
     }
   };
 
@@ -162,7 +162,7 @@ const Login = () => {
       </div>
       <div
         className={clsx(
-          'm-auto flex h-full w-full flex-col overflow-y-scroll p-8',
+          'm-auto flex h-full w-full flex-col overflow-y-scroll pl-5 pr-5',
           'md:w-1/3',
           'lg:w-1/4'
         )}

@@ -14,21 +14,18 @@ export async function POST(request: Request) {
   const user = result.rows[0];
 
   if (!user) {
-    return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+    return NextResponse.json({ error: 'invalid-email-or-password' }, { status: 401 });
   }
 
   // Check if password is valid
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+    return NextResponse.json({ error: 'invalid-email-or-password' }, { status: 401 });
   }
 
   // Check if email is confirmed
   if (!user.confirmed) {
-    return NextResponse.json(
-      { error: 'Please confirm your email address before logging in.' },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'please-confirm-email-before-login' }, { status: 401 });
   }
 
   // Create JWT token

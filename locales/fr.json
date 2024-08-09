@@ -27,7 +27,7 @@
   },
   "not-found": {
     "title": "Page non trouvée",
-    "content": "La page que vous recherchez n'existe pas."
+    "content": "La page que vous recherchez n'existe pas"
   },
   "auth": {
     "password": "Mot de passe",
@@ -48,11 +48,23 @@
     "email-confirmed-successfully": "Email confirmé avec succès",
     "failed-to-confirm-email": "Échec de la confirmation de l'email",
     "confirme-email": "Confirmer l'email",
-    "registration-success": "Inscription réussie! Veuillez vérifier votre email pour confirmer votre compte.",
-    "email-sent": "Email envoyé avec succès.",
-    "please-confirm": "Veuillez confirmer votre adresse email avant de vous connecter.",
     "max-char": "Caractères max",
-    "password-requirements": "8-21: 1 majuscule, 1 minuscule, 1 chiffre, 1 de @$!%*?&,.^=_+"
+    "password-requirements": "8-21: 1 majuscule, 1 minuscule, 1 chiffre, 1 de @$!%*?&,.^=_+",
+    "under-18": "Vous devez avoir au moins 18 ans pour utiliser ce service",
+    "invalid-birthdate": "Date de naissance invalide",
+    "email-already-exists": "Email déjà existant",
+    "nickname-already-exists": "Nickname déjà existant",
+    "failed-to-register-user": "Échec de l'inscription de l'utilisateur",
+    "invalid-email-or-password": "Email ou mot de passe invalide",
+    "please-confirm-email-before-login": "Veuillez confirmer votre adresse email avant de vous connecter",
+    "email-required": "Email requis",
+    "password-required": "Mot de passe requis",
+    "email-not-found-user-already-confirmed": "Email non trouvé ou utilisateur déjà confirmé",
+    "failed-resend-confirmation": "Échec de la renvoi de l'email de confirmation",
+    "confirmation-resent": "Email de confirmation renvoyé avec succès",
+    "failed-send-reset-link": "Échec de l'envoi du lien de réinitialisation",
+    "reset-link-sent": "Lien de réinitialisation envoyé avec succès",
+    "user-registered-successfully": "Inscription réussie. Veuillez vérifier votre email pour confirmer votre compte"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",

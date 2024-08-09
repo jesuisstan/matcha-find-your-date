@@ -27,7 +27,7 @@
   },
   "not-found": {
     "title": "Page not found",
-    "content": "The page, you are looking for, does not exist."
+    "content": "The page, you are looking for, does not exist"
   },
   "auth": {
     "password": "Password",
@@ -48,11 +48,23 @@
     "email-confirmed-successfully": "Email confirmed successfully",
     "failed-to-confirm-email": "Failed to confirm email",
     "confirme-email": "Confirm email",
-    "registration-success": "Registration successful! Please check your email to confirm your account.",
-    "email-sent": "Email sent successfully.",
-    "please-confirm": "Please confirm your email address before logging in.",
     "max-char": "Max characters",
-    "password-requirements": "8-21: 1 UP letter, 1 low letter, 1 number, 1 of @$!%*?&,.^=_+"
+    "password-requirements": "8-21: 1 UP letter, 1 low letter, 1 number, 1 of @$!%*?&,.^=_+",
+    "under-18": "You must be at least 18 years old to use this service",
+    "invalid-birthdate": "Invalid birthdate",
+    "email-already-exists": "Email already exists",
+    "nickname-already-exists": "Nickname already exists",
+    "failed-to-register-user": "Failed to register user",
+    "invalid-email-or-password": "Invalid email or password",
+    "please-confirm-email-before-login": "Please confirm your email address before logging in",
+    "email-required": "Email is required",
+    "password-required": "Password is required",
+    "email-not-found-user-already-confirmed": "Email not found or user already confirmed",
+    "failed-resend-confirmation": "Failed to resend confirmation email",
+    "confirmation-resent": "Confirmation email resent successfully",
+    "failed-send-reset-link": "Failed to send reset link",
+    "reset-link-sent": "Reset link sent successfully",
+    "user-registered-successfully": "User registered successfully. Please check your email to confirm your account"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",

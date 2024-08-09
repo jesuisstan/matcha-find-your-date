@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   const { email } = await req.json();
 
   if (!email) {
-    return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    return NextResponse.json({ error: 'email-required' }, { status: 400 });
   }
 
   const client = await db.connect();
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
     if (result.rowCount === 0) {
       return NextResponse.json(
-        { error: 'Email not found or user already confirmed' },
+        { error: 'email-not-found-user-already-confirmed' },
         { status: 404 }
       );
     }
@@ -54,10 +54,10 @@ export async function POST(req: Request) {
       html: `Click the link to confirm your email: <a href="${confirmationUrl}">${confirmationUrl}</a>`,
     });
 
-    return NextResponse.json({ message: 'Confirmation email resent successfully' });
+    return NextResponse.json({ message: 'confirmation-resent' });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Failed to resend confirmation email' }, { status: 500 });
+    return NextResponse.json({ error: 'failed-resend-confirmation' }, { status: 500 });
   } finally {
     client.release();
   }

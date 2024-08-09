@@ -35,25 +35,24 @@ async function createTables() {
     await client.query(`
       CREATE TABLE IF NOT EXISTS users (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        email TEXT NOT NULL UNIQUE,
+        confirmed BOOLEAN DEFAULT false,
+        password TEXT NOT NULL,
         firstname VARCHAR(255) NOT NULL,
         lastname VARCHAR(255) NOT NULL,
         nickname VARCHAR(255) NOT NULL,
         birthdate DATE NOT NULL,
-        email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-        confirmed BOOLEAN DEFAULT false,
         sex sex_enum NOT NULL,
         biography TEXT,
         tags TEXT[],
         complete BOOLEAN DEFAULT false,
         latitude DOUBLE PRECISION,
         longitude DOUBLE PRECISION,
-        lastVisit TIMESTAMP,
+        trace TIMESTAMP,
         online BOOLEAN DEFAULT false,
         popularity INT DEFAULT 0,
         preferences preferences_enum DEFAULT 'bisexual',
         avatars TEXT[],
-        lang VARCHAR(10) DEFAULT 'en',
         confirmation_token TEXT
       );
     `);

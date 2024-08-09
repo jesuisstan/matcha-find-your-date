@@ -2,11 +2,11 @@ import { z } from 'zod';
 
 export const userSchema = z.object({
   id: z.number().nullable(),
+  email: z.string().email(),
+  confirmed: z.boolean(),
   firstname: z.string(),
   lastname: z.string(),
   nickname: z.string(),
-  email: z.string().email(),
-  confirmed: z.boolean(),
   birthdate: z.string(),
   sex: z.enum(['male', 'female']),
   biography: z.string(),
@@ -19,6 +19,7 @@ export const userSchema = z.object({
   popularity: z.number(),
   preferences: z.enum(['male', 'female', 'bisexual']),
   avatars: z.array(z.string()),
+  confirmation_token: z.string().nullable(),
 });
 
 export type TUser = z.infer<typeof userSchema>;

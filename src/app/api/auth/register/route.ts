@@ -10,16 +10,45 @@ export async function POST(req: Request) {
   const hashedPassword = await bcrypt.hash(password, 10);
   const confirmationToken = uuidv4(); // Generate a unique token
 
+  // Convert birthdate to a Date object
+  const birthdateObj = new Date(birthdate);
+  const today = new Date();
+
+  // Check if birthdate is after today's date
+  if (birthdateObj > today) {
+    return NextResponse.json({ error: 'invalid-birthdate' }, { status: 400 });
+  }
+
+  // Calculate the user's age
+  let age = today.getFullYear() - birthdateObj.getFullYear();
+  const monthDifference = today.getMonth() - birthdateObj.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdateObj.getDate())) {
+    age--;
+  }
+
+  // Check if the user is under 18 or older than 142
+  if (age < 18) {
+    return NextResponse.json({ error: 'under-18' }, { status: 400 });
+  } else if (age > 142) {
+    return NextResponse.json({ error: 'invalid-birthdate' }, { status: 400 });
+  }
+
   const client = await db.connect();
 
   try {
-    // Check if the email already exists
+    // Check if the email or nickname already exists
     const existingUser = await client.sql`
-      SELECT * FROM users WHERE email = ${email};
+      SELECT * FROM users WHERE email = ${email} OR nickname = ${nickname};
     `;
 
     if ((existingUser.rowCount ?? 0) > 0) {
-      return NextResponse.json({ error: 'Email already exists' }, { status: 400 });
+      const existingRecord = existingUser.rows[0];
+
+      if (existingRecord.email === email) {
+        return NextResponse.json({ error: 'email-already-exists' }, { status: 400 });
+      } else if (existingRecord.nickname === nickname) {
+        return NextResponse.json({ error: 'nickname-already-exists' }, { status: 400 });
+      }
     }
 
     // Define the confirmation URL
@@ -53,11 +82,11 @@ export async function POST(req: Request) {
     `;
 
     return NextResponse.json({
-      message: 'User registered successfully. Please check your email to confirm your account.',
+      message: 'user-registered-successfully',
     });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Failed to register user' }, { status: 500 });
+    return NextResponse.json({ error: 'failed-to-register-user' }, { status: 500 });
   } finally {
     client.release();
   }
