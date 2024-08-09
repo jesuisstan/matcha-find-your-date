@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 
+import Spinner from '@/components/ui/spinner';
 import { cn } from '@/utils/utils';
 
 const buttonVariants = cva(
@@ -32,20 +33,32 @@ const buttonVariants = cva(
   }
 );
 
-export interface ButtonProps
+export interface TButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loading?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+const ButtonMatcha = React.forwardRef<HTMLButtonElement, TButtonProps>(
+  (
+    { className, variant, size, asChild = false, loading = false, children, disabled, ...props },
+    ref
+  ) => {
     const Comp = asChild ? Slot : 'button';
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        disabled={disabled || loading} // Block the button when loading is true or disabled is true
+        {...props}
+      >
+        {loading ? <Spinner size={6} /> : children}
+      </Comp>
     );
   }
 );
-Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+ButtonMatcha.displayName = 'ButtonMatcha';
+
+export { ButtonMatcha, buttonVariants };

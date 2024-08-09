@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { Eye, EyeOff } from 'lucide-react';
 
 import LocaleSwitcher from '@/components/locale-switcher';
-import { Button } from '@/components/ui/button';
+import { ButtonMatcha } from '@/components/ui/button-matcha';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
@@ -27,6 +27,7 @@ const Login = () => {
     user: state.user,
     setUser: state.setUser,
   }));
+  const [loading, setLoading] = React.useState(false);
 
   // Redirect to dashboard if user is already logged in
   React.useEffect(() => {
@@ -54,6 +55,7 @@ const Login = () => {
     let response;
     switch (pageLayout) {
       case 'login':
+        setLoading(true);
         response = await fetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -62,8 +64,10 @@ const Login = () => {
             password: formData.get('password'),
           }),
         });
+        setLoading(false);
         break;
       case 'register':
+        setLoading(true);
         response = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -77,8 +81,10 @@ const Login = () => {
             sex: formData.get('sex'),
           }),
         });
+        setLoading(false);
         break;
       case 'confirmation':
+        setLoading(true);
         response = await fetch('/api/auth/resend-confirmation-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -86,8 +92,10 @@ const Login = () => {
             email: formData.get('email'),
           }),
         });
+        setLoading(false);
         break;
       case 'forgot':
+        setLoading(true);
         response = await fetch('/api/auth/password-forgotten-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -95,6 +103,7 @@ const Login = () => {
             email: formData.get('email'),
           }),
         });
+        setLoading(false);
         break;
     }
 
@@ -300,12 +309,12 @@ const Login = () => {
               </div>
             </>
           )}
-          <Button type="submit" className="mb-5">
+          <ButtonMatcha type="submit" className="mb-5" loading={loading}>
             {pageLayout === 'login' && t(`auth.sign-in`)}
             {pageLayout === 'register' && t(`auth.sign-up`)}
             {pageLayout === 'confirmation' && t(`auth.resend-confirmation-email`)}
             {pageLayout === 'forgot' && t(`auth.send-reset-link`)}
-          </Button>
+          </ButtonMatcha>
         </form>
         {error && <p className="mb-5 text-center text-sm text-negative">{error}</p>}
         {successMessage && (
@@ -313,7 +322,7 @@ const Login = () => {
         )}
         <div className="flex justify-center">
           {pageLayout !== 'login' && (
-            <Button
+            <ButtonMatcha
               variant="link"
               onClick={() => {
                 setPageLayout('login');
@@ -322,11 +331,11 @@ const Login = () => {
               }}
             >
               {t(`auth.back-to-login`)}
-            </Button>
+            </ButtonMatcha>
           )}
           {pageLayout === 'login' && (
             <>
-              <Button
+              <ButtonMatcha
                 variant="link"
                 onClick={() => {
                   setPageLayout('register');
@@ -335,8 +344,8 @@ const Login = () => {
                 }}
               >
                 {t(`auth.create-account`)}
-              </Button>
-              <Button
+              </ButtonMatcha>
+              <ButtonMatcha
                 variant="link"
                 onClick={() => {
                   setPageLayout('confirmation');
@@ -345,8 +354,8 @@ const Login = () => {
                 }}
               >
                 {t(`auth.resend-confirmation-email`)}
-              </Button>
-              <Button
+              </ButtonMatcha>
+              <ButtonMatcha
                 variant="link"
                 onClick={() => {
                   setPageLayout('forgot');
@@ -355,7 +364,7 @@ const Login = () => {
                 }}
               >
                 {t(`auth.forgot-password`)}
-              </Button>
+              </ButtonMatcha>
             </>
           )}
         </div>

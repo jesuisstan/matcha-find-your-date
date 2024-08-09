@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 
 import { Eye, EyeOff } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { ButtonMatcha } from '@/components/ui/button-matcha';
 import { Label } from '@/components/ui/label';
 import { RequiredInput } from '@/components/ui/required-input';
 
@@ -85,9 +85,9 @@ const PasswordChangePage = () => {
                   </button>
                 </div>
               </>
-              <Button type="submit" className="mb-5">
+              <ButtonMatcha type="submit" className="mb-5">
                 {t(`auth.change-password`)}
-              </Button>
+              </ButtonMatcha>
             </form>
             {error && <p className="mb-5 text-center text-sm text-negative">{error}</p>}
             {successMessage && (
