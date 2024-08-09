@@ -7,7 +7,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'secret-key';
 
 // List of supported locales and public pages
 const locales = ['en', 'fr', 'ru'];
-const publicPages = ['/', '/login', '/email-confirmation'];
+const publicPages = ['/', '/login', '/email-confirmation', '/password-change'];
 
 // Middleware for internationalization (i18n)
 const intlMiddleware = createMiddleware({
