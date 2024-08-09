@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
+import { Eye, EyeOff } from 'lucide-react';
 
 import LocaleSwitcher from '@/components/locale-switcher';
 import { Button } from '@/components/ui/button';
@@ -16,12 +17,12 @@ import useUserStore from '@/stores/user';
 
 const Login = () => {
   const t = useTranslations();
-
   const router = useRouter();
   const [pageLayout, setPageLayout] = React.useState('login');
   const formRef = React.useRef<HTMLFormElement>(null);
   const [error, setError] = React.useState('');
   const [successMessage, setSuccessMessage] = React.useState('');
+  const [showPassword, setShowPassword] = React.useState(false);
   const { user, setUser } = useUserStore((state) => ({
     user: state.user,
     setUser: state.setUser,
@@ -272,16 +273,25 @@ const Login = () => {
               <Label htmlFor="password" className="mb-2">
                 {t(`auth.password`)}
               </Label>
-              <RequiredInput
-                type="password"
-                id="password"
-                name="password"
-                placeholder={t(`auth.password`)}
-                autoComplete="current-password"
-                errorMessage={t(`auth.password-requirements`)}
-                pattern="^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@$!%*?&,.^=_+])[A-Za-z0-9@$!%*?&,.^=_+]{8,21}$"
-                className="mb-5"
-              />
+              <div className="relative">
+                <RequiredInput
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  placeholder={t(`auth.password`)}
+                  autoComplete="current-password"
+                  errorMessage={t(`auth.password-requirements`)}
+                  pattern="^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@$!%*?&,.^=_+])[A-Za-z0-9@$!%*?&,.^=_+]{8,21}$"
+                  className="mb-5"
+                />
+                <button
+                  type="button"
+                  className="absolute right-2 top-2 text-secondary"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </button>
+              </div>
             </>
           )}
           <Button type="submit" className="mb-5">
