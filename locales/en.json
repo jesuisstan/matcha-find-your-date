@@ -16,7 +16,7 @@
   "service-provided": "This service is provided by",
   "rights-reserved": "© 2024 - All rights reserved",
   "terms-condition": "Terms and Conditions",
-  "go-to-home": "Go to home",
+  "go-to-home": "To Home page",
   "selector": {
     "select-sex": "Select sex",
     "select-preferences": "Select sexual preferences",
@@ -67,7 +67,8 @@
     "confirmation-resent": "Confirmation email resent successfully",
     "failed-send-reset-link": "Failed to send reset link",
     "reset-link-sent": "Reset link sent successfully",
-    "user-registered-successfully": "User registered successfully. Please check your email to confirm your account"
+    "user-registered-successfully": "User registered successfully. Please check your email to confirm your account",
+    "email-user-not-found": "User with this email not found"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",

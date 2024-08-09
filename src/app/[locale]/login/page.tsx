@@ -88,7 +88,13 @@ const Login = () => {
         });
         break;
       case 'forgot':
-        // Implement forgot password logic here
+        response = await fetch('/api/auth/password-forgotten-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.get('email'),
+          }),
+        });
         break;
     }
 

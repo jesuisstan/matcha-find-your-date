@@ -11,6 +11,8 @@ export async function POST(request: Request) {
 
   // Get user by email
   const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+  //const result = await db.query(`SELECT * FROM users WHERE email = '${email}'`); // ! SQL Injection example
+
   const user = result.rows[0];
 
   if (!user) {

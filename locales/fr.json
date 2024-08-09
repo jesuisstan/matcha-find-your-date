@@ -16,7 +16,7 @@
   "service-provided": "Ce service est fourni par",
   "rights-reserved": "© 2024 - Tous droits réservés",
   "terms-condition": "Conditions générales",
-  "go-to-home": "Aller à l'accueil",
+  "go-to-home": "A la page Home",
   "selector": {
     "select-sex": "Sélectionnez le sexe",
     "select-preferences": "Sélectionnez les préférences sexuelles",
@@ -67,7 +67,8 @@
     "confirmation-resent": "Email de confirmation renvoyé avec succès",
     "failed-send-reset-link": "Échec de l'envoi du lien de réinitialisation",
     "reset-link-sent": "Lien de réinitialisation envoyé avec succès",
-    "user-registered-successfully": "Inscription réussie. Veuillez vérifier votre email pour confirmer votre compte"
+    "user-registered-successfully": "Inscription réussie. Veuillez vérifier votre email pour confirmer votre compte",
+    "email-user-not-found": "User avec cet email non trouvé"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",
