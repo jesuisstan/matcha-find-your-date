@@ -43,6 +43,13 @@ const Login = () => {
     if (!currentForm) return;
     const formData = new FormData(currentForm);
 
+    // Trim spaces from all input values
+    formData.forEach((value, key) => {
+      if (typeof value === 'string') {
+        formData.set(key, value.trim());
+      }
+    });
+
     let response;
     switch (pageLayout) {
       case 'login':
@@ -173,7 +180,7 @@ const Login = () => {
         <div className="mb-5 flex self-center">
           <LocaleSwitcher />
         </div>
-        <h2 className="mb-6 text-center text-3xl text-foreground">
+        <h2 className="mb-5 text-center text-3xl text-foreground">
           {pageLayout === 'login' && t(`auth.sign-in`)}
           {pageLayout === 'register' && t(`auth.register-new`)}
           {pageLayout === 'confirmation' && t(`auth.confirme-email`)}
@@ -190,7 +197,9 @@ const Login = () => {
                 id="firstname"
                 name="firstname"
                 placeholder={t(`firstname`)}
-                className="mb-6"
+                pattern="^[A-Za-z\-]{1,21}$"
+                errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
+                className="mb-2"
               />
               <Label htmlFor="lastname" className="mb-2">
                 {t(`lastname`)}
@@ -199,8 +208,10 @@ const Login = () => {
                 type="text"
                 id="lastname"
                 name="lastname"
-                placeholder={t(`lastname`)}
-                className="mb-6"
+                placeholder={t('lastname')}
+                pattern="^[A-Za-z\-]{1,21}$"
+                errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
+                className="mb-2"
               />
               <Label htmlFor="nickname" className="mb-2">
                 {t(`nickname`)}
@@ -210,9 +221,11 @@ const Login = () => {
                 id="nickname"
                 name="nickname"
                 placeholder={t(`nickname`)}
-                className="mb-6"
+                pattern="^[A-Za-z0-9\-@]{1,21}$"
+                errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}
+                className="mb-2"
               />
-              <div className="flex flex-row gap-6">
+              <div className="flex flex-row gap-10">
                 <div className="flex flex-col">
                   <Label htmlFor="birthdate" className="mb-2">
                     {t(`birthdate`)}
@@ -222,7 +235,7 @@ const Login = () => {
                     id="birthdate"
                     name="birthdate"
                     placeholder={t(`birthdate`)}
-                    className="mb-6"
+                    className="mb-2"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -249,8 +262,10 @@ const Login = () => {
             id="email"
             name="email"
             placeholder={t(`auth.email`)}
-            className="mb-6"
             autoComplete="email"
+            //errorMessage="Valid email with max length 42"
+            //pattern="^(?=.{1,42}$)\\S+@\\S+\\.\\S+$"
+            className="mb-2"
           />
           {pageLayout !== 'confirmation' && pageLayout !== 'forgot' && (
             <>
@@ -262,21 +277,23 @@ const Login = () => {
                 id="password"
                 name="password"
                 placeholder={t(`auth.password`)}
-                className="mb-6"
                 autoComplete="current-password"
+                errorMessage={t(`auth.password-requirements`)}
+                pattern="^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@$!%*?&,.^=_+])[A-Za-z0-9@$!%*?&,.^=_+]{8,21}$"
+                className="mb-5"
               />
             </>
           )}
-          <Button type="submit" className="mb-4">
+          <Button type="submit" className="mb-5">
             {pageLayout === 'login' && t(`auth.sign-in`)}
             {pageLayout === 'register' && t(`auth.sign-up`)}
             {pageLayout === 'confirmation' && t(`auth.resend-confirmation-email`)}
             {pageLayout === 'forgot' && t(`auth.send-reset-link`)}
           </Button>
         </form>
-        {error && <p className="mb-4 text-center text-sm text-negative">{error}</p>}
+        {error && <p className="mb-5 text-center text-sm text-negative">{error}</p>}
         {successMessage && (
-          <p className="mb-4 text-center text-sm text-positive">{successMessage}</p>
+          <p className="mb-5 text-center text-sm text-positive">{successMessage}</p>
         )}
         <div className="flex justify-center">
           {pageLayout !== 'login' && (

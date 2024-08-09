@@ -50,7 +50,9 @@
     "confirme-email": "Confirmer l'email",
     "registration-success": "Inscription réussie! Veuillez vérifier votre email pour confirmer votre compte.",
     "email-sent": "Email envoyé avec succès.",
-    "please-confirm": "Veuillez confirmer votre adresse email avant de vous connecter."
+    "please-confirm": "Veuillez confirmer votre adresse email avant de vous connecter.",
+    "max-char": "Caractères max",
+    "password-requirements": "8-21: 1 majuscule, 1 minuscule, 1 chiffre, 1 de @$!%*?&,.^=_+"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",
