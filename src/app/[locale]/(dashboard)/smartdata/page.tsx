@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { PlaySquareIcon } from 'lucide-react';
 
 import HeaderSkeleton from '@/components/header-skeleton';
-import { Button } from '@/components/ui/button';
+import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
@@ -66,9 +66,9 @@ const ManufacturingNowcast = () => {
               {/* BUTTONS GROUP */}
               <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
                 <div className="flex w-full flex-row items-center justify-center gap-4">
-                  <Button size="icon">
+                  <ButtonMatcha size="icon">
                     <PlaySquareIcon size={20} />
-                  </Button>
+                  </ButtonMatcha>
                 </div>
               </div>
             </div>
