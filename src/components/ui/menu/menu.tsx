@@ -12,7 +12,6 @@ import { ChevronLeft, MenuIcon, Rows3 } from 'lucide-react';
 import ClearLocalStorageButton from '../clear-storage-btn/clear-storage-btn';
 import ContactSupportBlock from './contact-support-block';
 import MenuList from './menu-list';
-import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
@@ -190,7 +189,6 @@ const Menu: React.FC = () => {
                 <ClearLocalStorageButton />
               </div>
 
-              <TermsConditionBlock translate={t} />
               <ContactSupportBlock translate={t} />
             </div>
           </div>

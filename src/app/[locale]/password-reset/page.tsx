@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
-import { Eye, EyeOff } from 'lucide-react';
+import { CircleCheck, Eye, EyeOff, OctagonAlert } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import { Label } from '@/components/ui/label';
@@ -89,11 +89,13 @@ const PasswordResetPage = () => {
                     pattern="^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@$!%*?&,.^=_+])[A-Za-z0-9@$!%*?&,.^=_+]{8,21}$"
                     errorMessage={t(`auth.password-requirements`)}
                     className="mb-5"
+                    disabled={loading || !!successMessage}
                   />
                   <button
                     type="button"
                     className="absolute right-2 top-2 text-secondary"
                     onClick={() => setShowPassword(!showPassword)}
+                    disabled={loading || !!successMessage}
                   >
                     {showPassword ? <EyeOff /> : <Eye />}
                   </button>
@@ -110,23 +112,38 @@ const PasswordResetPage = () => {
                     name="password-confirmation"
                     placeholder={t(`auth.password`)}
                     className="mb-5"
+                    disabled={loading || !!successMessage}
                   />
                   <button
                     type="button"
                     className="absolute right-2 top-2 text-secondary"
                     onClick={() => setShowPassword(!showPassword)}
+                    disabled={loading || !!successMessage}
                   >
                     {showPassword ? <EyeOff /> : <Eye />}
                   </button>
                 </div>
               </>
-              <ButtonMatcha type="submit" className="mb-5" loading={loading}>
+              <ButtonMatcha
+                type="submit"
+                className="mb-5"
+                loading={loading}
+                disabled={loading || !!successMessage}
+              >
                 {t(`auth.change-password`)}
               </ButtonMatcha>
             </form>
-            {error && <p className="mb-5 text-center text-sm text-negative">{error}</p>}
+            {error && (
+              <div className="flex flex-col items-center gap-2 text-negative">
+                <OctagonAlert size={30} />
+                <p className="mb-5 text-center text-sm">{error}</p>
+              </div>
+            )}
             {successMessage && (
-              <p className="mb-5 text-center text-sm text-positive">{successMessage}</p>
+              <div className="flex flex-col items-center gap-2 text-positive">
+                <CircleCheck size={30} />
+                <p className="mb-5 text-center text-sm ">{successMessage}</p>
+              </div>
             )}
           </>
         )}
