@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 
@@ -12,10 +11,12 @@ import { ChevronLeft, MenuIcon, Rows3 } from 'lucide-react';
 
 import ClearLocalStorageButton from '../clear-storage-btn/clear-storage-btn';
 import ContactSupportBlock from './contact-support-block';
+import MenuList from './menu-list';
 import TermsConditionBlock from './terms-condition-block';
 
 import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
 import SideBarHeader from '@/components/ui/menu/side-bar-header';
+import { usePathname } from '@/navigation';
 import useUserStore from '@/stores/user';
 import { getLocaleFromCookiesOnClientSide } from '@/utils/get-locale';
 
@@ -71,7 +72,7 @@ const Menu: React.FC = () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [isSidebarOpen]);
-
+  console.log('pathname', pathname);
   return (
     <div className="relative z-50 h-10 w-[330px] flex-shrink">
       {/* Menu on small screens */}
@@ -177,18 +178,18 @@ const Menu: React.FC = () => {
                 </Link>
               </div>
 
-              {/*<SmartdataList
+              <MenuList
                 onClick={() => {
                   if (isSidebarOpen) setIsSidebarOpen(false);
                 }}
                 pathname={pathname}
-              />*/}
-              <div>Link 1</div>
-              <div>Link 1</div>
-              <div>Link 1</div>
+                translate={t}
+              />
+
               <div className="items-center">
                 <ClearLocalStorageButton />
               </div>
+
               <TermsConditionBlock translate={t} />
               <ContactSupportBlock translate={t} />
             </div>

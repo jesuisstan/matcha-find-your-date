@@ -13,7 +13,7 @@ import RadioGroup from '@/components/ui/radio/radio-group';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 
-const ManufacturingNowcast = () => {
+const ProfilePage = () => {
   // Translate hook
   const t = useTranslations();
   const [loading, setLoading] = useState(false); // todo
@@ -124,4 +124,4 @@ const ManufacturingNowcast = () => {
   );
 };
 
-export default ManufacturingNowcast;
+export default ProfilePage;
