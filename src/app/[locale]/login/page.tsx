@@ -28,6 +28,7 @@ const Login = () => {
     setUser: state.setUser,
   }));
   const [loading, setLoading] = React.useState(false);
+  const [loginMethod, setLoginMethod] = React.useState('nickname'); // <'email' | 'nickname'>
 
   // Redirect to dashboard if user is already logged in
   React.useEffect(() => {
@@ -62,6 +63,7 @@ const Login = () => {
           body: JSON.stringify({
             email: formData.get('email'),
             password: formData.get('password'),
+            nickname: formData.get('nickname'),
           }),
         });
         setLoading(false);
@@ -202,6 +204,20 @@ const Login = () => {
           {pageLayout === 'confirmation' && t(`auth.confirme-email`)}
           {pageLayout === 'forgot' && t(`auth.reset-password`)}
         </h2>
+        {pageLayout === 'login' && (
+          <div className="mb-5 flex flex-row justify-start gap-5">
+            <RadioGroup
+              label={t(`auth.login-method`) + ':'}
+              name="loginMethod"
+              options={[
+                { value: 'nickname', label: t(`nickname`) },
+                { value: 'email', label: t(`auth.email`) },
+              ]}
+              defaultValue="nickname"
+              onSelectAction={setLoginMethod}
+            />
+          </div>
+        )}
         <form className="flex flex-col" onSubmit={handleSubmit} ref={formRef}>
           {pageLayout === 'register' && (
             <>
@@ -270,19 +286,38 @@ const Login = () => {
               </div>
             </>
           )}
-          <Label htmlFor="email" className="mb-2">
-            {t(`auth.email`)}
-          </Label>
-          <RequiredInput
-            type="email"
-            id="email"
-            name="email"
-            placeholder={t(`auth.email`)}
-            autoComplete="email"
-            //errorMessage="Valid email with max length 42"
-            //pattern="^(?=.{1,42}$)\\S+@\\S+\\.\\S+$"
-            className="mb-2"
-          />
+          {pageLayout === 'login' && loginMethod === 'nickname' ? (
+            <>
+              <Label htmlFor="nickname" className="mb-2">
+                {t(`nickname`)}
+              </Label>
+              <RequiredInput
+                type="text"
+                id="nickname"
+                name="nickname"
+                placeholder={t(`nickname`)}
+                pattern="^[A-Za-z0-9\-@]{1,21}$"
+                errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}
+                className="mb-2"
+              />
+            </>
+          ) : (
+            <>
+              <Label htmlFor="email" className="mb-2">
+                {t(`auth.email`)}
+              </Label>
+              <RequiredInput
+                type="email"
+                id="email"
+                name="email"
+                placeholder={t(`auth.email`)}
+                autoComplete="email"
+                //errorMessage="Valid email with max length 42"
+                //pattern="^(?=.{1,42}$)\\S+@\\S+\\.\\S+$"
+                className="mb-2"
+              />
+            </>
+          )}
           {pageLayout !== 'confirmation' && pageLayout !== 'forgot' && (
             <>
               <Label htmlFor="password" className="mb-2">

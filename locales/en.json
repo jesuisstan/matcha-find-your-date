@@ -58,7 +58,8 @@
     "email-already-exists": "Email already exists",
     "nickname-already-exists": "Nickname already exists",
     "failed-to-register-user": "Failed to register user",
-    "invalid-email-or-password": "Invalid email or password",
+    "invalid-email-or-nickname": "Invalid email or nickname",
+    "invalid-password": "Invalid password",
     "please-confirm-email-before-login": "Please confirm your email address before logging in",
     "email-required": "Email is required",
     "password-required": "Password is required",
@@ -72,7 +73,8 @@
     "passwords-do-not-match": "Passwords do not match",
     "password-changed-successfully": "Password changed successfully",
     "password-change-error": "Error changing password",
-    "missing-token-or-password": "Missing token or password"
+    "missing-token-or-password": "Missing token or password",
+    "login-method": "Login Method"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",
@@ -81,5 +83,7 @@
     "label": "Change language",
     "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unknown}}"
   },
-  "profile": "Profile"
+  "profile": "My Profile",
+  "account": "Account",
+  "search": "Search"
 }

@@ -185,11 +185,14 @@ const Menu: React.FC = () => {
                 translate={t}
               />
 
-              <div className="items-center">
+              {/* horizontal divider */}
+              <div className="mb-3 ml-3 w-52 border-t border-secondary opacity-40" />
+              <ContactSupportBlock translate={t} />
+
+              {/* Clear LocalStorage Button DELETE. debug*/}
+              <div className="items-center self-center">
                 <ClearLocalStorageButton />
               </div>
-
-              <ContactSupportBlock translate={t} />
             </div>
           </div>
         </>

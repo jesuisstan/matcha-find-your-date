@@ -6,7 +6,7 @@ import RadioOption from '@/components/ui/radio/radio-option';
 import { radioGroupPropsSchema, TRadioGroupProps } from '@/types/radio-button';
 import { capitalize } from '@/utils/format-string';
 
-const RadioGroup = ({ name, label, options, defaultValue }: TRadioGroupProps) => {
+const RadioGroup = ({ name, label, options, defaultValue, onSelectAction }: TRadioGroupProps) => {
   const optionsValues = options.map((option) => option.value);
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
@@ -19,6 +19,11 @@ const RadioGroup = ({ name, label, options, defaultValue }: TRadioGroupProps) =>
 
   const handleRadioSelect = (value: string) => {
     setSelectedValue(value);
+
+    // Call the onSelectAction prop if provided
+    if (onSelectAction) {
+      onSelectAction(value);
+    }
   };
 
   // initial setting of value:
@@ -34,6 +39,7 @@ const RadioGroup = ({ name, label, options, defaultValue }: TRadioGroupProps) =>
     label,
     options,
     defaultValue,
+    onSelectAction,
   });
 
   if (!verif.success) {

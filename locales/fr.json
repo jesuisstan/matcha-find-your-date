@@ -58,7 +58,8 @@
     "email-already-exists": "Email déjà existant",
     "nickname-already-exists": "Nickname déjà existant",
     "failed-to-register-user": "Échec de l'inscription de l'utilisateur",
-    "invalid-email-or-password": "Email ou mot de passe invalide",
+    "invalid-email-or-nickname": "Email ou nickname invalide",
+    "invalid-password": "Mot de passe invalide",
     "please-confirm-email-before-login": "Veuillez confirmer votre adresse email avant de vous connecter",
     "email-required": "Email requis",
     "password-required": "Mot de passe requis",
@@ -72,7 +73,8 @@
     "passwords-do-not-match": "Les mots de passe ne correspondent pas",
     "password-changed-successfully": "Mot de passe changé avec succès",
     "password-change-error": "Erreur de changement de mot de passe",
-    "missing-token-or-password": "Jeton ou mot de passe manquant"
+    "missing-token-or-password": "Jeton ou mot de passe manquant",
+    "login-method": "Méthode de connexion"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",
@@ -80,5 +82,7 @@
   "LocaleSwitcher": {
     "switchLocale": "Passer à {locale, select, de {Allemand} en {Anglais} other {Inconnu}}"
   },
-  "profile": "Profil"
+  "profile": "Mon Profil",
+  "account": "Compte",
+  "search": "Rechercher"
 }

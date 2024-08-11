@@ -50,7 +50,7 @@
     "invalid-token": "Неверный токен",
     "email-confirmed-successfully": "Электронная почта успешно подтверждена",
     "failed-to-confirm-email": "Не удалось подтвердить электронную почту",
-    "confirme-email": "Подтвердить электронную почту",
+    "confirme-email": "Подтвердить почту",
     "max-char": "Макс символов",
     "password-requirements": "8-21: 1 заглавная, 1 строчная, 1 цифра, 1 из @$!%*?&,.^=_+",
     "under-18": "Вам должно быть не менее 18 лет, чтобы воспользоваться сервисом",
@@ -58,7 +58,8 @@
     "email-already-exists": "Электронная почта уже существует",
     "nickname-already-exists": "Псевдоним уже существует",
     "failed-to-register-user": "Не удалось зарегистрировать пользователя",
-    "invalid-email-or-password": "Неверный адрес электронной почты или пароль",
+    "invalid-email-or-nickname": "Неверный адрес электронной почты или псевдоним",
+    "invalid-password": "Неверный пароль",
     "please-confirm-email-before-login": "Пожалуйста, подтвердите свой адрес электронной почты перед входом",
     "email-required": "Требуется адрес электронной почты",
     "password-required": "Требуется пароль",
@@ -72,7 +73,8 @@
     "passwords-do-not-match": "Пароли не совпадают",
     "password-changed-successfully": "Пароль успешно изменен",
     "password-change-error": "Ошибка смены пароля",
-    "missing-token-or-password": "Отсутствует токен или пароль"
+    "missing-token-or-password": "Отсутствует токен или пароль",
+    "login-method": "Метод входа"
   },
   "slogan": "Найди свою дэйт",
   "slogan-subject": "Потому что любовь тоже может быть индустриализирована",
@@ -80,5 +82,7 @@
   "LocaleSwitcher": {
     "switchLocale": "Переключить на {locale, select, de {немецкий} en {английский} other {Неизвестно}}"
   },
-  "profile": "Профиль"
+  "profile": "Мой Профиль",
+  "account": "Аккаунт",
+  "search": "Поиск"
 }

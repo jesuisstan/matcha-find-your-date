@@ -1,11 +1,8 @@
-import { MouseEventHandler, use, useEffect, useMemo, useState } from 'react';
+import { MouseEventHandler } from 'react';
 import Link from 'next/link';
 
 import clsx from 'clsx';
 
-import { generateSkeletonItems } from './menu-skeleton';
-
-import useUserStore from '@/stores/user';
 import { capitalize } from '@/utils/format-string';
 
 const MenuList = ({
@@ -20,7 +17,7 @@ const MenuList = ({
   return (
     <ul className="space-y-4 overflow-y-auto text-sm font-bold text-foreground">
       <li>
-        <span className="group ml-3 flex items-center">{capitalize('category')}</span>
+        <span className="group ml-3 flex items-center">{capitalize(translate(`account`))}</span>
         <ul className="ml-4 mt-2 border-l-2 border-secondary font-normal text-secondary">
           <li>
             <Link
@@ -48,7 +45,7 @@ const MenuList = ({
       </li>
 
       <li>
-        <span className="group ml-3 flex items-center">{capitalize('Search')}</span>
+        <span className="group ml-3 flex items-center">{capitalize(translate(`search`))}</span>
         <ul className="ml-4 mt-2 border-l-2 border-secondary font-normal text-secondary">
           <li>
             <Link

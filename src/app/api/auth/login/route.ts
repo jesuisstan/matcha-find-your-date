@@ -7,22 +7,31 @@ import { SignJWT } from 'jose';
 const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-key';
 
 export async function POST(request: Request) {
-  const { email, password } = await request.json();
+  const { email, password, nickname } = await request.json();
 
-  // Get user by email
-  const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-  //const result = await db.query(`SELECT * FROM users WHERE email = '${email}'`); // ! SQL Injection example
+  let result;
+  // Get user by email or nickname
+  if (nickname) {
+    result = await db.query('SELECT * FROM users WHERE nickname = $1', [nickname]);
+  } else if (email) {
+    result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+    //const result = await db.query(`SELECT * FROM users WHERE email = '${email}'`); // ! SQL Injection example
+  }
+
+  if (!result || !result.rows || result.rows.length === 0) {
+    return NextResponse.json({ error: 'invalid-email-or-nickname' }, { status: 401 });
+  }
 
   const user = result.rows[0];
 
   if (!user) {
-    return NextResponse.json({ error: 'invalid-email-or-password' }, { status: 401 });
+    return NextResponse.json({ error: 'invalid-email-or-nickname' }, { status: 401 });
   }
 
   // Check if password is valid
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    return NextResponse.json({ error: 'invalid-email-or-password' }, { status: 401 });
+    return NextResponse.json({ error: 'invalid-password' }, { status: 401 });
   }
 
   // Check if email is confirmed

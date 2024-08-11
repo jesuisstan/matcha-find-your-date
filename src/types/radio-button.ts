@@ -12,6 +12,7 @@ export const radioGroupPropsSchema = z.object({
   label: z.string().optional(),
   options: z.array(radioOptionSchema),
   defaultValue: z.string().optional(),
+  onSelectAction: z.function(z.tuple([z.string()], z.void())).optional(),
 });
 
 export type TRadioGroupProps = z.infer<typeof radioGroupPropsSchema>;
