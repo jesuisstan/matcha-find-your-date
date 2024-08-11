@@ -68,7 +68,11 @@
     "failed-send-reset-link": "Échec de l'envoi du lien de réinitialisation",
     "reset-link-sent": "Lien de réinitialisation envoyé avec succès",
     "user-registered-successfully": "Inscription réussie. Veuillez vérifier votre email pour confirmer votre compte",
-    "email-user-not-found": "User avec cet email non trouvé"
+    "email-user-not-found": "User avec cet email non trouvé",
+    "passwords-do-not-match": "Les mots de passe ne correspondent pas",
+    "password-changed-successfully": "Mot de passe changé avec succès",
+    "password-change-error": "Erreur de changement de mot de passe",
+    "missing-token-or-password": "Jeton ou mot de passe manquant"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",

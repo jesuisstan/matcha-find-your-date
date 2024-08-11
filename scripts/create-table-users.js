@@ -48,12 +48,13 @@ async function createTables() {
         complete BOOLEAN DEFAULT false,
         latitude DOUBLE PRECISION,
         longitude DOUBLE PRECISION,
-        trace TIMESTAMP,
+        registration_date TIMESTAMP,
+        last_connection_date TIMESTAMP,
         online BOOLEAN DEFAULT false,
         popularity INT DEFAULT 0,
         preferences preferences_enum DEFAULT 'bisexual',
         avatars TEXT[],
-        confirmation_token TEXT
+        service_token TEXT
       );
     `);
 

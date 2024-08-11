@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     // Update the user with the new confirmation token
     const result = await client.sql`
       UPDATE users
-      SET confirmation_token = ${confirmationToken}
+      SET service_token = ${confirmationToken}
       WHERE email = ${email}
       RETURNING *;
     `;

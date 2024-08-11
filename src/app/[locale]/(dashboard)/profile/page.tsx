@@ -28,11 +28,6 @@ const ManufacturingNowcast = () => {
     { value: 'monthly', label: t(`selector.monthly`) },
   ];
 
-  const approachOptions = [
-    { value: 'standardized', label: t`common:selector.standardized` },
-    { value: 'level', label: t`common:selector.level-qmn` },
-  ];
-
   const countriesOptions = [
     { value: 'US', label: 'USA' },
     { value: 'RU', label: 'Russia' },
@@ -92,14 +87,6 @@ const ManufacturingNowcast = () => {
                 label={t`common:selector.frequency`}
                 options={frequencyOptions}
                 defaultValue={'daily'}
-              />
-            </div>
-            <div className="mt-4">
-              <RadioGroup
-                name="approach"
-                label={t`common:selector.approach`}
-                options={approachOptions}
-                defaultValue={'standardized'}
               />
             </div>
             <div className="mt-4">CONTENT</div>

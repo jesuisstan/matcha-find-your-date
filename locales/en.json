@@ -68,7 +68,11 @@
     "failed-send-reset-link": "Failed to send reset link",
     "reset-link-sent": "Reset link sent successfully",
     "user-registered-successfully": "User registered successfully. Please check your email to confirm your account",
-    "email-user-not-found": "User with this email not found"
+    "email-user-not-found": "User with this email not found",
+    "passwords-do-not-match": "Passwords do not match",
+    "password-changed-successfully": "Password changed successfully",
+    "password-change-error": "Error changing password",
+    "missing-token-or-password": "Missing token or password"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",

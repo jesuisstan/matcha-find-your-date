@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import DashboardSkeleton from './dashboard-skeleton';
 
@@ -20,7 +20,19 @@ const Dashboard = () => {
         {t('welcome')}, {capitalize(user!.firstname)}!
       </h1>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-        CONTENTTTTTTTTTTTTTTTT
+        Reg date: {user!.registration_date}
+        <br />
+        Last connection: {user!.last_connection_date}
+        <br />
+        Popularity: {user!.popularity}
+        <br />
+        Online: {user!.online ? 'Yes' : 'No'}
+        <br />
+        Birthdate: {user!.birthdate}
+        <br />
+        longtitude: {user!.longitude}
+        <br />
+        latitude: {user!.latitude}
       </div>
     </>
   );

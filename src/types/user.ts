@@ -14,12 +14,13 @@ export const userSchema = z.object({
   complete: z.boolean(),
   latitude: z.number().nullable(),
   longitude: z.number().nullable(),
-  trace: z.string(), // last visit
+  registration_date: z.string(),
+  last_connection_date: z.string(),
   online: z.boolean(),
   popularity: z.number(),
   preferences: z.enum(['male', 'female', 'bisexual']),
   avatars: z.array(z.string()),
-  confirmation_token: z.string().nullable(),
+  service_token: z.string().nullable(),
 });
 
 export type TUser = z.infer<typeof userSchema>;

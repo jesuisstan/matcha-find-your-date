@@ -117,7 +117,7 @@ const Login = () => {
           if (result.user.confirmed) {
             document.cookie = `token=${result.token}; path=/`;
             setUser(result.user);
-            router.push(`/dashboard`);
+            setTimeout(() => router.push(`/profile`), 500);
           } else {
             setError(t(`auth.${result.error}`));
           }

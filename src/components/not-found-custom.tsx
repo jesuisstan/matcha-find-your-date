@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
+import { ButtonMatcha } from '@/components/ui/button-matcha';
+
 const NotFoundCustom = () => {
   const t = useTranslations();
 
@@ -11,12 +13,9 @@ const NotFoundCustom = () => {
       <div className="flex flex-col items-center justify-center rounded-xl bg-card/90 p-4 text-foreground">
         <h1 className="text-4xl font-bold">404</h1>
         <p className="text-lg">{t('not-found.content')}</p>
-        <Link
-          href={`/dashboard`}
-          className="mt-4 text-positive transition-all duration-300 ease-in-out hover:text-c42orange"
-        >
-          {t(`go-to-home`)}
-        </Link>
+        <ButtonMatcha variant="link">
+          <Link href={`/dashboard`}>{t('go-to-home')}</Link>
+        </ButtonMatcha>
       </div>
     </div>
   );
