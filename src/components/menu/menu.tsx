@@ -7,14 +7,13 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 
 import clsx from 'clsx';
-import { ChevronLeft, MenuIcon, Rows3 } from 'lucide-react';
+import { MenuIcon, Rows3 } from 'lucide-react';
 
-import ClearLocalStorageButton from '../clear-storage-btn/clear-storage-btn';
-import ContactSupportBlock from './contact-support-block';
-import MenuList from './menu-list';
-
-import MenuSkeleton from '@/components/ui/menu/menu-skeleton';
-import SideBarHeader from '@/components/ui/menu/side-bar-header';
+import ContactSupportBlock from '@/components/menu/contact-support-block';
+import MenuList from '@/components/menu/menu-list';
+import MenuSkeleton from '@/components/menu/menu-skeleton';
+import SideBarHeader from '@/components/menu/side-bar-header';
+import ClearLocalStorageButton from '@/components/ui/clear-storage-btn/clear-storage-btn';
 import { usePathname } from '@/navigation';
 import useUserStore from '@/stores/user';
 import { getLocaleFromCookiesOnClientSide } from '@/utils/get-locale';
@@ -121,7 +120,7 @@ const Menu: React.FC = () => {
           >
             <div
               id="rounded-menu-container"
-              className="relative flex max-h-full w-64 flex-col space-y-5 rounded-2xl bg-card px-3 py-4"
+              className="relative flex max-h-full w-64 flex-col space-y-5 rounded-2xl bg-card px-3 pt-5"
             >
               <div className="flex justify-center">
                 <Image
@@ -135,22 +134,6 @@ const Menu: React.FC = () => {
                   blurDataURL={'/identity/logo-transparent.png'}
                   priority
                 />
-
-                {/* Close-Sidebar button */}
-                {/*{isSidebarOpen && (
-                  <button
-                    id="close-sidebar-button"
-                    onClick={toggleSidebar}
-                    title="Close the menu"
-                    className={clsx(
-                      `absolute left-72 top-1/2 z-50 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-secondary bg-card text-foreground opacity-90 transition-all duration-300 ease-in-out`,
-                      `hover:text-c42orange hover:opacity-100`,
-                      `lg:hidden`
-                    )}
-                  >
-                    <ChevronLeft />
-                  </button>
-                )}*/}
               </div>
 
               <SideBarHeader name={user?.nickname || user?.firstname} translate={t} />
@@ -166,7 +149,7 @@ const Menu: React.FC = () => {
                   className={clsx(
                     `flex w-full items-center text-secondary transition-all duration-300 ease-in-out`,
                     `hover:text-c42orange`,
-                    pathname === `/${locale}/dashboard` && 'font-bold'
+                    pathname === `/dashboard` && 'font-bold'
                   )}
                   onClick={() => {
                     if (isSidebarOpen) setIsSidebarOpen(false);

@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     result = await db.query('SELECT * FROM users WHERE nickname = $1', [nickname]);
   } else if (email) {
     result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-    //const result = await db.query(`SELECT * FROM users WHERE email = '${email}'`); // ! SQL Injection example
+    // result = await db.query(`SELECT * FROM users WHERE email = '${email}'`); // ! SQL Injection example
   }
 
   if (!result || !result.rows || result.rows.length === 0) {

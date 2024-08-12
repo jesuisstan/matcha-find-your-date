@@ -17,6 +17,7 @@
   "rights-reserved": "© 2024 - Все права защищены",
   "terms-condition": "Условия и положения",
   "go-to-home": "Перейти на Главную",
+  "theme-toggle": "Переключить тему",
   "selector": {
     "select-sex": "Выберите пол",
     "select-preferences": "Выберите сексуальные предпочтения",
@@ -84,5 +85,9 @@
   },
   "profile": "Мой Профиль",
   "account": "Аккаунт",
-  "search": "Поиск"
+  "search": {
+    "search": "Поиск",
+    "smart-suggestions": "Умные предложения",
+    "advanced-search": "Расширенный поиск"
+  }
 }

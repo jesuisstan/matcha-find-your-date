@@ -4,8 +4,8 @@ import React from 'react';
 
 import clsx from 'clsx';
 
+import Menu from '@/components/menu/menu';
 import Footer from '@/components/ui/footer';
-import Menu from '@/components/ui/menu/menu';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (

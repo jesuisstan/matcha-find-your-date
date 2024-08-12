@@ -17,6 +17,7 @@
   "rights-reserved": "© 2024 - All rights reserved",
   "terms-condition": "Terms and Conditions",
   "go-to-home": "To Home page",
+  "theme-toggle": "Toggle theme",
   "selector": {
     "select-sex": "Select sex",
     "select-preferences": "Select sexual preferences",
@@ -85,5 +86,9 @@
   },
   "profile": "My Profile",
   "account": "Account",
-  "search": "Search"
+  "search": {
+    "search": "Search",
+    "smart-suggestions": "Smart Suggestions",
+    "advanced-search": "Advanced Search"
+  }
 }

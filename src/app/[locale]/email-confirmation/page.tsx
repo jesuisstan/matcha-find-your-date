@@ -18,7 +18,7 @@ const EmailConfirmation = () => {
     <div className="flex h-screen flex-col items-center justify-center bg-identity-background bg-cover bg-center text-center">
       <div className="flex min-w-56 flex-col items-center justify-center rounded-xl bg-card/90 p-4 text-foreground">
         <h1 className="text-2xl font-bold">{t(`${displayTitle.toLowerCase()}`)}</h1>
-        <p className="pt-2 text-lg">{t(`auth.${displayMessage}`)}</p>
+        <p className="pb-5 pt-5 text-lg">{t(`auth.${displayMessage}`)}</p>
         <ButtonMatcha variant="link">
           <Link href={`/dashboard`}>{t('go-to-home')}</Link>
         </ButtonMatcha>

@@ -45,11 +45,13 @@ const MenuList = ({
       </li>
 
       <li>
-        <span className="group ml-3 flex items-center">{capitalize(translate(`search`))}</span>
+        <span className="group ml-3 flex items-center">
+          {capitalize(translate(`search.search`))}
+        </span>
         <ul className="ml-4 mt-2 border-l-2 border-secondary font-normal text-secondary">
           <li>
             <Link
-              href={pathname !== '/suggestions' ? `/suggestions` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
+              href={pathname !== '/search/smart-suggestions' ? `/search/smart-suggestions` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
                 `group flex w-full items-center text-secondary transition duration-75`,
                 `hover:text-c42orange`
@@ -60,19 +62,19 @@ const MenuList = ({
               <div
                 id="smartdata-chosen-pointer"
                 className={clsx('ml-[-5px] mr-4 h-2 w-2 rounded-full', {
-                  'bg-secondary': pathname === '/suggestions',
-                  'bg-transparent': pathname !== '/suggestions',
+                  'bg-secondary': pathname === '/search/smart-suggestions',
+                  'bg-transparent': pathname !== '/search/smart-suggestions',
                 })}
               />
-              <div title={translate(`suggestions`)} className="max-w-[170px] truncate">
-                {translate(`suggestions`)}
+              <div title={translate(`search.smart-suggestions`)} className="max-w-[170px] truncate">
+                {translate(`search.smart-suggestions`)}
               </div>
             </Link>
           </li>
 
           <li>
             <Link
-              href={pathname !== '/advanced-search' ? `/advanced-search` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
+              href={pathname !== '/search/advanced-search' ? `/search/advanced-search` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
                 `group flex w-full items-center text-secondary transition duration-75`,
                 `hover:text-c42orange`
@@ -83,12 +85,12 @@ const MenuList = ({
               <div
                 id="smartdata-chosen-pointer"
                 className={clsx('ml-[-5px] mr-4 h-2 w-2 rounded-full', {
-                  'bg-secondary': pathname === '/advanced-search',
-                  'bg-transparent': pathname !== '/advanced-search',
+                  'bg-secondary': pathname === '/search/advanced-search',
+                  'bg-transparent': pathname !== '/search/advanced-search',
                 })}
               />
-              <div title={translate(`advanced-search`)} className="max-w-[170px] truncate">
-                {translate(`advanced-search`)}
+              <div title={translate(`search.advanced-search`)} className="max-w-[170px] truncate">
+                {translate(`search.advanced-search`)}
               </div>
             </Link>
           </li>

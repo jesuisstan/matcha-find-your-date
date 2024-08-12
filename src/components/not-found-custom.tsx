@@ -11,8 +11,8 @@ const NotFoundCustom = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-identity-background bg-cover bg-center text-center">
       <div className="flex flex-col items-center justify-center rounded-xl bg-card/90 p-4 text-foreground">
-        <h1 className="text-4xl font-bold">404</h1>
-        <p className="text-lg">{t('not-found.content')}</p>
+        <h1 className="text-4xl font-bold">{t('error')} 404</h1>
+        <p className="pb-5 pt-5 text-lg">{t('not-found.content')}</p>
         <ButtonMatcha variant="link">
           <Link href={`/dashboard`}>{t('go-to-home')}</Link>
         </ButtonMatcha>

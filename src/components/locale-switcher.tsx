@@ -8,7 +8,7 @@ import clsx from 'clsx';
 
 import { usePathname } from '@/navigation';
 
-export default function LocaleSwitcher() {
+const LocaleSwitcher = () => {
   const [isPending, startTransition] = useTransition();
   const localActive = useLocale();
   const pathname = usePathname();
@@ -29,6 +29,7 @@ export default function LocaleSwitcher() {
           `hover:border-c42orange`,
           localActive === 'fr' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
+        title="Français"
         onClick={() => handleLocaleChange('fr')}
       >
         <div className="overflow-hidden rounded-full bg-transparent">
@@ -52,6 +53,7 @@ export default function LocaleSwitcher() {
           `hover:border-c42orange`,
           localActive === 'en' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
+        title="English"
         onClick={() => handleLocaleChange('en')}
       >
         <div className="overflow-hidden rounded-full bg-transparent">
@@ -75,6 +77,7 @@ export default function LocaleSwitcher() {
           `hover:border-c42orange`,
           localActive === 'ru' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
+        title="Русский"
         onClick={() => handleLocaleChange('ru')}
       >
         <div className="overflow-hidden rounded-full bg-transparent">
@@ -93,4 +96,6 @@ export default function LocaleSwitcher() {
       </div>
     </div>
   );
-}
+};
+
+export default LocaleSwitcher;
