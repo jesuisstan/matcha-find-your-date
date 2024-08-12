@@ -89,5 +89,13 @@
     "search": "Rechercher",
     "smart-suggestions": "Suggestions Intelligentes",
     "advanced-search": "Recherche Avancée"
-  }
+  },
+  "attension": "Attention!",
+  "complete-your-profile-message": "Veuillez compléter votre profil pour continuer à utiliser le service et accéder aux fonctionnalités de recherche avancée.",
+  "ignore": "Ignorer",
+  "ok": "D'accord",
+  "yes": "Oui",
+  "no": "Non",
+  "next": "Suivant",
+  "finish": "Terminer"
 }

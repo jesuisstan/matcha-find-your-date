@@ -33,8 +33,8 @@ const ModalBasic = ({
             )}
           >
             <Image
-              src="/identity/logo-transparent.png"
-              alt="Q3"
+              src="/identity/logo-title-only.png"
+              alt="matcha-title-only-logo"
               width={0}
               height={0}
               sizes="100vw"

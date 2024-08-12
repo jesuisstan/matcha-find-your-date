@@ -21,7 +21,6 @@ import { getLocaleFromCookiesOnClientSide } from '@/utils/get-locale';
 const Menu: React.FC = () => {
   const { theme } = useTheme();
   const t = useTranslations();
-  const locale = getLocaleFromCookiesOnClientSide() ?? 'en';
   const user = useUserStore((state) => state.user);
 
   const pathname = usePathname();
@@ -70,7 +69,7 @@ const Menu: React.FC = () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [isSidebarOpen]);
-  console.log('pathname', pathname);
+
   return (
     <div className="relative z-50 h-10 w-[330px] flex-shrink">
       {/* Menu on small screens */}

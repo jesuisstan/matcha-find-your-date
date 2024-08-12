@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
@@ -9,16 +9,16 @@ import { PlaySquareIcon } from 'lucide-react';
 import HeaderSkeleton from '@/components/header-skeleton';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
+import ModalCompleteProfile from '@/components/ui/modals/modal-complete-profile';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
+import useUserStore from '@/stores/user';
 
 const ProfilePage = () => {
-  // Translate hook
   const t = useTranslations();
+  const user = useUserStore((state) => state.user);
   const [loading, setLoading] = useState(false); // todo
-
-  //const { getValueOfSmartdata } = useSmartdataFiltersStore();
 
   // TODO: API call to get option
   const indicatorOptions = [{ value: 'nsa', label: t(`selector.level`) }];
@@ -41,6 +41,7 @@ const ProfilePage = () => {
           <HeaderSkeleton />
         ) : (
           <div className="flex flex-col justify-start">
+            <ModalCompleteProfile user={user!} />
             <h1 className="mb-2 text-4xl">{'metadata?.title'}</h1>
             <div
               className={clsx(
