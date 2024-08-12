@@ -34,18 +34,18 @@
     --c42orange: 4 65% 59%;
 
     --card: 0 0% 7%;
-    --card-foreground: 210 40% 98%;
+    --card-foreground: 210 40% 90%;
 
-    --primary: 210 40% 98%;
+    --primary: 210 40% 90%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 204 13% 37%;
-    --secondary-foreground: 204 13% 37%;
+    --secondary: 204 13% 47%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 217.2 32.6% 20.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 217.2 32.6% 20.5%;
     --accent-foreground: 210 40% 98%;
   }
 }
