@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       from: process.env.NEXT_PUBLIC_SUPPORT_EMAIL,
       to: user.email,
       subject: 'Reset password link',
-      html: `Click the link to reset your password: <a href="${resetPasswordUrl}">${resetPasswordUrl}</a>`,
+      html: `Click the link to reset your Matcha password: <a href="${resetPasswordUrl}">Reset your password</a>.`,
     });
 
     return NextResponse.json({ message: 'reset-link-sent' });

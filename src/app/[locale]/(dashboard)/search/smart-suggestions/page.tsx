@@ -81,14 +81,7 @@ const SmartSuggestions = () => {
         >
           <div className="m-5 flex flex-col justify-start">
             <h3 className="text-3xl">{t`common:overview`}</h3>
-            <div className="mt-4">
-              <RadioGroup
-                name="frequency"
-                label={t`common:selector.frequency`}
-                options={frequencyOptions}
-                defaultValue={'daily'}
-              />
-            </div>
+
             <div className="mt-4">CONTENT</div>
           </div>
         </div>
@@ -105,14 +98,7 @@ const SmartSuggestions = () => {
             </div>
             {/* vertical divider */}
             <div className={clsx('m-5 hidden w-[1px] bg-secondary opacity-40', 'xl:block')} />
-            <div className={clsx('m-4', 'xl:w-1/2')}>
-              <RadioGroup
-                name="indicator"
-                label={t`common:selector.indicator`}
-                options={indicatorOptions}
-                defaultValue={'level'}
-              />
-            </div>
+
           </div>
           {/* CHART */}
           <div className="rounded-2xl bg-card p-2">

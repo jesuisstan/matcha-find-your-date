@@ -28,7 +28,8 @@ const Login = () => {
     setUser: state.setUser,
   }));
   const [loading, setLoading] = React.useState(false);
-  const [loginMethod, setLoginMethod] = React.useState('nickname'); // <'email' | 'nickname'>
+  const [loginMethod, setLoginMethod] = React.useState('email'); // <'email' | 'nickname'>
+  const [sex, setSex] = React.useState('male');
 
   // Redirect to dashboard if user is already logged in
   React.useEffect(() => {
@@ -36,6 +37,19 @@ const Login = () => {
       router.push('/dashboard');
     }
   }, [user, router]);
+
+  // Clear email field when pageLayout or loginMethod changes
+  React.useEffect(() => {
+    const emailInput = formRef.current?.elements.namedItem('email') as HTMLInputElement;
+    const nicknameInput = formRef.current?.elements.namedItem('nickname') as HTMLInputElement;
+
+    if (emailInput) {
+      emailInput.value = '';
+    }
+    if (nicknameInput) {
+      nicknameInput.value = '';
+    }
+  }, [pageLayout, loginMethod]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,7 +94,7 @@ const Login = () => {
             lastname: formData.get('lastname'),
             nickname: formData.get('nickname'),
             birthdate: formData.get('birthdate'),
-            sex: formData.get('sex'),
+            sex: sex,
           }),
         });
         setLoading(false);
@@ -205,16 +219,16 @@ const Login = () => {
           {pageLayout === 'forgot' && t(`auth.reset-password`)}
         </h2>
         {pageLayout === 'login' && (
-          <div className="mb-5 flex flex-row justify-start gap-5">
+          <div className="mb-7 flex flex-row justify-start gap-5">
             <RadioGroup
               label={t(`auth.login-method`) + ':'}
-              name="loginMethod"
               options={[
-                { value: 'nickname', label: t(`nickname`) },
                 { value: 'email', label: t(`auth.email`) },
+                { value: 'nickname', label: t(`nickname`) },
               ]}
-              defaultValue="nickname"
-              onSelectAction={setLoginMethod}
+              defaultValue="email"
+              selectedItem={loginMethod}
+              onSelectItem={setLoginMethod}
             />
           </div>
         )}
@@ -270,17 +284,16 @@ const Login = () => {
                     className="mb-2"
                   />
                 </div>
-                <div className="flex flex-col">
-                  <Label htmlFor="sex" className="mb-2">
-                    {t(`selector.select-sex`)}
-                  </Label>
+                <div className="flex flex-col self-start">
                   <RadioGroup
-                    name="sex"
+                    label={t(`selector.select-sex`) + ':'}
                     options={[
                       { value: 'male', label: t(`male`) },
                       { value: 'female', label: t(`female`) },
                     ]}
                     defaultValue="male"
+                    selectedItem={sex}
+                    onSelectItem={setSex}
                   />
                 </div>
               </div>
@@ -288,13 +301,13 @@ const Login = () => {
           )}
           {pageLayout === 'login' && loginMethod === 'nickname' ? (
             <>
-              <Label htmlFor="nickname" className="mb-2">
+              <Label htmlFor="nickname-login" className="mb-2">
                 {t(`nickname`)}
               </Label>
               <RequiredInput
                 type="text"
-                id="nickname"
-                name="nickname"
+                id="nickname-login"
+                name="nickname-login"
                 placeholder={t(`nickname`)}
                 pattern="^[A-Za-z0-9\-@]{1,21}$"
                 errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}

@@ -1,21 +1,11 @@
-/* Component for displaying a single radio option with its label.
-    Handles click events and updates the selected value accordingly.
-
-  Props for the RadioOption component:
-  - value: Value of the radio option
-  - isSelected: Boolean indicating if the option is selected
-  - onSelect: Function to handle the selection of the option
-  - children: Content to be displayed as the label for the radio option */
-
 import clsx from 'clsx';
 
 import styles from '@/styles/radio-button.module.css';
 import { radioOptionPropsSchema, TRadioOptionProps } from '@/types/radio-button';
 
-const RadioOption = ({ name, value, isSelected, onSelect, children }: TRadioOptionProps) => {
+const RadioOption = ({ value, isSelected, onSelect, children }: TRadioOptionProps) => {
   /* Verifying the passed Props of the component */
   const verif = radioOptionPropsSchema.safeParse({
-    name,
     value,
     isSelected,
     onSelect,
@@ -35,7 +25,6 @@ const RadioOption = ({ name, value, isSelected, onSelect, children }: TRadioOpti
       <input
         id={value}
         type="radio"
-        name={name}
         value={value}
         checked={isSelected}
         className={clsx(

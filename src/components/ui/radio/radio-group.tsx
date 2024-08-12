@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import RadioOption from '@/components/ui/radio/radio-option';
 import { radioGroupPropsSchema, TRadioGroupProps } from '@/types/radio-button';
 import { capitalize } from '@/utils/format-string';
 
-const RadioGroup = ({ name, label, options, defaultValue, onSelectAction }: TRadioGroupProps) => {
+const RadioGroup = ({ label, options, defaultValue, selectedItem, onSelectItem }: TRadioGroupProps) => {
   const optionsValues = options.map((option) => option.value);
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
   // Verify defaultValue: if valid, use it, otherwise use the first option's value
   const verifiedDefaultValue = defaultValue
@@ -18,28 +17,23 @@ const RadioGroup = ({ name, label, options, defaultValue, onSelectAction }: TRad
     : options?.[0]?.value;
 
   const handleRadioSelect = (value: string) => {
-    setSelectedValue(value);
-
-    // Call the onSelectAction prop if provided
-    if (onSelectAction) {
-      onSelectAction(value);
-    }
+    onSelectItem(value);
   };
 
-  // initial setting of value:
+  // Initial setting of value:
   useEffect(() => {
-    if (!selectedValue) {
-      setSelectedValue(verifiedDefaultValue);
+    if (selectedItem === undefined && defaultValue) {
+      onSelectItem(verifiedDefaultValue!);
     }
   }, [options]);
 
-  /* Verifying the passed Props of the component */
+  // Verifying the passed Props of the component
   const verif = radioGroupPropsSchema.safeParse({
-    name,
     label,
     options,
     defaultValue,
-    onSelectAction,
+    selectedItem,
+    onSelectItem,
   });
 
   if (!verif.success) {
@@ -57,15 +51,14 @@ const RadioGroup = ({ name, label, options, defaultValue, onSelectAction }: TRad
           <RadioOption
             key={`${option.value}-${index}`}
             value={option.value}
-            isSelected={option.value === selectedValue}
+            isSelected={option.value === selectedItem}
             onSelect={handleRadioSelect}
-            name={name}
           >
             {option.label}
           </RadioOption>
         ))}
       </div>
-      <input type="hidden" name={name} value={selectedValue ?? ''} />
+      <input type="hidden" value={selectedItem ?? ''} />
     </div>
   );
 };

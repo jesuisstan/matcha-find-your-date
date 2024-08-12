@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       from: process.env.NEXT_PUBLIC_SUPPORT_EMAIL,
       to: user.email,
       subject: 'Please confirm your email',
-      html: `Click the link to confirm your email: <a href="${confirmationUrl}">${confirmationUrl}</a>`,
+      html: `To start using Matcha, please confirm your email by clicking the following link: <a href="${confirmationUrl}">Confirm your email</a>.`,
     });
 
     return NextResponse.json({ message: 'confirmation-resent' });
