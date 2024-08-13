@@ -25,7 +25,7 @@ const ModalBasic = ({
       <AlertDialog.Portal>
         <AlertDialog.Overlay className="fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm" />
 
-        <AlertDialog.Content className="fixed left-[50%] top-[50%] z-50 h-auto max-h-[95vh] w-fit max-w-[80vw] translate-x-[-50%] translate-y-[-50%] space-y-5 overflow-auto rounded-2xl bg-card p-6 shadow-md shadow-secondary focus:outline-none">
+        <AlertDialog.Content className="fixed left-[50%] top-[50%] z-50 h-auto max-h-[95vh] w-fit max-w-[95vw] translate-x-[-50%] translate-y-[-50%] space-y-5 overflow-auto rounded-2xl bg-card p-6 shadow-md shadow-secondary focus:outline-none">
           <AlertDialog.Title
             className={clsx(
               `flex flex-wrap items-center justify-center gap-5 overflow-hidden`,

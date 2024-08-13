@@ -33,3 +33,23 @@ export const formatApiDateTableHistory = (apiDate: string): string => {
   // Construct the formatted date string in 'YYYY-MM-DD' format
   return `${year}-${month}-${day}`;
 };
+
+/**
+ * Converts an ISO 8601 date string to the "YYYY-MM-DD" format.
+ * If the input is invalid or empty, it returns an empty string.
+ *
+ * @param isoDate - The ISO 8601 date string (e.g., "1987-07-31T22:00:00.000Z").
+ * @returns The formatted date string in "YYYY-MM-DD" format, or an empty string if the input is invalid.
+ */
+export function formatDateForInput(isoDate: string | undefined | null): string {
+  if (!isoDate) return '';
+
+  try {
+    const date = new Date(isoDate);
+    if (isNaN(date.getTime())) return ''; // Check if the date is invalid
+    return date.toISOString().split('T')[0];
+  } catch (error) {
+    console.error('Invalid date format:', isoDate);
+    return '';
+  }
+}

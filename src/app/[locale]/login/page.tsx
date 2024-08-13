@@ -122,7 +122,6 @@ const Login = () => {
             document.cookie = `token=${result.token}; path=/`;
             setUser(result.user);
             window.location.href = `/profile`;
-            setLoading(false);
           } else {
             setError(t(`auth.${result.error}`));
           }
@@ -232,6 +231,7 @@ const Login = () => {
                 id="firstname"
                 name="firstname"
                 placeholder={t(`firstname`)}
+                maxLength={21}
                 pattern="^[A-Za-z\-]{1,21}$"
                 errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
                 className="mb-2"
@@ -244,6 +244,7 @@ const Login = () => {
                 id="lastname"
                 name="lastname"
                 placeholder={t('lastname')}
+                maxLength={21}
                 pattern="^[A-Za-z\-]{1,21}$"
                 errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
                 className="mb-2"
@@ -257,6 +258,7 @@ const Login = () => {
                 name="nickname"
                 placeholder={t(`nickname`)}
                 pattern="^[A-Za-z0-9\-@]{1,21}$"
+                maxLength={21}
                 errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}
                 className="mb-2"
               />
@@ -299,6 +301,7 @@ const Login = () => {
                 name="nickname-login"
                 placeholder={t(`nickname`)}
                 pattern="^[A-Za-z0-9\-@]{1,21}$"
+                maxLength={21}
                 errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}
                 className="mb-2"
               />
@@ -315,6 +318,7 @@ const Login = () => {
                 name="email"
                 placeholder={t(`auth.email`)}
                 autoComplete="email"
+                maxLength={42}
                 //errorMessage="Valid email with max length 42"
                 //pattern="^(?=.{1,42}$)\\S+@\\S+\\.\\S+$"
                 className="mb-2"
@@ -334,6 +338,8 @@ const Login = () => {
                   placeholder={t(`auth.password`)}
                   autoComplete="current-password"
                   errorMessage={t(`auth.password-requirements`)}
+                  minLength={8}
+                  maxLength={21}
                   pattern="^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@$!%*?&,.^=_+])[A-Za-z0-9@$!%*?&,.^=_+]{8,21}$"
                   className="mb-5"
                 />

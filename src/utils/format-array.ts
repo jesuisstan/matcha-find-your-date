@@ -1,22 +1,5 @@
 import { ALL_COUNTRY_ISO_CODES } from '@/constants/all-country-iso-codes';
-
-// export const sortOptionsArray = (arr: { label: string; value: string }[]) => {
-//   if (arr.length <= 1) {
-//     return arr;
-//   }
-//   return arr
-//     .slice()
-//     .sort((a, b) => a.value.localeCompare(b.value, undefined, { sensitivity: 'base' }));
-// };
-
-// export const lowercaseOptionsArrayValues = (arr: { label: string; value: string }[]) => {
-//   return arr.map((item) => {
-//     return {
-//       ...item,
-//       value: item.value.toLowerCase(),
-//     };
-//   });
-// };
+import { TSelectorOption } from '@/utils/create-tags';
 
 export const getOptionLabelByValue = (
   value: string,
@@ -29,13 +12,6 @@ export const getOptionLabelByValue = (
 export const getCountryFullName = (countryCode: string) => {
   const country = ALL_COUNTRY_ISO_CODES.find((item) => item.code === countryCode);
   return country ? country.name : 'unknown country';
-};
-
-export type TSelectorOption = {
-  value: string;
-  label: string;
-  version?: string;
-  drilldown?: any[];
 };
 
 export const sortCountriesOptionsByCode = (
@@ -71,38 +47,6 @@ export const sortCountriesOptionsByCode = (
   return countriesOptions;
 };
 
-type TCountryDataOption = {
-  id: string;
-  name: string;
-  date: string;
-  unit: string;
-  value: number | null;
-};
-
-export const sortCountriesForTableOverview = (
-  countries: TCountryDataOption[]
-): TCountryDataOption[] => {
-  countries?.sort((a, b) => {
-    if (a.name.includes('US')) {
-      return -1;
-    } else if (b.name.includes('US')) {
-      return 1;
-    } else if (a.name === 'CN') {
-      return -1;
-    } else if (b.name === 'CN') {
-      return 1;
-    } else if (a.name === 'EU') {
-      return -1;
-    } else if (b.name === 'EU') {
-      return 1;
-    } else {
-      return a.name.localeCompare(b.name);
-    }
-  });
-
-  return countries;
-};
-
 export const verifyMultipleSelectorDefaultValues = (
   options: TSelectorOption[],
   defaultValues: string[]
@@ -118,76 +62,6 @@ export const verifyMultipleSelectorDefaultValues = (
   if (filteredDefaults.length === 0) return [options[0].value];
 
   return filteredDefaults.length === defaultValues.length ? defaultValues : filteredDefaults;
-};
-
-type TComponentsData = {
-  id: string;
-  name: string;
-  date: string;
-  unit: string;
-  value: number | null;
-};
-
-export const sortComponentsForTableOverview = (
-  componentsData: TComponentsData[]
-): TComponentsData[] => {
-  componentsData.sort((a, b) => {
-    if (a.name === 'cpi') {
-      return -1;
-    } else if (b.name === 'cpi') {
-      return 1;
-    } else {
-      return a.name.localeCompare(b.name);
-    }
-  });
-
-  return componentsData;
-};
-
-export const sortSectorsForTableOverview = (
-  componentsData: TComponentsData[]
-): TComponentsData[] => {
-  componentsData.sort((a, b) => {
-    if (a.name === 'national') {
-      return -1;
-    } else if (b.name === 'national') {
-      return 1;
-    } else {
-      return a.name.localeCompare(b.name);
-    }
-  });
-
-  return componentsData;
-};
-
-export const sortYearsForTableOverview = (componentsData: TComponentsData[]): TComponentsData[] => {
-  componentsData.sort((a, b) => {
-    if (a.name === 'marketingYears') {
-      return -1;
-    } else if (b.name === 'marketingYears') {
-      return 1;
-    } else {
-      return a.name.localeCompare(b.name);
-    }
-  });
-
-  return componentsData;
-};
-
-export const sortRegionsForTableOverview = (
-  componentsData: TComponentsData[]
-): TComponentsData[] => {
-  componentsData?.sort((a, b) => {
-    if (a.name === 'name') {
-      return -1;
-    } else if (b.name === 'name') {
-      return 1;
-    } else {
-      return a.name.localeCompare(b.name);
-    }
-  });
-
-  return componentsData;
 };
 
 export function onlyUnique(value: any, index: any, array: any) {
@@ -209,113 +83,6 @@ export function mergeArrays(arr1: any, arr2: any) {
   }
 
   return arr2;
-}
-
-type Unit = {
-  name: string;
-  value: number | null;
-  version?: string;
-};
-
-type InputItem = {
-  id: string;
-  name: string;
-  unit: Unit[];
-  version?: string;
-};
-
-type OutputItem = {
-  item: string;
-  versionLength: number;
-};
-
-export function processVersions(input: InputItem[]): OutputItem[] {
-  // Create a map to keep track of the versions for each country
-  const versionMap: { [key: string]: Set<string> } = {};
-
-  input.forEach(({ id, unit }) => {
-    // Extract the country code (e.g., "us" from "us-bls_v1")
-    const countryCode = id.split('_')[0];
-    if (!versionMap[countryCode]) {
-      versionMap[countryCode] = new Set();
-    }
-
-    // Iterate over the unit versions
-    unit.forEach(({ version }) => {
-      if (version) {
-        versionMap[countryCode].add(version);
-      }
-    });
-  });
-
-  // Convert the version map to the desired output format
-  const output: OutputItem[] = Object.keys(versionMap).map((countryCode) => {
-    return {
-      item: countryCode,
-      versionLength: versionMap[countryCode].size,
-    };
-  });
-
-  return output;
-}
-
-export type InputItemChips = {
-  value: string;
-  label: string;
-  version: string;
-  name?: string;
-};
-
-type VersionCountItem = {
-  item: string;
-  versionLength: number;
-};
-
-export function processVersionsChips(inputArray: InputItemChips[]): VersionCountItem[] {
-  const versionMap: { [key: string]: Set<string> } = {};
-
-  inputArray?.forEach((item) => {
-    const [countryMethod] = item.value.split('_');
-    if (!versionMap[countryMethod]) {
-      versionMap[countryMethod] = new Set();
-    }
-    versionMap[countryMethod].add(item.version);
-  });
-
-  const result: VersionCountItem[] = Object.keys(versionMap).map((item) => ({
-    item,
-    versionLength: versionMap[item].size,
-  }));
-
-  return result;
-}
-
-type VersionLengthItem = {
-  item: string;
-  versionLength: number;
-};
-
-export function checkVersionLength(
-  inputItem: InputItem,
-  versionLengthArray: VersionLengthItem[]
-): boolean {
-  // Extract the country code (e.g., "gb" from "gb_v1")
-  const countryCode = inputItem.id.split('_')[0].toUpperCase();
-
-  // Find the corresponding entry in the versionLengthArray
-  const foundItem = versionLengthArray.find((v) => v.item.toUpperCase() === countryCode);
-
-  // Return true if found and versionLength is greater than 1
-  return foundItem ? foundItem.versionLength > 1 : false;
-}
-
-export function checkVersionLengthChips(
-  value: string,
-  versionLengths: VersionCountItem[]
-): boolean {
-  const [itemMethod] = value.split('_');
-  const foundItem = versionLengths.find((item) => item.item === itemMethod);
-  return foundItem ? foundItem.versionLength > 1 : false;
 }
 
 /**

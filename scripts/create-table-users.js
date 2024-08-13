@@ -25,7 +25,7 @@ async function createTables() {
       END $$;
 
       DO $$ BEGIN
-        CREATE TYPE preferences_enum AS ENUM ('male', 'female', 'bisexual');
+        CREATE TYPE preferences_enum AS ENUM ('men', 'women', 'bisexual');
       EXCEPTION
         WHEN duplicate_object THEN null;
       END $$;

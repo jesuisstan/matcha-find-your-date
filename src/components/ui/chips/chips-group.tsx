@@ -5,140 +5,83 @@ import { useTranslations } from 'next-intl';
 
 import ChipsOption from '@/components/ui/chips/chips-option';
 import ChipsSkeleton from '@/components/ui/chips/chips-skeleton';
-import Spinner from '@/components/ui/spinner';
 import { chipsGroupPropsSchema, TChipGroupProps } from '@/types/chips';
-import {
-  checkVersionLengthChips,
-  processVersionsChips,
-  verifyMultipleSelectorDefaultValues,
-} from '@/utils/format-array';
 import { capitalize } from '@/utils/format-string';
 
 const ChipsGroup = ({
-  smartdataFilterKey,
-  smartdataSubFilterKey,
+  name,
   label,
   options,
-  defaultValues,
-  singleSelection,
-  showSpinner,
+  selectedChips,
+  setSelectedChips,
   loading,
   errorMessage,
-  versionLength,
 }: TChipGroupProps) => {
   const t = useTranslations();
-  const [hideAllClicked, setHideAllClicked] = useState(false);
-  const optionsValues = options?.map((option) => option.value);
-  const verifiedDefaultValues = verifyMultipleSelectorDefaultValues(options, defaultValues);
 
-  const smartdataName = 'usePathname()';
-  const smartdataValue: string[] =
-    //(getValueOfSmartdata(smartdataName, smartdataFilterKey, smartdataSubFilterKey) as string[]) ||
-    [];
-
-  const handleShowAll = (event: React.FormEvent) => {
+  const handleSelectAll = (event: React.FormEvent) => {
     event.preventDefault();
-    setHideAllClicked(false);
-    optionsValues.map((option) =>
-      console.log(smartdataName, smartdataFilterKey, option, smartdataSubFilterKey)
-    );
+    setSelectedChips(options);
   };
 
-  const handleHideAll = (event: React.FormEvent) => {
+  const handleUnselectAll = (event: React.FormEvent) => {
     event.preventDefault();
-    setHideAllClicked(true);
-    //clearAllItemsOfSmartdata!(smartdataName, smartdataFilterKey, smartdataSubFilterKey);
+    setSelectedChips([]);
   };
 
   const handleChipSelect = (value: string) => {
-    if (!singleSelection) {
-      setHideAllClicked(false);
-      if (smartdataValue?.length === 1 && value === smartdataValue![0]) {
-        setHideAllClicked(true);
-      }
-      if (smartdataValue?.includes(value)) {
-        //removeOneItemOfSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
-      } else {
-        //addOneItemToSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
-      }
+    if (selectedChips?.includes(value)) {
+      // If the chip is already selected, remove it from the array
+      setSelectedChips(selectedChips.filter((chip) => chip !== value));
     } else {
-      //replaceAllItemsOfSmartdata(smartdataName, smartdataFilterKey, [value], smartdataSubFilterKey);
+      // If the chip is not selected, add it to the array
+      setSelectedChips([...selectedChips, value]);
     }
   };
 
-  // initial setting of smartdata value:
-  useEffect(() => {
-    if (
-      hideAllClicked === false &&
-      (!smartdataValue?.length || smartdataValue?.[0] === null || smartdataValue?.[0] === undefined)
-    ) {
-      if (verifiedDefaultValues.length && verifiedDefaultValues.length > 0) {
-        verifiedDefaultValues.map((value) => {
-          //addOneItemToSmartdata(smartdataName, smartdataFilterKey, value, smartdataSubFilterKey);
-          console.log(value);
-        });
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options]);
-
   /* Verifying the passed Props of the component */
   const verif = chipsGroupPropsSchema.safeParse({
-    smartdataFilterKey,
+    name,
     label,
     options,
-    defaultValues,
+    selectedChips,
+    setSelectedChips,
+    loading,
+    errorMessage,
   });
 
   if (!verif.success) {
     console.error(verif.error);
     return null;
   }
-  //@ts-ignore
-  const processedOptions = processVersionsChips(options);
 
   return loading || errorMessage || !options || options?.length === 0 ? (
     <ChipsSkeleton message={errorMessage} />
   ) : (
-    <div
-      id={`${smartdataFilterKey}-chips`}
-      // name={smartdataFilterKey}
-      className="relative flex flex-col justify-center"
-    >
+    <div id={`${label}-chips`} className="relative flex flex-col justify-center">
       <div className="mb-4 flex flex-row items-end gap-8">
         {label && <div className="text-base font-normal text-foreground">{label}</div>}
-        {!singleSelection && (
-          <div className="flex flex-row gap-7 text-xs font-normal text-secondary">
-            <button className="min-w-fit text-left hover:text-c42orange" onClick={handleShowAll}>
-              {t(`selector.select-all`)}
-            </button>
-            <button className="min-w-fit text-left hover:text-c42orange" onClick={handleHideAll}>
-              {t(`selector.unselect-all`)}
-            </button>
-          </div>
-        )}
+
+        <div className="flex flex-row gap-7 text-xs font-normal text-secondary">
+          <button className="min-w-fit text-left hover:text-c42orange" onClick={handleSelectAll}>
+            {t(`selector.select-all`)}
+          </button>
+          <button className="min-w-fit text-left hover:text-c42orange" onClick={handleUnselectAll}>
+            {t(`selector.unselect-all`)}
+          </button>
+        </div>
       </div>
       <div className="relative flex flex-row flex-wrap justify-start gap-2">
-        {showSpinner && (
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-            <Spinner size={5} />
-          </div>
-        )}
-        {options.map((option: any, index: number) => {
-          const showVersion =
-            versionLength && versionLength > 1
-              ? true
-              : checkVersionLengthChips(option.value, processedOptions);
+        {options.map((option: string, index: number) => {
           return (
             <ChipsOption
-              key={`${option.value}-${index}`}
-              paramName={smartdataFilterKey}
-              value={option.value}
-              isSelected={smartdataValue!.includes(option.value)}
+              key={`${option}-${index}`}
+              paramName={name}
+              value={option}
+              isSelected={selectedChips!.includes(option)}
               onSelect={handleChipSelect}
             >
-              <div>{capitalize(option.label)}</div>
-              {showVersion && <div className="ml-2">{option.version}</div>}
+              <div>{t(`${name}.${option}`)}</div>
             </ChipsOption>
           );
         })}

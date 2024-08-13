@@ -24,16 +24,6 @@ const ChipsOption = ({ paramName, value, isSelected, onSelect, children }: TChip
     return;
   }
 
-  function customCountryName(name: string) {
-    if (name === 'CN.3.MHT' || name === 'CN.3.NOMHT') {
-      return 'asia';
-    } else if (name === 'WO') {
-      return 'europe';
-    } else {
-      return name;
-    }
-  }
-
   // Utility function to get a string representation of children to show correct label on hover
   const getTitleFromChildren = (children: React.ReactNode): string => {
     if (typeof children === 'string' || typeof children === 'number') {
@@ -63,7 +53,7 @@ const ChipsOption = ({ paramName, value, isSelected, onSelect, children }: TChip
       {paramName.includes('countries') && (
         <div className="ml-[-7px] overflow-hidden rounded-full">
           <Image
-            src={`/country-flags/${customCountryName(value.split('_')[0])?.toLowerCase()}.svg`}
+            src={`/country-flags/${value.split('_')[0]?.toLowerCase()}.svg`}
             alt="national-flag"
             width={0}
             height={0}
