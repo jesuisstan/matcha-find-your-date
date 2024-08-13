@@ -106,32 +106,30 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
                 value={user?.nickname}
               />
             </div>
-            <div className="flex flex-row gap-10">
-              <div className="flex flex-col">
-                <Label htmlFor="birthdate" className="mb-2">
-                  {t(`birthdate`)}
-                </Label>
-                <RequiredInput
-                  type="date"
-                  id="birthdate"
-                  name="birthdate"
-                  placeholder={t(`birthdate`)}
-                  className="mb-2"
-                  value={formatDateForInput(user?.birthdate)}
-                />
-              </div>
-              <div className="flex flex-col self-start">
-                <RadioGroup
-                  label={t(`selector.sex`) + ':'}
-                  options={[
-                    { value: 'male', label: t(`male`) },
-                    { value: 'female', label: t(`female`) },
-                  ]}
-                  defaultValue="male"
-                  selectedItem={sex}
-                  onSelectItem={setSex}
-                />
-              </div>
+            <div className="flex flex-col">
+              <Label htmlFor="birthdate" className="mb-2">
+                {t(`birthdate`)}
+              </Label>
+              <RequiredInput
+                type="date"
+                id="birthdate"
+                name="birthdate"
+                placeholder={t(`birthdate`)}
+                className="mb-2"
+                value={formatDateForInput(user?.birthdate)}
+              />
+            </div>
+            <div className="flex flex-col self-start">
+              <RadioGroup
+                label={t(`selector.sex`) + ':'}
+                options={[
+                  { value: 'male', label: t(`male`) },
+                  { value: 'female', label: t(`female`) },
+                ]}
+                defaultValue="male"
+                selectedItem={sex}
+                onSelectItem={setSex}
+              />
             </div>
           </div>
           <div id="bio" className="flex flex-col gap-5">
@@ -170,7 +168,7 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
             <div>LOCATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
           </div>
 
-          <div className="w-96">
+          <div className="max-w-80">
             <ChipsGroup
               name="tags"
               label={t('tags.tags')}
@@ -179,6 +177,7 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
               setSelectedChips={setSelectedTags}
             />
           </div>
+          <div className="">AVATARS</div>
         </div>
 
         <ButtonMatcha type="submit" className="m-5 w-32" loading={loading}>
@@ -213,19 +212,16 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
 
   return (
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('personal-data')}>
-      <div className="mt-10 flex min-h-[70vh] w-[80vw] flex-col items-center justify-center space-y-10 p-10 text-center align-middle">
+      <div className="mt-10 flex min-h-[70vh] w-[90vw] flex-col items-center justify-center space-y-10 p-10 text-center align-middle">
         {layouts[layout as keyof typeof layouts]}
       </div>
-      <div className="flex flex-row flex-wrap justify-evenly">
-        <ButtonMatcha type="button" onClick={handleClose} className="min-w-32">
-          {t('close')}
-        </ButtonMatcha>
-        {layout === 'start' && (
+      {layout === 'start' && (
+        <div className="flex flex-row justify-center">
           <ButtonMatcha type="button" onClick={handleComplete} className="min-w-32">
             {t('proceed')}
           </ButtonMatcha>
-        )}
-      </div>
+        </div>
+      )}
     </ModalBasic>
   );
 };
