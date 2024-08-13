@@ -38,19 +38,6 @@ const Login = () => {
     }
   }, [user, router]);
 
-  // Clear email field when pageLayout or loginMethod changes
-  React.useEffect(() => {
-    const emailInput = formRef.current?.elements.namedItem('email') as HTMLInputElement;
-    const nicknameInput = formRef.current?.elements.namedItem('nickname') as HTMLInputElement;
-
-    if (emailInput) {
-      emailInput.value = '';
-    }
-    if (nicknameInput) {
-      nicknameInput.value = '';
-    }
-  }, [pageLayout, loginMethod]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -77,7 +64,7 @@ const Login = () => {
           body: JSON.stringify({
             email: formData.get('email'),
             password: formData.get('password'),
-            nickname: formData.get('nickname'),
+            nickname: formData.get('nickname-login'),
           }),
         });
         setLoading(false);
@@ -299,7 +286,7 @@ const Login = () => {
               </div>
             </>
           )}
-          {pageLayout === 'login' && loginMethod === 'nickname' ? (
+          {pageLayout === 'login' && loginMethod === 'nickname' && (
             <>
               <Label htmlFor="nickname-login" className="mb-2">
                 {t(`nickname`)}
@@ -314,7 +301,8 @@ const Login = () => {
                 className="mb-2"
               />
             </>
-          ) : (
+          )}
+          {((pageLayout === 'login' && loginMethod === 'email') || pageLayout !== 'login') && (
             <>
               <Label htmlFor="email" className="mb-2">
                 {t(`auth.email`)}
