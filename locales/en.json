@@ -19,8 +19,8 @@
   "go-to-home": "To Home page",
   "theme-toggle": "Toggle theme",
   "selector": {
-    "select-sex": "Select sex",
-    "select-preferences": "Select sexual preferences",
+    "sex": "Sex",
+    "preferences": "Sexual preferences",
     "select-all": "Select all",
     "unselect-all": "Unselect all",
     "daily": "Daily",
@@ -98,5 +98,8 @@
   "yes": "Yes",
   "no": "No",
   "next": "Next",
-  "finish": "Finish"
+  "finish": "Finish",
+  "close": "Close",
+  "proceed": "Proceed",
+  "save": "Save"
 }

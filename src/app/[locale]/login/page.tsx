@@ -29,7 +29,7 @@ const Login = () => {
   }));
   const [loading, setLoading] = React.useState(false);
   const [loginMethod, setLoginMethod] = React.useState('email'); // <'email' | 'nickname'>
-  const [sex, setSex] = React.useState('male');
+  const [sex, setSex] = React.useState('male'); // <'male' | 'female'>
 
   // Redirect to dashboard if user is already logged in
   React.useEffect(() => {
@@ -118,9 +118,11 @@ const Login = () => {
       switch (pageLayout) {
         case 'login':
           if (result.user.confirmed) {
+            setLoading(true);
             document.cookie = `token=${result.token}; path=/`;
             setUser(result.user);
             window.location.href = `/profile`;
+            setLoading(false);
           } else {
             setError(t(`auth.${result.error}`));
           }
@@ -273,7 +275,7 @@ const Login = () => {
                 </div>
                 <div className="flex flex-col self-start">
                   <RadioGroup
-                    label={t(`selector.select-sex`) + ':'}
+                    label={t(`selector.sex`) + ':'}
                     options={[
                       { value: 'male', label: t(`male`) },
                       { value: 'female', label: t(`female`) },
