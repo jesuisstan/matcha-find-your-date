@@ -68,6 +68,7 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
                 name="firstname"
                 placeholder={t(`firstname`)}
                 pattern="^[A-Za-z\-]{1,21}$"
+                maxLength={21}
                 errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
                 className="mb-2"
                 value={user?.firstname}
@@ -83,6 +84,7 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
                 name="lastname"
                 placeholder={t('lastname')}
                 pattern="^[A-Za-z\-]{1,21}$"
+                maxLength={21}
                 errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
                 className="mb-2"
                 value={user?.lastname}
@@ -98,6 +100,7 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
                 name="nickname"
                 placeholder={t(`nickname`)}
                 pattern="^[A-Za-z0-9\-@]{1,21}$"
+                maxLength={21}
                 errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}
                 className="mb-2"
                 value={user?.nickname}
@@ -210,7 +213,7 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
 
   return (
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('personal-data')}>
-      <div className="mt-10 flex min-h-[600px] w-[80vw] flex-col items-center justify-center space-y-10 p-10 text-center align-middle">
+      <div className="mt-10 flex min-h-[70vh] w-[80vw] flex-col items-center justify-center space-y-10 p-10 text-center align-middle">
         {layouts[layout as keyof typeof layouts]}
       </div>
       <div className="flex flex-row flex-wrap justify-evenly">
