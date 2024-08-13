@@ -100,12 +100,7 @@ const AdvancedSearch = () => {
           {/* SELECTOR */}
           <div className={clsx('mb-4 flex flex-col rounded-2xl bg-card p-2', 'xl:flex-row')}>
             <div className={clsx('m-4', 'xl:w-2/3')}>
-              <ChipsGroup
-                smartdataFilterKey="countries"
-                label={t`common:selector.select-country`}
-                options={countriesOptions || []}
-                defaultValues={['US']}
-              />
+
             </div>
             {/* vertical divider */}
             <div className={clsx('m-5 hidden w-[1px] bg-secondary opacity-40', 'xl:block')} />
