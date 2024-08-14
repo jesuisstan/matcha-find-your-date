@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { OctagonAlert } from 'lucide-react';
 
-import AvatarUploader from '@/components/avatar-uploader';
+import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import { Label } from '@/components/ui/label';
@@ -13,15 +12,14 @@ import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
 import { TAGS_LIST } from '@/constants/tags-list';
 import { TUser } from '@/types/user';
-import { createTagsOptions } from '@/utils/create-tags';
 import { formatDateForInput } from '@/utils/format-date';
 
 const MAX_BIOGRAPHY_LENGTH = 342;
 
-const ModalCompleteProfile = ({ user }: { user: TUser }) => {
+const ModalProfileComplete = ({ user }: { user: TUser }) => {
   const t = useTranslations();
   const [show, setShow] = useState(false);
-  const [layout, setLayout] = useState('start');
+  const [layout, setLayout] = useState('basicsLayout');
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const [sex, setSex] = useState(user?.sex as string); // <'male' | 'female'>
@@ -44,15 +42,7 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
   };
 
   const layouts = {
-    start: (
-      <>
-        <div className="text-c42orange">
-          <OctagonAlert size={60} />
-        </div>
-        <p>{t('complete-your-profile-message')}</p>
-      </>
-    ),
-    userData: (
+    basicsLayout: (
       <div className="flex max-h-[50vh] max-w-[90vw] flex-wrap items-center self-center ">
         <form
           className="align-center flex flex-col items-center justify-center text-left"
@@ -135,6 +125,22 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
                 />
               </div>
             </div>
+          </div>
+
+          <ButtonMatcha type="submit" className="m-5 w-32" loading={loading}>
+            {t('save')}
+          </ButtonMatcha>
+        </form>
+      </div>
+    ),
+    biographyLayout: (
+      <div className="flex max-h-[50vh] max-w-[90vw] flex-wrap items-center self-center ">
+        <form
+          className="align-center flex flex-col items-center justify-center text-left"
+          onSubmit={handleSubmit}
+          ref={formRef}
+        >
+          <div className="flex flex-wrap items-start justify-center">
             <div id="bio" className="flex flex-col gap-5 p-5">
               <div>
                 <Label htmlFor="about" className="mb-2">
@@ -146,7 +152,6 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
                     name="about"
                     placeholder={t(`describe-youself`)}
                     className="disabled:opacity-50, flex h-48 w-96 rounded-md border bg-background p-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed"
-                    defaultValue={user?.biography}
                     value={biography}
                     onChange={handleBiographyChange}
                   />
@@ -170,24 +175,49 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
               </div>
               <div>LOCATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
             </div>
-
-            <div className="max-w-96 p-5">
-              <ChipsGroup
-                name="tags"
-                label={t('tags.tags')}
-                options={TAGS_LIST || []}
-                selectedChips={selectedTags}
-                setSelectedChips={setSelectedTags}
-              />
-            </div>
-            <div className="p-5">
-              <Label htmlFor="about" className="mb-2">
-                {t(`photos`)}
-              </Label>
-              <AvatarUploader />
-            </div>
           </div>
 
+          <ButtonMatcha type="submit" className="m-5 w-32" loading={loading}>
+            {t('save')}
+          </ButtonMatcha>
+        </form>
+      </div>
+    ),
+    tagsLayout: (
+      <div className="flex max-h-[50vh] max-w-[90vw] flex-wrap items-center self-center ">
+        <form
+          className="align-center flex flex-col items-center justify-center text-left"
+          onSubmit={handleSubmit}
+          ref={formRef}
+        >
+          <div className="p-5">
+            <ChipsGroup
+              name="tags"
+              label={t('tags.tags')}
+              options={TAGS_LIST || []}
+              selectedChips={selectedTags}
+              setSelectedChips={setSelectedTags}
+            />
+          </div>
+          <ButtonMatcha type="submit" className="m-5 w-32" loading={loading}>
+            {t('save')}
+          </ButtonMatcha>
+        </form>
+      </div>
+    ),
+    photosLayout: (
+      <div className="flex max-h-[50vh] max-w-[90vw] flex-wrap items-center self-center ">
+        <form
+          className="align-center flex flex-col items-center justify-center text-left"
+          onSubmit={handleSubmit}
+          ref={formRef}
+        >
+          <div className="p-5">
+            <Label htmlFor="about" className="mb-2">
+              {t(`photos`)}
+            </Label>
+            <AvatarUploader />
+          </div>
           <ButtonMatcha type="submit" className="m-5 w-32" loading={loading}>
             {t('save')}
           </ButtonMatcha>
@@ -206,12 +236,18 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
     setShow(false);
   };
 
-  const handleComplete = () => {
+  const handleNext = () => {
     switch (layout) {
-      case 'start':
-        setLayout('userData');
+      case 'basicsLayout':
+        setLayout('biographyLayout');
         break;
-      case 'userData':
+      case 'biographyLayout':
+        setLayout('tagsLayout');
+        break;
+      case 'tagsLayout':
+        setLayout('photosLayout');
+        break;
+      case 'photosLayout':
         handleClose();
         break;
       default:
@@ -220,24 +256,24 @@ const ModalCompleteProfile = ({ user }: { user: TUser }) => {
   };
 
   return (
-    <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('personal-data')}>
+    <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('complete-profile')}>
       <div
         className={clsx(
-          'flex h-max min-h-[65vh] w-[90vw] flex-col items-center space-y-10 text-center',
+          'flex h-max min-h-[50vh] w-fit min-w-[42vw] flex-col items-center space-y-10 text-center',
           layout === 'userData' ? 'overflow-auto' : 'justify-center'
         )}
       >
         {layouts[layout as keyof typeof layouts]}
       </div>
-      {layout === 'start' && (
-        <div className="flex flex-row justify-center">
-          <ButtonMatcha type="button" onClick={handleComplete} className="min-w-32">
-            {t('proceed')}
-          </ButtonMatcha>
-        </div>
-      )}
+      {/*{layout === 'start' && (*/}
+      <div className="flex flex-row justify-end">
+        <ButtonMatcha type="button" onClick={handleNext} className="min-w-32">
+          {t('next')}
+        </ButtonMatcha>
+      </div>
+      {/*)}*/}
     </ModalBasic>
   );
 };
 
-export default ModalCompleteProfile;
+export default ModalProfileComplete;

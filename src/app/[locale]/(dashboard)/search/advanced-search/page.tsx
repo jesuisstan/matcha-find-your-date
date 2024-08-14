@@ -8,9 +8,7 @@ import { PlaySquareIcon } from 'lucide-react';
 
 import HeaderSkeleton from '@/components/header-skeleton';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
-import ChipsGroup from '@/components/ui/chips/chips-group';
-import ModalCompleteProfile from '@/components/ui/modals/modal-complete-profile';
-import RadioGroup from '@/components/ui/radio/radio-group';
+import ModalProfileWarning from '@/components/ui/modals/modal-profile-warning';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 import useUserStore from '@/stores/user';
@@ -44,7 +42,7 @@ const AdvancedSearch = () => {
           <HeaderSkeleton />
         ) : (
           <div className="flex flex-col justify-start">
-            <ModalCompleteProfile user={user!} />
+            <ModalProfileWarning user={user!} />
             <h1 className="mb-2 text-4xl">{'metadata?.title'}</h1>
             <div
               className={clsx(
@@ -99,12 +97,9 @@ const AdvancedSearch = () => {
         <div className={clsx('col-span-10', 'lg:col-span-7')}>
           {/* SELECTOR */}
           <div className={clsx('mb-4 flex flex-col rounded-2xl bg-card p-2', 'xl:flex-row')}>
-            <div className={clsx('m-4', 'xl:w-2/3')}>
-
-            </div>
+            <div className={clsx('m-4', 'xl:w-2/3')}></div>
             {/* vertical divider */}
             <div className={clsx('m-5 hidden w-[1px] bg-secondary opacity-40', 'xl:block')} />
-
           </div>
           {/* CHART */}
           <div className="rounded-2xl bg-card p-2">

@@ -4,6 +4,9 @@ import { useRef, useState } from 'react';
 
 import type { PutBlobResult } from '@vercel/blob';
 
+import ImageCompressor from './image-compressor';
+import ImagePreviewer from './image-previewer';
+
 const AvatarUploader = () => {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
@@ -42,6 +45,7 @@ const AvatarUploader = () => {
         <button type="submit">Upload</button>
 				</div>
       </form>
+      <ImageCompressor />
       {blob && (
         <div>
           Blob url: <a href={blob.url}>{blob.url}</a>

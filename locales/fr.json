@@ -57,7 +57,7 @@
     "failed-to-confirm-email": "Échec de la confirmation de l'email",
     "confirme-email": "Confirmer l'email",
     "max-char": "Caractères max",
-    "password-requirements": "8-21: 1 majuscule, 1 minuscule, 1 chiffre, 1 de @$!%*?&,.^=_+",
+    "password-requirements": "8-21: MAJ/min, chiffres, 1 de @$!%*?&,.^=_+",
     "under-18": "Vous devez avoir au moins 18 ans pour utiliser ce service",
     "invalid-birthdate": "Date de naissance invalide",
     "email-already-exists": "Email déjà existant",

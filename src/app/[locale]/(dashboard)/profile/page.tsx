@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
-import ModalCompleteProfile from '@/components/ui/modals/modal-complete-profile';
+import ModalProfileComplete from '@/components/ui/modals/modal-profile-complete';
 import useUserStore from '@/stores/user';
 
 const ProfilePage = () => {
@@ -15,7 +15,7 @@ const ProfilePage = () => {
   return (
     <div>
       {/* HEADER */}
-      <ModalCompleteProfile user={user!} />
+      <ModalProfileComplete user={user!} />
       CONTENT
     </div>
   );
