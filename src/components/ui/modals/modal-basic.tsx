@@ -26,22 +26,23 @@ const ModalBasic = ({
       <AlertDialog.Portal>
         <AlertDialog.Overlay className="fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm" />
 
-        <AlertDialog.Content className="fixed left-[50%] top-[50%] z-50 h-auto max-h-[95vh] w-fit max-w-[95vw] translate-x-[-50%] translate-y-[-50%] space-y-5 overflow-auto rounded-2xl bg-card p-6 shadow-md shadow-secondary focus:outline-none">
+        <AlertDialog.Content className="fixed left-[50%] top-[50%] z-50 h-auto max-h-[95vh] w-fit max-w-[95vw] translate-x-[-50%] translate-y-[-50%] space-y-5 overflow-auto rounded-2xl bg-card p-6 shadow-md shadow-secondary transition-all duration-300 ease-in-out focus:outline-none">
           <AlertDialog.Title
             className={clsx(
               `flex flex-wrap items-center justify-center gap-5 overflow-hidden`,
-              'sm:justify-between '
+              'sm:justify-between'
             )}
           >
-            <span className="ml-10 overflow-hidden text-ellipsis text-3xl">{title}</span>
+            <span className=" overflow-hidden text-ellipsis text-3xl sm:ml-10">{title}</span>
             <Image
               src="/identity/logo-title-only.png"
               alt="matcha-title-only-logo"
               width={0}
               height={0}
               sizes="100vw"
-              className={clsx(`mr-10 h-7 w-auto`, theme === 'dark' ? 'darkmode-logo' : '')}
+              className={clsx(` h-7 w-auto`, `sm:mr-10`, theme === 'dark' ? 'darkmode-logo' : '')}
             />
+
             <button
               className="absolute right-3 top-3 rounded-md p-1 hover:bg-gray-200 dark:hover:bg-gray-700"
               onClick={() => setIsOpen?.(false)}
