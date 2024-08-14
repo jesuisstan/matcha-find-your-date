@@ -18,8 +18,8 @@ export const userSchema = z.object({
   last_connection_date: z.string(),
   online: z.boolean(),
   popularity: z.number(),
-  preferences: z.enum(['male', 'female', 'bisexual']),
-  avatars: z.array(z.string()),
+  sex_preferences: z.enum(['male', 'female', 'bisexual']),
+  photos: z.array(z.string()),
   service_token: z.string().nullable(),
 });
 

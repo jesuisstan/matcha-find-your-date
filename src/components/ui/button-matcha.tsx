@@ -53,7 +53,13 @@ const ButtonMatcha = React.forwardRef<HTMLButtonElement, TButtonProps>(
         disabled={disabled || loading} // Block the button when loading is true or disabled is true
         {...props}
       >
-        {loading ? <Spinner size={6} /> : children}
+        {loading ? (
+          //<div className="flex self-center items-center justify-center ">
+            <Spinner size={6} />
+          //</div>
+        ) : (
+          children
+        )}
       </Comp>
     );
   }

@@ -25,7 +25,7 @@ async function createTables() {
       END $$;
 
       DO $$ BEGIN
-        CREATE TYPE preferences_enum AS ENUM ('men', 'women', 'bisexual');
+        CREATE TYPE sex_preferences_enum AS ENUM ('men', 'women', 'bisexual');
       EXCEPTION
         WHEN duplicate_object THEN null;
       END $$;
@@ -52,8 +52,8 @@ async function createTables() {
         last_connection_date TIMESTAMP,
         online BOOLEAN DEFAULT false,
         popularity INT DEFAULT 0,
-        preferences preferences_enum DEFAULT 'bisexual',
-        avatars TEXT[],
+        sex_preferences sex_preferences_enum DEFAULT 'bisexual',
+        photos TEXT[],
         service_token TEXT
       );
     `);

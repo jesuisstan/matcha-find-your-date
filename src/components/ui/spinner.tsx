@@ -6,7 +6,7 @@ const Spinner = ({ size }: { size: number }) => {
       <svg
         aria-hidden="true"
         className={clsx(
-          `mr-2 inline animate-spin fill-foreground text-secondary`,
+          `inline animate-spin fill-foreground text-secondary`,
           `h-${size} w-${size}`,
           `dark:fill-card dark:text-secondary`
         )}
