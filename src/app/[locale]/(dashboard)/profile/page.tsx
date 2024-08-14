@@ -15,8 +15,10 @@ const ProfilePage = () => {
   return (
     <div>
       {/* HEADER */}
-      <ModalProfileComplete user={user!} />
-      CONTENT
+      <ModalProfileComplete />
+      CONTENT:
+      <h1>{t('profile')}</h1>
+      {user && JSON.stringify(user, null, 2)}
     </div>
   );
 };

@@ -10,23 +10,21 @@ export async function POST(req: Request) {
   const hashedPassword = await bcrypt.hash(password, 10);
   const confirmationToken = uuidv4(); // Generate a unique token
 
-  // Convert birthdate to a Date object
-  const birthdateObj = new Date(birthdate);
+  // Parse the birthdate string into components
+  const [birthYear, birthMonth, birthDay] = birthdate.split('-').map(Number);
   const today = new Date();
 
-  // Check if birthdate is after today's date
-  if (birthdateObj > today) {
-    return NextResponse.json({ error: 'invalid-birthdate' }, { status: 400 });
-  }
-
-  // Calculate the user's age
-  let age = today.getFullYear() - birthdateObj.getFullYear();
-  const monthDifference = today.getMonth() - birthdateObj.getMonth();
-  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdateObj.getDate())) {
+  // Calculate the user's age based on the parsed components
+  let age = today.getFullYear() - birthYear;
+  const monthDifference = today.getMonth() + 1 - birthMonth; // getMonth is 0-indexed
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDay)) {
     age--;
   }
 
-  // Check if the user is under 18 or older than 142
+  // Validate the birthdate
+  if (new Date(birthdate) > today) {
+    return NextResponse.json({ error: 'invalid-birthdate' }, { status: 400 });
+  }
   if (age < 18) {
     return NextResponse.json({ error: 'under-18' }, { status: 400 });
   } else if (age > 142) {

@@ -58,7 +58,7 @@
     "confirme-email": "Confirm email",
     "max-char": "Max characters",
     "password-requirements": "8-21: UP/low, dig, 1 of @$!%*?&,.^=_+",
-    "under-18": "You must be at least 18 years old to use this service",
+    "under-18": "This service is only for users over 18 years old",
     "invalid-birthdate": "Invalid birthdate",
     "email-already-exists": "Email already exists",
     "nickname-already-exists": "Nickname already exists",
@@ -157,5 +157,11 @@
     "yoga": "Yoga",
     "zodiac": "Zodiac"
   },
-  "photos": "Photos"
+  "photos": "Photos",
+  "failed-to-update-user": "Failed to update your profile",
+  "user-updated-successfully": "Your profile updated successfully",
+  "data-is-up-to-date": "Profile data is up to date",
+  "user-not-found": "User not found",
+  "invalid-birthdate": "Invalid birthdate",
+  "under-18": "This service is only for users over 18 years old"
 }

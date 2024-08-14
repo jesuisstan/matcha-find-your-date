@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
+import { Save } from 'lucide-react';
 
 import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
@@ -11,23 +12,21 @@ import ModalBasic from '@/components/ui/modals/modal-basic';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
 import { TAGS_LIST } from '@/constants/tags-list';
+import useUserStore from '@/stores/user';
 import { TUser } from '@/types/user';
 import { formatDateForInput } from '@/utils/format-date';
-import { Save } from 'lucide-react';
 
 const MAX_BIOGRAPHY_LENGTH = 442;
-type TProfileCompleteLayout = 'basicsLayout' | 'biographyLayout' | 'tagsLayout' | 'photosLayout';
+type TProfileCompleteLayout = 'basics' | 'biography' | 'location' | 'tags' | 'photos';
 
-const ModalProfileComplete = ({
-  user,
-  startLayout,
-}: {
-  user: TUser;
-  startLayout?: TProfileCompleteLayout;
-}) => {
+const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteLayout }) => {
   const t = useTranslations();
+  const { user, setUser } = useUserStore((state) => ({
+    user: state.user,
+    setUser: state.setUser,
+  }));
   const [show, setShow] = useState(false);
-  const [layout, setLayout] = useState<TProfileCompleteLayout>(startLayout ?? 'basicsLayout');
+  const [layout, setLayout] = useState<TProfileCompleteLayout>(startLayout ?? 'basics');
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const [sex, setSex] = useState(user?.sex as string); // <'male' | 'female'>
@@ -35,6 +34,8 @@ const ModalProfileComplete = ({
   const [biography, setBiography] = useState(user?.biography || '');
   const [selectedTags, setSelectedTags] = useState<string[]>(user?.tags || []);
   const [photosURLs, setPhotosURLs] = useState<string[]>(user?.photos || []);
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleBiographyChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;
@@ -45,9 +46,12 @@ const ModalProfileComplete = ({
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setError('');
+    setSuccessMessage('');
     setLoading(true);
+
     const currentForm = formRef.current;
     if (!currentForm) return;
 
@@ -56,7 +60,7 @@ const ModalProfileComplete = ({
 
     // create body for request:
     let body: any = {};
-    if (layout === 'basicsLayout') {
+    if (layout === 'basics') {
       body = JSON.stringify({
         id: user?.id,
         firstname: formData.get('firstname'),
@@ -65,30 +69,59 @@ const ModalProfileComplete = ({
         birthdate: formData.get('birthdate'),
         sex: sex,
       });
-    } else if (layout === 'biographyLayout') {
+    } else if (layout === 'biography') {
       body = JSON.stringify({
         id: user?.id,
         biography: biography,
         sex_preferences: sexPreferences,
-        // add location
       });
-    } else if (layout === 'tagsLayout') {
+    } else if (layout === 'location') {
+      body = JSON.stringify({
+        id: user?.id,
+        latitude: 42.42, // todo
+        longitude: 21.21, // todo
+      });
+    } else if (layout === 'tags') {
       body = JSON.stringify({
         id: user?.id,
         tags: selectedTags,
       });
-    } else if (layout === 'photosLayout') {
+    } else if (layout === 'photos') {
       body = JSON.stringify({
         id: user?.id,
         photos: photosURLs,
       });
     }
 
-    console.log('body', body);
+    let response: any;
+    try {
+      response = await fetch(`/api/profile/update/${layout}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      });
+
+      const result = await response.json();
+      const updatedUserData: TUser = result.user;
+      if (response.ok) {
+        setSuccessMessage(t(result.message));
+        if (updatedUserData) {
+          setUser({ ...user, ...updatedUserData });
+        }
+      } else {
+        setError(t(result.error));
+      }
+    } catch (error) {
+      setError(t(error));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const layouts = {
-    basicsLayout: (
+    basics: (
       <div id="basics" className="flex flex-col p-5">
         <div className="flex flex-col">
           <Label htmlFor="firstname" className="mb-2">
@@ -165,7 +198,7 @@ const ModalProfileComplete = ({
         </div>
       </div>
     ),
-    biographyLayout: (
+    biography: (
       <div id="bio" className="flex flex-col gap-5 p-5">
         <div>
           <Label htmlFor="about" className="mb-2">
@@ -198,10 +231,18 @@ const ModalProfileComplete = ({
             onSelectItem={setSexPreferences}
           />
         </div>
+      </div>
+    ),
+    location: (
+      <div className="p-5">
+        <Label htmlFor="about" className="mb-2">
+          {/*{t(`location`)}*/}
+          LOCATION
+        </Label>
         <div>LOCATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
       </div>
     ),
-    tagsLayout: (
+    tags: (
       <div className="p-5">
         <ChipsGroup
           name="tags"
@@ -212,7 +253,7 @@ const ModalProfileComplete = ({
         />
       </div>
     ),
-    photosLayout: (
+    photos: (
       <div className="p-5">
         <Label htmlFor="about" className="mb-2">
           {t(`photos`)}
@@ -229,21 +270,28 @@ const ModalProfileComplete = ({
   }, []);
 
   const handleClose = () => {
+    setError('');
+    setSuccessMessage('');
     setShow(false);
   };
 
   const handleNext = () => {
+    setError('');
+    setSuccessMessage('');
     switch (layout) {
-      case 'basicsLayout':
-        setLayout('biographyLayout');
+      case 'basics':
+        setLayout('biography');
         break;
-      case 'biographyLayout':
-        setLayout('tagsLayout');
+      case 'biography':
+        setLayout('location');
         break;
-      case 'tagsLayout':
-        setLayout('photosLayout');
+      case 'location':
+        setLayout('tags');
         break;
-      case 'photosLayout':
+      case 'tags':
+        setLayout('photos');
+        break;
+      case 'photos':
         handleClose();
         break;
       default:
@@ -252,15 +300,20 @@ const ModalProfileComplete = ({
   };
 
   const handlePrevious = () => {
+    setError('');
+    setSuccessMessage('');
     switch (layout) {
-      case 'biographyLayout':
-        setLayout('basicsLayout');
+      case 'biography':
+        setLayout('basics');
         break;
-      case 'tagsLayout':
-        setLayout('biographyLayout');
+      case 'location':
+        setLayout('biography');
         break;
-      case 'photosLayout':
-        setLayout('tagsLayout');
+      case 'tags':
+        setLayout('location');
+        break;
+      case 'photos':
+        setLayout('tags');
         break;
       default:
         break;
@@ -271,12 +324,12 @@ const ModalProfileComplete = ({
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('complete-profile')}>
       <div
         className={clsx(
-          'flex h-max min-h-[10vh] w-fit min-w-[42vw] flex-col items-center justify-center space-y-10 text-center'
+          'flex h-max min-h-[10vh] w-fit min-w-[25vw] flex-col items-center justify-center space-y-10 text-center'
         )}
       >
-        {layout !== 'photosLayout' ? (
+        {layout !== 'photos' ? (
           <form
-            className="align-center flex flex-col items-center justify-center text-left"
+            className="align-center flex flex-col items-center justify-center gap-5 text-left"
             onSubmit={handleSubmit}
             ref={formRef}
           >
@@ -289,13 +342,16 @@ const ModalProfileComplete = ({
           <div>{layouts[layout as keyof typeof layouts]}</div>
         )}
       </div>
-      <div
-        className={clsx(
-          'flex flex-row',
-          layout === 'basicsLayout' ? 'justify-end' : 'justify-between'
+      <div className="min-h-6">
+        {error && <p className="mb-5 text-center text-sm text-negative">{error}</p>}
+        {successMessage && (
+          <p className="mb-5 text-center text-sm text-positive">{successMessage}</p>
         )}
+      </div>
+      <div
+        className={clsx('flex flex-row', layout === 'basics' ? 'justify-end' : 'justify-between')}
       >
-        {layout !== 'basicsLayout' && (
+        {layout !== 'basics' && (
           <ButtonMatcha
             type="button"
             onClick={handlePrevious}
@@ -306,7 +362,7 @@ const ModalProfileComplete = ({
           </ButtonMatcha>
         )}
         <ButtonMatcha type="button" onClick={handleNext} className="min-w-32" disabled={loading}>
-          {t('next')}
+          {layout !== 'photos' ? t('next') : t('finish')}
         </ButtonMatcha>
       </div>
     </ModalBasic>

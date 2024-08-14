@@ -29,7 +29,7 @@ const ModalBasic = ({
         <AlertDialog.Content className="fixed left-[50%] top-[50%] z-50 h-auto max-h-[95vh] w-fit max-w-[95vw] translate-x-[-50%] translate-y-[-50%] space-y-5 overflow-auto rounded-2xl bg-card p-6 shadow-md shadow-secondary transition-all duration-300 ease-in-out focus:outline-none">
           <AlertDialog.Title
             className={clsx(
-              `mt-3 flex flex-wrap items-center justify-center overflow-hidden pl-10 pr-10`
+              `mt-5 flex flex-wrap items-center justify-center overflow-hidden pl-10 pr-10`
             )}
           >
             <Image

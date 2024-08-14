@@ -41,7 +41,7 @@ async function createTables() {
         firstname VARCHAR(255) NOT NULL,
         lastname VARCHAR(255) NOT NULL,
         nickname VARCHAR(255) NOT NULL,
-        birthdate DATE NOT NULL,
+        birthdate TEXT NOT NULL,
         sex sex_enum NOT NULL,
         biography TEXT,
         tags TEXT[],
