@@ -18,21 +18,6 @@ const SmartSuggestions = () => {
   const t = useTranslations();
   const [loading, setLoading] = useState(false); // todo
 
-  //const { getValueOfSmartdata } = useSmartdataFiltersStore();
-
-  // TODO: API call to get option
-  const indicatorOptions = [{ value: 'nsa', label: t(`selector.level`) }];
-
-  const frequencyOptions = [
-    { value: 'daily', label: t(`selector.daily`) },
-    { value: 'monthly', label: t(`selector.monthly`) },
-  ];
-
-  const countriesOptions = [
-    { value: 'US', label: 'USA' },
-    { value: 'RU', label: 'Russia' },
-  ];
-
   return (
     <div>
       {/* HEADER */}

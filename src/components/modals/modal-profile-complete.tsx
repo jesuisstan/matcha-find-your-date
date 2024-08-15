@@ -5,10 +5,10 @@ import clsx from 'clsx';
 import { Save } from 'lucide-react';
 
 import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
+import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import { Label } from '@/components/ui/label';
-import ModalBasic from '@/components/ui/modals/modal-basic';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
 import { TAGS_LIST } from '@/constants/tags-list';

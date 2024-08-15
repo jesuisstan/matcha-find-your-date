@@ -81,9 +81,10 @@ export const TAGS_LIST = [
   'volunteer',
   'wine-lover',
   'writer',
-  'yogi',
   'yoga',
+  'zen',
   'zodiac',
+
   'arabic',
   'chinese',
   'dutch',

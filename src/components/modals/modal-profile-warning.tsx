@@ -3,8 +3,8 @@ import { useTranslations } from 'next-intl';
 
 import { OctagonAlert } from 'lucide-react';
 
+import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
-import ModalBasic from '@/components/ui/modals/modal-basic';
 import { usePathname, useRouter } from '@/navigation';
 import { TUser } from '@/types/user';
 

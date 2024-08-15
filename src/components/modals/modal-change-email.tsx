@@ -4,9 +4,9 @@ import { useTranslations } from 'next-intl';
 import { Eye, EyeOff } from 'lucide-react';
 import { Save } from 'lucide-react';
 
+import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import { Label } from '@/components/ui/label';
-import ModalBasic from '@/components/ui/modals/modal-basic';
 import { RequiredInput } from '@/components/ui/required-input';
 import useUserStore from '@/stores/user';
 import { TUser } from '@/types/user';
@@ -122,7 +122,7 @@ const ModalChangeEmail = ({
                 type="email"
                 id="email-confirm"
                 name="email-confirm"
-                placeholder={t(`confirme-email`)}
+                placeholder={t(`email-new-enter-again`)}
                 autoComplete="new-email-confirmation"
                 maxLength={42}
                 className="mb-2"
