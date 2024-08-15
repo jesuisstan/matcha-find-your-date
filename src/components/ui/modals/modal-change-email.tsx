@@ -44,7 +44,7 @@ const ModalChangeEmail = ({
     const confirmEmail = formData.get('email-confirm');
 
     if (newEmail !== confirmEmail) {
-      setError(t('auth.email-mismatch'));
+      setError(t('email-mismatch'));
       setLoading(false);
       return;
     }
@@ -81,10 +81,10 @@ const ModalChangeEmail = ({
   };
 
   return (
-    <ModalBasic isOpen={show} setIsOpen={setShow} title={t('auth.email-change')}>
+    <ModalBasic isOpen={show} setIsOpen={setShow} title={t('email-change')}>
       <div className="flex min-h-[30vh] flex-col items-center justify-center space-y-5 text-center">
         <p>
-          {t('auth.email-current')}
+          {t('email-current')}
           {': '}
           <span className="italic">{user?.email}</span>
         </p>
@@ -96,13 +96,13 @@ const ModalChangeEmail = ({
           <div className="flex flex-col">
             <div className="flex flex-col">
               <Label htmlFor="email-new" className="mb-2">
-                {t(`auth.email-new`)}
+                {t(`email-new`)}
               </Label>
               <RequiredInput
                 type="email"
                 id="email-new"
                 name="email-new"
-                placeholder={t(`auth.email-new-enter`)}
+                placeholder={t(`email-new-enter`)}
                 autoComplete="email"
                 maxLength={42}
                 className="mb-2"
@@ -110,13 +110,13 @@ const ModalChangeEmail = ({
             </div>
             <div className="flex flex-col">
               <Label htmlFor="email-confirm" className="mb-2">
-                {t(`auth.email-new-confirmation`)}
+                {t(`email-new-confirmation`)}
               </Label>
               <RequiredInput
                 type="email"
                 id="email-confirm"
                 name="email-confirm"
-                placeholder={t(`auth.confirme-email`)}
+                placeholder={t(`confirme-email`)}
                 autoComplete="new-email-confirmation"
                 maxLength={42}
                 className="mb-2"

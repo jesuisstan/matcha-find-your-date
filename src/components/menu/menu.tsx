@@ -10,13 +10,13 @@ import clsx from 'clsx';
 import { MenuIcon, Rows3 } from 'lucide-react';
 
 import ContactSupportBlock from '@/components/menu/contact-support-block';
+import LogoutButton from '@/components/menu/logout-button';
 import MenuList from '@/components/menu/menu-list';
 import MenuSkeleton from '@/components/menu/menu-skeleton';
 import SideBarHeader from '@/components/menu/side-bar-header';
 import ClearLocalStorageButton from '@/components/ui/clear-storage-btn/clear-storage-btn';
 import { usePathname } from '@/navigation';
 import useUserStore from '@/stores/user';
-import { getLocaleFromCookiesOnClientSide } from '@/utils/get-locale';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
@@ -84,7 +84,7 @@ const Menu: React.FC = () => {
           aria-controls="default-sidebar"
           type="button"
           onClick={toggleSidebar}
-          title="Open menu"
+          title={t('menu-open')}
           className="flex flex-row items-center space-x-3"
         >
           <MenuIcon />
@@ -102,6 +102,7 @@ const Menu: React.FC = () => {
             />
           )}
         </button>
+        <LogoutButton translate={t} />
       </div>
 
       {/* Menu Sidebar */}

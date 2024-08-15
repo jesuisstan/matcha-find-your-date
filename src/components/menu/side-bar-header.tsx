@@ -1,13 +1,7 @@
-import { useRouter } from 'next/navigation';
-
-import { LogOut } from 'lucide-react';
-
-import { UserNameSkeleton } from './menu-skeleton';
-
 import LocaleSwitcher from '@/components/locale-switcher';
-import { ButtonMatcha } from '@/components/ui/button-matcha';
+import LogoutButton from '@/components/menu/logout-button';
+import { UserNameSkeleton } from '@/components/menu/menu-skeleton';
 import ThemeToggler from '@/components/ui/theme-toggler';
-import useUserStore from '@/stores/user';
 import { formatUserName, formatUserNameOneLetter } from '@/utils/format-string';
 
 const SideBarHeader = ({
@@ -17,16 +11,6 @@ const SideBarHeader = ({
   name?: string;
   translate: (key: string) => string;
 }) => {
-  const logout = useUserStore((state) => state.logout);
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    logout();
-    // wait for some time to ensure logout is processed
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    router.push('/login');
-  };
-
   return (
     <div className="flex flex-col items-center justify-center gap-2 align-middle">
       <div
@@ -57,19 +41,7 @@ const SideBarHeader = ({
           <div className="items-center">
             <ThemeToggler translate={translate} />
           </div>
-
-          <div className="items-center">
-            <ButtonMatcha
-              variant="ghost"
-              size="icon"
-              title={translate(`auth.logout`)}
-              onClick={handleLogout}
-              className="transition-all duration-300 ease-in-out hover:bg-transparent hover:text-c42orange"
-            >
-              <LogOut />
-              <span className="sr-only">{translate(`auth.logout`)}</span>
-            </ButtonMatcha>
-          </div>
+          <LogoutButton translate={translate} />
         </div>
 
         {/* horizontal divider */}

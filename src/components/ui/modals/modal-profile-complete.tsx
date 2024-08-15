@@ -125,7 +125,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
       <div
         id="basics"
         className={clsx(
-          'flex flex-col items-center justify-center self-center p-5 align-middle',
+          'flex flex-col items-center justify-center self-center align-middle',
           `sm:flex-row sm:items-center sm:justify-center sm:space-x-10 sm:space-y-0 sm:self-center sm:align-middle`
         )}
       >
@@ -207,7 +207,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
       </div>
     ),
     biography: (
-      <div id="bio" className="flex flex-col gap-5 p-5">
+      <div id="bio" className="flex flex-col gap-5">
         <div>
           <Label htmlFor="about" className="mb-2">
             {t(`about-youself`)}
@@ -242,7 +242,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
       </div>
     ),
     location: (
-      <div className="p-5">
+      <div className="">
         <Label htmlFor="about" className="mb-2">
           {/*{t(`location`)}*/}
           LOCATION
@@ -251,7 +251,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
       </div>
     ),
     tags: (
-      <div className="p-5">
+      <div className="">
         <ChipsGroup
           name="tags"
           label={t('tags.tags')}
@@ -262,7 +262,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
       </div>
     ),
     photos: (
-      <div className="p-5">
+      <div className="">
         <Label htmlFor="about" className="mb-2">
           {t(`photos`)}
         </Label>
