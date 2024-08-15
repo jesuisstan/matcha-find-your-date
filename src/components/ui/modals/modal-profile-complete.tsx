@@ -122,79 +122,87 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
 
   const layouts = {
     basics: (
-      <div id="basics" className="flex flex-col p-5">
-        <div className="flex flex-col">
-          <Label htmlFor="firstname" className="mb-2">
-            {t(`firstname`)}
-          </Label>
-          <RequiredInput
-            type="text"
-            id="firstname"
-            name="firstname"
-            placeholder={t(`firstname`)}
-            pattern="^[A-Za-z\-]{1,21}$"
-            maxLength={21}
-            errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
-            className="mb-2"
-            value={user?.firstname}
-          />
+      <div
+        id="basics"
+        className={clsx(
+          'flex flex-col items-center justify-center self-center p-5 align-middle',
+          `sm:flex-row sm:items-center sm:justify-center sm:space-x-10 sm:space-y-0 sm:self-center sm:align-middle`
+        )}
+      >
+        <div className="flex flex-col space-y-3 self-start">
+          <div className="flex flex-col">
+            <Label htmlFor="firstname" className="mb-2">
+              {t(`firstname`)}
+            </Label>
+            <RequiredInput
+              type="text"
+              id="firstname"
+              name="firstname"
+              placeholder={t(`firstname`)}
+              pattern="^[A-Za-z\-]{1,21}$"
+              maxLength={21}
+              errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
+              value={user?.firstname}
+            />
+          </div>
+          <div className="flex flex-col">
+            <Label htmlFor="lastname" className="mb-2">
+              {t(`lastname`)}
+            </Label>
+            <RequiredInput
+              type="text"
+              id="lastname"
+              name="lastname"
+              placeholder={t('lastname')}
+              pattern="^[A-Za-z\-]{1,21}$"
+              maxLength={21}
+              errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
+              value={user?.lastname}
+            />
+          </div>
+          <div className="flex flex-col">
+            <Label htmlFor="nickname" className="mb-2">
+              {t(`nickname`)}
+            </Label>
+            <RequiredInput
+              type="text"
+              id="nickname"
+              name="nickname"
+              placeholder={t(`nickname`)}
+              pattern="^[A-Za-z0-9\-@]{1,21}$"
+              maxLength={21}
+              errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}
+              value={user?.nickname}
+            />
+          </div>
         </div>
-        <div className="flex flex-col">
-          <Label htmlFor="lastname" className="mb-2">
-            {t(`lastname`)}
-          </Label>
-          <RequiredInput
-            type="text"
-            id="lastname"
-            name="lastname"
-            placeholder={t('lastname')}
-            pattern="^[A-Za-z\-]{1,21}$"
-            maxLength={21}
-            errorMessage={t('auth.max-char') + ' 21: a-Z, -'}
-            className="mb-2"
-            value={user?.lastname}
-          />
-        </div>
-        <div className="flex flex-col">
-          <Label htmlFor="nickname" className="mb-2">
-            {t(`nickname`)}
-          </Label>
-          <RequiredInput
-            type="text"
-            id="nickname"
-            name="nickname"
-            placeholder={t(`nickname`)}
-            pattern="^[A-Za-z0-9\-@]{1,21}$"
-            maxLength={21}
-            errorMessage={t('auth.max-char') + ' 21: a-Z 0-9 - @'}
-            className="mb-2"
-            value={user?.nickname}
-          />
-        </div>
-        <div className="flex flex-col">
-          <Label htmlFor="birthdate" className="mb-2">
-            {t(`birthdate`)}
-          </Label>
-          <RequiredInput
-            type="date"
-            id="birthdate"
-            name="birthdate"
-            placeholder={t(`birthdate`)}
-            className="mb-2"
-            value={formatDateForInput(user?.birthdate)}
-          />
-        </div>
+
         <div className="flex flex-col self-start">
-          <RadioGroup
-            label={t(`selector.sex`) + ':'}
-            options={[
-              { value: 'male', label: t(`male`) },
-              { value: 'female', label: t(`female`) },
-            ]}
-            defaultValue="male"
-            selectedItem={sex}
-            onSelectItem={setSex}
-          />
+          <div className="flex flex-col">
+            <Label htmlFor="birthdate" className="mb-2">
+              {t(`birthdate`)}
+            </Label>
+            <RequiredInput
+              type="date"
+              id="birthdate"
+              name="birthdate"
+              placeholder={t(`birthdate`)}
+              className="mb-2"
+              value={formatDateForInput(user?.birthdate)}
+            />
+          </div>
+          <div className="flex flex-col self-start">
+            <RadioGroup
+              label={t(`selector.sex`) + ':'}
+              options={[
+                { value: 'male', label: t(`male`) },
+                { value: 'female', label: t(`female`) },
+              ]}
+              defaultValue="male"
+              selectedItem={sex}
+              onSelectItem={setSex}
+            />
+          </div>
         </div>
       </div>
     ),
@@ -209,7 +217,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
               id="biography"
               name="biography"
               placeholder={t(`describe-youself`)}
-              className="disabled:opacity-50, flex h-48 w-[42vw] rounded-md border bg-background p-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed"
+              className="disabled:opacity-50, flex h-48 min-w-[35vw] rounded-md border bg-background p-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed"
               value={biography}
               onChange={handleBiographyChange}
             />
@@ -324,7 +332,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('complete-profile')}>
       <div
         className={clsx(
-          'flex h-max min-h-[10vh] w-fit min-w-[25vw] flex-col items-center justify-center space-y-10 text-center'
+          'flex h-max min-h-[10vh] min-w-[25vw] flex-col items-center justify-center space-y-10 text-center'
         )}
       >
         {layout !== 'photos' ? (
