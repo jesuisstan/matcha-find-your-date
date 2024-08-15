@@ -79,7 +79,8 @@
     "password-changed-successfully": "Mot de passe changé avec succès",
     "password-change-error": "Erreur de changement de mot de passe",
     "missing-token-or-password": "Jeton ou mot de passe manquant",
-    "login-method": "Méthode de connexion"
+    "login-method": "Méthode de connexion",
+    "login-failed": "Échec de la connexion"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",

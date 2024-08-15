@@ -78,7 +78,8 @@
     "password-changed-successfully": "Пароль успешно изменен",
     "password-change-error": "Ошибка смены пароля",
     "missing-token-or-password": "Отсутствует токен или пароль",
-    "login-method": "Метод входа"
+    "login-method": "Метод входа",
+    "login-failed": "Ошибка входа"
   },
   "slogan": "Найди свою дэйт",
   "slogan-subject": "Потому что любовь тоже может быть индустриализирована",

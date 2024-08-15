@@ -78,7 +78,8 @@
     "password-changed-successfully": "Password changed successfully",
     "password-change-error": "Error changing password",
     "missing-token-or-password": "Missing token or password",
-    "login-method": "Login Method"
+    "login-method": "Login Method",
+    "login-failed": "Login failed"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",

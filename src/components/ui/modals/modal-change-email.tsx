@@ -49,6 +49,12 @@ const ModalChangeEmail = ({
       return;
     }
 
+    if (newEmail === user?.email) {
+      setSuccessMessage(t('data-is-up-to-date'));
+      setLoading(false);
+      return;
+    }
+
     let response: any;
     try {
       response = await fetch(`/api/profile/update/email`, {
