@@ -129,7 +129,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
           `sm:flex-row sm:items-center sm:justify-center sm:space-x-10 sm:space-y-0 sm:self-center sm:align-middle`
         )}
       >
-        <div className="flex flex-col space-y-3 self-start">
+        <div className="flex flex-col self-start">
           <div className="flex flex-col">
             <Label htmlFor="firstname" className="mb-2">
               {t(`firstname`)}
