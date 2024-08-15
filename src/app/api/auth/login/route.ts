@@ -50,5 +50,28 @@ export async function POST(request: Request) {
     .setExpirationTime(exp)
     .sign(secretKey);
 
-  return NextResponse.json({ token, user });
+  // Create a sanitized user object to return (without password and service_token)
+  const userResponse = {
+    id: user.id,
+    email: user.email,
+    confirmed: user.confirmed,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    nickname: user.nickname,
+    birthdate: user.birthdate,
+    sex: user.sex,
+    biography: user.biography,
+    tags: user.tags,
+    complete: user.complete,
+    latitude: user.latitude,
+    longitude: user.longitude,
+    registration_date: user.registration_date,
+    last_connection_date: user.last_connection_date,
+    online: user.online,
+    popularity: user.popularity,
+    sex_preferences: user.sex_preferences,
+    photos: user.photos,
+  };
+
+  return NextResponse.json({ token, user: userResponse });
 }

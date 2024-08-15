@@ -20,7 +20,6 @@ export const userSchema = z.object({
   popularity: z.number(),
   sex_preferences: z.enum(['male', 'female', 'bisexual']),
   photos: z.array(z.string()),
-  service_token: z.string().nullable(),
 });
 
 export type TUser = z.infer<typeof userSchema>;
