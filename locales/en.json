@@ -79,7 +79,15 @@
     "password-changed-successfully": "Password changed successfully",
     "password-change-error": "Error changing password",
     "missing-token-or-password": "Missing token or password",
-    "login-method": "Login Method"
+    "login-method": "Login Method",
+    "email-change": "Change email",
+    "email-changed-successfully": "Email changed successfully",
+    "email-change-error": "Error changing email",
+    "email-new": "New email",
+    "email-new-enter": "Enter new email",
+    "email-new-confirmation": "New email confirmation",
+    "email-current": "Current email",
+    "email-mismatch": "Emails do not match"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",

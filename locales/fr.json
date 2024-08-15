@@ -79,7 +79,15 @@
     "password-changed-successfully": "Mot de passe changé avec succès",
     "password-change-error": "Erreur de changement de mot de passe",
     "missing-token-or-password": "Jeton ou mot de passe manquant",
-    "login-method": "Méthode de connexion"
+    "login-method": "Méthode de connexion",
+    "email-change": "Changer l'email",
+    "email-changed-successfully": "Email changé avec succès",
+    "email-change-error": "Erreur de changement d'email",
+    "email-new": "Nouvel email",
+    "email-new-enter": "Entrez le nouvel email",
+    "email-new-confirmation": "Confirmation du nouvel email",
+    "email-current": "Email actuel",
+    "email-mismatch": "Les emails ne correspondent pas"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",

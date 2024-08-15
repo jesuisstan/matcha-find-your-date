@@ -79,7 +79,15 @@
     "password-changed-successfully": "Пароль успешно изменен",
     "password-change-error": "Ошибка смены пароля",
     "missing-token-or-password": "Отсутствует токен или пароль",
-    "login-method": "Метод входа"
+    "login-method": "Метод входа",
+    "email-change": "Изменить адрес почты",
+    "email-changed-successfully": "Адрес почты успешно изменен",
+    "email-change-error": "Ошибка при смене адреса почты",
+    "email-new": "Новый адрес почты",
+    "email-new-enter": "Введите новый адрес почты",
+    "email-new-confirmation": "Подтверждение нового адреса",
+    "email-current": "Текущий адрес почты",
+    "email-mismatch": "Адреса почты не совпадают"
   },
   "slogan": "Найди свою дэйт",
   "slogan-subject": "Потому что любовь тоже может быть индустриализирована",
