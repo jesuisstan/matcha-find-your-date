@@ -11,7 +11,6 @@ import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
-import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 
 const SmartSuggestions = () => {
   // Translate hook
@@ -33,16 +32,9 @@ const SmartSuggestions = () => {
                 'lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0'
               )}
             >
-              {/* LABELS */}
-              <LabelsWrapper
-                category={'metadata?.category'}
-                lastUpdate={'formatApiDateLastUpdate(filteredLastUpdate)'}
-                frequency={'metadata?.frequency'}
-                history={'metadata?.history'}
-                loading={false}
-              />
+
               {/* DESCRIPTION */}
-              <DescriptionWrapper smartdataDescription={'metadata?.description'} />
+              <DescriptionWrapper text={'metadata?.description'} />
               {/* BUTTONS GROUP */}
               <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
                 <div className="flex w-full flex-row items-center justify-center gap-4">

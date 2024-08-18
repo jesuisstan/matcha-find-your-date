@@ -2,56 +2,45 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const DescriptionWrapper = ({ smartdataDescription }: { smartdataDescription: string }) => {
+import TextWithLineBreaks from '@/components/ui/text-with-line-breaks';
+import { capitalize } from '@/utils/format-string';
+
+const DescriptionWrapper = ({ text }: { text: string | undefined }) => {
   const t = useTranslations();
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const animate = {
-    transition: { duration: 0.5, ease: 'easeInOut', type: 'tween' },
-  };
 
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
 
   return (
-    <motion.div
-      layout
-      title={
-        isDescriptionExpanded
-          ? 'Click to wrap the description'
-          : 'Click to see the full description'
-      }
+    <div
+      title={isDescriptionExpanded ? t('click-to-wrap') : t('click-to-unwrap')}
       onClick={toggleDescription}
       className={clsx(
-        'relative w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl bg-card p-4 pb-3 pt-2'
+        'relative w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl bg-card p-4 pb-3 pt-2 transition-all duration-300 ease-in-out'
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <motion.p
-        layout="position"
-        className="text-base font-bold"
-      >{t`common:documentation.description`}</motion.p>
-      <motion.p
-        layout="position"
-        {...animate}
+      <p className="text-base font-bold">{capitalize(t('description'))}</p>
+      <p
         className={clsx(
           'text-justify text-sm',
           isDescriptionExpanded ? 'h-auto' : 'text-ellipsis- line-clamp-3 h-[max-content]'
         )}
       >
-        {smartdataDescription}
-      </motion.p>
+        <TextWithLineBreaks text={text ?? t(`no-description`)} />
+      </p>
       <div
         className={clsx(
           'absolute bottom-0 left-[50%] m-auto w-min translate-x-[-50%]',
           isHovered
-            ? 'duration-400 text-[#B42E2C] transition'
-            : 'duration-400 text-slate-200 transition'
+            ? 'duration-400 text-c42orange transition-all ease-in-out'
+            : 'duration-400 text-slate-200 transition-all ease-in-out'
         )}
       >
         {isDescriptionExpanded ? (
@@ -74,7 +63,7 @@ const DescriptionWrapper = ({ smartdataDescription }: { smartdataDescription: st
           />
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -7,6 +7,8 @@
   "firstname": "Prénom",
   "nickname": "Surnom",
   "birthdate": "Date de naissance",
+  "age": "Âge",
+  "sex": "Sexe",
   "sexual-orientation": "Orientation sexuelle",
   "sexual-preferences": "Préférences sexuelles",
   "need-help": "Besoin d'aide? Contactez le support",
@@ -233,5 +235,10 @@
   "email-current": "Email actuel",
   "email-mismatch": "Les emails ne correspondent pas",
   "password-invalid": "Mot de passe invalide",
-  "confirme-email": "Confirmer l'email"
+  "confirme-email": "Confirmer l'email",
+  "click-to-wrap": "Cliquez pour dérouler la description",
+  "click-to-unwrap": "Cliquez pour voir la description complète",
+  "no-description": "Pas de description",
+  "description": "Description",
+  "last-action": "Dernière action"
 }

@@ -11,7 +11,8 @@ import { ButtonMatcha } from '@/components/ui/button-matcha';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 import useUserStore from '@/stores/user';
-import { capitalize } from '@/utils/format-string';
+import { formatApiDateLastUpdate } from '@/utils/format-date';
+import { calculateAge, capitalize } from '@/utils/format-string';
 
 const ProfilePage = () => {
   // Translate hook
@@ -41,14 +42,14 @@ const ProfilePage = () => {
             >
               {/* LABELS */}
               <LabelsWrapper
-                category={'metadata?.category'}
-                lastUpdate={'formatApiDateLastUpdate(filteredLastUpdate)'}
-                frequency={'metadata?.frequency'}
-                history={'metadata?.history'}
+                nickname={user!.nickname ?? '???'}
+                age={calculateAge(user!.birthdate)}
+                sex={user!.sex ?? '???'}
+                lastConnection={formatApiDateLastUpdate(user!.last_connection_date)}
                 loading={false}
               />
               {/* DESCRIPTION */}
-              <DescriptionWrapper smartdataDescription={'metadata?.description'} />
+              <DescriptionWrapper text={user?.biography} />
               {/* BUTTONS GROUP */}
               {/*<div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
                 <div className="flex w-full flex-row items-center justify-center gap-4">

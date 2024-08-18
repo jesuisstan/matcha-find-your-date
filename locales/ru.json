@@ -7,6 +7,8 @@
   "firstname": "Имя",
   "nickname": "Псевдоним",
   "birthdate": "Дата рождения",
+  "age": "Возраст",
+  "sex": "Пол",
   "sexual-orientation": "Сексуальная ориентация",
   "sexual-preferences": "Сексуальные предпочтения",
   "need-help": "Нужна помощь? Свяжитесь с поддержкой",
@@ -232,5 +234,10 @@
   "email-current": "Текущий адрес почты",
   "email-mismatch": "Адреса почты не совпадают",
   "password-invalid": "Неверный пароль",
-  "confirme-email": "Подтвердить почту"
+  "confirme-email": "Подтвердить почту",
+  "click-to-wrap": "Нажмите, чтобы свернуть описание",
+  "click-to-unwrap": "Нажмите, чтобы развернуть полное описание",
+  "no-description": "Нет описания",
+  "description": "Описание",
+  "last-action": "Активность"
 }

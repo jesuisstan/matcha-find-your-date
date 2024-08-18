@@ -7,6 +7,8 @@
   "firstname": "First name",
   "nickname": "Nickname",
   "birthdate": "Birthdate",
+  "age": "Age",
+  "sex": "Sex",
   "sexual-orientation": "Sexual Orientation",
   "sexual-preferences": "Sexual Preferences",
   "need-help": "Need help? Contact Support",
@@ -233,5 +235,10 @@
   "email-current": "Current email",
   "email-mismatch": "Emails do not match",
   "password-invalid": "Invalid password",
-  "confirme-email": "Confirm email"
+  "confirme-email": "Confirm email",
+  "click-to-wrap": "Click to wrap the description",
+  "click-to-unwrap": "Click to see the full description",
+  "no-description": "No description",
+  "description": "Description",
+  "last-action": "Last action"
 }

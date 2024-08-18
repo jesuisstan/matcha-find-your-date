@@ -7,10 +7,9 @@ import clsx from 'clsx';
 import { PlaySquareIcon } from 'lucide-react';
 
 import HeaderSkeleton from '@/components/header-skeleton';
-import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
+import { ButtonMatcha } from '@/components/ui/button-matcha';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
-import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 import useUserStore from '@/stores/user';
 
 const AdvancedSearch = () => {
@@ -51,15 +50,9 @@ const AdvancedSearch = () => {
               )}
             >
               {/* LABELS */}
-              <LabelsWrapper
-                category={'metadata?.category'}
-                lastUpdate={'formatApiDateLastUpdate(filteredLastUpdate)'}
-                frequency={'metadata?.frequency'}
-                history={'metadata?.history'}
-                loading={false}
-              />
+
               {/* DESCRIPTION */}
-              <DescriptionWrapper smartdataDescription={'metadata?.description'} />
+              <DescriptionWrapper text={'metadata?.description'} />
               {/* BUTTONS GROUP */}
               <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
                 <div className="flex w-full flex-row items-center justify-center gap-4">
