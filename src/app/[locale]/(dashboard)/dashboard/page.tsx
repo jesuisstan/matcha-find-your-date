@@ -17,7 +17,7 @@ const Dashboard = () => {
   ) : (
     <>
       <h1 className="mb-4 text-2xl md:text-3xl lg:text-4xl">
-        {t('welcome')}, {capitalize(user!.firstname)}!
+        {t('welcome')}, {capitalize(user?.firstname)}!
       </h1>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
         Reg date: {user!.registration_date}

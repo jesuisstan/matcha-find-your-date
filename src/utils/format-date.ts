@@ -1,4 +1,4 @@
-export const formatApiDateLastUpdate = (apiDate: string): string => {
+export const formatApiDateLastUpdate = (apiDate: string | undefined): string => {
   if (!apiDate) return 'Invalid Date';
 
   const inputDate = new Date(apiDate);

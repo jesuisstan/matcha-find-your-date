@@ -47,7 +47,7 @@
     "sign-up": "Sign up",
     "register": "Register",
     "register-new": "Register a new account",
-    "forgot-password": "Forgot password",
+    "forgot-password": "Forgot password?",
     "change-password": "Change password",
     "new-password": "New password",
     "confirmation-password": "Password confirmation",
@@ -81,7 +81,8 @@
     "password-change-error": "Error changing password",
     "missing-token-or-password": "Missing token or password",
     "login-method": "Login Method",
-    "login-failed": "Login failed"
+    "login-failed": "Login failed",
+    "password-change-message": "To enhance your security, you will be logged out and redirected to the login page. From there, please select the 'Forgot Password?' option to proceed with changing your password.\n Would you like to continue?"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",

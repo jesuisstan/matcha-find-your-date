@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { SquarePen } from 'lucide-react';
 
 import ModalChangeEmail from '@/components/modals/modal-change-email';
+import ModalChangePassword from '@/components/modals/modal-change-password';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
@@ -23,10 +24,12 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(false); // todo
   const [showChangeEmailModal, setShowChangeEmailModal] = useState(false);
   const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
 
   // Automatically show the modal on first load if the profile is incomplete
   useEffect(() => {
+    if (!user) return;
     if (!user?.complete) {
       setProfileCompleteModalLayout('basics');
       setShowProfileCompleteModal(true);
@@ -46,6 +49,7 @@ const ProfilePage = () => {
         setShow={setShowProfileCompleteModal}
         startLayout={profileCompleteModalLayout as keyof typeof TProfileCompleteLayout}
       />
+      <ModalChangePassword show={showChangePasswordModal} setShow={setShowChangePasswordModal} />
       {/* HEADER todo skeleton*/}
       <div className={clsx('mb-4 flex items-center justify-between text-4xl')}>
         {loading ? (
@@ -54,7 +58,7 @@ const ProfilePage = () => {
           <div className="flex flex-col justify-start">
             <div className="relative flex w-max flex-wrap">
               <h1 className="mb-2 text-4xl">
-                {user?.firstname} {user!.lastname.toUpperCase()}{' '}
+                {user?.firstname} {user?.lastname.toUpperCase()}{' '}
               </h1>
               <div className="absolute -right-10 top-1 text-foreground opacity-60 hover:opacity-100">
                 <SquarePen
@@ -71,10 +75,10 @@ const ProfilePage = () => {
             >
               {/* LABELS */}
               <LabelsWrapper
-                nickname={user!.nickname ?? '???'}
-                age={calculateAge(user!.birthdate)}
-                sex={user!.sex ?? '???'}
-                lastConnection={formatApiDateLastUpdate(user!.last_connection_date)}
+                nickname={user?.nickname ?? '???'}
+                age={calculateAge(user?.birthdate)}
+                sex={user?.sex ?? '???'}
+                lastConnection={formatApiDateLastUpdate(user?.last_connection_date)}
                 loading={false}
                 modifiable
                 onModify={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
@@ -87,6 +91,29 @@ const ProfilePage = () => {
                   handleModifyClick('biography' as keyof typeof TProfileCompleteLayout)
                 }
               />
+              {/* BUTTONS GROUP */}
+              <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
+                <div className="flex w-full flex-row items-center justify-center gap-4">
+                  <ButtonMatcha
+                    size="default"
+                    className="min-w-32"
+                    onClick={() => setShowChangeEmailModal(true)}
+                  >
+                    <span>E-mail</span>
+                    <SquarePen size={18} />
+                  </ButtonMatcha>
+                </div>
+                <div className="flex w-full flex-row items-center justify-center gap-4">
+                  <ButtonMatcha
+                    size="default"
+                    className="min-w-32"
+                    onClick={() => setShowChangePasswordModal(true)}
+                  >
+                    <span>Password</span>
+                    <SquarePen size={18} />
+                  </ButtonMatcha>
+                </div>
+              </div>
             </div>
           </div>
         )}

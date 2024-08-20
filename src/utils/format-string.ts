@@ -73,7 +73,9 @@ export const formatStringWithoutIndex = (input: string): string => {
   return capitalize(formattedString);
 };
 
-export const calculateAge = (birthDateString: string): number => {
+export const calculateAge = (birthDateString: string | undefined): number => {
+  if (!birthDateString) return 0;
+
   const birthDate = new Date(birthDateString.trim());
   const today = new Date();
 

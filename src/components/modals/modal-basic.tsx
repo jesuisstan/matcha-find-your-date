@@ -45,13 +45,15 @@ const ModalBasic = ({
             />
             <span className="overflow-hidden text-ellipsis text-center text-3xl">{title}</span>
 
-            <button
-              className="absolute right-2 top-2 rounded-full p-1 transition-all duration-300 ease-in-out hover:bg-muted"
-              onClick={() => setIsOpen?.(false)}
-              aria-label="Close"
-            >
-              <X size={24} />
-            </button>
+            {setIsOpen && (
+              <button
+                className="absolute right-2 top-2 rounded-full p-1 transition-all duration-300 ease-in-out hover:bg-muted"
+                onClick={() => setIsOpen?.(false)}
+                aria-label="Close"
+              >
+                <X size={24} />
+              </button>
+            )}
           </AlertDialog.Title>
           <AlertDialog.Description />
           {children}
