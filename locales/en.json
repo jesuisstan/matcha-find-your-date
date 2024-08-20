@@ -241,5 +241,6 @@
   "click-to-unwrap": "Click to see the full description",
   "no-description": "No description",
   "description": "Description",
-  "last-action": "Last action"
+  "last-action": "Last action",
+  "invalid-date": "Invalid date"
 }

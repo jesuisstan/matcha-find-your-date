@@ -50,13 +50,13 @@ const LabelsWrapper = ({
         <p className="text-base font-bold">{capitalize(t('sex'))}</p>
         {/* Render history with line breaks */}
         <p className="line-clamp-1 h-[max-content] text-ellipsis text-sm" title={sex}>
-          {capitalize(sex)}
+          {capitalize(t(sex))}
         </p>
       </div>
 
       <div className="min-w-36">
         <p className="text-base font-bold">{t('last-action')}</p>
-        {loading || !lastConnection || lastConnection === 'Invalid Date' ? (
+        {loading || !lastConnection || lastConnection === t('invalid-date') ? (
           <DateSkeleton />
         ) : (
           <p className="line-clamp-1 h-[max-content] text-ellipsis text-sm" title={lastConnection}>

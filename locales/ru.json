@@ -240,5 +240,6 @@
   "click-to-unwrap": "Нажмите, чтобы развернуть полное описание",
   "no-description": "Нет описания",
   "description": "Описание",
-  "last-action": "Активность"
+  "last-action": "Активность",
+  "invalid-date": "Неверная дата"
 }
