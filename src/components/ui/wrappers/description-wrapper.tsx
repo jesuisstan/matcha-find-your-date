@@ -2,12 +2,20 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, SquarePen } from 'lucide-react';
 
 import TextWithLineBreaks from '@/components/ui/text-with-line-breaks';
 import { capitalize } from '@/utils/format-string';
 
-const DescriptionWrapper = ({ text }: { text: string | undefined }) => {
+const DescriptionWrapper = ({
+  text,
+  modifiable,
+  onModify,
+}: {
+  text: string | undefined;
+  modifiable?: boolean;
+  onModify?: () => void;
+}) => {
   const t = useTranslations();
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -63,6 +71,12 @@ const DescriptionWrapper = ({ text }: { text: string | undefined }) => {
           />
         )}
       </div>
+
+      {modifiable && (
+        <div className="absolute right-1 top-1 text-foreground opacity-60 hover:opacity-100">
+          <SquarePen size={18} onClick={onModify} />
+        </div>
+      )}
     </div>
   );
 };

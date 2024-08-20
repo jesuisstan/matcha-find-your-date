@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
+import { SquarePen } from 'lucide-react';
 
 import ModalChangeEmail from '@/components/modals/modal-change-email';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
+import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
@@ -20,20 +22,47 @@ const ProfilePage = () => {
   const { user } = useUserStore();
   const [loading, setLoading] = useState(false); // todo
   const [showChangeEmailModal, setShowChangeEmailModal] = useState(false);
+  const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
+  const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
+
+  // Automatically show the modal on first load if the profile is incomplete
+  useEffect(() => {
+    if (!user?.complete) {
+      setProfileCompleteModalLayout('basics');
+      setShowProfileCompleteModal(true);
+    }
+  }, [user]);
+
+  const handleModifyClick = (layout: keyof typeof TProfileCompleteLayout) => {
+    setProfileCompleteModalLayout(layout);
+    setShowProfileCompleteModal(true);
+  };
 
   return (
     <div>
       <ModalChangeEmail show={showChangeEmailModal} setShow={setShowChangeEmailModal} />
-      <ModalProfileComplete />
+      <ModalProfileComplete
+        show={showProfileCompleteModal}
+        setShow={setShowProfileCompleteModal}
+        startLayout={profileCompleteModalLayout as keyof typeof TProfileCompleteLayout}
+      />
       {/* HEADER todo skeleton*/}
       <div className={clsx('mb-4 flex items-center justify-between text-4xl')}>
         {loading ? (
           '<HeaderSkeleton />'
         ) : (
           <div className="flex flex-col justify-start">
-            <h1 className="mb-2 text-4xl">
-              {user?.firstname} {user!.lastname.toUpperCase()}{' '}
-            </h1>
+            <div className="relative flex w-max flex-wrap">
+              <h1 className="mb-2 text-4xl">
+                {user?.firstname} {user!.lastname.toUpperCase()}{' '}
+              </h1>
+              <div className="absolute -right-10 top-1 text-foreground opacity-60 hover:opacity-100">
+                <SquarePen
+                  size={18}
+                  onClick={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
+                />
+              </div>
+            </div>
             <div
               className={clsx(
                 'flex flex-col items-stretch space-y-4',
@@ -47,17 +76,17 @@ const ProfilePage = () => {
                 sex={user!.sex ?? '???'}
                 lastConnection={formatApiDateLastUpdate(user!.last_connection_date)}
                 loading={false}
+                modifiable
+                onModify={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
               />
               {/* DESCRIPTION */}
-              <DescriptionWrapper text={user?.biography} />
-              {/* BUTTONS GROUP */}
-              {/*<div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
-                <div className="flex w-full flex-row items-center justify-center gap-4">
-                  <ButtonMatcha size="icon">
-                    <PlaySquareIcon size={20} />
-                  </ButtonMatcha>
-                </div>
-              </div>*/}
+              <DescriptionWrapper
+                text={user?.biography}
+                modifiable
+                onModify={() =>
+                  handleModifyClick('biography' as keyof typeof TProfileCompleteLayout)
+                }
+              />
             </div>
           </div>
         )}
@@ -72,7 +101,7 @@ const ProfilePage = () => {
           )}
         >
           <div className="m-5 flex flex-col justify-start">
-            <h3 className="text-3xl">{t`common:overview`}</h3>
+            <h3 className="text-3xl">{'t`common:overview`'}</h3>
 
             <div className="mt-4">CONTENT</div>
           </div>

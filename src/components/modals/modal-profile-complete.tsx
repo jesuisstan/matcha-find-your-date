@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
@@ -17,15 +17,22 @@ import { TUser } from '@/types/user';
 import { formatDateForInput } from '@/utils/format-date';
 
 const MAX_BIOGRAPHY_LENGTH = 442;
-type TProfileCompleteLayout = 'basics' | 'biography' | 'location' | 'tags' | 'photos';
+export type TProfileCompleteLayout = 'basics' | 'biography' | 'location' | 'tags' | 'photos';
 
-const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteLayout }) => {
+const ModalProfileComplete = ({
+  show,
+  setShow,
+  startLayout,
+}: {
+  show: boolean;
+  setShow: Dispatch<SetStateAction<boolean>>;
+  startLayout: TProfileCompleteLayout;
+}) => {
   const t = useTranslations();
   const { user, setUser } = useUserStore((state) => ({
     user: state.user,
     setUser: state.setUser,
   }));
-  const [show, setShow] = useState(false);
   const [layout, setLayout] = useState<TProfileCompleteLayout>(startLayout ?? 'basics');
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
@@ -210,7 +217,7 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
       <div id="bio" className="flex flex-col gap-5">
         <div>
           <Label htmlFor="about" className="mb-2">
-            {t(`about-youself`)}
+            {t(`description`) + ':'}
           </Label>
           <div className="flex flex-col">
             <textarea
@@ -272,10 +279,10 @@ const ModalProfileComplete = ({ startLayout }: { startLayout?: TProfileCompleteL
   };
 
   useEffect(() => {
-    if (!user?.complete) {
-      setShow(true);
+    if (show) {
+      setLayout(startLayout ?? 'basics');
     }
-  }, []);
+  }, [show, startLayout]);
 
   const handleClose = () => {
     setError('');
