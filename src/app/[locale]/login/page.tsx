@@ -386,6 +386,7 @@ const Login = () => {
                   setError('');
                   setSuccessMessage('');
                 }}
+                disabled={loading}
               >
                 {t(`auth.create-account`)}
               </ButtonMatcha>
@@ -396,6 +397,7 @@ const Login = () => {
                   setError('');
                   setSuccessMessage('');
                 }}
+                disabled={loading}
               >
                 {t(`auth.resend-confirmation-email`)}
               </ButtonMatcha>
@@ -406,6 +408,7 @@ const Login = () => {
                   setError('');
                   setSuccessMessage('');
                 }}
+                disabled={loading}
               >
                 {t(`auth.forgot-password`)}
               </ButtonMatcha>

@@ -242,5 +242,9 @@
   "no-description": "No description",
   "description": "Description",
   "last-action": "Last action",
-  "invalid-date": "Invalid date"
+  "invalid-date": "Invalid date",
+  "customize-profile": "Customize your profile, update preferences, and manage access settings",
+  "use-smart-suggestions": "Discover potential matches with Matcha's smart suggestions for your next date",
+  "use-advanced-search": "Refine your search criteria to find someone who meets your unique preferences",
+  "powered-by": "Powered by"
 }
