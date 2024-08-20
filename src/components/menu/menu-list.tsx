@@ -74,7 +74,7 @@ const MenuList = ({
 
           <li>
             <Link
-              href={pathname !== '/search/advanced-search' ? `/search/advanced-search` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
+              href={pathname !== '/search/advanced' ? `/search/advanced` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
                 `group flex w-full items-center text-secondary transition duration-75`,
                 `hover:text-c42orange`
@@ -85,12 +85,12 @@ const MenuList = ({
               <div
                 id="smartdata-chosen-pointer"
                 className={clsx('ml-[-5px] mr-4 h-2 w-2 rounded-full', {
-                  'bg-secondary': pathname === '/search/advanced-search',
-                  'bg-transparent': pathname !== '/search/advanced-search',
+                  'bg-secondary': pathname === '/search/advanced',
+                  'bg-transparent': pathname !== '/search/advanced',
                 })}
               />
-              <div title={translate(`search.advanced-search`)} className="max-w-[170px] truncate">
-                {translate(`search.advanced-search`)}
+              <div title={translate(`search.advanced`)} className="max-w-[170px] truncate">
+                {translate(`search.advanced`)}
               </div>
             </Link>
           </li>
