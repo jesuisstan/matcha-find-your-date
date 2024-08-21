@@ -34,7 +34,7 @@ const DescriptionWrapper = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <p className="text-base font-bold">{capitalize(t('description'))}</p>
+      <p className="text-base font-bold">{capitalize(t('bio'))}</p>
       <p
         className={clsx(
           'text-justify text-sm',

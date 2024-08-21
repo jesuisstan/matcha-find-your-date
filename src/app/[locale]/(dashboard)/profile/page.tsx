@@ -11,14 +11,16 @@ import ModalChangePassword from '@/components/modals/modal-change-password';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
+import StaticTagsGroup from '@/components/ui/chips/tags-group-static';
+import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
+import UserSexPreference from '@/components/user-sex-preference';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
 import { calculateAge, capitalize } from '@/utils/format-string';
 
 const ProfilePage = () => {
-  // Translate hook
   const t = useTranslations();
   const { user } = useUserStore();
   const [loading, setLoading] = useState(false); // todo
@@ -50,10 +52,11 @@ const ProfilePage = () => {
         startLayout={profileCompleteModalLayout as keyof typeof TProfileCompleteLayout}
       />
       <ModalChangePassword show={showChangePasswordModal} setShow={setShowChangePasswordModal} />
-      {/* HEADER todo skeleton*/}
+
+      {/* HEADER */}
       <div className={clsx('mb-4 flex items-center justify-between text-4xl')}>
-        {loading ? (
-          '<HeaderSkeleton />'
+        {!user || loading ? (
+          <HeaderSkeleton />
         ) : (
           <div className="flex flex-col justify-start">
             <div className="relative flex w-max flex-wrap">
@@ -93,26 +96,22 @@ const ProfilePage = () => {
               />
               {/* BUTTONS GROUP */}
               <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
-                <div className="flex w-full flex-row items-center justify-center gap-4">
-                  <ButtonMatcha
-                    size="default"
-                    className="min-w-32"
-                    onClick={() => setShowChangeEmailModal(true)}
-                  >
-                    <span>E-mail</span>
-                    <SquarePen size={18} />
-                  </ButtonMatcha>
-                </div>
-                <div className="flex w-full flex-row items-center justify-center gap-4">
-                  <ButtonMatcha
-                    size="default"
-                    className="min-w-32"
-                    onClick={() => setShowChangePasswordModal(true)}
-                  >
-                    <span>Password</span>
-                    <SquarePen size={18} />
-                  </ButtonMatcha>
-                </div>
+                <ButtonMatcha
+                  size="default"
+                  className="w-full min-w-32"
+                  onClick={() => setShowChangeEmailModal(true)}
+                >
+                  <span>E-mail</span>
+                  <SquarePen size={18} />
+                </ButtonMatcha>
+                <ButtonMatcha
+                  size="default"
+                  className="w-full min-w-32"
+                  onClick={() => setShowChangePasswordModal(true)}
+                >
+                  <span>Password</span>
+                  <SquarePen size={18} />
+                </ButtonMatcha>
               </div>
             </div>
           </div>
@@ -120,7 +119,7 @@ const ProfilePage = () => {
       </div>
       {/* GRID Cols 8 Rows 1 */}
       <div className="mb-4 grid grid-cols-10 gap-4">
-        {/* OVERVIEW */}
+        {/* TASTES */}
         <div
           className={clsx(
             'col-span-10 h-max items-center justify-center rounded-2xl bg-card',
@@ -128,9 +127,25 @@ const ProfilePage = () => {
           )}
         >
           <div className="m-5 flex flex-col justify-start">
-            <h3 className="text-3xl">{'t`common:overview`'}</h3>
-
-            <div className="mt-4">CONTENT</div>
+            <h3 className="text-2xl font-bold">{t(`tastes`)}</h3>
+            <div className="mt-4">
+              <UserSexPreference
+                sexPreference={user?.sex_preferences}
+                modifiable
+                onModify={() =>
+                  handleModifyClick('sexpreferences' as keyof typeof TProfileCompleteLayout)
+                }
+              />
+            </div>
+            <div className="mt-4">
+              <StaticTagsGroup
+                tagsList={user?.tags!}
+                modifiable
+                onModify={() =>
+                  handleModifyClick('tags' as keyof typeof TProfileCompleteLayout)
+                }
+              />
+            </div>
           </div>
         </div>
         <div className={clsx('col-span-10', 'lg:col-span-7')}>

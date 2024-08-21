@@ -17,7 +17,13 @@ import { TUser } from '@/types/user';
 import { formatDateForInput } from '@/utils/format-date';
 
 const MAX_BIOGRAPHY_LENGTH = 442;
-export type TProfileCompleteLayout = 'basics' | 'biography' | 'location' | 'tags' | 'photos';
+export type TProfileCompleteLayout =
+  | 'basics'
+  | 'biography'
+  | 'location'
+  | 'sexpreferences'
+  | 'tags'
+  | 'photos';
 
 const ModalProfileComplete = ({
   show,
@@ -80,13 +86,17 @@ const ModalProfileComplete = ({
       body = JSON.stringify({
         id: user?.id,
         biography: biography,
-        sex_preferences: sexPreferences,
       });
     } else if (layout === 'location') {
       body = JSON.stringify({
         id: user?.id,
         latitude: 42.42, // todo
         longitude: 21.21, // todo
+      });
+    } else if (layout === 'sexpreferences') {
+      body = JSON.stringify({
+        id: user?.id,
+        sex_preferences: sexPreferences,
       });
     } else if (layout === 'tags') {
       body = JSON.stringify({
@@ -214,37 +224,22 @@ const ModalProfileComplete = ({
       </div>
     ),
     biography: (
-      <div id="bio" className="flex flex-col gap-5">
-        <div>
-          <Label htmlFor="about" className="mb-2">
-            {t(`description`) + ':'}
-          </Label>
-          <div className="flex flex-col">
-            <textarea
-              id="biography"
-              name="biography"
-              placeholder={t(`describe-youself`)}
-              className="disabled:opacity-50, flex h-48 min-w-[35vw] rounded-md border bg-background p-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed"
-              value={biography}
-              onChange={handleBiographyChange}
-            />
-            <span className="mt-1 text-xs text-muted">
-              {t('auth.max-char') + ': ' + MAX_BIOGRAPHY_LENGTH}
-            </span>
-          </div>
-        </div>
+      <div>
+        <Label htmlFor="about" className="mb-2">
+          {t(`bio`) + ':'}
+        </Label>
         <div className="flex flex-col">
-          <RadioGroup
-            label={t(`selector.preferences`) + ':'}
-            options={[
-              { value: 'men', label: t(`selector.men`) },
-              { value: 'women', label: t(`selector.women`) },
-              { value: 'bisexual', label: t(`selector.bisexual`) },
-            ]}
-            defaultValue="bisexual"
-            selectedItem={sexPreferences}
-            onSelectItem={setSexPreferences}
+          <textarea
+            id="biography"
+            name="biography"
+            placeholder={t(`describe-youself`)}
+            className="disabled:opacity-50, flex h-48 min-w-[35vw] rounded-md border bg-background p-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed"
+            value={biography}
+            onChange={handleBiographyChange}
           />
+          <span className="mt-1 text-xs text-muted">
+            {t('auth.max-char') + ': ' + MAX_BIOGRAPHY_LENGTH}
+          </span>
         </div>
       </div>
     ),
@@ -255,6 +250,21 @@ const ModalProfileComplete = ({
           LOCATION
         </Label>
         <div>LOCATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+      </div>
+    ),
+    sexpreferences: (
+      <div className="flex flex-col">
+        <RadioGroup
+          label={t(`selector.preferences`) + ':'}
+          options={[
+            { value: 'men', label: t(`selector.men`) },
+            { value: 'women', label: t(`selector.women`) },
+            { value: 'bisexual', label: t(`selector.bisexual`) },
+          ]}
+          defaultValue="bisexual"
+          selectedItem={sexPreferences}
+          onSelectItem={setSexPreferences}
+        />
       </div>
     ),
     tags: (
@@ -301,6 +311,9 @@ const ModalProfileComplete = ({
         setLayout('location');
         break;
       case 'location':
+        setLayout('sexpreferences');
+        break;
+      case 'sexpreferences':
         setLayout('tags');
         break;
       case 'tags':
@@ -324,8 +337,11 @@ const ModalProfileComplete = ({
       case 'location':
         setLayout('biography');
         break;
-      case 'tags':
+      case 'sexpreferences':
         setLayout('location');
+        break;
+      case 'tags':
+        setLayout('sexpreferences');
         break;
       case 'photos':
         setLayout('tags');

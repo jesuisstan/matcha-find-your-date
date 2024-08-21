@@ -240,11 +240,12 @@
   "click-to-wrap": "Cliquez pour dérouler la description",
   "click-to-unwrap": "Cliquez pour voir la description complète",
   "no-description": "Pas de description",
-  "description": "Description",
+  "bio": "Bio",
   "last-action": "Dernière action",
   "invalid-date": "Date invalide",
   "customize-profile": "Personnalisez votre profil, mettez à jour vos préférences et gérez les paramètres de sécurité",
   "use-smart-suggestions": "Découvrez des profils grâce aux suggestions intelligentes de Matcha pour votre prochain rendez-vous",
   "use-advanced-search": "Affinez vos critères de recherche pour trouver quelqu'un qui correspond à vos préférences uniques",
-  "powered-by": "Propulsé par"
+  "powered-by": "Propulsé par",
+  "tastes": "Goûts"
 }

@@ -13,7 +13,7 @@ export const radioGroupPropsSchema = z.object({
   label: z.string().optional(),
   options: z.array(radioOptionSchema),
   defaultValue: z.string().optional(),
-  selectedItem: z.string().optional(), // Add this line
+  selectedItem: z.string().optional(),
   onSelectItem: z.function(z.tuple([z.string()]), z.void()),
 });
 

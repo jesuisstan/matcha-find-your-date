@@ -1,12 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import ChipsOption from '@/components/ui/chips/chips-option';
-import ChipsSkeleton from '@/components/ui/chips/chips-skeleton';
+import ChipsSkeleton from '@/components/ui/skeletons/chips-skeleton';
 import { chipsGroupPropsSchema, TChipGroupProps } from '@/types/chips';
-import { capitalize } from '@/utils/format-string';
 
 const ChipsGroup = ({
   name,

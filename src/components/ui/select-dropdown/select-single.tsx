@@ -1,7 +1,5 @@
 'use client';
 
-import SelectSkeleton from './select-skeleton';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +8,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSelector,
 } from '@/components/ui/dropdown-primitives';
+import SelectSkeleton from '@/components/ui/skeletons/select-skeleton';
 import { SelectSinglePropsSchema, TSelectSingleProps } from '@/types/select-single';
 
 const SelectSingle = ({
