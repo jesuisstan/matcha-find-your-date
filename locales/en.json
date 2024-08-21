@@ -247,5 +247,6 @@
   "use-smart-suggestions": "Discover potential matches with Matcha's smart suggestions for your next date",
   "use-advanced-search": "Refine your search criteria to find someone who meets your unique preferences",
   "powered-by": "Powered by",
-  "tastes": "Tastes"
+  "tastes": "Tastes",
+  "location": "Location"
 }

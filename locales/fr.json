@@ -247,5 +247,6 @@
   "use-smart-suggestions": "Découvrez des profils grâce aux suggestions intelligentes de Matcha pour votre prochain rendez-vous",
   "use-advanced-search": "Affinez vos critères de recherche pour trouver quelqu'un qui correspond à vos préférences uniques",
   "powered-by": "Propulsé par",
-  "tastes": "Goûts"
+  "tastes": "Goûts",
+  "location": "Emplacement"
 }

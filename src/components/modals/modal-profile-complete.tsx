@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { Save } from 'lucide-react';
 
 import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
+import LocationSearchBar from '@/components/location-search-bar';
 import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
@@ -17,6 +18,7 @@ import { TUser } from '@/types/user';
 import { formatDateForInput } from '@/utils/format-date';
 
 const MAX_BIOGRAPHY_LENGTH = 442;
+
 export type TProfileCompleteLayout =
   | 'basics'
   | 'biography'
@@ -246,10 +248,9 @@ const ModalProfileComplete = ({
     location: (
       <div className="">
         <Label htmlFor="about" className="mb-2">
-          {/*{t(`location`)}*/}
-          LOCATION
+          {t(`location`)}
         </Label>
-        <div>LOCATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+        <LocationSearchBar />
       </div>
     ),
     sexpreferences: (
@@ -262,7 +263,7 @@ const ModalProfileComplete = ({
             { value: 'bisexual', label: t(`selector.bisexual`) },
           ]}
           defaultValue="bisexual"
-          selectedItem={sexPreferences}
+          selectedItem={sexPreferences ?? 'bisexual'}
           onSelectItem={setSexPreferences}
         />
       </div>

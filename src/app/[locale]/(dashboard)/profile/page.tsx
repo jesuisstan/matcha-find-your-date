@@ -117,46 +117,66 @@ const ProfilePage = () => {
           </div>
         )}
       </div>
-      {/* GRID Cols 8 Rows 1 */}
+
+      {/* MAIN CONTENT */}
       <div className="mb-4 grid grid-cols-10 gap-4">
-        {/* TASTES */}
         <div
           className={clsx(
-            'col-span-10 h-max items-center justify-center rounded-2xl bg-card',
+            'col-span-10 h-max items-center justify-center space-y-5',
             'lg:col-span-3'
           )}
         >
-          <div className="m-5 flex flex-col justify-start">
-            <h3 className="text-2xl font-bold">{t(`tastes`)}</h3>
-            <div className="mt-4">
-              <UserSexPreference
-                sexPreference={user?.sex_preferences}
-                modifiable
-                onModify={() =>
-                  handleModifyClick('sexpreferences' as keyof typeof TProfileCompleteLayout)
-                }
-              />
+          {/* LOCATION */}
+          <div className="rounded-2xl bg-card p-2">
+            <div className="m-5 flex flex-col justify-start">
+              <h3 className="text-2xl font-bold">{t(`location`)}</h3>
+              latitude {user?.latitude}
+              longitude {user?.longitude}
             </div>
-            <div className="mt-4">
-              <StaticTagsGroup
-                tagsList={user?.tags!}
-                modifiable
-                onModify={() =>
-                  handleModifyClick('tags' as keyof typeof TProfileCompleteLayout)
-                }
-              />
+          </div>
+
+          {/* TASTES */}
+          <div className="rounded-2xl bg-card p-2">
+            <div className="m-5 flex flex-col justify-start">
+              <h3 className="text-2xl font-bold">{t(`tastes`)}</h3>
+              <div className="mt-4">
+                <UserSexPreference
+                  sexPreference={user?.sex_preferences}
+                  modifiable
+                  onModify={() =>
+                    handleModifyClick('sexpreferences' as keyof typeof TProfileCompleteLayout)
+                  }
+                />
+              </div>
+              <div className="mt-4">
+                <StaticTagsGroup
+                  tagsList={user?.tags!}
+                  modifiable
+                  onModify={() => handleModifyClick('tags' as keyof typeof TProfileCompleteLayout)}
+                />
+              </div>
             </div>
           </div>
         </div>
+
+        {/* PHOTOS */}
         <div className={clsx('col-span-10', 'lg:col-span-7')}>
-          {/* SELECTOR */}
-          <div className={clsx('mb-4 flex flex-col rounded-2xl bg-card p-2', 'xl:flex-row')}>
-            <div className={clsx('m-4', 'xl:w-2/3')}></div>
-            {/* vertical divider */}
-            <div className={clsx('m-5 hidden w-[1px] bg-secondary opacity-40', 'xl:block')} />
-          </div>
-          {/* CHART */}
           <div className="rounded-2xl bg-card p-2">
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
+            <div>Content</div>
             <div>Content</div>
           </div>
         </div>

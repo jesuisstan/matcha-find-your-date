@@ -3,14 +3,21 @@
 import React from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 
+import clsx from 'clsx';
 import { SquarePen } from 'lucide-react';
 
-const SexPreferenceIcon = ({ preference }: { preference: string }) => {
+const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: string }) => {
   switch (preference) {
     case 'men':
       return (
-        <div className="flex items-center justify-center rounded-full border-[1px] bg-muted px-[2px] py-[2px]">
+        <div
+          className={clsx(
+            'flex items-center justify-center rounded-full px-[2px] py-[2px]',
+            theme === 'dark' ? 'bg-foreground' : ''
+          )}
+        >
           <div className="overflow-hidden rounded-full bg-transparent">
             <Image
               src="/sex/male.png"
@@ -28,7 +35,12 @@ const SexPreferenceIcon = ({ preference }: { preference: string }) => {
       );
     case 'women':
       return (
-        <div className="flex items-center justify-center rounded-full border-[1px] bg-muted px-[2px] py-[2px]">
+        <div
+          className={clsx(
+            'flex items-center justify-center rounded-full px-[2px] py-[2px]',
+            theme === 'dark' ? 'bg-foreground' : ''
+          )}
+        >
           <div className="overflow-hidden rounded-full bg-transparent">
             <Image
               src="/sex/female.png"
@@ -46,7 +58,12 @@ const SexPreferenceIcon = ({ preference }: { preference: string }) => {
       );
     case 'bisexual':
       return (
-        <div className="flex items-center justify-center rounded-full border-[1px] bg-muted px-[2px] py-[2px]">
+        <div
+          className={clsx(
+            'flex items-center justify-center rounded-full px-[2px] py-[2px]',
+            theme === 'dark' ? 'bg-foreground' : ''
+          )}
+        >
           <div className="overflow-hidden rounded-full bg-transparent">
             <Image
               src="/sex/bi.png"
@@ -64,7 +81,12 @@ const SexPreferenceIcon = ({ preference }: { preference: string }) => {
       );
     default:
       return (
-        <div className="flex items-center justify-center rounded-full border-[1px] bg-muted px-[2px] py-[2px]">
+        <div
+          className={clsx(
+            'flex items-center justify-center rounded-full px-[2px] py-[2px]',
+            theme === 'dark' ? 'bg-foreground' : ''
+          )}
+        >
           <div className="overflow-hidden rounded-full bg-transparent">
             <Image
               src="/sex/a.png"
@@ -93,34 +115,18 @@ const UserSexPreference = ({
   onModify?: () => void;
 }) => {
   const t = useTranslations();
+  const { theme } = useTheme();
 
   return (
     <div className="relative flex items-center">
       <span className="mr-2 text-base font-bold">{t('selector.preferences') + ':'}</span>
       {sexPreference ? (
         <span className="flex items-center gap-2">
-          <SexPreferenceIcon preference={sexPreference} />
+          <SexPreferenceIcon preference={sexPreference} theme={theme!} />
           {t(`selector.${sexPreference}`)}
         </span>
       ) : (
-        <span className="flex items-center gap-2">
-          <div className="flex items-center justify-center rounded-full border-[1px] bg-muted px-[2px] py-[2px]">
-            <div className="overflow-hidden rounded-full bg-transparent">
-              <Image
-                src="/sex/a.png"
-                alt="unknown"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="h-auto w-10"
-                placeholder="blur"
-                blurDataURL={'/sex/a.png'}
-                priority
-              />
-            </div>
-          </div>
-          {t('selector.unknown')}
-        </span>
+        <span className="flex items-center gap-2">???</span>
       )}
 
       {modifiable && (
