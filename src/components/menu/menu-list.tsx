@@ -83,7 +83,7 @@ const MenuList = ({
               scroll={false}
             >
               <div
-                id="smartdata-chosen-pointer"
+                id="chosen-pointer"
                 className={clsx('ml-[-5px] mr-4 h-2 w-2 rounded-full', {
                   'bg-secondary': pathname === '/search/advanced',
                   'bg-transparent': pathname !== '/search/advanced',

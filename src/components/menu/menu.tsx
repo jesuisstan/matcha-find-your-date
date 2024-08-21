@@ -10,7 +10,6 @@ import clsx from 'clsx';
 import { MenuIcon, Rows3 } from 'lucide-react';
 
 import ContactSupportBlock from '@/components/menu/contact-support-block';
-import LogoutButton from '@/components/menu/logout-button';
 import MenuList from '@/components/menu/menu-list';
 import MenuSkeleton from '@/components/menu/menu-skeleton';
 import SideBarHeader from '@/components/menu/side-bar-header';
@@ -102,7 +101,6 @@ const Menu: React.FC = () => {
             />
           )}
         </button>
-        <LogoutButton translate={t} />
       </div>
 
       {/* Menu Sidebar */}

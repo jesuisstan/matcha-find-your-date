@@ -11,7 +11,6 @@ import DashboardSkeleton from './dashboard-skeleton';
 
 import { useRouter } from '@/navigation';
 import useUserStore from '@/stores/user';
-import { capitalize } from '@/utils/format-string';
 
 const Dashboard = () => {
   const t = useTranslations();
@@ -23,25 +22,22 @@ const Dashboard = () => {
   ) : (
     <div>
       {/* HEADER */}
-      {!user ? (
-        '<HeaderSkeleton />'
-      ) : (
-        <div className="m-5 flex flex-col items-center justify-center gap-5">
-          <h1 className="text-center text-2xl md:text-3xl lg:text-4xl">{t('welcome')}</h1>
-          <Image
-            src="/identity/logo-title-only.png"
-            alt="Matcha"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className={clsx(`h-auto w-60`)}
-            placeholder="blur"
-            blurDataURL={'/identity/logo-transparent.png'}
-            priority
-          />
-        </div>
-      )}
-      <div className={clsx('flex w-[100%] flex-col content-center items-center gap-10')}>
+      <div className="mb-5 flex flex-row flex-wrap items-center justify-center gap-5">
+        <h1 className="text-center text-2xl md:text-3xl lg:text-4xl">{t('welcome')}</h1>
+        <Image
+          src="/identity/logo-title-only.png"
+          alt="Matcha"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className={clsx(`h-auto w-56`)}
+          placeholder="blur"
+          blurDataURL={'/identity/logo-transparent.png'}
+          priority
+        />
+      </div>
+
+      <div className={clsx('flex w-[100%] flex-col content-center items-center gap-5')}>
         {/* NAVIGATION BUTTONS */}
         <div
           id="navigation-buttons"
@@ -54,7 +50,7 @@ const Dashboard = () => {
             onClick={() => router.push('/profile')}
           >
             <p>{t('customize-profile')}</p>
-            <UserRoundCog size={100} className="hover:scale-125" />
+            <UserRoundCog size={80} className="hover:scale-125" />
           </div>
 
           <div
@@ -62,7 +58,7 @@ const Dashboard = () => {
             onClick={() => router.push('/search/smart-suggestions')}
           >
             <p>{t('use-smart-suggestions')}</p>
-            <ScanSearch size={100} className="hover:scale-125" />
+            <ScanSearch size={80} className="hover:scale-125" />
           </div>
 
           <div
@@ -70,9 +66,10 @@ const Dashboard = () => {
             onClick={() => router.push('/search/advanced')}
           >
             <p>{t('use-advanced-search')}</p>
-            <Microscope size={100} className="hover:scale-125" />
+            <Microscope size={80} className="hover:scale-125" />
           </div>
         </div>
+
         {/* POWERED BY */}
         <div
           id="powered-by"
