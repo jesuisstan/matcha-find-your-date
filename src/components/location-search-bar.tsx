@@ -60,12 +60,10 @@ const LocationSearchBar = () => {
   const loadDestinationCityOptions = async (inputValue, callback) => {
     if (inputValue) {
       try {
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`
-        );
+        const response = await fetch(`/api/google-places-proxy?inputValue=${inputValue}`);
         const data = await response.json();
         let places = [];
-        data?.data?.predictions?.map((place, i) => {
+        data?.predictions?.map((place) => {
           places = [...places, { value: place.description, label: place.description }];
         });
 
@@ -115,7 +113,7 @@ const LocationSearchBar = () => {
                 onChange={setDestinationCityOption}
                 loadOptions={loadDestinationCityOptions}
                 id="destinationCity"
-                placeholder={"Search for a City"}
+                placeholder={'Search for a City'}
               />
             </div>
             <button
