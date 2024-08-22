@@ -53,8 +53,6 @@ const LocationSearchBar = () => {
   const [selectedHomeCityOption, setSelectedHomeCityOption] = useState(null);
   const [selectedDestinationCityOption, setDestinationCityOption] = useState(null);
 
-  //https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Mos&key=AIzaSyCcbuWdTk2KJLLFrLqvgxWGg9FEzpL93Io// debug delete
-
   //this function loads in the options to react-select AsyncSelect component asynchronously
   //here we do not scope the country location, the Google Maps Places API will however give preference to your browser location
   const loadDestinationCityOptions = async (inputValue, callback) => {
