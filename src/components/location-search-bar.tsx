@@ -1,4 +1,11 @@
-import { useEffect, useState } from 'react';
+'use client';
+import { useState } from 'react';
+import Select from 'react-select';
+//AsyncSelect component is used for loading dynamic options in react-select
+import AsyncSelect from 'react-select/async';
+
+// A list of all countries
+import countryDb from '@/constants/country-db';
 
 type TGeoPosition = {
   latitude: number;
@@ -42,116 +49,87 @@ const getDefaultLocation = (language: string): TGeoPosition => {
 };
 
 const LocationSearchBar = () => {
-  const [searchText, setSearchText] = useState('');
-  const [geoPosition, setGeoPosition] = useState<TGeoPosition | null>(null);
-  const [citiesData, setCitiesData] = useState<any[]>([]);
+  const [selectedHomeCountryOption, setSelectedHomeCountryOption] = useState(null);
+  const [selectedHomeCityOption, setSelectedHomeCityOption] = useState(null);
+  const [selectedDestinationCityOption, setDestinationCityOption] = useState(null);
 
-  const fetchCitiesData = async (text: string): Promise<any[]> => {
-    if (text.length > 1) {
-      // Use your preferred API to fetch city suggestions
-      const response = await fetch(`https://api.example.com/cities?query=${text}`);
-      const data = await response.json();
-      return data.cities || [];
-    } else {
-      return [];
+  //https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Mos&key=AIzaSyCcbuWdTk2KJLLFrLqvgxWGg9FEzpL93Io// debug delete
+
+  //this function loads in the options to react-select AsyncSelect component asynchronously
+  //here we do not scope the country location, the Google Maps Places API will however give preference to your browser location
+  const loadDestinationCityOptions = async (inputValue, callback) => {
+    if (inputValue) {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`
+        );
+        const data = await response.json();
+        let places = [];
+        data?.data?.predictions?.map((place, i) => {
+          places = [...places, { value: place.description, label: place.description }];
+        });
+
+        callback(places);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
-  const handleGeoChange = (text: string) => {
-    setSearchText(text);
-    fetchCitiesData(text);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
   };
-
-  const handleTextSubmit = async () => {
-    if (!searchText) return;
-
-    const cities: any[]  = await fetchCitiesData(searchText);
-    if (cities.length > 0) {
-      const selectedCity = cities[0];
-      setGeoPosition({
-        latitude: selectedCity.latitude,
-        longitude: selectedCity.longitude,
-        city: selectedCity.name,
-        region: selectedCity.region,
-        country: selectedCity.country,
-        isoCountryCode: selectedCity.isoCountryCode,
-      });
-    } else {
-      alert('City not found');
-    }
-  };
-
-  const handleLocationPress = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
-          // Reverse geocoding to get city name from coordinates
-          const response = await fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=YOUR_API_KEY`
-          );
-          const data = await response.json();
-          const cityData = data.results[0].address_components;
-          setGeoPosition({
-            latitude,
-            longitude,
-            city: cityData.locality,
-            region: cityData.administrative_area_level_1,
-            country: cityData.country,
-            isoCountryCode: cityData.country_code,
-          });
-        },
-        () => {
-          alert('Permission denied. Setting default location.');
-          const defaultLocation = getDefaultLocation(navigator.language.slice(0, 2));
-          setGeoPosition(defaultLocation);
-        }
-      );
-    } else {
-      alert('Geolocation is not supported by your browser.');
-    }
-  };
-
-  const handleCityPress = (city: any) => {
-    setGeoPosition({
-      latitude: city.latitude,
-      longitude: city.longitude,
-      city: city.name,
-      region: city.region,
-      country: city.country,
-      isoCountryCode: city.isoCountryCode,
-    });
-  };
-
-  useEffect(() => {
-    if (geoPosition) {
-      console.log('TGeoPosition updated:', geoPosition); // debug
-    }
-  }, [geoPosition]);
 
   return (
-    <div>
-      <div>
-        <input
-          type="text"
-          value={searchText}
-          onChange={(e) => handleGeoChange(e.target.value)}
-          placeholder="Search Location"
-        />
-        <button onClick={handleTextSubmit}>Search</button>
-        <button onClick={handleLocationPress}>Use my current location</button>
-      </div>
-
-      {citiesData.length > 0 && (
-        <ul>
-          {citiesData.map((city, index) => (
-            <li key={index} onClick={() => handleCityPress(city)}>
-              {city.name}, {city.region}, {city.country}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <main className="w-full pb-20 text-sm">
+      <section className="flex h-full w-full flex-col gap-10">
+        <div>
+          <form className=" mt-2 flex w-full flex-wrap gap-x-12 gap-y-20 md:mt-4">
+            <div className="w-full md:w-2/5">
+              <label htmlFor="homeCountry">Current Country</label>
+              <Select
+                className="text-prim placeholder-black placeholder-opacity-25"
+                defaultValue={selectedHomeCountryOption}
+                onChange={setSelectedHomeCountryOption}
+                options={countryDb}
+                id="homeCountry"
+                placeholder={'Select a Country'}
+              />
+            </div>
+            <div className="w-full md:w-2/5">
+              <label htmlFor="homeCity">Home City</label>
+              <Select
+                className="text-prim placeholder-black placeholder-opacity-25"
+                defaultValue={selectedHomeCityOption}
+                onChange={setSelectedHomeCityOption}
+                options={[]}
+                id="homeCity"
+                placeholder={'Search for a City'}
+              />
+            </div>
+            <div className="w-full md:w-2/5">
+              <label htmlFor="destinationCity">Destination City</label>
+              <AsyncSelect
+                className="text-prim placeholder-black placeholder-opacity-25"
+                defaultValue={selectedDestinationCityOption}
+                onChange={setDestinationCityOption}
+                loadOptions={loadDestinationCityOptions}
+                id="destinationCity"
+                placeholder={"Search for a City"}
+              />
+            </div>
+            <button
+              className="bg-tert w-full rounded-3xl py-3  text-white opacity-100 md:mt-4 md:w-2/5"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+            >
+              Proceed
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
   );
 };
 
