@@ -313,6 +313,7 @@ const ModalProfileComplete = ({
               }
               id="country"
               placeholder={t('selector.select-country')}
+              required
             />
           </div>
           <div className="w-full">
@@ -326,6 +327,8 @@ const ModalProfileComplete = ({
               loadOptions={loadCityOptions}
               id="city"
               placeholder={t('selector.select-city')}
+              isDisabled={!selectedCountryOption}
+              required
             />
           </div>
         </div>
@@ -447,6 +450,12 @@ const ModalProfileComplete = ({
       isMounted = false;
     };
   }, [selectedCountryOption, selectedCityOption]);
+
+  useEffect(() => {
+    // Clear selectedCityOption when the country changes
+    setSelectedCityOption(null);
+    setGeoLocation(null);
+  }, [selectedCountryOption]);
 
   console.log('coordinates:', geoLocation?.lng, geoLocation?.lat);
   console.log('address:', selectedCityOption?.value);
