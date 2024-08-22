@@ -1,3 +1,5 @@
+import ClearLocalStorageButton from '../ui/clear-storage-btn/clear-storage-btn';
+
 import LocaleSwitcher from '@/components/locale-switcher';
 import LogoutButton from '@/components/menu/logout-button';
 import { UserNameSkeleton } from '@/components/menu/menu-skeleton';
@@ -42,6 +44,9 @@ const SideBarHeader = ({
             <ThemeToggler translate={translate} />
           </div>
           <LogoutButton translate={translate} />
+
+          {/* DEBUG todo:delete */}
+          <ClearLocalStorageButton />
         </div>
 
         {/* horizontal divider */}

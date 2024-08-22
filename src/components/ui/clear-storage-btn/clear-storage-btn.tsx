@@ -1,4 +1,6 @@
-import React from 'react';
+import { Trash2 } from 'lucide-react';
+
+import { ButtonMatcha } from '@/components/ui/button-matcha';
 
 const ClearLocalStorageButton = () => {
   const handleClearLocalStorage = () => {
@@ -15,13 +17,19 @@ const ClearLocalStorageButton = () => {
   };
 
   return (
-    <button
-      className="rounded bg-slate-400 px-4 py-2 font-bold text-white hover:bg-red-700"
-      onClick={handleClearLocalStorage}
-      title="Clear local storage and refresh data"
-    >
-      Clear storage
-    </button>
+    <div className="items-center">
+      <ButtonMatcha
+        variant="ghost"
+        size="icon"
+        title="Clear local storage and refresh data"
+        onClick={handleClearLocalStorage}
+        className="transition-all duration-300 ease-in-out hover:bg-transparent hover:text-c42orange"
+      >
+        <Trash2 />
+
+        <span className="sr-only">Clear local storage and refresh data</span>
+      </ButtonMatcha>
+    </div>
   );
 };
 

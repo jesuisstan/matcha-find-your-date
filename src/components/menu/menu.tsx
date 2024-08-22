@@ -13,7 +13,6 @@ import ContactSupportBlock from '@/components/menu/contact-support-block';
 import MenuList from '@/components/menu/menu-list';
 import MenuSkeleton from '@/components/menu/menu-skeleton';
 import SideBarHeader from '@/components/menu/side-bar-header';
-import ClearLocalStorageButton from '@/components/ui/clear-storage-btn/clear-storage-btn';
 import { usePathname } from '@/navigation';
 import useUserStore from '@/stores/user';
 
@@ -169,11 +168,6 @@ const Menu: React.FC = () => {
               {/* horizontal divider */}
               <div className="mb-3 ml-3 w-52 border-t border-secondary opacity-40" />
               <ContactSupportBlock translate={t} />
-
-              {/* Clear LocalStorage Button DELETE. debug*/}
-              <div className="items-center self-center">
-                <ClearLocalStorageButton />
-              </div>
             </div>
           </div>
         </>
