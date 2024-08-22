@@ -45,27 +45,36 @@ const Dashboard = () => {
           )}
         >
           <div
-            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center hover:scale-105"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center transition-all duration-300 ease-in-out hover:scale-105"
             onClick={() => router.push('/profile')}
           >
             <p>{t('customize-profile')}</p>
-            <UserRoundCog size={80} className="hover:scale-125" />
+            <UserRoundCog
+              size={80}
+              className="transition-all duration-300 ease-in-out hover:scale-125"
+            />
           </div>
 
           <div
-            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center hover:scale-105"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center transition-all duration-300 ease-in-out hover:scale-105"
             onClick={() => router.push('/search/smart-suggestions')}
           >
             <p>{t('use-smart-suggestions')}</p>
-            <ScanSearch size={80} className="hover:scale-125" />
+            <ScanSearch
+              size={80}
+              className="transition-all duration-300 ease-in-out hover:scale-125"
+            />
           </div>
 
           <div
-            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center hover:scale-105"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center transition-all duration-300 ease-in-out hover:scale-105"
             onClick={() => router.push('/search/advanced')}
           >
             <p>{t('use-advanced-search')}</p>
-            <Microscope size={80} className="hover:scale-125" />
+            <Microscope
+              size={80}
+              className="transition-all duration-300 ease-in-out hover:scale-125"
+            />
           </div>
         </div>
 
