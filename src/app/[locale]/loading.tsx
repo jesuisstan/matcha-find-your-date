@@ -9,6 +9,16 @@ const Loading = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center text-center text-foreground">
       <Image
+        src="/identity/background-nobg.png"
+        alt="hearts-bg"
+        fill
+        placeholder="blur"
+        blurDataURL="/identity/background-nobg.png"
+        className="z-[-5] opacity-5"
+        sizes={'100vw'}
+        priority
+      />
+      <Image
         src="/identity/logo-loading.png"
         alt="loading"
         width="0"
