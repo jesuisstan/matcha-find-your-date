@@ -6,9 +6,9 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { PlaySquareIcon } from 'lucide-react';
 
-import HeaderSkeleton from '@/components/header-skeleton';
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
+import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import useUserStore from '@/stores/user';
 

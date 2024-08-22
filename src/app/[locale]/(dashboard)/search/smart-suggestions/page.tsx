@@ -6,10 +6,10 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { PlaySquareIcon } from 'lucide-react';
 
-import HeaderSkeleton from '@/components/header-skeleton';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import RadioGroup from '@/components/ui/radio/radio-group';
+import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 
 const SmartSuggestions = () => {
