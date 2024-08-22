@@ -2,11 +2,20 @@
 
 import { useEffect } from 'react';
 
+import clsx from 'clsx';
+
+import { Label } from '@/components/ui/label';
 import RadioOption from '@/components/ui/radio/radio-option';
 import { radioGroupPropsSchema, TRadioGroupProps } from '@/types/radio-button';
 import { capitalize } from '@/utils/format-string';
 
-const RadioGroup = ({ label, options, defaultValue, selectedItem, onSelectItem }: TRadioGroupProps) => {
+const RadioGroup = ({
+  label,
+  options,
+  defaultValue,
+  selectedItem,
+  onSelectItem,
+}: TRadioGroupProps) => {
   const optionsValues = options.map((option) => option.value);
 
   // Verify defaultValue: if valid, use it, otherwise use the first option's value
@@ -43,10 +52,11 @@ const RadioGroup = ({ label, options, defaultValue, selectedItem, onSelectItem }
 
   return (
     <div id={`radio`}>
-      {label && (
-        <div className="mb-3 block text-base font-normal text-foreground">{capitalize(label)}</div>
-      )}
-      <div className="flex flex-row flex-wrap justify-start gap-5">
+      {label && <Label htmlFor={`radio-${label}`}>{capitalize(label)}</Label>}
+      <div
+        id={`radio-${label}`}
+        className={clsx('flex flex-row flex-wrap justify-start gap-5', label ? 'mt-4' : '')}
+      >
         {options.map((option, index) => (
           <RadioOption
             key={`${option.value}-${index}`}

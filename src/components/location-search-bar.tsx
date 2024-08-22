@@ -80,36 +80,41 @@ const LocationSearchBar = () => {
       console.log('Submitted Location Data:', locationData);
     }
   };
-  console.log('coordinates:', homeGeoLocation?.lng, homeGeoLocation?.lat);
-  console.log('address:', selectedHomeCityOption?.value);
-  console.log('country:', selectedHomeCountryOption?.value);
 
   return (
     <main className="w-full pb-20 text-sm">
       <section className="flex h-full w-full flex-col gap-10">
         <div>
-          <div className="w-full md:w-2/5">
-            <label htmlFor="country">Country</label>
-            <Select
-              className="text-prim w-60 placeholder-black placeholder-opacity-25"
-              value={selectedHomeCountryOption}
-              onChange={setSelectedHomeCountryOption}
-              options={countryDb}
-              id="country"
-              placeholder={'Select a Country'}
-            />
-          </div>
-          <div className="w-full md:w-2/5">
-            <label htmlFor="city">City</label>
-            <AsyncSelect
-              className="text-prim w-60 placeholder-black placeholder-opacity-25"
-              value={selectedHomeCityOption}
-              onChange={setSelectedHomeCityOption}
-              loadOptions={loadHomeCityOptions}
-              id="city"
-              placeholder={'Search for a City'}
-            />
-          </div>
+          <form
+            className="mt-2 flex w-full flex-wrap gap-x-12 gap-y-20 md:mt-4"
+            onSubmit={handleSubmit}
+          >
+            <div className="w-full md:w-2/5">
+              <label htmlFor="country">Country</label>
+              <Select
+                className="text-prim w-60 text-sm placeholder-black placeholder-opacity-25"
+                value={selectedHomeCountryOption}
+                onChange={setSelectedHomeCountryOption}
+                options={countryDb}
+                id="country"
+                placeholder={'Select a Country'}
+              />
+            </div>
+            <div className="w-full md:w-2/5">
+              <label htmlFor="city">City</label>
+              <AsyncSelect
+                className="text-prim w-60 text-sm placeholder-black placeholder-opacity-25"
+                value={selectedHomeCityOption}
+                onChange={setSelectedHomeCityOption}
+                loadOptions={loadHomeCityOptions}
+                id="city"
+                placeholder={'Search for a City'}
+              />
+            </div>
+            <ButtonMatcha type="submit" className="bg-tert w-full rounded-3xl py-3">
+              Proceed
+            </ButtonMatcha>
+          </form>
         </div>
       </section>
     </main>

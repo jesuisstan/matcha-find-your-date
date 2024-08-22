@@ -29,8 +29,8 @@
     "women": "Femmes",
     "bisexual": "Bisexuel",
     "tags": "Tags #",
-    "daily": "Quotidien",
-    "monthly": "Mensuel"
+    "select-country": "Sélectionner un pays",
+    "select-city": "Rechercher une ville"
   },
   "not-found": {
     "title": "Page non trouvée",
@@ -248,5 +248,7 @@
   "use-advanced-search": "Affinez vos critères de recherche pour trouver quelqu'un qui correspond à vos préférences uniques",
   "powered-by": "Propulsé par",
   "tastes": "Goûts",
-  "location": "Emplacement"
+  "location": "Emplacement",
+  "country": "Pays",
+  "city": "Ville"
 }

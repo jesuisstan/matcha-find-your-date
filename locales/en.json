@@ -29,8 +29,8 @@
     "women": "Women",
     "bisexual": "Bisexual",
     "tags": "Tags #",
-    "daily": "Daily",
-    "monthly": "Monthly"
+    "select-country": "Select country",
+    "select-city": "Search for a city"
   },
   "not-found": {
     "title": "Page not found",
@@ -248,5 +248,9 @@
   "use-advanced-search": "Refine your search criteria to find someone who meets your unique preferences",
   "powered-by": "Powered by",
   "tastes": "Tastes",
-  "location": "Location"
+  "location": "Location",
+  "country": "Country",
+  "city": "City",
+  "error-loading-city-options": "Error loading city options",
+  "error-getting-geolocation": "Error getting geolocation"
 }

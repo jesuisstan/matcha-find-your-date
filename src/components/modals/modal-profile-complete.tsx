@@ -1,19 +1,23 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 import clsx from 'clsx';
 import { Save } from 'lucide-react';
 
 import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
-import LocationSearchBar from '@/components/location-search-bar';
 import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
+import { countryOptionsEN, countryOptionsFR, countryOptionsRU } from '@/constants/country-db';
 import { TAGS_LIST } from '@/constants/tags-list';
 import useUserStore from '@/stores/user';
+import { TGeoCoordinates, TSelectGeoOption } from '@/types/geolocation';
 import { TUser } from '@/types/user';
 import { formatDateForInput } from '@/utils/format-date';
 
@@ -41,16 +45,22 @@ const ModalProfileComplete = ({
     user: state.user,
     setUser: state.setUser,
   }));
+  const localeActive = useLocale();
   const [layout, setLayout] = useState<TProfileCompleteLayout>(startLayout ?? 'basics');
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [sex, setSex] = useState(user?.sex as string); // <'male' | 'female'>
   const [sexPreferences, setSexPreferences] = useState(user?.sex_preferences as string); // <'men' | 'women' | 'bisexual'>
   const [biography, setBiography] = useState(user?.biography || '');
   const [selectedTags, setSelectedTags] = useState<string[]>(user?.tags || []);
   const [photosURLs, setPhotosURLs] = useState<string[]>(user?.photos || []);
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+
+  // Location vars
+  const [selectedCountryOption, setSelectedCountryOption] = useState<TSelectGeoOption | null>(null);
+  const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(null);
+  const [geoLocation, setGeoLocation] = useState<TGeoCoordinates | null>(null);
 
   const handleBiographyChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;
@@ -58,6 +68,41 @@ const ModalProfileComplete = ({
       setBiography(text);
     } else {
       setBiography(text.substring(0, MAX_BIOGRAPHY_LENGTH));
+    }
+  };
+
+  const loadCityOptions = async (inputValue: string): Promise<TSelectGeoOption[]> => {
+    setError('');
+    if (selectedCountryOption && inputValue) {
+      try {
+        const response = await fetch(
+          `/api/location-proxy?input=${inputValue}&type=autocomplete&country=${selectedCountryOption.value}`
+        );
+        const data = await response.json();
+        return (
+          data?.predictions?.map((place: any) => ({
+            value: place.description,
+            label: place.description,
+          })) || []
+        );
+      } catch (error) {
+        setError(t('error-loading-city-options'));
+        return [];
+      }
+    }
+    return [];
+  };
+
+  const getGeoLocation = async (address: string) => {
+    setError('');
+    try {
+      const response = await fetch(`/api/location-proxy?input=${address}&type=geocode`);
+      const data = await response.json();
+      const location = data?.results[0]?.geometry?.location;
+      return location || null;
+    } catch (error) {
+      setError(t('error-getting-geolocation'));
+      return null;
     }
   };
 
@@ -247,14 +292,47 @@ const ModalProfileComplete = ({
     ),
     location: (
       <div className="">
-        <Label htmlFor="about" className="mb-2">
-          {t(`location`)}
+        <Label htmlFor="geolocation" className="mb-2">
+          {t(`location`) + ':'}
         </Label>
-        <LocationSearchBar />
+        <div id="geolocation" className="m-5 flex flex-col gap-5">
+          <div className="w-full">
+            <Label htmlFor="country" className="mb-2">
+              {t(`country`)}
+            </Label>
+            <Select
+              className="w-60 text-sm text-foreground/85 placeholder-foreground placeholder-opacity-25"
+              value={selectedCountryOption}
+              onChange={setSelectedCountryOption}
+              options={
+                localeActive === 'en'
+                  ? countryOptionsEN
+                  : localeActive === 'fr'
+                    ? countryOptionsFR
+                    : countryOptionsRU
+              }
+              id="country"
+              placeholder={t('selector.select-country')}
+            />
+          </div>
+          <div className="w-full">
+            <Label htmlFor="city" className="mb-2">
+              {t(`city`)}
+            </Label>
+            <AsyncSelect
+              className="w-60 text-sm text-foreground/85 placeholder-foreground placeholder-opacity-25"
+              value={selectedCityOption}
+              onChange={setSelectedCityOption}
+              loadOptions={loadCityOptions}
+              id="city"
+              placeholder={t('selector.select-city')}
+            />
+          </div>
+        </div>
       </div>
     ),
     sexpreferences: (
-      <div className="flex flex-col">
+      <div className="m-5 flex flex-col">
         <RadioGroup
           label={t(`selector.preferences`) + ':'}
           options={[
@@ -269,7 +347,7 @@ const ModalProfileComplete = ({
       </div>
     ),
     tags: (
-      <div className="">
+      <div className="m-5">
         <ChipsGroup
           name="tags"
           label={t('tags.tags')}
@@ -288,12 +366,6 @@ const ModalProfileComplete = ({
       </div>
     ),
   };
-
-  useEffect(() => {
-    if (show) {
-      setLayout(startLayout ?? 'basics');
-    }
-  }, [show, startLayout]);
 
   const handleClose = () => {
     setError('');
@@ -351,6 +423,34 @@ const ModalProfileComplete = ({
         break;
     }
   };
+
+  useEffect(() => {
+    if (show) {
+      setLayout(startLayout ?? 'basics');
+    }
+  }, [show, startLayout]);
+
+  useEffect(() => {
+    // Get geolocation for selected home city
+    if (layout !== 'location') return;
+    let isMounted = true;
+    const fetchData = async () => {
+      if (selectedCityOption) {
+        const geoLocation = await getGeoLocation(selectedCityOption.value);
+        if (isMounted) {
+          setGeoLocation(geoLocation);
+        }
+      }
+    };
+    fetchData();
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedCountryOption, selectedCityOption]);
+
+  console.log('coordinates:', geoLocation?.lng, geoLocation?.lat);
+  console.log('address:', selectedCityOption?.value);
+  console.log('country:', selectedCountryOption?.value);
 
   return (
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('complete-profile')}>

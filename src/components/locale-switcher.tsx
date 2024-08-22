@@ -10,11 +10,11 @@ import { usePathname } from '@/navigation';
 
 const LocaleSwitcher = () => {
   const [isPending, startTransition] = useTransition();
-  const localActive = useLocale();
+  const localeActive = useLocale();
   const pathname = usePathname();
 
   const handleLocaleChange = (locale: string) => {
-    if (localActive === locale || isPending) return;
+    if (localeActive === locale || isPending) return;
 
     startTransition(() => {
       window.location.href = `/${locale}${pathname}`;
@@ -27,7 +27,7 @@ const LocaleSwitcher = () => {
         className={clsx(
           `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] transition-all duration-300 ease-in-out`,
           `hover:border-c42orange`,
-          localActive === 'fr' ? 'border-[1px] border-foreground' : 'bg-card'
+          localeActive === 'fr' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
         title="Français"
         onClick={() => handleLocaleChange('fr')}
@@ -40,7 +40,7 @@ const LocaleSwitcher = () => {
             height={0}
             className={clsx(
               'h-5 w-5 object-cover',
-              localActive === 'fr' ? 'opacity-100' : 'opacity-70',
+              localeActive === 'fr' ? 'opacity-100' : 'opacity-70',
               `hover:opacity-100`
             )}
           />
@@ -51,7 +51,7 @@ const LocaleSwitcher = () => {
         className={clsx(
           `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] transition-all duration-300 ease-in-out`,
           `hover:border-c42orange`,
-          localActive === 'en' ? 'border-[1px] border-foreground' : 'bg-card'
+          localeActive === 'en' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
         title="English"
         onClick={() => handleLocaleChange('en')}
@@ -64,7 +64,7 @@ const LocaleSwitcher = () => {
             height={0}
             className={clsx(
               'h-5 w-5 object-cover',
-              localActive === 'en' ? 'opacity-100' : 'opacity-70',
+              localeActive === 'en' ? 'opacity-100' : 'opacity-70',
               `hover:opacity-100`
             )}
           />
@@ -75,7 +75,7 @@ const LocaleSwitcher = () => {
         className={clsx(
           `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] transition-all duration-300 ease-in-out`,
           `hover:border-c42orange`,
-          localActive === 'ru' ? 'border-[1px] border-foreground' : 'bg-card'
+          localeActive === 'ru' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
         title="Русский"
         onClick={() => handleLocaleChange('ru')}
@@ -88,7 +88,7 @@ const LocaleSwitcher = () => {
             height={0}
             className={clsx(
               'h-5 w-5 object-cover',
-              localActive === 'ru' ? 'opacity-100' : 'opacity-70',
+              localeActive === 'ru' ? 'opacity-100' : 'opacity-70',
               `hover:opacity-100`
             )}
           />
