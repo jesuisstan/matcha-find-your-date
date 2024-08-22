@@ -13,9 +13,9 @@ export async function GET(request: Request) {
   let url = '';
 
   if (type === 'autocomplete') {
-    url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&types=%28cities%29&components=country:${country}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`;
+    url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${inputValue}&types=%28cities%29&components=country:${country}&key=${process.env.GOOGLE_MAPS_KEY}`;
   } else if (type === 'geocode') {
-    url = `https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`;
+    url = `https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=${process.env.GOOGLE_MAPS_KEY}`;
   }
 
   try {
