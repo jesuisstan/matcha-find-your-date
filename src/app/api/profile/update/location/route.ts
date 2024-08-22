@@ -7,11 +7,11 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { id, biography, sex_preferences } = body;
+    const { id, latitude, longitude } = body;
 
     // Step 1: Check if the user exists
     const selectQuery = `
-      SELECT biography, sex_preferences
+      SELECT latitude, longitude
       FROM users 
       WHERE id = $1
     `;
@@ -24,18 +24,18 @@ export async function POST(req: Request) {
     const currentData = currentDataResult.rows[0];
 
     // Step 2: Check if the data is up-to-date
-    if (currentData.biography === biography && currentData.sex_preferences === sex_preferences) {
+    if (currentData.latitude === latitude && currentData.longitude === longitude) {
       return NextResponse.json({ message: 'data-is-up-to-date' });
     }
 
     // Step 4: Update the user data if needed
     const updateQuery = `
       UPDATE users 
-      SET biography = $2, sex_preferences = $3
+      SET latitude = $2, longitude = $3
       WHERE id = $1
-      RETURNING id, biography, sex_preferences;
+      RETURNING id, latitude, longitude;
     `;
-    const updateValues = [id, biography, sex_preferences];
+    const updateValues = [id, latitude, longitude];
 
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];

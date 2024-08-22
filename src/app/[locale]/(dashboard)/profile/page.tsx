@@ -15,10 +15,11 @@ import StaticTagsGroup from '@/components/ui/chips/tags-group-static';
 import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
+import UserLocation from '@/components/user-location';
 import UserSexPreference from '@/components/user-sex-preference';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
-import { calculateAge, capitalize } from '@/utils/format-string';
+import { calculateAge } from '@/utils/format-string';
 
 const ProfilePage = () => {
   const t = useTranslations();
@@ -130,8 +131,14 @@ const ProfilePage = () => {
           <div className="rounded-2xl bg-card p-2">
             <div className="m-5 flex flex-col justify-start">
               <h3 className="text-2xl font-bold">{t(`location`)}</h3>
-              latitude {user?.latitude}
-              longitude {user?.longitude}
+              <UserLocation
+                latitude={user?.latitude}
+                longitude={user?.longitude}
+                modifiable
+                onModify={() =>
+                  handleModifyClick('location' as keyof typeof TProfileCompleteLayout)
+                }
+              />
             </div>
           </div>
 

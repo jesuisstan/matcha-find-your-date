@@ -137,8 +137,8 @@ const ModalProfileComplete = ({
     } else if (layout === 'location') {
       body = JSON.stringify({
         id: user?.id,
-        latitude: 42.42, // todo
-        longitude: 21.21, // todo
+        latitude: geoLocation?.lat,
+        longitude: geoLocation?.lng,
       });
     } else if (layout === 'sexpreferences') {
       body = JSON.stringify({
