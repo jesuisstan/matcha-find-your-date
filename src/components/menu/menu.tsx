@@ -144,7 +144,7 @@ const Menu: React.FC = () => {
                 <Link
                   href={`/dashboard`}
                   className={clsx(
-                    `flex w-full items-center text-secondary transition-all duration-300 ease-in-out`,
+                    `flex w-full items-center text-secondary smooth42transition`,
                     `hover:text-c42orange`,
                     pathname === `/dashboard` && 'font-bold'
                   )}

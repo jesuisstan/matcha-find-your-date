@@ -87,5 +87,16 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.smooth42transition': {
+          transition: 'all 300ms ease-in-out',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+  ],
 };

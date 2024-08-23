@@ -64,7 +64,11 @@ const ProfilePage = () => {
               <h1 className="mb-2 text-4xl">
                 {user?.firstname} {user?.lastname.toUpperCase()}{' '}
               </h1>
-              <div className="absolute -right-10 top-1 text-foreground opacity-60 hover:opacity-100">
+              <div
+                className={
+                  'absolute -right-10 top-1 text-foreground opacity-60 smooth42transition hover:opacity-100'
+                }
+              >
                 <SquarePen
                   size={18}
                   onClick={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}

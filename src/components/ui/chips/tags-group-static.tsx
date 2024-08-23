@@ -35,7 +35,7 @@ const StaticTagsGroup: React.FC<TStaticTagsGroupProps> = ({ tagsList, modifiable
       </div>
 
       {modifiable && (
-        <div className="absolute right-1 top-1 text-foreground opacity-60 hover:opacity-100">
+        <div className="absolute right-1 top-1 text-foreground opacity-60 smooth42transition hover:opacity-100">
           <SquarePen size={18} onClick={onModify} />
         </div>
       )}

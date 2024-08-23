@@ -19,6 +19,7 @@ import useUserStore from '@/stores/user';
 import { TGeoCoordinates, TSelectGeoOption } from '@/types/geolocation';
 import { TUser } from '@/types/user';
 import { formatDateForInput } from '@/utils/format-date';
+import { createTGeoCoordinates, createTSelectGeoOption } from '@/utils/geolocation-handlers';
 
 const MAX_BIOGRAPHY_LENGTH = 442;
 
@@ -57,8 +58,12 @@ const ModalProfileComplete = ({
   const [photosURLs, setPhotosURLs] = useState<string[]>(user?.photos || []);
 
   // Location vars
-  const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(null);
-  const [geoCoordinates, setGeoCoordinates] = useState<TGeoCoordinates | null>(null);
+  const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(
+    createTSelectGeoOption(user?.address)
+  );
+  const [geoCoordinates, setGeoCoordinates] = useState<TGeoCoordinates | null>(
+    createTGeoCoordinates(user?.latitude, user?.longitude)
+  );
 
   const handleBiographyChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;

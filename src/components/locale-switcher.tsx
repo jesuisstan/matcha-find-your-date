@@ -25,7 +25,7 @@ const LocaleSwitcher = () => {
     <div className="flex space-x-4 self-center align-middle">
       <div
         className={clsx(
-          `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] transition-all duration-300 ease-in-out`,
+          `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] smooth42transition`,
           `hover:border-c42orange`,
           localeActive === 'fr' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
@@ -49,7 +49,7 @@ const LocaleSwitcher = () => {
 
       <div
         className={clsx(
-          `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] transition-all duration-300 ease-in-out`,
+          `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] smooth42transition`,
           `hover:border-c42orange`,
           localeActive === 'en' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
@@ -73,7 +73,7 @@ const LocaleSwitcher = () => {
 
       <div
         className={clsx(
-          `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] transition-all duration-300 ease-in-out`,
+          `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] smooth42transition`,
           `hover:border-c42orange`,
           localeActive === 'ru' ? 'border-[1px] border-foreground' : 'bg-card'
         )}

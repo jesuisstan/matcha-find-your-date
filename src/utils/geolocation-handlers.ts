@@ -1,3 +1,40 @@
+import { TGeoCoordinates, TSelectGeoOption } from '@/types/geolocation';
+import { TUser } from '@/types/user';
+
+/**
+ * Function to create TSelectGeoOption from user?.address
+ * @param address - user?.address
+ * @returns TSelectGeoOption | null
+ *  */
+export const createTSelectGeoOption = (
+  address: string | null | undefined
+): TSelectGeoOption | null => {
+  if (address) {
+    return { value: address, label: address };
+  }
+  return null;
+};
+
+/** Function to create TGeoCoordinates from user?.latitude and user?.longitude
+ * @param latitude - user?.latitude
+ * @param longitude - user?.longitude
+ * @returns TGeoCoordinates | null
+ * */
+export const createTGeoCoordinates = (
+  latitude: number | null | undefined,
+  longitude: number | null | undefined
+): TGeoCoordinates | null => {
+  if (
+    latitude !== null &&
+    latitude !== undefined &&
+    longitude !== null &&
+    longitude !== undefined
+  ) {
+    return { lat: latitude, lng: longitude };
+  }
+  return null;
+};
+
 export type TGeoPosition = {
   latitude: number;
   longitude: number;

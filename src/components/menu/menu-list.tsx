@@ -23,7 +23,7 @@ const MenuList = ({
             <Link
               href={pathname !== '/profile' ? `/profile` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
-                `group flex w-full items-center text-secondary transition duration-75`,
+                `group flex w-full items-center text-secondary smooth42transition`,
                 `hover:text-c42orange`
               )}
               onClick={onClick}
@@ -53,7 +53,7 @@ const MenuList = ({
             <Link
               href={pathname !== '/search/smart-suggestions' ? `/search/smart-suggestions` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
-                `group flex w-full items-center text-secondary transition duration-75`,
+                `group flex w-full items-center text-secondary smooth42transition`,
                 `hover:text-c42orange`
               )}
               onClick={onClick}
@@ -76,7 +76,7 @@ const MenuList = ({
             <Link
               href={pathname !== '/search/advanced' ? `/search/advanced` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
-                `group flex w-full items-center text-secondary transition duration-75`,
+                `group flex w-full items-center text-secondary smooth42transition`,
                 `hover:text-c42orange`
               )}
               onClick={onClick}
