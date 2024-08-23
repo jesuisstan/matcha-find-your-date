@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 
 import clsx from 'clsx';
 import { Save } from 'lucide-react';
+import { MapPinned } from 'lucide-react';
 
 import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
 import ModalBasic from '@/components/modals/modal-basic';
@@ -14,7 +14,6 @@ import ChipsGroup from '@/components/ui/chips/chips-group';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
-import { countryOptionsEN, countryOptionsFR, countryOptionsRU } from '@/constants/country-db';
 import { TAGS_LIST } from '@/constants/tags-list';
 import useUserStore from '@/stores/user';
 import { TGeoCoordinates, TSelectGeoOption } from '@/types/geolocation';
@@ -58,9 +57,8 @@ const ModalProfileComplete = ({
   const [photosURLs, setPhotosURLs] = useState<string[]>(user?.photos || []);
 
   // Location vars
-  const [selectedCountryOption, setSelectedCountryOption] = useState<TSelectGeoOption | null>(null);
   const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(null);
-  const [geoLocation, setGeoLocation] = useState<TGeoCoordinates | null>(null);
+  const [geoCoordinates, setGeoCoordinates] = useState<TGeoCoordinates | null>(null);
 
   const handleBiographyChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.target.value;
@@ -73,11 +71,9 @@ const ModalProfileComplete = ({
 
   const loadCityOptions = async (inputValue: string): Promise<TSelectGeoOption[]> => {
     setError('');
-    if (selectedCountryOption && inputValue) {
+    if (inputValue) {
       try {
-        const response = await fetch(
-          `/api/location-proxy?input=${inputValue}&type=autocomplete&country=${selectedCountryOption.value}`
-        );
+        const response = await fetch(`/api/location-proxy?input=${inputValue}&type=autocomplete`);
         const data = await response.json();
         return (
           data?.predictions?.map((place: any) => ({
@@ -93,7 +89,7 @@ const ModalProfileComplete = ({
     return [];
   };
 
-  const getGeoLocation = async (address: string) => {
+  const getGeoCoordinates = async (address: string) => {
     setError('');
     try {
       const response = await fetch(`/api/location-proxy?input=${address}&type=geocode`);
@@ -104,6 +100,53 @@ const ModalProfileComplete = ({
       setError(t('error-getting-geolocation'));
       return null;
     }
+  };
+
+  const reverseGeocode = async (lat: number, lng: number) => {
+    setError('');
+    try {
+      const response = await fetch(
+        `/api/location-proxy?lat=${lat}&lng=${lng}&type=reverse-geocode`
+      );
+      const data = await response.json();
+      const addressComponents = data?.results[0]?.address_components || [];
+      const country = addressComponents.find((c: any) => c.types.includes('country'));
+
+      const city = addressComponents.find(
+        (c: any) => c.types.includes('locality') || c.types.includes('sublocality')
+      );
+      return {
+        city: city
+          ? { value: city.long_name, label: `${city.long_name}, ${country.long_name}` }
+          : null,
+      };
+    } catch (error) {
+      setError(t('error-reverse-geocoding'));
+      return null;
+    }
+  };
+
+  const handleGeoLocatorClick = async () => {
+    setError('');
+    setSuccessMessage('');
+    setLoading(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          setGeoCoordinates({ lat: latitude, lng: longitude });
+          const locationData = await reverseGeocode(latitude, longitude);
+          if (locationData) setSelectedCityOption(locationData.city);
+        },
+        (error) => {
+          setError(t('error-getting-location'));
+          console.error('Error obtaining location:', error);
+        }
+      );
+    } else {
+      setError(t('geolocation-not-supported'));
+    }
+    setLoading(false);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -137,8 +180,9 @@ const ModalProfileComplete = ({
     } else if (layout === 'location') {
       body = JSON.stringify({
         id: user?.id,
-        latitude: geoLocation?.lat,
-        longitude: geoLocation?.lng,
+        latitude: geoCoordinates?.lat,
+        longitude: geoCoordinates?.lng,
+        address: selectedCityOption?.label,
       });
     } else if (layout === 'sexpreferences') {
       body = JSON.stringify({
@@ -146,6 +190,11 @@ const ModalProfileComplete = ({
         sex_preferences: sexPreferences,
       });
     } else if (layout === 'tags') {
+      if (selectedTags.length < 3) {
+        setError(t('error-minimum-tags-array'));
+        setLoading(false);
+        return;
+      }
       body = JSON.stringify({
         id: user?.id,
         tags: selectedTags,
@@ -295,41 +344,31 @@ const ModalProfileComplete = ({
         <Label htmlFor="geolocation" className="mb-2">
           {t(`location`) + ':'}
         </Label>
-        <div id="geolocation" className="m-5 flex flex-col gap-5">
-          <div className="w-full">
-            <Label htmlFor="country" className="mb-2">
-              {t(`country`)}
-            </Label>
-            <Select
-              className="w-60 text-sm text-foreground/85 placeholder-foreground placeholder-opacity-25"
-              value={selectedCountryOption}
-              onChange={setSelectedCountryOption}
-              options={
-                localeActive === 'en'
-                  ? countryOptionsEN
-                  : localeActive === 'fr'
-                    ? countryOptionsFR
-                    : countryOptionsRU
-              }
-              id="country"
-              placeholder={t('selector.select-country')}
-              required
+        <div id="geolocation" className="m-5 flex flex-row gap-5">
+          <div id="geo-locator" className="self-center">
+            <MapPinned
+              size={24}
+              onClick={handleGeoLocatorClick}
+              className="cursor-pointer transition-all duration-300 ease-in-out hover:scale-110"
             />
           </div>
-          <div className="w-full">
-            <Label htmlFor="city" className="mb-2">
-              {t(`city`)}
-            </Label>
-            <AsyncSelect
-              className="w-60 text-sm text-foreground/85 placeholder-foreground placeholder-opacity-25"
-              value={selectedCityOption}
-              onChange={setSelectedCityOption}
-              loadOptions={loadCityOptions}
-              id="city"
-              placeholder={t('selector.select-city')}
-              isDisabled={!selectedCountryOption}
-              required
-            />
+          {/* vertical divider */}
+          <div className={clsx('w-[1px] bg-secondary opacity-40', 'xl:block')} />
+          <div id="geo-selector" className="flex flex-col gap-3">
+            <div className="w-full">
+              <Label htmlFor="city" className="mb-2">
+                {t(`city`)}
+              </Label>
+              <AsyncSelect
+                className="w-60 text-sm text-foreground/85 placeholder-foreground placeholder-opacity-25"
+                value={selectedCityOption}
+                onChange={setSelectedCityOption}
+                loadOptions={loadCityOptions}
+                id="city"
+                placeholder={t('selector.select-city')}
+                required
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -439,9 +478,9 @@ const ModalProfileComplete = ({
     let isMounted = true;
     const fetchData = async () => {
       if (selectedCityOption) {
-        const geoLocation = await getGeoLocation(selectedCityOption.value);
+        const geoLocation = await getGeoCoordinates(selectedCityOption.value);
         if (isMounted) {
-          setGeoLocation(geoLocation);
+          setGeoCoordinates(geoLocation);
         }
       }
     };
@@ -449,17 +488,7 @@ const ModalProfileComplete = ({
     return () => {
       isMounted = false;
     };
-  }, [selectedCountryOption, selectedCityOption]);
-
-  useEffect(() => {
-    // Clear selectedCityOption when the country changes
-    setSelectedCityOption(null);
-    setGeoLocation(null);
-  }, [selectedCountryOption]);
-
-  console.log('coordinates:', geoLocation?.lng, geoLocation?.lat);
-  console.log('address:', selectedCityOption?.value);
-  console.log('country:', selectedCountryOption?.value);
+  }, [selectedCityOption]);
 
   return (
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('complete-profile')}>

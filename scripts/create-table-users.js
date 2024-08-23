@@ -48,6 +48,7 @@ async function createTables() {
         complete BOOLEAN DEFAULT false,
         latitude DOUBLE PRECISION,
         longitude DOUBLE PRECISION,
+        address TEXT,
         registration_date TIMESTAMP,
         last_connection_date TIMESTAMP,
         online BOOLEAN DEFAULT false,

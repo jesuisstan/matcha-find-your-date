@@ -7,13 +7,11 @@ import clsx from 'clsx';
 import { SquarePen } from 'lucide-react';
 
 const UserLocation = ({
-  latitude,
-  longitude,
+  address,
   modifiable,
   onModify,
 }: {
-  latitude: number | null | undefined;
-  longitude: number | null | undefined;
+  address: string | null | undefined;
   modifiable?: boolean;
   onModify?: () => void;
 }) => {
@@ -21,12 +19,8 @@ const UserLocation = ({
 
   return (
     <div className="relative flex items-center">
-      {latitude && longitude ? (
-        <span className="flex items-center gap-2">
-          {t('selector.latitude')} {latitude}
-          <br />
-          {t('selector.longitude')} {longitude}
-        </span>
+      {address ? (
+        <span className="flex items-center gap-2">{address}</span>
       ) : (
         <span className="flex items-center gap-2">???</span>
       )}

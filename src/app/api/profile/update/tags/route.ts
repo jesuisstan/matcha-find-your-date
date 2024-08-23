@@ -9,7 +9,16 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { id, tags } = body;
 
-    // Step 1: Check if the user exists
+    // Step 1: Validate the tags received from the frontend
+    if (
+      !Array.isArray(tags) ||
+      tags.length < 3 ||
+      !tags.every((tag) => typeof tag === 'string' && tag.trim() !== '')
+    ) {
+      return NextResponse.json({ error: 'error-minimum-tags-array' }, { status: 400 });
+    }
+
+    // Step 2: Check if the user exists
     const selectQuery = `
       SELECT tags
       FROM users 
@@ -22,16 +31,17 @@ export async function POST(req: Request) {
     }
 
     const currentData = currentDataResult.rows[0];
+    const currentTags = currentData.tags || []; // Handle NULL as an empty array
 
-    // Step 2: Check if the data is up-to-date (sort and compare the tags arrays)
-    const currentTagsSorted = currentData.tags.slice().sort();
+    // Step 3: Check if the data is up-to-date (sort and compare the tags arrays)
+    const currentTagsSorted = currentTags.slice().sort();
     const newTagsSorted = tags.slice().sort();
     const areTagsEqual = JSON.stringify(currentTagsSorted) === JSON.stringify(newTagsSorted);
     if (areTagsEqual) {
       return NextResponse.json({ message: 'data-is-up-to-date' });
     }
 
-    // Step 3: Update the user data if needed
+    // Step 4: Update the user data if needed
     const updateQuery = `
       UPDATE users 
       SET tags = $2

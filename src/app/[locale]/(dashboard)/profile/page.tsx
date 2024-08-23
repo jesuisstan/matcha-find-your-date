@@ -132,8 +132,7 @@ const ProfilePage = () => {
             <div className="m-5 flex flex-col justify-start">
               <h3 className="text-2xl font-bold">{t(`location`)}</h3>
               <UserLocation
-                latitude={user?.latitude}
-                longitude={user?.longitude}
+                address={user?.address}
                 modifiable
                 onModify={() =>
                   handleModifyClick('location' as keyof typeof TProfileCompleteLayout)

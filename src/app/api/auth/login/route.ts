@@ -78,6 +78,7 @@ export async function POST(request: Request) {
     complete: user.complete,
     latitude: user.latitude,
     longitude: user.longitude,
+    address: user.address,
     registration_date: user.registration_date,
     last_connection_date: currentDate, // set last connection date with currentDate value to avoid unnecessary user-data fetch
     online: user.online,

@@ -252,5 +252,7 @@
   "country": "Country",
   "city": "City",
   "error-loading-city-options": "Error loading city options",
-  "error-getting-geolocation": "Error getting geolocation"
+  "error-getting-geolocation": "Error getting geolocation",
+  "get-location": "Get current location",
+  "error-minimum-tags-array": "Minimum 3 #tags are required"
 }

@@ -14,6 +14,7 @@ export const userSchema = z.object({
   last_connection_date: z.string(),
   latitude: z.number().nullable(),
   longitude: z.number().nullable(),
+  address: z.string().nullable(),
   online: z.boolean(),
   popularity: z.number(),
   sex_preferences: z.enum(['male', 'female', 'bisexual']),

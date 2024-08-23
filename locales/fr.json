@@ -250,5 +250,7 @@
   "tastes": "Goûts",
   "location": "Emplacement",
   "country": "Pays",
-  "city": "Ville"
+  "city": "Ville",
+  "get-location": "Obtenir l'emplacement",
+  "error-minimum-tags-array": "Minimum 3 #tags requis"
 }
