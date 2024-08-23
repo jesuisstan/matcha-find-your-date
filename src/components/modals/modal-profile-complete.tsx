@@ -121,7 +121,7 @@ const ModalProfileComplete = ({
           : null,
       };
     } catch (error) {
-      setError(t('error-reverse-geocoding'));
+      setError(t('error-getting-location'));
       return null;
     }
   };
@@ -140,7 +140,6 @@ const ModalProfileComplete = ({
         },
         (error) => {
           setError(t('error-getting-location'));
-          console.error('Error obtaining location:', error);
         }
       );
     } else {

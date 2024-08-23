@@ -252,5 +252,7 @@
   "country": "Pays",
   "city": "Ville",
   "get-location": "Obtenir l'emplacement",
-  "error-minimum-tags-array": "Minimum 3 #tags requis"
+  "error-minimum-tags-array": "Minimum 3 #tags requis",
+  "error-getting-location": "Erreur lors de l'obtention de la géolocalisation ou l'accessibilité à la géolocalisation est désactivée",
+  "geolocation-not-supported": "La géolocalisation n'est pas prise en charge par votre navigateur"
 }
