@@ -346,7 +346,7 @@ const ModalProfileComplete = ({
             id="biography"
             name="biography"
             placeholder={t(`describe-youself`)}
-            className="disabled:opacity-50, flex h-48 min-w-[35vw] rounded-md border bg-background p-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed"
+            className="disabled:opacity-50, flex h-48 min-w-[30vw] rounded-md border bg-background p-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed"
             value={biography}
             onChange={handleBiographyChange}
           />
@@ -404,7 +404,7 @@ const ModalProfileComplete = ({
           <div className="text-c42orange">
             <OctagonAlert size={25} />
           </div>
-          <div className="max-w-[442px] text-left text-xs">
+          <div className="max-w-[400px] text-left text-xs">
             <TextWithLineBreaks text={t('location-need-message')} />
           </div>
         </div>
@@ -529,32 +529,36 @@ const ModalProfileComplete = ({
 
   return (
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('complete-profile')}>
-      <div
-        className={clsx(
-          'flex h-max min-h-[40vh] min-w-[30vw] flex-col items-center justify-center space-y-10 text-center'
-        )}
-      >
-        {layout !== 'photos' ? (
-          <form
-            className="align-center flex flex-col items-center justify-center gap-5 text-left"
-            onSubmit={handleSubmit}
-            ref={formRef}
-          >
-            {layouts[layout as keyof typeof layouts]}
-            <ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
-              <Save size={24} />
-            </ButtonMatcha>
-          </form>
-        ) : (
-          <div>{layouts[layout as keyof typeof layouts]}</div>
-        )}
+      <div className="max-h-[70vh] overflow-y-auto">
+        <div
+          className={clsx(
+            'flex h-max min-h-[40vh] min-w-[30vw] flex-col items-center justify-center space-y-10 text-center'
+          )}
+        >
+          {layout !== 'photos' ? (
+            <form
+              className="align-center flex flex-col items-center justify-center gap-5 text-left"
+              onSubmit={handleSubmit}
+              ref={formRef}
+            >
+              {layouts[layout as keyof typeof layouts]}
+              <ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
+                <Save size={24} />
+              </ButtonMatcha>
+            </form>
+          ) : (
+            <div>{layouts[layout as keyof typeof layouts]}</div>
+          )}
+        </div>
+        <div className="min-h-6">
+          {error && <p className="mb-5 text-center text-sm text-negative">{error}</p>}
+          {successMessage && (
+            <p className="mb-5 text-center text-sm text-positive">{successMessage}</p>
+          )}
+        </div>
       </div>
-      <div className="min-h-6">
-        {error && <p className="mb-5 text-center text-sm text-negative">{error}</p>}
-        {successMessage && (
-          <p className="mb-5 text-center text-sm text-positive">{successMessage}</p>
-        )}
-      </div>
+
+      {/* Next and Previous buttons */}
       <div
         className={clsx('flex flex-row', layout === 'basics' ? 'justify-end' : 'justify-between')}
       >
