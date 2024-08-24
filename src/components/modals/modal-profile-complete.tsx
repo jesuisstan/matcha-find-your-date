@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 
 import clsx from 'clsx';
-import { Save } from 'lucide-react';
-import { MapPinned } from 'lucide-react';
+import { OctagonAlert, Save } from 'lucide-react';
+import { MapPinned, MapPinOff } from 'lucide-react';
 
 import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
 import ModalBasic from '@/components/modals/modal-basic';
@@ -14,12 +14,17 @@ import ChipsGroup from '@/components/ui/chips/chips-group';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
+import TextWithLineBreaks from '@/components/ui/text-with-line-breaks';
 import { TAGS_LIST } from '@/constants/tags-list';
 import useUserStore from '@/stores/user';
 import { TGeoCoordinates, TSelectGeoOption } from '@/types/geolocation';
 import { TUser } from '@/types/user';
 import { formatDateForInput } from '@/utils/format-date';
-import { createTGeoCoordinates, createTSelectGeoOption } from '@/utils/geolocation-handlers';
+import {
+  createTGeoCoordinates,
+  createTSelectGeoOption,
+  getFakeLocation,
+} from '@/utils/geolocation-handlers';
 
 const MAX_BIOGRAPHY_LENGTH = 442;
 
@@ -72,6 +77,14 @@ const ModalProfileComplete = ({
     } else {
       setBiography(text.substring(0, MAX_BIOGRAPHY_LENGTH));
     }
+  };
+
+  const handleFakeLocatorClick = () => {
+    setError('');
+    setSuccessMessage('');
+    const fakeLocation = getFakeLocation(localeActive);
+    setGeoCoordinates({ lat: fakeLocation.latitude, lng: fakeLocation.longitude });
+    setSelectedCityOption({ value: fakeLocation.address, label: fakeLocation.address });
   };
 
   const loadCityOptions = async (inputValue: string): Promise<TSelectGeoOption[]> => {
@@ -344,12 +357,12 @@ const ModalProfileComplete = ({
       </div>
     ),
     location: (
-      <div className="">
-        <Label htmlFor="geolocation" className="mb-2">
+      <div className="flex flex-col">
+        <Label htmlFor="geolocation" className="mb-2 ml-5">
           {t(`location`) + ':'}
         </Label>
-        <div id="geolocation" className="m-5 flex flex-row gap-5">
-          <div id="geo-locator" className="self-center">
+        <div id="geolocation" className="m-5 flex flex-row gap-5 self-center">
+          <div id="geo-locator" className="self-center" title={t('get-location')}>
             <MapPinned
               size={24}
               onClick={handleGeoLocatorClick}
@@ -358,13 +371,14 @@ const ModalProfileComplete = ({
           </div>
           {/* vertical divider */}
           <div className={clsx('w-[1px] bg-secondary opacity-40', 'xl:block')} />
+          {/* city selector */}
           <div id="geo-selector" className="flex flex-col gap-3">
             <div className="w-full">
               <Label htmlFor="city" className="mb-2">
                 {t(`city`)}
               </Label>
               <AsyncSelect
-                className="w-60 text-sm text-foreground/85 placeholder-foreground placeholder-opacity-25"
+                className="w-52 text-xs text-foreground/85 placeholder-foreground placeholder-opacity-25"
                 value={selectedCityOption}
                 onChange={setSelectedCityOption}
                 loadOptions={loadCityOptions}
@@ -373,6 +387,25 @@ const ModalProfileComplete = ({
                 required
               />
             </div>
+          </div>
+          {/* vertical divider */}
+          <div className={clsx('w-[1px] bg-secondary opacity-40', 'xl:block')} />
+          {/* fake location */}
+          <div id="geo-locator" className="self-center" title={t('set-fake-location')}>
+            <MapPinOff
+              size={24}
+              onClick={handleFakeLocatorClick}
+              className="cursor-pointer transition-all duration-300 ease-in-out hover:scale-110"
+            />
+          </div>
+        </div>
+        {/* warning */}
+        <div className="flex flex-row items-center justify-center gap-3 space-y-1 text-center">
+          <div className="text-c42orange">
+            <OctagonAlert size={25} />
+          </div>
+          <div className="max-w-[442px] text-left text-xs">
+            <TextWithLineBreaks text={t('location-need-message')} />
           </div>
         </div>
       </div>
@@ -498,7 +531,7 @@ const ModalProfileComplete = ({
     <ModalBasic isOpen={show} setIsOpen={handleClose} title={t('complete-profile')}>
       <div
         className={clsx(
-          'flex h-max min-h-[10vh] min-w-[25vw] flex-col items-center justify-center space-y-10 text-center'
+          'flex h-max min-h-[40vh] min-w-[30vw] flex-col items-center justify-center space-y-10 text-center'
         )}
       >
         {layout !== 'photos' ? (

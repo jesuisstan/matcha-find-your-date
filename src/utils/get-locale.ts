@@ -15,11 +15,3 @@ export const getLocaleFromCookiesOnServerSide = (req: NextApiRequest): string | 
   const localeCookie = req.cookies['NEXT_LOCALE'];
   return localeCookie ? decodeURIComponent(localeCookie) : null;
 };
-
-//// Example usage in an API route
-//const handler = (req: NextApiRequest, res: NextApiResponse) => {
-//  const locale = getLocaleFromCookies(req);
-//  res.status(200).json({ locale });
-//};
-
-//export default handler;

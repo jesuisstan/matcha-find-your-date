@@ -82,7 +82,8 @@
     "missing-token-or-password": "Missing token or password",
     "login-method": "Login Method",
     "login-failed": "Login failed",
-    "password-change-message": "To enhance your security, you will be logged out and redirected to the login page. From there, please select the 'Forgot Password?' option to proceed with changing your password.\n Would you like to continue?"
+    "password-change-message": "To enhance your security, you will be logged out and redirected to the login page. From there, please select the 'Forgot Password?' option to proceed with changing your password.\n Would you like to continue?",
+    "password-invalid": "Invalid password"
   },
   "slogan": "Find your date",
   "slogan-subject": "Because, love too can be industrialized",
@@ -254,7 +255,9 @@
   "error-loading-city-options": "Error loading city options",
   "error-getting-geolocation": "Error getting geolocation",
   "get-location": "Get current location",
+  "set-fake-location": "Set fake location",
   "error-minimum-tags-array": "Minimum 3 #tags are required",
   "error-getting-location": "Error getting location or access to location denied",
-  "geolocation-not-supported": "Geolocation is not supported by your browser"
+  "geolocation-not-supported": "Geolocation is not supported by your browser",
+  "location-need-message": "To improve search accuracy and account security, we recommend sharing your location. If you prefer not to, you can manually select a city or use fake location based on the current service language: London (en), Paris (fr), Moscow (ru)."
 }

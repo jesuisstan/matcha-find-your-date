@@ -66,7 +66,6 @@
     "nickname-already-exists": "Nickname déjà existant",
     "failed-to-register-user": "Échec de l'inscription de l'utilisateur",
     "invalid-email-or-nickname": "Email ou nickname invalide",
-    "password-invalid": "Mot de passe invalide",
     "please-confirm-email-before-login": "Veuillez confirmer votre adresse email avant de vous connecter",
     "email-required": "Email requis",
     "password-required": "Mot de passe requis",
@@ -83,7 +82,8 @@
     "missing-token-or-password": "Jeton ou mot de passe manquant",
     "login-method": "Méthode de connexion",
     "login-failed": "Échec de la connexion",
-    "password-change-message": "Pour renforcer votre sécurité, vous allez être déconnecté et redirigé vers la page de connexion. À partir de là, veuillez sélectionner l'option 'Mot de passe oublié?' pour continuer à changer votre mot de passe.\n Souhaitez-vous continuer?"
+    "password-change-message": "Pour renforcer votre sécurité, vous allez être déconnecté et redirigé vers la page de connexion. À partir de là, veuillez sélectionner l'option 'Mot de passe oublié?' pour continuer à changer votre mot de passe.\n Souhaitez-vous continuer?",
+    "password-invalid": "Mot de passe invalide"
   },
   "slogan": "Trouvez votre date",
   "slogan-subject": "Parce que l'amour aussi peut être industrialisé",
@@ -252,7 +252,9 @@
   "country": "Pays",
   "city": "Ville",
   "get-location": "Obtenir l'emplacement",
+  "set-fake-location": "Définir un faux emplacement",
   "error-minimum-tags-array": "Minimum 3 #tags requis",
   "error-getting-location": "Erreur lors de l'obtention de la géolocalisation ou l'accessibilité à la géolocalisation est désactivée",
-  "geolocation-not-supported": "La géolocalisation n'est pas prise en charge par votre navigateur"
+  "geolocation-not-supported": "La géolocalisation n'est pas prise en charge par votre navigateur",
+  "location-need-message": "Pour améliorer la précision de la recherche et la sécurité des comptes, nous vous recommandons de partager votre emplacement. Si vous préférez ne pas le faire, vous pouvez sélectionner manuellement une ville ou utiliser un faux emplacement en fonction de la langue de service actuelle: Paris (fr), Londres (en), Moscou (ru)."
 }
