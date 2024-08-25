@@ -165,7 +165,8 @@ const Login = () => {
           <div className="absolute bottom-0 z-10 bg-card/85 p-4 text-foreground">
             <h2 className="mb-2 text-4xl">Make love, not war</h2>
             <p className="text-sm">
-              {t(`service-provided`)}{' '}
+              Matcha Dating App{'. '}
+              {/*{t(`service-provided`)}{' '}
               <a
                 href={`https://www.krivtsoff.site/`}
                 target="_blank"
@@ -173,7 +174,7 @@ const Login = () => {
               >
                 Stan Krivtsoff
               </a>
-              {'. '}
+              {'. '}*/}
               {t(`rights-reserved`)}
               {'.'}
             </p>

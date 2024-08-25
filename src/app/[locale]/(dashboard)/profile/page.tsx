@@ -134,8 +134,8 @@ const ProfilePage = () => {
           )}
         >
           {/* LOCATION */}
-          <div className="rounded-2xl bg-card p-2">
-            <div className="m-5 flex flex-col justify-start">
+          <div className="rounded-2xl bg-card p-5">
+            <div className="flex flex-col justify-start">
               <h3 className="text-2xl font-bold">{t(`location`)}</h3>
               <UserLocation
                 address={user?.address}
@@ -148,8 +148,8 @@ const ProfilePage = () => {
           </div>
 
           {/* TASTES */}
-          <div className="rounded-2xl bg-card p-2">
-            <div className="m-5 flex flex-col justify-start">
+          <div className="rounded-2xl bg-card p-5">
+            <div className="flex flex-col justify-start">
               <h3 className="text-2xl font-bold">{t(`tastes`)}</h3>
               <div className="mt-4">
                 <UserSexPreference
@@ -173,7 +173,7 @@ const ProfilePage = () => {
 
         {/* PHOTOS */}
         <div className={clsx('col-span-10', 'lg:col-span-7')}>
-          <div className="rounded-2xl bg-card p-2">
+          <div className="rounded-2xl bg-card p-5">
             <div>Content</div>
             <div>Content</div>
             <div>Content</div>
