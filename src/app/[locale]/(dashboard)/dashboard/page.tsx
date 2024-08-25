@@ -45,7 +45,7 @@ const Dashboard = () => {
           )}
         >
           <div
-            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center transition-all duration-300 ease-in-out hover:scale-105"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out hover:border-c42orange"
             onClick={() => router.push('/profile')}
           >
             <p>{t('customize-profile')}</p>
@@ -56,7 +56,7 @@ const Dashboard = () => {
           </div>
 
           <div
-            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center transition-all duration-300 ease-in-out hover:scale-105"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out hover:border-c42orange"
             onClick={() => router.push('/search/smart-suggestions')}
           >
             <p>{t('use-smart-suggestions')}</p>
@@ -67,7 +67,7 @@ const Dashboard = () => {
           </div>
 
           <div
-            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl bg-card p-5 text-center transition-all duration-300 ease-in-out hover:scale-105"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out hover:border-c42orange"
             onClick={() => router.push('/search/advanced')}
           >
             <p>{t('use-advanced-search')}</p>
