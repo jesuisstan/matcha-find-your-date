@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { SquarePen } from 'lucide-react';
 
+import FilledOrNot from '@/components/ui/filled-or-not';
 import { capitalize } from '@/utils/format-string';
 
 export const DateSkeleton = () => {
@@ -66,8 +67,11 @@ const LabelsWrapper = ({
       </div>
 
       {modifiable && (
-        <div className="absolute right-1 top-1 text-foreground opacity-60 smooth42transition hover:opacity-100">
-          <SquarePen size={18} onClick={onModify} />
+        <div className={'absolute right-1 top-1 flex gap-1'}>
+          <FilledOrNot size={18} filled={!!nickname || !!age || !!sex} />
+          <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
+            <SquarePen size={18} onClick={onModify} />
+          </div>
         </div>
       )}
     </div>

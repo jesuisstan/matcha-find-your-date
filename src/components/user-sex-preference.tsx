@@ -8,6 +8,8 @@ import { useTheme } from 'next-themes';
 import clsx from 'clsx';
 import { SquarePen } from 'lucide-react';
 
+import FilledOrNot from '@/components/ui/filled-or-not';
+
 const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: string }) => {
   switch (preference) {
     case 'men':
@@ -25,7 +27,7 @@ const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: s
               width={0}
               height={0}
               sizes="100vw"
-              className="h-auto w-10"
+              className="h-auto w-10 p-1"
               placeholder="blur"
               blurDataURL={'/sex/male.png'}
               priority
@@ -48,7 +50,7 @@ const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: s
               width={0}
               height={0}
               sizes="100vw"
-              className="h-auto w-10"
+              className="h-auto w-10 p-1"
               placeholder="blur"
               blurDataURL={'/sex/female.png'}
               priority
@@ -71,7 +73,7 @@ const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: s
               width={0}
               height={0}
               sizes="100vw"
-              className="h-auto w-10"
+              className="h-auto w-10 p-1"
               placeholder="blur"
               blurDataURL={'/sex/bi.png'}
               priority
@@ -94,7 +96,7 @@ const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: s
               width={0}
               height={0}
               sizes="100vw"
-              className="h-auto w-10"
+              className="h-auto w-10 p-1"
               placeholder="blur"
               blurDataURL={'/sex/a.png'}
               priority
@@ -126,12 +128,15 @@ const UserSexPreference = ({
           {t(`selector.${sexPreference}`)}
         </span>
       ) : (
-        <span className="flex items-center gap-2">???</span>
+        <p className="italic">{t('data-incomplete')}</p>
       )}
 
       {modifiable && (
-        <div className="absolute right-1 top-0 text-foreground opacity-60 smooth42transition hover:opacity-100">
-          <SquarePen size={18} onClick={onModify} />
+        <div className={'absolute right-1 top-0 flex gap-1'}>
+          <FilledOrNot size={18} filled={!!sexPreference} />
+          <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
+            <SquarePen size={18} onClick={onModify} />
+          </div>
         </div>
       )}
     </div>

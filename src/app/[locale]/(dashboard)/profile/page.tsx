@@ -12,6 +12,7 @@ import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import StaticTagsGroup from '@/components/ui/chips/tags-group-static';
+import FilledOrNot from '@/components/ui/filled-or-not';
 import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
@@ -64,15 +65,16 @@ const ProfilePage = () => {
               <h1 className="mb-2 text-4xl">
                 {user?.firstname} {user?.lastname.toUpperCase()}{' '}
               </h1>
-              <div
-                className={
-                  'absolute -right-10 top-1 text-foreground opacity-60 smooth42transition hover:opacity-100'
-                }
-              >
-                <SquarePen
-                  size={18}
-                  onClick={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
-                />
+              <div className={'absolute -right-14 top-1 flex gap-1'}>
+                <FilledOrNot size={18} filled={!!user?.firstname || !!user?.lastname} />
+                <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
+                  <SquarePen
+                    size={18}
+                    onClick={() =>
+                      handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)
+                    }
+                  />
+                </div>
               </div>
             </div>
             <div

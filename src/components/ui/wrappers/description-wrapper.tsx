@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { ChevronDown, ChevronUp, SquarePen } from 'lucide-react';
 
+import FilledOrNot from '@/components/ui/filled-or-not';
 import TextWithLineBreaks from '@/components/ui/text-with-line-breaks';
 import { capitalize } from '@/utils/format-string';
 
@@ -29,7 +30,7 @@ const DescriptionWrapper = ({
       title={isDescriptionExpanded ? t('click-to-wrap') : t('click-to-unwrap')}
       onClick={toggleDescription}
       className={clsx(
-        'relative w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl bg-card p-4 pb-3 pt-2 transition-all duration-300 ease-in-out'
+        'relative w-full min-w-96 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl bg-card p-4 pb-3 pt-2 transition-all duration-300 ease-in-out'
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -73,8 +74,11 @@ const DescriptionWrapper = ({
       </div>
 
       {modifiable && (
-        <div className="absolute right-1 top-1 text-foreground opacity-60 smooth42transition hover:opacity-100">
-          <SquarePen size={18} onClick={onModify} />
+        <div className={'absolute right-1 top-1 flex gap-1'}>
+          <FilledOrNot size={18} filled={!!text} />
+          <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
+            <SquarePen size={18} onClick={onModify} />
+          </div>
         </div>
       )}
     </div>

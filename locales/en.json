@@ -245,7 +245,7 @@
   "last-action": "Last action",
   "invalid-date": "Invalid date",
   "customize-profile": "Customize your profile, update preferences, and manage access settings",
-  "use-smart-suggestions": "Discover potential matches with Matcha's smart suggestions for your next date",
+  "use-smart-suggestions": "Discover potential matches with smart suggestions for your next date",
   "use-advanced-search": "Refine your search criteria to find someone who meets your unique preferences",
   "powered-by": "Powered by",
   "tastes": "Tastes",
@@ -259,5 +259,8 @@
   "error-minimum-tags-array": "Minimum 3 #tags are required",
   "error-getting-location": "Error getting location or access to location denied",
   "geolocation-not-supported": "Geolocation is not supported by your browser",
-  "location-need-message": "To improve search accuracy and account security, we recommend sharing your location. If you prefer not to, you can manually select a city or use fake location based on the current service language: London (en), Paris (fr), Moscow (ru)."
+  "location-need-message": "To improve search accuracy and account security, we recommend sharing your location. If you prefer not to, you can manually select a city or use fake location based on the current service language: London (en), Paris (fr), Moscow (ru).",
+  "data-category-filled": "Profile data category filled",
+  "data-category-not-filled": "(!) Profile data category not filled",
+  "data-incomplete": "Data incomplete"
 }
