@@ -50,7 +50,7 @@ const Dashboard = () => {
           >
             <p>{t('customize-profile')}</p>
             <UserRoundCog
-              size={80}
+              size={70}
               className="transition-all duration-300 ease-in-out hover:scale-125"
             />
           </div>
@@ -61,7 +61,7 @@ const Dashboard = () => {
           >
             <p>{t('use-smart-suggestions')}</p>
             <ScanSearch
-              size={80}
+              size={70}
               className="transition-all duration-300 ease-in-out hover:scale-125"
             />
           </div>
@@ -72,7 +72,7 @@ const Dashboard = () => {
           >
             <p>{t('use-advanced-search')}</p>
             <Microscope
-              size={80}
+              size={70}
               className="transition-all duration-300 ease-in-out hover:scale-125"
             />
           </div>
@@ -90,11 +90,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-html.png"
-                alt="Matcha"
+                alt="html"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-html.png'}
                 priority
@@ -105,11 +105,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-css.png"
-                alt="Matcha"
+                alt="css"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-css.png'}
                 priority
@@ -120,11 +120,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-js.png"
-                alt="Matcha"
+                alt="js"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-js.png'}
                 priority
@@ -135,11 +135,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-ts.png"
-                alt="Matcha"
+                alt="ts"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-ts.png'}
                 priority
@@ -150,11 +150,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-react.png"
-                alt="Matcha"
+                alt="react"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-react.png'}
                 priority
@@ -165,11 +165,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-nextjs.png"
-                alt="Matcha"
+                alt="nextjs"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-nextjs.png'}
                 priority
@@ -180,11 +180,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-tailwindcss.png"
-                alt="Matcha"
+                alt="tailwindcss"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-tailwindcss.png'}
                 priority
@@ -195,11 +195,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-jwt.svg"
-                alt="Matcha"
+                alt="jwt"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-jwt.svg'}
                 priority
@@ -210,11 +210,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-next-intl.png"
-                alt="Matcha"
+                alt="next-intl"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-next-intl.png'}
                 priority
@@ -225,11 +225,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-vercel.svg"
-                alt="Matcha"
+                alt="vercel"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-vercel.svg'}
                 priority
@@ -240,11 +240,11 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-vercel-postgresql.svg"
-                alt="Matcha"
+                alt="vercel-postgresql"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-vercel-postgresql.svg'}
                 priority
@@ -255,16 +255,31 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-between gap-3">
               <Image
                 src="/powered-by/logo-vercel-blob.svg"
-                alt="Matcha"
+                alt="vercel-blob"
                 width={0}
                 height={0}
                 sizes="100vw"
-                className={clsx(`h-auto w-24`)}
+                className={clsx(`h-auto w-16`)}
                 placeholder="blur"
                 blurDataURL={'/powered-by/logo-vercel-blob.svg'}
                 priority
               />
               <p>Vercel Blob</p>
+            </div>
+
+            <div className="flex flex-col items-center justify-between gap-3">
+              <Image
+                src="/powered-by/logo-google-maps.png"
+                alt="google-maps.png"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className={clsx(`h-auto w-16`)}
+                placeholder="blur"
+                blurDataURL={'/powered-by/logo-google-maps.png'}
+                priority
+              />
+              <p>Google Maps API</p>
             </div>
           </div>
         </div>
