@@ -24,7 +24,7 @@ const MenuList = ({
               href={pathname !== '/profile' ? `/profile` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
                 `group flex w-full items-center text-secondary smooth42transition`,
-                `hover:text-c42orange`
+                `hover:text-c42green`
               )}
               onClick={onClick}
               scroll={false}
@@ -54,7 +54,7 @@ const MenuList = ({
               href={pathname !== '/search/smart-suggestions' ? `/search/smart-suggestions` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
                 `group flex w-full items-center text-secondary smooth42transition`,
-                `hover:text-c42orange`
+                `hover:text-c42green`
               )}
               onClick={onClick}
               scroll={false}
@@ -77,7 +77,7 @@ const MenuList = ({
               href={pathname !== '/search/advanced' ? `/search/advanced` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
                 `group flex w-full items-center text-secondary smooth42transition`,
-                `hover:text-c42orange`
+                `hover:text-c42green`
               )}
               onClick={onClick}
               scroll={false}

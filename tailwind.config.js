@@ -41,6 +41,7 @@ module.exports = {
         negative: 'hsl(var(--negative))',
         card: 'hsl(var(--card))',
         c42orange: 'hsl(var(--c42orange))',
+        c42green: 'hsl(var(--c42green))',
 
         primary: {
           DEFAULT: 'hsl(var(--primary))',

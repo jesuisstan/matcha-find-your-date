@@ -29,8 +29,7 @@
     "women": "Femmes",
     "bisexual": "Bisexuel",
     "tags": "Tags #",
-    "select-country": "Sélectionner un pays",
-    "select-city": "Rechercher une ville"
+    "select-city": "Sélectionnez une ville"
   },
   "not-found": {
     "title": "Page non trouvée",
@@ -219,6 +218,7 @@
     "turkish": "Turc"
   },
   "photos": "Photos",
+  "photos-gallery": "Galerie de photos",
   "failed-to-update-user": "Échec de la mise à jour de votre profil",
   "user-updated-successfully": "Votre profil a été mis à jour avec succès",
   "data-is-up-to-date": "Les données du profil sont à jour",
@@ -259,5 +259,12 @@
   "location-need-message": "Pour améliorer la précision de la recherche et la sécurité des comptes, nous vous recommandons de partager votre emplacement. Si vous préférez ne pas le faire, vous pouvez sélectionner manuellement une ville ou utiliser un faux emplacement en fonction de la langue de service actuelle: Paris (fr), Londres (en), Moscou (ru).",
   "data-category-filled": "Catégorie de données du profil remplie",
   "data-category-not-filled": "(!) Catégorie de données du profil non remplie",
-  "data-incomplete": "Données incomplètes"
+  "data-incomplete": "Données incomplètes",
+  "drop": "(ou déposer)",
+  "image-processed-success": "Image traitée avec succès",
+  "image-compression-failed": "Échec de la compression de l'image",
+  "image-upload-failed": "Échec du téléchargement de l'image",
+  "only-image-files-allowed": "Seuls les fichiers image sont autorisés",
+  "image-processing": "Traitement de l'image...",
+  "no-file-selected": "Aucun fichier sélectionné"
 }

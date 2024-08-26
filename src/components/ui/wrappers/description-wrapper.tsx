@@ -39,7 +39,7 @@ const DescriptionWrapper = ({
       <p
         className={clsx(
           'text-justify text-sm',
-          isDescriptionExpanded ? 'h-auto' : 'text-ellipsis- line-clamp-3 h-[max-content]'
+          isDescriptionExpanded ? 'h-auto' : 'line-clamp-3 h-[max-content] text-ellipsis'
         )}
       >
         <TextWithLineBreaks text={text ?? t(`no-description`)} />
@@ -48,8 +48,8 @@ const DescriptionWrapper = ({
         className={clsx(
           'absolute bottom-0 left-[50%] m-auto w-min translate-x-[-50%]',
           isHovered
-            ? 'duration-400 text-c42orange transition-all ease-in-out'
-            : 'duration-400 text-slate-200 transition-all ease-in-out'
+            ? 'text-c42green transition-all duration-300 ease-in-out'
+            : 'text-slate-200 transition-all duration-300 ease-in-out'
         )}
       >
         {isDescriptionExpanded ? (

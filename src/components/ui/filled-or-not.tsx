@@ -10,7 +10,7 @@ const FilledOrNot = ({ size, filled }: { size: number; filled?: boolean }) => {
       {filled ? (
         <CircleCheck size={size} className="text-positive" />
       ) : (
-        <CircleAlert size={size} className="text-c42orange" />
+        <CircleAlert size={size} className="text-negative" />
       )}
     </div>
   );

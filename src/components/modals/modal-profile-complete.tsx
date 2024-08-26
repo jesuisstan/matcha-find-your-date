@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { OctagonAlert, Save } from 'lucide-react';
 import { MapPinned, MapPinOff } from 'lucide-react';
 
-import AvatarUploader from '@/components/avatar-uploader/avatar-uploader';
+import ImageUploader from '@/components/avatar-uploader/image-uploader';
 import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
@@ -437,11 +437,15 @@ const ModalProfileComplete = ({
       </div>
     ),
     photos: (
-      <div className="">
-        <Label htmlFor="about" className="mb-2">
-          {t(`photos`)}
+      <div className="flex min-h-96 min-w-96 flex-col gap-1 text-left">
+        <Label htmlFor="about" className="mb-3 text-left">
+          {t(`photos-gallery`) + ':'}
         </Label>
-        <AvatarUploader />
+        <ImageUploader id={'1'} />
+        <ImageUploader id={'2'} />
+        <ImageUploader id={'3'} />
+        <ImageUploader id={'4'} />
+        <ImageUploader id={'5'} />
       </div>
     ),
   };

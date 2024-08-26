@@ -174,7 +174,8 @@ const ProfilePage = () => {
         {/* PHOTOS */}
         <div className={clsx('col-span-10', 'lg:col-span-7')}>
           <div className="rounded-2xl bg-card p-5">
-            <div>Content</div>
+            <h3 className="text-2xl font-bold">{t(`photos-gallery`)}</h3>
+
             <div>Content</div>
             <div>Content</div>
             <div>Content</div>

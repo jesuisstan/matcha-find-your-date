@@ -23,7 +23,7 @@ const ClearLocalStorageButton = () => {
         size="icon"
         title="Clear local storage and refresh data"
         onClick={handleClearLocalStorage}
-        className="transition-all duration-300 ease-in-out hover:bg-transparent hover:text-c42orange"
+        className="transition-all duration-300 ease-in-out hover:bg-transparent hover:text-negative"
       >
         <Trash2 />
 

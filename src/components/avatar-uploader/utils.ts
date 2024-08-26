@@ -10,9 +10,9 @@ const defaultOptions = {
 export async function compressFile(imageFile: any, options = defaultOptions) {
   try {
     const compressedFile = await imageCompression(imageFile, options);
-    console.log('Compressed file:', compressedFile);
+    console.log('Compressed file:', compressedFile); // debug
     return compressedFile;
   } catch (error) {
-    console.error('Error compressing image:', error);
+    console.error('Error compressing image:', error); // debug
   }
 }

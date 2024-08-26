@@ -145,7 +145,7 @@ const Menu: React.FC = () => {
                   href={`/dashboard`}
                   className={clsx(
                     `flex w-full items-center text-secondary smooth42transition`,
-                    `hover:text-c42orange`,
+                    `hover:text-c42green`,
                     pathname === `/dashboard` && 'font-bold'
                   )}
                   onClick={() => {

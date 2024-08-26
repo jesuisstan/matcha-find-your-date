@@ -29,7 +29,6 @@
     "women": "Women",
     "bisexual": "Bisexual",
     "tags": "Tags #",
-    "select-country": "Select country",
     "select-city": "Search for a city"
   },
   "not-found": {
@@ -220,6 +219,7 @@
     "turkish": "Turkish"
   },
   "photos": "Photos",
+  "photos-gallery": "Photos Gallery",
   "failed-to-update-user": "Failed to update your profile",
   "user-updated-successfully": "Your profile updated successfully",
   "data-is-up-to-date": "Profile data is up to date",
@@ -262,5 +262,12 @@
   "location-need-message": "To improve search accuracy and account security, we recommend sharing your location. If you prefer not to, you can manually select a city or use fake location based on the current service language: London (en), Paris (fr), Moscow (ru).",
   "data-category-filled": "Profile data category filled",
   "data-category-not-filled": "(!) Profile data category not filled",
-  "data-incomplete": "Data incomplete"
+  "data-incomplete": "Data incomplete",
+  "drop": "(or drop)",
+  "image-processed-success": "Image processed successfully",
+  "image-compression-failed": "Error compressing image",
+  "image-upload-failed": "Error uploading image",
+  "only-image-files-allowed": "Only image files are allowed",
+  "image-processing": "Image processing...",
+  "no-file-selected": "No file selected"
 }
