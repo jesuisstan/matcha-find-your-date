@@ -17,6 +17,7 @@ import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 import UserLocation from '@/components/user-location';
+import UserPhotoGallery from '@/components/user-photo-gallery';
 import UserSexPreference from '@/components/user-sex-preference';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
@@ -173,24 +174,12 @@ const ProfilePage = () => {
 
         {/* PHOTOS */}
         <div className={clsx('col-span-10', 'lg:col-span-7')}>
-          <div className="rounded-2xl bg-card p-5">
-            <h3 className="text-2xl font-bold">{t(`photos-gallery`)}</h3>
-
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
-            <div>Content</div>
+          <div className="rounded-2xl bg-card p-5 self-center">
+            <UserPhotoGallery
+              user={user}
+              modifiable
+              onModify={() => handleModifyClick('photos' as keyof typeof TProfileCompleteLayout)}
+            />
           </div>
         </div>
       </div>

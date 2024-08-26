@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+
 import type { PutBlobResult } from '@vercel/blob';
 import clsx from 'clsx';
 import { CirclePlus, Trash2 } from 'lucide-react';
@@ -133,7 +134,7 @@ const ImageUploader = ({ id }: { id?: string }) => {
               ) : (
                 <CirclePlus
                   size={21}
-                  className="hover:text-c42green cursor-pointer smooth42transition"
+                  className="cursor-pointer smooth42transition hover:text-c42green"
                 />
               )}
             </label>
@@ -182,12 +183,6 @@ const ImageUploader = ({ id }: { id?: string }) => {
         {error && <div className="text-xs text-negative">{error}</div>}
         {successMessage && <div className="text-xs text-positive">{successMessage}</div>}
       </div>
-
-      {blob && (
-        <div>
-          Blob url: <a href={blob.url}>{blob.url}</a>
-        </div>
-      )}
     </div>
   );
 };
