@@ -261,7 +261,7 @@
   "data-category-not-filled": "(!) Catégorie de données du profil non remplie",
   "data-incomplete": "Données incomplètes",
   "drop": "(ou déposer)",
-  "image-processed-success": "Image traitée avec succès",
+  "image-processed-success": "Nouvelle photo ajoutée avec succès",
   "image-compression-failed": "Échec de la compression de l'image",
   "image-upload-failed": "Échec du téléchargement de l'image",
   "only-image-files-allowed": "Seuls les fichiers image sont autorisés",

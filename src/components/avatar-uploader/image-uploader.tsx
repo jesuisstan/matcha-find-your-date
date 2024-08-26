@@ -1,22 +1,30 @@
 'use client';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-
+import type { PutBlobResult } from '@vercel/blob';
 import clsx from 'clsx';
 import { CirclePlus, Trash2 } from 'lucide-react';
 
 import { compressFile } from './utils';
 
 import Spinner from '@/components/ui/spinner';
+import useUserStore from '@/stores/user';
+import { TUser } from '@/types/user';
 
 const ImageUploader = ({ id }: { id?: string }) => {
   const t = useTranslations();
+  const { user, setUser } = useUserStore((state) => ({
+    user: state.user,
+    setUser: state.setUser,
+  }));
   const [file, setFile] = useState<string>();
   const [fileEnter, setFileEnter] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/gif']; // Supported image types
   const [error, setError] = useState(t('no-file-selected'));
   const [successMessage, setSuccessMessage] = useState('');
+
+  const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
   const handleFileSelection = async (file: File) => {
     setError('');
@@ -27,17 +35,51 @@ const ImageUploader = ({ id }: { id?: string }) => {
       try {
         const compressedImage = await compressFile(file); // Compress the image
         if (compressedImage) {
-          const blobUrl = URL.createObjectURL(compressedImage);
-          setFile(blobUrl); // Set the compressed image file URL for preview
+          //const blobUrl = URL.createObjectURL(compressedImage);
+          //setFile(blobUrl); // Set the compressed image file URL for preview
+
+          const response = await fetch(`/api/avatar/upload?filename=${compressedImage.name}`, {
+            method: 'POST',
+            body: compressedImage,
+          });
+
+          const newBlob = (await response.json()) as PutBlobResult;
+          setBlob(newBlob);
+
+          // Save the compressed image to the user's profile
+          const responseSQL = await fetch(`/api/avatar/save-url`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              id: user?.id,
+              url: newBlob?.url,
+            }),
+          });
+
+          const result = await responseSQL.json();
+          const updatedUserData: TUser = result.user;
+          if (responseSQL.ok) {
+            if (updatedUserData) {
+              setUser({ ...user, ...updatedUserData });
+            }
+          } else {
+            setError(t(result.error));
+          }
+
           setSuccessMessage(t('image-processed-success'));
         } else {
+          setSuccessMessage('');
           setError(t('image-compression-failed'));
         }
       } catch (error) {
+        setSuccessMessage('');
         setError(t('image-upload-failed'));
       }
       setIsCompressing(false);
     } else {
+      setSuccessMessage('');
       setError(t('only-image-files-allowed'));
     }
   };
@@ -91,7 +133,7 @@ const ImageUploader = ({ id }: { id?: string }) => {
               ) : (
                 <CirclePlus
                   size={21}
-                  className="cursor-pointer smooth42transition hover:text-c42green"
+                  className="hover:text-c42green cursor-pointer smooth42transition"
                 />
               )}
             </label>
@@ -140,6 +182,12 @@ const ImageUploader = ({ id }: { id?: string }) => {
         {error && <div className="text-xs text-negative">{error}</div>}
         {successMessage && <div className="text-xs text-positive">{successMessage}</div>}
       </div>
+
+      {blob && (
+        <div>
+          Blob url: <a href={blob.url}>{blob.url}</a>
+        </div>
+      )}
     </div>
   );
 };

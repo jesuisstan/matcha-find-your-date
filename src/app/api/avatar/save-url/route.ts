@@ -7,11 +7,16 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { id, biography } = body;
+    const { id, url } = body;
 
-    // Step 1: Check if the user exists
+    // Step 1: Validate the photo received from the frontend
+    if (!url || typeof url !== 'string' || url.trim() === '') {
+      return NextResponse.json({ error: 'error-photo-type' }, { status: 400 });
+    }
+
+    // Step 2: Check if the user exists
     const selectQuery = `
-      SELECT biography
+      SELECT photos
       FROM users 
       WHERE id = $1
     `;
@@ -21,22 +26,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 404 });
     }
 
-    const currentData = currentDataResult.rows[0];
-
-    // Step 2: Check if the data is up-to-date
-    if (currentData.biography === biography) {
-      return NextResponse.json({ message: 'data-is-up-to-date' });
-    }
-
-    // Step 3: Update the user data if needed
+    // Step 3: Update the user's photos array by appending the new URL
     const updateQuery = `
       UPDATE users 
-      SET biography = $2
+      SET photos = array_append(photos, $2)
       WHERE id = $1
-      RETURNING id, biography;
+      RETURNING id, photos;
     `;
-    const updateValues = [id, biography];
-
+    const updateValues = [id, url];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 

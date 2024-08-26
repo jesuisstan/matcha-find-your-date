@@ -261,7 +261,7 @@
   "data-category-not-filled": "(!) Категория данных профиля не заполнена",
   "data-incomplete": "Данные не заполнены",
   "drop": "(или перетащите)",
-  "image-processed-success": "Изображение успешно обработано",
+  "image-processed-success": "Новая фотография успешно добавлена",
   "image-compression-failed": "Ошибка сжатия изображения",
   "image-upload-failed": "Ошибка загрузки изображения",
   "only-image-files-allowed": "Разрешены только файлы изображений",
