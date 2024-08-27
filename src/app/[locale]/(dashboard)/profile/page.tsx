@@ -31,7 +31,7 @@ const ProfilePage = () => {
   const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
-  console.log('user?.last_connection_date', user?.last_connection_date); // debug
+
   // Automatically show the modal on first load if the profile is incomplete
   useEffect(() => {
     if (!user) return;
@@ -63,12 +63,12 @@ const ProfilePage = () => {
         ) : (
           <div className="flex flex-col justify-start">
             <div id="user-name" className="relative flex w-max max-w-96 flex-wrap md:max-w-fit">
-              <h1 className="mb-2 overflow-hidden text-ellipsis text-4xl">
+              <h1 className="mb-2 overflow-hidden text-ellipsis text-4xl sm:text-3xl">
                 {user?.firstname} {user?.lastname.toUpperCase()}
               </h1>
               <div
                 className={
-                  'absolute -right-5 top-1 flex flex-col gap-1 smooth42transition md:-right-14 md:flex-row'
+                  'absolute -right-11 top-1 flex flex-col gap-1 smooth42transition xs:-right-14 md:flex-row'
                 }
               >
                 <FilledOrNot size={18} filled={!!user?.firstname || !!user?.lastname} />
