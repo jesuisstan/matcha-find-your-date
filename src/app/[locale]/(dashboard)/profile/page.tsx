@@ -62,11 +62,15 @@ const ProfilePage = () => {
           <HeaderSkeleton />
         ) : (
           <div className="flex flex-col justify-start">
-            <div className="relative flex w-max flex-wrap">
-              <h1 className="mb-2 text-4xl">
-                {user?.firstname} {user?.lastname.toUpperCase()}{' '}
+            <div id="user-name" className="relative flex w-max max-w-96 flex-wrap md:max-w-fit">
+              <h1 className="mb-2 overflow-hidden text-ellipsis text-4xl">
+                {user?.firstname} {user?.lastname.toUpperCase()}
               </h1>
-              <div className={'absolute -right-14 top-1 flex gap-1'}>
+              <div
+                className={
+                  'absolute -right-5 top-1 flex flex-col gap-1 smooth42transition md:-right-14 md:flex-row'
+                }
+              >
                 <FilledOrNot size={18} filled={!!user?.firstname || !!user?.lastname} />
                 <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
                   <SquarePen
@@ -174,7 +178,7 @@ const ProfilePage = () => {
 
         {/* PHOTOS */}
         <div className={clsx('col-span-10', 'lg:col-span-7')}>
-          <div className="rounded-2xl bg-card p-5 self-center">
+          <div className="self-center rounded-2xl bg-card p-5">
             <UserPhotoGallery
               user={user}
               modifiable

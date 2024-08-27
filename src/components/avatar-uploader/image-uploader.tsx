@@ -26,7 +26,7 @@ const ImageUploader = ({ id }: { id: number }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const [photoUrl, setPhotoUrl] = useState<string | null>(user?.photos?.[id] || null);
-  console.log('photoUrl', photoUrl); // debug
+
   const handleFileSelection = async (file: File) => {
     setError('');
     setSuccessMessage('');
