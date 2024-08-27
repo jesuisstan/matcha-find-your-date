@@ -275,5 +275,6 @@
   "invalid-url": "Invalid file URL",
   "photo-deleted-successfully": "Photo deleted successfully",
   "failed-to-delete-photo": "Failed to delete photo",
-  "error-photo-type": "Error photo type"
+  "error-photo-type": "Error photo type",
+  "interests": "Interests"
 }

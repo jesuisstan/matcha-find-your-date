@@ -272,5 +272,6 @@
   "invalid-url": "Неверный фото-URL",
   "photo-deleted-successfully": "Фотография успешно удалена",
   "failed-to-delete-photo": "Не удалось удалить фотографию",
-  "error-photo-type": "Неверный тип фотографии"
+  "error-photo-type": "Неверный тип фотографии",
+  "interests": "Интересы"
 }

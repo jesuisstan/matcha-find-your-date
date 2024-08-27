@@ -25,13 +25,13 @@ export async function POST(req: Request) {
     // Generate a new confirmation token
     const confirmationToken = uuidv4();
 
-    // Update the user with the new confirmation token
-    const result = await client.sql`
-      UPDATE users
-      SET service_token = ${confirmationToken}
-      WHERE email = ${email}
-      RETURNING *;
-    `;
+    const result = await client.query(
+      `UPDATE users
+      SET service_token = $1
+      WHERE email = $2
+      RETURNING *`,
+      [confirmationToken, email]
+    );
 
     if (result.rowCount === 0) {
       return NextResponse.json({ error: 'email-user-not-found' }, { status: 404 });

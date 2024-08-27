@@ -22,16 +22,12 @@ export async function POST(req: Request) {
   const client = await db.connect();
 
   try {
-    // Generate a new confirmation token
+    // Generate a new confirmation token & update the user with the new confirmation token
     const confirmationToken = uuidv4();
-
-    // Update the user with the new confirmation token
-    const result = await client.sql`
-      UPDATE users
-      SET service_token = ${confirmationToken}
-      WHERE email = ${email} AND confirmed = false
-      RETURNING *;
-    `;
+    const result = await client.query(
+      'UPDATE users SET service_token = $1 WHERE email = $2 AND confirmed = false RETURNING *',
+      [confirmationToken, email]
+    );
 
     if (result.rowCount === 0) {
       return NextResponse.json(

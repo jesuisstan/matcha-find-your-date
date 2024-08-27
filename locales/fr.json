@@ -272,5 +272,6 @@
   "invalid-url": "URL de photo invalide",
   "photo-deleted-successfully": "Photo supprimée avec succès",
   "failed-to-delete-photo": "Échec de la suppression de la photo",
-  "error-photo-type": "Type de photo invalide"
+  "error-photo-type": "Type de photo invalide",
+  "interests": "Intérêts"
 }

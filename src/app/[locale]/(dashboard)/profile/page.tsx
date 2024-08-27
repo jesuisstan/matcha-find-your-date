@@ -31,7 +31,7 @@ const ProfilePage = () => {
   const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
-console.log("user?.last_connection_date", user?.last_connection_date); // debug
+  console.log('user?.last_connection_date', user?.last_connection_date); // debug
   // Automatically show the modal on first load if the profile is incomplete
   useEffect(() => {
     if (!user) return;
@@ -152,7 +152,7 @@ console.log("user?.last_connection_date", user?.last_connection_date); // debug
             </div>
           </div>
 
-          {/* TASTES */}
+          {/* PREFERENCES */}
           <div className="rounded-2xl bg-card p-5">
             <div className="flex flex-col justify-start">
               <h3 className="text-2xl font-bold">{t(`tastes`)}</h3>
@@ -165,6 +165,13 @@ console.log("user?.last_connection_date", user?.last_connection_date); // debug
                   }
                 />
               </div>
+            </div>
+          </div>
+
+          {/* INTERESTS */}
+          <div className="rounded-2xl bg-card p-5">
+            <div className="flex flex-col justify-start">
+              <h3 className="text-2xl font-bold">{t(`interests`)}</h3>
               <div className="mt-4">
                 <StaticTagsGroup
                   tagsList={user?.tags!}
