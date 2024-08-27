@@ -3,7 +3,6 @@ import React from 'react';
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 
-import './embla-carousel.css';
 import {
   NextButton,
   PrevButton,
@@ -11,16 +10,14 @@ import {
 } from '@/components/carousel/embla-carousel-arrow-buttons';
 import { DotButton, useDotButton } from '@/components/carousel/embla-carousel-dot-button';
 
-// Update the type to reflect that slides can contain JSX elements
-type PropType = {
+type TPropType = {
   slides: React.ReactNode[];
   options?: EmblaOptionsType;
 };
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const EmblaCarousel: React.FC<TPropType> = (props) => {
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
     usePrevNextButtons(emblaApi);

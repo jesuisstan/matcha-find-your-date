@@ -19,7 +19,7 @@ const EmptyPhoto = () => {
       width={0}
       height={0}
       sizes="100vw"
-      className="h-full w-full rounded-xl object-cover p-2 shadow-md"
+      className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-c42orange"
       style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
       placeholder="blur"
       blurDataURL={'/identity/logo-heart.png'}
@@ -41,7 +41,10 @@ const UserPhotoGallery = ({
   const OPTIONS: EmblaOptionsType = { loop: true };
   const SLIDE_COUNT = 5;
   const SLIDES = [
-    <div key="slide1" className="m-3 mx-10 flex h-[400px] w-[400px] justify-center self-center">
+    <div
+      key="slide1"
+      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+    >
       {user?.photos?.[0] ? (
         <Image
           src={`${user?.photos?.[0]}`}
@@ -50,7 +53,7 @@ const UserPhotoGallery = ({
           height={0}
           sizes="100vw"
           //className="h-auto w-full rounded-xl border-8 border-black"
-          className="h-full w-full rounded-xl object-cover p-2 shadow-md"
+          className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-positive"
           style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
           placeholder="blur"
           blurDataURL={'/identity/logo-square.png'}
@@ -60,7 +63,10 @@ const UserPhotoGallery = ({
         <EmptyPhoto />
       )}
     </div>,
-    <div key="slide2" className="m-3 flex h-[400px] w-[400px] justify-center self-center">
+    <div
+      key="slide2"
+      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+    >
       {user?.photos?.[1] ? (
         <Image
           src={`${user?.photos?.[1]}`}
@@ -69,7 +75,7 @@ const UserPhotoGallery = ({
           height={0}
           sizes="100vw"
           //className="h-auto w-full rounded-xl border-8 border-black"
-          className="h-full w-full rounded-xl object-cover p-2 shadow-md"
+          className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-positive"
           style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
           placeholder="blur"
           blurDataURL={'/identity/logo-square.png'}
@@ -79,7 +85,10 @@ const UserPhotoGallery = ({
         <EmptyPhoto />
       )}
     </div>,
-    <div key="slide3" className="m-3 flex h-[400px] w-[400px] justify-center self-center">
+    <div
+      key="slide3"
+      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+    >
       {user?.photos?.[2] ? (
         <Image
           src={`${user?.photos?.[2]}`}
@@ -88,7 +97,7 @@ const UserPhotoGallery = ({
           height={0}
           sizes="100vw"
           //className="h-auto w-full rounded-xl border-8 border-black"
-          className="h-full w-full rounded-xl object-cover p-2 shadow-md"
+          className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-positive"
           style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
           placeholder="blur"
           blurDataURL={'/identity/logo-square.png'}
@@ -98,7 +107,10 @@ const UserPhotoGallery = ({
         <EmptyPhoto />
       )}
     </div>,
-    <div key="slide4" className="m-3 flex h-[400px] w-[400px] justify-center self-center">
+    <div
+      key="slide4"
+      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+    >
       {user?.photos?.[3] ? (
         <Image
           src={`${user?.photos?.[3]}`}
@@ -107,7 +119,7 @@ const UserPhotoGallery = ({
           height={0}
           sizes="100vw"
           //className="h-auto w-full rounded-xl border-8 border-black"
-          className="h-full w-full rounded-xl object-cover p-2 shadow-md"
+          className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-positive"
           style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
           placeholder="blur"
           blurDataURL={'/identity/logo-square.png'}
@@ -117,7 +129,10 @@ const UserPhotoGallery = ({
         <EmptyPhoto />
       )}
     </div>,
-    <div key="slide5" className="m-3 flex h-[400px] w-[400px] justify-center self-center">
+    <div
+      key="slide5"
+      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+    >
       {user?.photos?.[4] ? (
         <Image
           src={`${user?.photos?.[4]}`}
@@ -126,7 +141,7 @@ const UserPhotoGallery = ({
           height={0}
           sizes="100vw"
           //className="h-auto w-full rounded-xl border-8 border-black"
-          className="h-full w-full rounded-xl object-cover p-2 shadow-md"
+          className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-positive"
           style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
           placeholder="blur"
           blurDataURL={'/identity/logo-square.png'}
