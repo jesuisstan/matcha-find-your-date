@@ -43,7 +43,7 @@ const UserPhotoGallery = ({
   const SLIDES = [
     <div
       key="slide1"
-      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+      className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
       {user?.photos?.[0] ? (
         <Image
@@ -65,7 +65,7 @@ const UserPhotoGallery = ({
     </div>,
     <div
       key="slide2"
-      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+      className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
       {user?.photos?.[1] ? (
         <Image
@@ -87,7 +87,7 @@ const UserPhotoGallery = ({
     </div>,
     <div
       key="slide3"
-      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+      className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
       {user?.photos?.[2] ? (
         <Image
@@ -109,7 +109,7 @@ const UserPhotoGallery = ({
     </div>,
     <div
       key="slide4"
-      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+      className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
       {user?.photos?.[3] ? (
         <Image
@@ -131,7 +131,7 @@ const UserPhotoGallery = ({
     </div>,
     <div
       key="slide5"
-      className="m-3 mx-10 flex h-96 w-96 justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+      className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
       {user?.photos?.[4] ? (
         <Image
