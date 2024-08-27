@@ -13,10 +13,7 @@ export async function POST(req: Request) {
   const client = await db.connect();
 
   try {
-    // Validate the token by checking if it exists in the database
-    const userResult = await client.sql`
-      SELECT id FROM users WHERE service_token = ${token};
-    `;
+    const userResult = await client.query('SELECT id FROM users WHERE service_token = $1', [token]);
 
     if (userResult.rowCount === 0) {
       return NextResponse.json({ error: 'invalid-token' }, { status: 400 });
@@ -24,13 +21,13 @@ export async function POST(req: Request) {
 
     const userId = userResult.rows[0].id;
 
-    // Hash the new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const currentDate = new Date().toISOString();
 
-    // Update the user's password in the database
-    await client.sql`
-      UPDATE users SET password = ${hashedPassword}, service_token = NULL WHERE id = ${userId};
-    `;
+    await client.query(
+      'UPDATE users SET password = $1, service_token = NULL, last_connection_date = $2 WHERE id = $3',
+      [hashedPassword, currentDate, userId]
+    );
 
     return NextResponse.json({ message: 'password-changed-successfully' }, { status: 200 });
   } catch (error) {

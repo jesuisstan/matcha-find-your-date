@@ -235,6 +235,7 @@ const ModalProfileComplete = ({
 
       const result = await response.json();
       const updatedUserData: TUser = result.user;
+      console.log('updatedUserData', updatedUserData); // debug
       if (response.ok) {
         setSuccessMessage(t(result.message));
         if (updatedUserData) {

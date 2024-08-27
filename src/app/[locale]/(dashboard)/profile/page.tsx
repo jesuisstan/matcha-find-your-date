@@ -31,7 +31,7 @@ const ProfilePage = () => {
   const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
-
+console.log("user?.last_connection_date", user?.last_connection_date); // debug
   // Automatically show the modal on first load if the profile is incomplete
   useEffect(() => {
     if (!user) return;

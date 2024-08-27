@@ -8,14 +8,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-key';
 
 export async function POST(request: Request) {
   const { email, password, nickname } = await request.json();
+  const client = await db.connect();
 
   let result;
   // Get user by email or nickname
   if (nickname) {
-    result = await db.query('SELECT * FROM users WHERE nickname = $1', [nickname]);
+    result = await client.query('SELECT * FROM users WHERE nickname = $1', [nickname]);
   } else if (email) {
-    result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-    // result = await db.query(`SELECT * FROM users WHERE email = '${email}'`); // ! SQL Injection example
+    result = await client.query('SELECT * FROM users WHERE email = $1', [email]);
+    // result = await client.query(`SELECT * FROM users WHERE email = '${email}'`); // ! SQL Injection example
   }
 
   if (!result || !result.rows || result.rows.length === 0) {
@@ -57,35 +58,24 @@ export async function POST(request: Request) {
   }
 
   // Update the last_connection_date
-  const currentDate = new Date().toISOString();
-  await db.query('UPDATE users SET last_connection_date = $1 WHERE id = $2', [
-    currentDate,
-    user.id,
-  ]);
+  try {
+    const currentDate = new Date().toISOString();
+    const updateQuery = `
+        UPDATE users 
+        SET last_connection_date = $2
+        WHERE id = $1
+        RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_connection_date, online, popularity, sex_preferences, photos;
+      `;
+    const updateValues = [user.id, currentDate];
 
-  // Create a sanitized user object to return (without password and service_token)
-  const userResponse = {
-    id: user.id,
-    email: user.email,
-    confirmed: user.confirmed,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    nickname: user.nickname,
-    birthdate: user.birthdate,
-    sex: user.sex,
-    biography: user.biography,
-    tags: user.tags,
-    complete: user.complete,
-    latitude: user.latitude,
-    longitude: user.longitude,
-    address: user.address,
-    registration_date: user.registration_date,
-    last_connection_date: currentDate, // set last connection date with currentDate value to avoid unnecessary user-data fetch
-    online: user.online,
-    popularity: user.popularity,
-    sex_preferences: user.sex_preferences,
-    photos: user.photos,
-  };
+    const updatedUserResult = await client.query(updateQuery, updateValues);
+    const updatedUser = updatedUserResult.rows[0];
 
-  return NextResponse.json({ token, user: userResponse });
+    return NextResponse.json({ token, user: updatedUser });
+  } catch (error) {
+    console.error('Error updating last_connection_date:', error);
+    return NextResponse.json({ error: 'login-failed' }, { status: 500 });
+  } finally {
+    client.release();
+  }
 }

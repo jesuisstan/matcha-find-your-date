@@ -32,10 +32,10 @@ export async function POST(req: Request) {
 
     // Step 2: Check if the user exists
     const selectQuery = `
-      SELECT firstname, lastname, nickname, birthdate, sex
-      FROM users 
-      WHERE id = $1
-    `;
+        SELECT firstname, lastname, nickname, birthdate, sex
+        FROM users 
+        WHERE id = $1
+      `;
     const currentDataResult = await client.query(selectQuery, [id]);
 
     if (currentDataResult.rowCount === 0) {
@@ -56,13 +56,14 @@ export async function POST(req: Request) {
     }
 
     // Step 4: Update the user data if needed
+    const currentDate = new Date().toISOString();
     const updateQuery = `
-      UPDATE users 
-      SET firstname = $2, lastname = $3, nickname = $4, birthdate = $5, sex = $6
-      WHERE id = $1
-      RETURNING id, firstname, lastname, nickname, birthdate, sex;
-    `;
-    const updateValues = [id, firstname, lastname, nickname, birthdate, sex]; // Store birthdate as string
+        UPDATE users 
+        SET firstname = $2, lastname = $3, nickname = $4, birthdate = $5, sex = $6, last_connection_date = $7
+        WHERE id = $1
+        RETURNING id, firstname, lastname, nickname, birthdate, sex, last_connection_date;
+      `;
+    const updateValues = [id, firstname, lastname, nickname, birthdate, sex, currentDate];
 
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
