@@ -28,6 +28,7 @@
     "men": "Hommes",
     "women": "Femmes",
     "bisexual": "Bisexuel",
+    "undefined": "Non défini",
     "tags": "Tags #",
     "select-city": "Sélectionnez une ville"
   },
@@ -218,7 +219,7 @@
     "turkish": "Turc"
   },
   "photos": "Photos",
-  "photos-gallery": "Galerie de photos",
+  "photo-gallery": "Galerie de photos",
   "failed-to-update-user": "Échec de la mise à jour de votre profil",
   "user-updated-successfully": "Votre profil a été mis à jour avec succès",
   "data-is-up-to-date": "Les données du profil sont à jour",
@@ -266,5 +267,10 @@
   "image-upload-failed": "Échec du téléchargement de l'image",
   "only-image-files-allowed": "Seuls les fichiers image sont autorisés",
   "image-processing": "Traitement de l'image...",
-  "no-file-selected": "Aucun fichier sélectionné"
+  "no-file-selected": "Aucun fichier sélectionné",
+  "missing-parameters": "Paramètres manquants, veuillez réessayer",
+  "invalid-url": "URL de photo invalide",
+  "photo-deleted-successfully": "Photo supprimée avec succès",
+  "failed-to-delete-photo": "Échec de la suppression de la photo",
+  "error-photo-type": "Type de photo invalide"
 }

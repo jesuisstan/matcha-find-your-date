@@ -28,6 +28,7 @@
     "men": "Мужчины",
     "women": "Женщины",
     "bisexual": "Бисексуал",
+    "undefined": "Не определено",
     "tags": "Теги #",
     "select-city": "Выберите город"
   },
@@ -218,7 +219,7 @@
     "turkish": "Турецкий"
   },
   "photos": "Фотографии",
-  "photos-gallery": "Галерея фотографий",
+  "photo-gallery": "Фото Галерея",
   "failed-to-update-user": "Не удалось обновить ваш профиль",
   "user-updated-successfully": "Ваш профиль успешно обновлен",
   "data-is-up-to-date": "Данные профиля актуальны",
@@ -266,5 +267,10 @@
   "image-upload-failed": "Ошибка загрузки изображения",
   "only-image-files-allowed": "Разрешены только файлы изображений",
   "image-processing": "Обработка изображения...",
-  "no-file-selected": "Файл не выбран"
+  "no-file-selected": "Файл не выбран",
+  "missing-parameters": "Отсутствуют параметры, попробуйте еще раз",
+  "invalid-url": "Неверный фото-URL",
+  "photo-deleted-successfully": "Фотография успешно удалена",
+  "failed-to-delete-photo": "Не удалось удалить фотографию",
+  "error-photo-type": "Неверный тип фотографии"
 }

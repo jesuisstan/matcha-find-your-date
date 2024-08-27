@@ -10,11 +10,20 @@ import { SquarePen } from 'lucide-react';
 
 import FilledOrNot from '@/components/ui/filled-or-not';
 
-const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: string }) => {
+const SexPreferenceIcon = ({
+  preference,
+  theme,
+  translate,
+}: {
+  preference: string;
+  theme: string;
+  translate: (id: string) => string;
+}) => {
   switch (preference) {
     case 'men':
       return (
         <div
+          title={translate(`selector.${preference}`)}
           className={clsx(
             'flex items-center justify-center rounded-full px-[2px] py-[2px]',
             theme === 'dark' ? 'bg-foreground' : ''
@@ -38,6 +47,7 @@ const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: s
     case 'women':
       return (
         <div
+          title={translate(`selector.${preference}`)}
           className={clsx(
             'flex items-center justify-center rounded-full px-[2px] py-[2px]',
             theme === 'dark' ? 'bg-foreground' : ''
@@ -61,6 +71,7 @@ const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: s
     case 'bisexual':
       return (
         <div
+          title={translate(`selector.${preference}`)}
           className={clsx(
             'flex items-center justify-center rounded-full px-[2px] py-[2px]',
             theme === 'dark' ? 'bg-foreground' : ''
@@ -84,6 +95,7 @@ const SexPreferenceIcon = ({ preference, theme }: { preference: string; theme: s
     default:
       return (
         <div
+          title={translate(`selector.undefined`)}
           className={clsx(
             'flex items-center justify-center rounded-full px-[2px] py-[2px]',
             theme === 'dark' ? 'bg-foreground' : ''
@@ -123,10 +135,7 @@ const UserSexPreference = ({
     <div className="relative flex items-center">
       <span className="mr-2 text-base font-bold">{t('selector.preferences') + ':'}</span>
       {sexPreference ? (
-        <span className="flex items-center gap-2">
-          <SexPreferenceIcon preference={sexPreference} theme={theme!} />
-          {t(`selector.${sexPreference}`)}
-        </span>
+        <SexPreferenceIcon preference={sexPreference} theme={theme!} translate={t} />
       ) : (
         <p className="italic">{t('data-incomplete')}</p>
       )}

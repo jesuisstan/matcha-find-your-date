@@ -439,13 +439,13 @@ const ModalProfileComplete = ({
     photos: (
       <div className="flex min-h-96 min-w-96 flex-col gap-1 text-left">
         <Label htmlFor="about" className="mb-3 text-left">
-          {t(`photos-gallery`) + ':'}
+          {t(`photo-gallery`) + ':'}
         </Label>
-        <ImageUploader id={'1'} />
-        <ImageUploader id={'2'} />
-        <ImageUploader id={'3'} />
-        <ImageUploader id={'4'} />
-        <ImageUploader id={'5'} />
+        <ImageUploader id={0} />
+        <ImageUploader id={1} />
+        <ImageUploader id={2} />
+        <ImageUploader id={3} />
+        <ImageUploader id={4} />
       </div>
     ),
   };

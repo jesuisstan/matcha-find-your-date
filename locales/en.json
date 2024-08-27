@@ -28,6 +28,7 @@
     "men": "Men",
     "women": "Women",
     "bisexual": "Bisexual",
+    "undefined": "Undefined",
     "tags": "Tags #",
     "select-city": "Search for a city"
   },
@@ -219,7 +220,7 @@
     "turkish": "Turkish"
   },
   "photos": "Photos",
-  "photos-gallery": "Photos Gallery",
+  "photo-gallery": "Photo Gallery",
   "failed-to-update-user": "Failed to update your profile",
   "user-updated-successfully": "Your profile updated successfully",
   "data-is-up-to-date": "Profile data is up to date",
@@ -269,5 +270,10 @@
   "image-upload-failed": "Error uploading image",
   "only-image-files-allowed": "Only image files are allowed",
   "image-processing": "Image processing...",
-  "no-file-selected": "No file selected"
+  "no-file-selected": "No file selected",
+  "missing-parameters": "Missing parameters, try again",
+  "invalid-url": "Invalid file URL",
+  "photo-deleted-successfully": "Photo deleted successfully",
+  "failed-to-delete-photo": "Failed to delete photo",
+  "error-photo-type": "Error photo type"
 }

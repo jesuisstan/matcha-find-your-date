@@ -30,7 +30,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
           {slides.map((slide, index) => (
-            <div className="min-w-0 flex-none basis-[75%]" key={index}>
+            <div key={index}>
+              {/*<div className="min-w-0 flex-none basis-[80%]" key={index}>*/}
               {slide}
             </div>
           ))}
@@ -38,12 +39,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       </div>
 
       <div className="mt-[1.8rem] grid grid-cols-[auto_1fr] justify-between gap-10">
-        <div className="flex items-center gap-2">
+        <div className="ml-5 flex items-center gap-3">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
 
-        <div className="-mr-1.5 flex flex-wrap items-center justify-end gap-2">
+        <div className="mr-5 flex flex-wrap items-center justify-end gap-2">
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}

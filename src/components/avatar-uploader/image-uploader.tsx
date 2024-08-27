@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import type { PutBlobResult } from '@vercel/blob';
@@ -12,21 +13,20 @@ import Spinner from '@/components/ui/spinner';
 import useUserStore from '@/stores/user';
 import { TUser } from '@/types/user';
 
-const ImageUploader = ({ id }: { id?: string }) => {
+const ImageUploader = ({ id }: { id: number }) => {
   const t = useTranslations();
   const { user, setUser } = useUserStore((state) => ({
     user: state.user,
     setUser: state.setUser,
   }));
-  const [file, setFile] = useState<string>();
   const [fileEnter, setFileEnter] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
   const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/gif']; // Supported image types
   const [error, setError] = useState(t('no-file-selected'));
   const [successMessage, setSuccessMessage] = useState('');
-
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
-
+  const [photoUrl, setPhotoUrl] = useState<string | null>(user?.photos?.[id] || null);
+  console.log('photoUrl', photoUrl); // debug
   const handleFileSelection = async (file: File) => {
     setError('');
     setSuccessMessage('');
@@ -36,9 +36,6 @@ const ImageUploader = ({ id }: { id?: string }) => {
       try {
         const compressedImage = await compressFile(file); // Compress the image
         if (compressedImage) {
-          //const blobUrl = URL.createObjectURL(compressedImage);
-          //setFile(blobUrl); // Set the compressed image file URL for preview
-
           const response = await fetch(`/api/avatar/upload?filename=${compressedImage.name}`, {
             method: 'POST',
             body: compressedImage,
@@ -46,6 +43,7 @@ const ImageUploader = ({ id }: { id?: string }) => {
 
           const newBlob = (await response.json()) as PutBlobResult;
           setBlob(newBlob);
+          setPhotoUrl(newBlob?.url);
 
           // Save the compressed image to the user's profile
           const responseSQL = await fetch(`/api/avatar/save-url`, {
@@ -85,10 +83,36 @@ const ImageUploader = ({ id }: { id?: string }) => {
     }
   };
 
+  const handleFileDeletion = async () => {
+    console.log('remove file', blob);
+    console.log('remove photoUrl', photoUrl);
+
+    const response = await fetch(
+      `/api/avatar/delete?id=${user?.id}&url=${encodeURIComponent(photoUrl!)}`,
+      {
+        method: 'DELETE',
+      }
+    );
+
+    const result = await response.json();
+    const updatedUserData: TUser = result.user;
+    if (response.ok) {
+      setSuccessMessage(t(result.message));
+      if (updatedUserData) {
+        setUser({ ...user, ...updatedUserData });
+      }
+    } else {
+      setError(t(result.error));
+    }
+
+    setBlob(null);
+    setPhotoUrl(null);
+  };
+
   return (
     <div className="container flex max-w-3xl flex-row items-center justify-between gap-5 rounded-lg border py-1">
       <>
-        {!file ? (
+        {!photoUrl ? (
           <div
             onDragOver={(e) => {
               e.preventDefault();
@@ -154,12 +178,20 @@ const ImageUploader = ({ id }: { id?: string }) => {
         ) : (
           <div className="relative flex h-20 w-20 items-center justify-center">
             {/* PREVIEW SECTION */}
-            <object
-              className="h-full w-full rounded-md object-cover" // Adjusted to fit the parent container
-              data={file}
-              type="image/png" // Adjust this if needed
-              style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
-            />
+            {photoUrl && (
+              <Image
+                src={`${photoUrl}`}
+                alt="photo2"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="h-full w-full rounded-md object-cover"
+                placeholder="blur"
+                blurDataURL={'/identity/logo-square.png'}
+                priority
+                style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
+              />
+            )}
 
             {/* REMOVE BUTTON */}
             <div
@@ -167,14 +199,7 @@ const ImageUploader = ({ id }: { id?: string }) => {
                 'absolute right-1 top-1 flex rounded-full border bg-card/80 p-1 text-foreground smooth42transition hover:text-negative'
               }
             >
-              <Trash2
-                size={15}
-                onClick={() => {
-                  setFile('');
-                  setSuccessMessage('');
-                  setError(t('no-file-selected'));
-                }}
-              />
+              <Trash2 size={15} onClick={handleFileDeletion} />
             </div>
           </div>
         )}
