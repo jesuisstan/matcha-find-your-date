@@ -276,5 +276,7 @@
   "photo-deleted-successfully": "Photo deleted successfully",
   "failed-to-delete-photo": "Failed to delete photo",
   "error-photo-type": "Error photo type",
-  "interests": "Interests"
+  "interests": "Interests",
+  "photo-uploaded": "Photo uploaded",
+  "no-photo-uploaded": "No photo uploaded"
 }

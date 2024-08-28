@@ -25,13 +25,14 @@ export async function DELETE(req: Request): Promise<NextResponse> {
     }
 
     // Step 3: Remove the photo URL from the user's photos[] array in PostgreSQL
+    const currentDate = new Date().toISOString();
     const updateQuery = `
       UPDATE users 
-      SET photos = array_remove(photos, $2)
+      SET photos = array_remove(photos, $2), last_connection_date = $3
       WHERE id = $1
-      RETURNING id, photos;
+      RETURNING id, photos, last_connection_date;
     `;
-    const updateValues = [userId, photoUrl];
+    const updateValues = [userId, photoUrl, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);
 
     if (updatedUserResult.rowCount === 0) {

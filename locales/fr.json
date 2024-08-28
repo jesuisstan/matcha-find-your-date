@@ -273,5 +273,7 @@
   "photo-deleted-successfully": "Photo supprimée avec succès",
   "failed-to-delete-photo": "Échec de la suppression de la photo",
   "error-photo-type": "Type de photo invalide",
-  "interests": "Intérêts"
+  "interests": "Intérêts",
+  "photo-uploaded": "Photo téléchargée",
+  "no-photo-uploaded": "Aucune photo téléchargée"
 }

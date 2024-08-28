@@ -21,11 +21,13 @@ const ImageUploader = ({ id }: { id: number }) => {
   }));
   const [fileEnter, setFileEnter] = useState(false);
   const [isCompressing, setIsCompressing] = useState(false);
+  const [loading, setLoading] = useState(false);
   const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/gif']; // Supported image types
-  const [error, setError] = useState(t('no-file-selected'));
-  const [successMessage, setSuccessMessage] = useState('');
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const [photoUrl, setPhotoUrl] = useState<string | null>(user?.photos?.[id] || null);
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const commonMessage = !user?.photos?.[id] ? t('no-photo-uploaded') : t('photo-uploaded');
 
   const handleFileSelection = async (file: File) => {
     setError('');
@@ -84,9 +86,7 @@ const ImageUploader = ({ id }: { id: number }) => {
   };
 
   const handleFileDeletion = async () => {
-    console.log('remove file', blob);
-    console.log('remove photoUrl', photoUrl);
-
+    setLoading(true);
     const response = await fetch(
       `/api/avatar/delete?id=${user?.id}&url=${encodeURIComponent(photoUrl!)}`,
       {
@@ -98,15 +98,18 @@ const ImageUploader = ({ id }: { id: number }) => {
     const updatedUserData: TUser = result.user;
     if (response.ok) {
       setSuccessMessage(t(result.message));
+      setLoading(false);
       if (updatedUserData) {
         setUser({ ...user, ...updatedUserData });
       }
     } else {
+      setLoading(false);
       setError(t(result.error));
     }
 
     setBlob(null);
     setPhotoUrl(null);
+    setLoading(false);
   };
 
   return (
@@ -153,7 +156,7 @@ const ImageUploader = ({ id }: { id: number }) => {
               htmlFor={`file{${id}}`}
               className="flex h-full flex-col justify-center text-center"
             >
-              {isCompressing ? (
+              {isCompressing || loading ? (
                 <Spinner size={5} />
               ) : (
                 <CirclePlus
@@ -192,21 +195,27 @@ const ImageUploader = ({ id }: { id: number }) => {
                 style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
               />
             )}
-
             {/* REMOVE BUTTON */}
-            <div
-              className={
-                'absolute right-1 top-1 flex rounded-full border bg-card/80 p-1 text-foreground smooth42transition hover:text-negative'
-              }
+
+            <button
+              disabled={loading}
+              className={clsx(
+                'absolute right-1 top-1 flex rounded-full border bg-card/80 p-1 text-foreground smooth42transition ',
+                loading ? 'opacity-60' : 'opacity-100 hover:text-negative'
+              )}
             >
               <Trash2 size={15} onClick={handleFileDeletion} />
-            </div>
+            </button>
           </div>
         )}
       </>
       <div className="w-52 ">
+        {loading && <Spinner size={5} />}
         {error && <div className="text-xs text-negative">{error}</div>}
         {successMessage && <div className="text-xs text-positive">{successMessage}</div>}
+        {!error && !successMessage && commonMessage && (
+          <div className="text-xs text-foreground">{commonMessage}</div>
+        )}
       </div>
     </div>
   );

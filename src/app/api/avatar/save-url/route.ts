@@ -27,13 +27,14 @@ export async function POST(req: Request) {
     }
 
     // Step 3: Update the user's photos array by appending the new URL
+    const currentDate = new Date().toISOString();
     const updateQuery = `
       UPDATE users 
-      SET photos = array_append(photos, $2)
+      SET photos = array_append(photos, $2), last_connection_date = $3
       WHERE id = $1
-      RETURNING id, photos;
+      RETURNING id, photos, last_connection_date;
     `;
-    const updateValues = [id, url];
+    const updateValues = [id, url, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 

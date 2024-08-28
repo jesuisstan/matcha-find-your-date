@@ -273,5 +273,7 @@
   "photo-deleted-successfully": "Фотография успешно удалена",
   "failed-to-delete-photo": "Не удалось удалить фотографию",
   "error-photo-type": "Неверный тип фотографии",
-  "interests": "Интересы"
+  "interests": "Интересы",
+  "photo-uploaded": "Фотография загружена",
+  "no-photo-uploaded": "Фотография не загружена"
 }
