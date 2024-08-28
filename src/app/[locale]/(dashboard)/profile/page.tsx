@@ -62,25 +62,10 @@ const ProfilePage = () => {
           <HeaderSkeleton />
         ) : (
           <div className="flex flex-col justify-start">
-            <div id="user-name" className="relative flex w-max max-w-96 flex-wrap md:max-w-fit">
+            <div id="user-name" className="flex w-max max-w-96 flex-wrap md:max-w-fit">
               <h1 className="mb-2 overflow-hidden text-ellipsis text-4xl sm:text-3xl">
                 {user?.firstname} {user?.lastname.toUpperCase()}
               </h1>
-              <div
-                className={
-                  'absolute -right-11 top-1 flex flex-col gap-1 smooth42transition xs:-right-14 md:flex-row'
-                }
-              >
-                <FilledOrNot size={18} filled={!!user?.firstname || !!user?.lastname} />
-                <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
-                  <SquarePen
-                    size={18}
-                    onClick={() =>
-                      handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)
-                    }
-                  />
-                </div>
-              </div>
             </div>
             <div
               className={clsx(
