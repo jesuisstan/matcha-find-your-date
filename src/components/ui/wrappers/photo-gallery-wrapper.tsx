@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { EmblaOptionsType } from 'embla-carousel';
-import { SquarePen } from 'lucide-react';
+import { PenLine } from 'lucide-react';
 
 import EmblaCarousel from '@/components/carousel/embla-carousel';
 import FilledOrNot from '@/components/ui/filled-or-not';
@@ -28,7 +28,7 @@ const EmptyPhoto = () => {
   );
 };
 
-const UserPhotoGallery = ({
+const PhotoGalleryWrapper = ({
   user,
   modifiable,
   onModify,
@@ -39,7 +39,7 @@ const UserPhotoGallery = ({
 }) => {
   const t = useTranslations();
   const OPTIONS: EmblaOptionsType = { loop: true };
-  const SLIDE_COUNT = 5;
+
   const SLIDES = [
     <div
       key="slide1"
@@ -153,29 +153,57 @@ const UserPhotoGallery = ({
     </div>,
   ];
 
+  // Alternative to create slides dynamically with no EmptyPhoto for nullable photos
+  //const SLIDE_COUNT = user?.photos?.length || 0;
+  //const SLIDES = user?.photos.map((photo, index) => (
+  //  <div
+  //    key={`slide-${index}`}
+  //    className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
+  //  >
+  //    {photo ? (
+  //      <Image
+  //        src={`${photo}`}
+  //        alt={`photo-${index}`}
+  //        width={0}
+  //        height={0}
+  //        sizes="100vw"
+  //        className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-positive"
+  //        style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
+  //        placeholder="blur"
+  //        blurDataURL={'/identity/logo-square.png'}
+  //        priority
+  //      />
+  //    ) : (
+  //      <EmptyPhoto />
+  //    )}
+  //  </div>
+  //));
+
   return (
-    <div className="relative flex flex-col items-center">
-      <div className="flex w-full max-w-screen-md flex-col items-center">
-        <h3 className="mb-4 text-left text-2xl font-bold">{t('photo-gallery')}</h3>
-        {user?.photos ? (
-          <div className="w-full max-w-4xl rounded-xl border-2 py-5">
-            <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+    <div className="relative self-center rounded-2xl bg-card p-5">
+      <div className="flex flex-col items-center">
+        <div className="flex w-full max-w-screen-md flex-col items-center">
+          <h3 className="mb-4 text-left text-2xl font-bold">{t('photo-gallery')}</h3>
+          {user?.photos ? (
+            <div className="w-full max-w-4xl rounded-xl border-2 py-5">
+              <EmblaCarousel slides={SLIDES!} options={OPTIONS} />
+            </div>
+          ) : (
+            <p className="italic">{t('data-incomplete')}</p>
+          )}
+        </div>
+
+        {modifiable && (
+          <div className="absolute right-2 top-2 flex gap-1">
+            <FilledOrNot size={15} filled={!!user?.photos && user?.photos.length > 1} />
+            <div className="text-foreground opacity-60 transition-opacity hover:opacity-100">
+              <PenLine size={15} onClick={onModify} />
+            </div>
           </div>
-        ) : (
-          <p className="italic">{t('data-incomplete')}</p>
         )}
       </div>
-
-      {modifiable && (
-        <div className="absolute right-1 top-0 flex gap-1">
-          <FilledOrNot size={18} filled={!!user?.photos && user?.photos.length > 1} />
-          <div className="text-foreground opacity-60 transition-opacity hover:opacity-100">
-            <SquarePen size={18} onClick={onModify} />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default UserPhotoGallery;
+export default PhotoGalleryWrapper;

@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { SquarePen } from 'lucide-react';
+import { PenLine } from 'lucide-react';
 
 import FilledOrNot from '@/components/ui/filled-or-not';
 import { capitalize } from '@/utils/format-string';
@@ -67,10 +67,10 @@ const LabelsWrapper = ({
       </div>
 
       {modifiable && (
-        <div className={'absolute right-1 top-1 flex gap-1'}>
-          <FilledOrNot size={18} filled={!!nickname || !!age || !!sex} />
+        <div className={'absolute right-2 top-2 flex gap-1'}>
+          <FilledOrNot size={15} filled={!!nickname || !!age || !!sex} />
           <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
-            <SquarePen size={18} onClick={onModify} />
+            <PenLine size={15} onClick={onModify} />
           </div>
         </div>
       )}

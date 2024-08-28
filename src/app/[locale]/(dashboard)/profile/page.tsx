@@ -4,21 +4,20 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { SquarePen } from 'lucide-react';
+import { PenLine } from 'lucide-react';
 
 import ModalChangeEmail from '@/components/modals/modal-change-email';
 import ModalChangePassword from '@/components/modals/modal-change-password';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
-import StaticTagsGroup from '@/components/ui/chips/tags-group-static';
-import FilledOrNot from '@/components/ui/filled-or-not';
 import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
+import InterestsWrapper from '@/components/ui/wrappers/interests-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
-import UserLocation from '@/components/user-location';
-import UserPhotoGallery from '@/components/user-photo-gallery';
-import UserSexPreference from '@/components/user-sex-preference';
+import LocationWrapper from '@/components/ui/wrappers/location-wrapper';
+import PhotoGalleryWrapper from '@/components/ui/wrappers/photo-gallery-wrapper';
+import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrapper';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
 import { calculateAge } from '@/utils/format-string';
@@ -99,7 +98,7 @@ const ProfilePage = () => {
                   onClick={() => setShowChangeEmailModal(true)}
                 >
                   <span>E-mail</span>
-                  <SquarePen size={18} />
+                  <PenLine size={15} />
                 </ButtonMatcha>
                 <ButtonMatcha
                   size="default"
@@ -107,7 +106,7 @@ const ProfilePage = () => {
                   onClick={() => setShowChangePasswordModal(true)}
                 >
                   <span>Password</span>
-                  <SquarePen size={18} />
+                  <PenLine size={15} />
                 </ButtonMatcha>
               </div>
             </div>
@@ -117,6 +116,7 @@ const ProfilePage = () => {
 
       {/* MAIN CONTENT */}
       <div className="mb-4 grid grid-cols-10 gap-4">
+        {/* LEFT SECTOR */}
         <div
           className={clsx(
             'col-span-10 h-max items-center justify-center space-y-5',
@@ -124,59 +124,37 @@ const ProfilePage = () => {
           )}
         >
           {/* LOCATION */}
-          <div className="rounded-2xl bg-card p-5">
-            <div className="flex flex-col justify-start">
-              <h3 className="text-2xl font-bold">{t(`location`)}</h3>
-              <UserLocation
-                address={user?.address}
-                modifiable
-                onModify={() =>
-                  handleModifyClick('location' as keyof typeof TProfileCompleteLayout)
-                }
-              />
-            </div>
-          </div>
+          <LocationWrapper
+            address={user?.address}
+            modifiable
+            onModify={() => handleModifyClick('location' as keyof typeof TProfileCompleteLayout)}
+          />
 
           {/* PREFERENCES */}
-          <div className="rounded-2xl bg-card p-5">
-            <div className="flex flex-col justify-start">
-              <h3 className="text-2xl font-bold">{t(`tastes`)}</h3>
-              <div className="mt-4">
-                <UserSexPreference
-                  sexPreference={user?.sex_preferences}
-                  modifiable
-                  onModify={() =>
-                    handleModifyClick('sexpreferences' as keyof typeof TProfileCompleteLayout)
-                  }
-                />
-              </div>
-            </div>
-          </div>
+          <SexPreferenceWrapper
+            sexPreference={user?.sex_preferences}
+            modifiable
+            onModify={() =>
+              handleModifyClick('sexpreferences' as keyof typeof TProfileCompleteLayout)
+            }
+          />
 
           {/* INTERESTS */}
-          <div className="rounded-2xl bg-card p-5">
-            <div className="flex flex-col justify-start">
-              <h3 className="text-2xl font-bold">{t(`interests`)}</h3>
-              <div className="mt-4">
-                <StaticTagsGroup
-                  tagsList={user?.tags!}
-                  modifiable
-                  onModify={() => handleModifyClick('tags' as keyof typeof TProfileCompleteLayout)}
-                />
-              </div>
-            </div>
-          </div>
+          <InterestsWrapper
+            tagsList={user?.tags!}
+            modifiable
+            onModify={() => handleModifyClick('tags' as keyof typeof TProfileCompleteLayout)}
+          />
         </div>
 
-        {/* PHOTOS */}
-        <div className={clsx('col-span-10', 'lg:col-span-7')}>
-          <div className="self-center rounded-2xl bg-card p-5">
-            <UserPhotoGallery
-              user={user}
-              modifiable
-              onModify={() => handleModifyClick('photos' as keyof typeof TProfileCompleteLayout)}
-            />
-          </div>
+        {/* RIGHT SECTOR */}
+        <div className={clsx('col-span-10 space-y-5', 'lg:col-span-7')}>
+          {/* PHOTOS */}
+          <PhotoGalleryWrapper
+            user={user}
+            modifiable
+            onModify={() => handleModifyClick('photos' as keyof typeof TProfileCompleteLayout)}
+          />
         </div>
       </div>
     </div>
