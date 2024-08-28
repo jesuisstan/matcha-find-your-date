@@ -7,11 +7,11 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { id, photos } = body;
+    const { id } = body;
 
     // Step 1: Check if the user exists
     const selectQuery = `
-      SELECT photos
+      SELECT complete
       FROM users 
       WHERE id = $1
     `;
@@ -23,23 +23,20 @@ export async function POST(req: Request) {
 
     const currentData = currentDataResult.rows[0];
 
-    // Step 2: Check if the data is up-to-date (sort and compare the photos arrays)
-    const currentPhotosSorted = currentData.photos.slice().sort();
-    const newPhotosSorted = photos.slice().sort();
-    const arePhotosEqual = JSON.stringify(currentPhotosSorted) === JSON.stringify(newPhotosSorted);
-    if (arePhotosEqual) {
+    // Step 2: Check if the data is up-to-date
+    if (currentData.complete === false) {
       return NextResponse.json({ message: 'data-is-up-to-date' });
     }
 
     // Step 3: Update the user data if needed
+    const currentDate = new Date().toISOString();
     const updateQuery = `
       UPDATE users 
-      SET photos = $2
+      SET complete = false, last_connection_date = $2
       WHERE id = $1
-      RETURNING id, photos;
+      RETURNING id, complete, last_connection_date;
     `;
-    const updateValues = [id, photos];
-
+    const updateValues = [id, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 

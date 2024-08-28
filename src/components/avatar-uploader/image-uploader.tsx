@@ -213,7 +213,7 @@ const ImageUploader = ({ id }: { id: number }) => {
         {loading && <Spinner size={5} />}
         {error && <div className="text-xs text-negative">{error}</div>}
         {successMessage && <div className="text-xs text-positive">{successMessage}</div>}
-        {!error && !successMessage && commonMessage && (
+        {!error && !successMessage && !loading && commonMessage && (
           <div className="text-xs text-foreground">{commonMessage}</div>
         )}
       </div>

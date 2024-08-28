@@ -35,7 +35,6 @@ const ProfilePage = () => {
   useEffect(() => {
     if (!user) return;
     if (!user?.complete) {
-      setProfileCompleteModalLayout('basics');
       setShowProfileCompleteModal(true);
     }
   }, [user]);
@@ -47,12 +46,12 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <ModalChangeEmail show={showChangeEmailModal} setShow={setShowChangeEmailModal} />
       <ModalProfileComplete
         show={showProfileCompleteModal}
         setShow={setShowProfileCompleteModal}
         startLayout={profileCompleteModalLayout as keyof typeof TProfileCompleteLayout}
       />
+      <ModalChangeEmail show={showChangeEmailModal} setShow={setShowChangeEmailModal} />
       <ModalChangePassword show={showChangePasswordModal} setShow={setShowChangePasswordModal} />
 
       {/* HEADER */}

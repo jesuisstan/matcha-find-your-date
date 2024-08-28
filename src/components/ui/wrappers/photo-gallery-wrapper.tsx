@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -14,12 +14,12 @@ import { TUser } from '@/types/user';
 const EmptyPhoto = () => {
   return (
     <Image
-      src={`/identity/logo-heart.png`}
-      alt="heart"
+      src={`/identity/logo-square.png`}
+      alt="matcha-heart"
       width={0}
       height={0}
       sizes="100vw"
-      className="h-full w-full rounded-xl object-cover p-2 shadow-md shadow-c42orange"
+      className="h-full w-full rounded-xl object-cover p-2 px-16 opacity-50 shadow-md shadow-c42orange"
       style={{ objectFit: 'contain', objectPosition: 'center' }} // Ensures image fits and is centered
       placeholder="blur"
       blurDataURL={'/identity/logo-heart.png'}
@@ -38,8 +38,11 @@ const PhotoGalleryWrapper = ({
   onModify?: () => void;
 }) => {
   const t = useTranslations();
-  const OPTIONS: EmblaOptionsType = { loop: true };
+  const [allPhotosFilled, setAllPhotosFilled] = useState<boolean>(
+    user?.photos?.length! >= 1 && user?.photos?.length! < 5 ? false : true
+  );
 
+  const OPTIONS: EmblaOptionsType = { loop: true };
   const SLIDES = [
     <div
       key="slide1"
@@ -179,13 +182,17 @@ const PhotoGalleryWrapper = ({
   //  </div>
   //));
 
+  useEffect(() => {
+    setAllPhotosFilled(user?.photos?.length! >= 1 && user?.photos?.length! < 5 ? false : true);
+  }, [user?.photos]);
+
   return (
     <div className="relative self-center rounded-2xl bg-card p-5">
       <div className="flex flex-col items-center">
         <div className="flex w-full max-w-screen-md flex-col items-center">
           <h3 className="mb-4 text-left text-2xl font-bold">{t('photo-gallery')}</h3>
           {user?.photos ? (
-            <div className="w-full max-w-4xl rounded-xl border-2 py-5">
+            <div className="w-full max-w-4xl rounded-xl py-5">
               <EmblaCarousel slides={SLIDES!} options={OPTIONS} />
             </div>
           ) : (
@@ -195,7 +202,11 @@ const PhotoGalleryWrapper = ({
 
         {modifiable && (
           <div className="absolute right-2 top-2 flex gap-1">
-            <FilledOrNot size={15} filled={!!user?.photos && user?.photos.length > 1} />
+            <FilledOrNot
+              size={15}
+              filled={!!user?.photos && user?.photos?.length >= 1}
+              warning={!allPhotosFilled}
+            />
             <div className="text-foreground opacity-60 transition-opacity hover:opacity-100">
               <PenLine size={15} onClick={onModify} />
             </div>

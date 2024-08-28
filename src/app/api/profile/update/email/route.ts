@@ -36,14 +36,14 @@ export async function POST(req: Request) {
     }
 
     // Step 4: Update the user data if needed
+    const currentDate = new Date().toISOString();
     const updateQuery = `
       UPDATE users 
-      SET email = $2
+      SET email = $2, last_connection_date = $3
       WHERE id = $1
       RETURNING id, email;
     `;
-    const updateValues = [id, email];
-
+    const updateValues = [id, email, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 

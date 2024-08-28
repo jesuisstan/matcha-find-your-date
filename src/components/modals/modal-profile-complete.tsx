@@ -7,6 +7,8 @@ import clsx from 'clsx';
 import { OctagonAlert, Save } from 'lucide-react';
 import { MapPinned, MapPinOff } from 'lucide-react';
 
+import FilledOrNot from '../ui/filled-or-not';
+
 import ImageUploader from '@/components/avatar-uploader/image-uploader';
 import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
@@ -25,6 +27,7 @@ import {
   createTSelectGeoOption,
   getFakeLocation,
 } from '@/utils/geolocation-handlers';
+import { isProfileCategoryFilled } from '@/utils/user-handlers';
 
 const MAX_BIOGRAPHY_LENGTH = 442;
 
@@ -51,7 +54,7 @@ const ModalProfileComplete = ({
     setUser: state.setUser,
   }));
   const localeActive = useLocale();
-  const [layout, setLayout] = useState<TProfileCompleteLayout>(startLayout ?? 'basics');
+  const [layout, setLayout] = useState<TProfileCompleteLayout>(startLayout ?? 'photos');
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -235,7 +238,6 @@ const ModalProfileComplete = ({
 
       const result = await response.json();
       const updatedUserData: TUser = result.user;
-      console.log('updatedUserData', updatedUserData); // debug
       if (response.ok) {
         setSuccessMessage(t(result.message));
         if (updatedUserData) {
@@ -547,9 +549,12 @@ const ModalProfileComplete = ({
               ref={formRef}
             >
               {layouts[layout as keyof typeof layouts]}
-              <ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
-                <Save size={24} />
-              </ButtonMatcha>
+              <div className="flex flex-row items-center justify-center gap-3 self-center text-center">
+                <FilledOrNot size={24} filled={isProfileCategoryFilled(layout, user)} />
+                <ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
+                  <Save size={24} />
+                </ButtonMatcha>
+              </div>
             </form>
           ) : (
             <div>{layouts[layout as keyof typeof layouts]}</div>
