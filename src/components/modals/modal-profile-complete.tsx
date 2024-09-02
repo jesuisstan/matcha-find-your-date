@@ -450,6 +450,7 @@ const ModalProfileComplete = ({
             filled={isProfileCategoryFilled(layout, user)}
             warning={!(user?.photos?.length! >= 1 && user?.photos?.length! < 5 ? false : true)}
           />
+          {user?.photos?.length} / 5
         </div>
         <ImageUploader id={0} setProfileIsCompleted={setProfileIsCompleted} />
         <ImageUploader id={1} setProfileIsCompleted={setProfileIsCompleted} />
