@@ -10,6 +10,7 @@ import ModalChangeEmail from '@/components/modals/modal-change-email';
 import ModalChangePassword from '@/components/modals/modal-change-password';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
+import ModalProfileCongrats from '@/components/modals/modal-profile-congrats';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
@@ -29,6 +30,7 @@ const ProfilePage = () => {
   const [showChangeEmailModal, setShowChangeEmailModal] = useState(false);
   const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [showProfileCongratsModal, setShowProfileCongratsModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
 
   // Automatically show the modal on first load if the profile is incomplete
@@ -50,9 +52,11 @@ const ProfilePage = () => {
         show={showProfileCompleteModal}
         setShow={setShowProfileCompleteModal}
         startLayout={profileCompleteModalLayout as keyof typeof TProfileCompleteLayout}
+        setProfileIsCompleted={setShowProfileCongratsModal}
       />
       <ModalChangeEmail show={showChangeEmailModal} setShow={setShowChangeEmailModal} />
       <ModalChangePassword show={showChangePasswordModal} setShow={setShowChangePasswordModal} />
+      <ModalProfileCongrats show={showProfileCongratsModal} setShow={setShowProfileCongratsModal} />
 
       {/* HEADER */}
       <div className={clsx('mb-4 flex items-center justify-between text-4xl')}>

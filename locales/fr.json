@@ -242,7 +242,7 @@
   "click-to-unwrap": "Cliquez pour voir la description complète",
   "no-description": "Pas de description",
   "bio": "Bio",
-  "last-action": "Dernière action",
+  "last-activity": "Dernière activité",
   "invalid-date": "Date invalide",
   "customize-profile": "Personnalisez votre profil, mettez à jour vos préférences et gérez les paramètres de sécurité",
   "use-smart-suggestions": "Découvrez des profils grâce aux suggestions intelligentes de Matcha pour votre prochain rendez-vous",
@@ -275,5 +275,10 @@
   "error-photo-type": "Type de photo invalide",
   "interests": "Intérêts",
   "photo-uploaded": "Photo téléchargée",
-  "no-photo-uploaded": "Aucune photo téléchargée"
+  "no-photo-uploaded": "Aucune photo téléchargée",
+  "error-min-biography-length": "Minimum 42 caractères requis",
+  "error-max-biography-length": "Maximum 442 caractères autorisés",
+  "congrats": "Félicitations!",
+  "profile-is-completed": "Votre profil est complet.\n Vous pouvez maintenant utiliser toutes les fonctionnalités de Matcha",
+  "click-to-modify": "Cliquez pour modifier"
 }

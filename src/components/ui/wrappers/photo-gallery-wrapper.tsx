@@ -207,7 +207,10 @@ const PhotoGalleryWrapper = ({
               filled={!!user?.photos && user?.photos?.length >= 1}
               warning={!allPhotosFilled}
             />
-            <div className="text-foreground opacity-60 transition-opacity hover:opacity-100">
+            <div
+              className="text-foreground opacity-60 transition-opacity hover:opacity-100"
+              title={t('click-to-modify')}
+            >
               <PenLine size={15} onClick={onModify} />
             </div>
           </div>

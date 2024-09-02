@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import { del } from '@vercel/blob';
 import { db } from '@vercel/postgres';
 
+import { checkIfUserDataIsFilled } from '@/utils/server/check-user-details-filled';
+
 export async function DELETE(req: Request): Promise<NextResponse> {
   const client = await db.connect();
 
@@ -34,13 +36,20 @@ export async function DELETE(req: Request): Promise<NextResponse> {
     `;
     const updateValues = [userId, photoUrl, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);
-
     if (updatedUserResult.rowCount === 0) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 404 });
     }
-
     const updatedUser = updatedUserResult.rows[0];
-    return NextResponse.json({ message: 'photo-deleted-successfully', user: updatedUser });
+
+    // Check if all required fields are filled to determine `complete` status & Update the `complete` status
+    const { complete, changedToCompleteFlag } = await checkIfUserDataIsFilled(client, userId);
+    await client.query('UPDATE users SET complete = $2 WHERE id = $1', [userId, complete]);
+
+    return NextResponse.json({
+      message: 'photo-deleted-successfully',
+      user: { ...updatedUser, complete },
+      changedToCompleteFlag,
+    });
   } catch (error) {
     console.error('Error deleting photo:', error);
     return NextResponse.json({ error: 'failed-to-delete-photo' }, { status: 500 });

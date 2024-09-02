@@ -56,7 +56,7 @@ const LabelsWrapper = ({
       </div>
 
       <div className="min-w-36">
-        <p className="text-base font-bold">{t('last-action')}</p>
+        <p className="text-base font-bold">{t('last-activity')}</p>
         {loading || !lastConnection || lastConnection === t('invalid-date') ? (
           <DateSkeleton />
         ) : (
@@ -69,7 +69,10 @@ const LabelsWrapper = ({
       {modifiable && (
         <div className={'absolute right-2 top-2 flex gap-1'}>
           <FilledOrNot size={15} filled={!!nickname || !!age || !!sex} />
-          <div className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}>
+          <div
+            className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}
+            title={t('click-to-modify')}
+          >
             <PenLine size={15} onClick={onModify} />
           </div>
         </div>

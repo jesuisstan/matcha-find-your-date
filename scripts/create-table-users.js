@@ -36,8 +36,8 @@ async function createTables() {
       CREATE TABLE IF NOT EXISTS users (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         email TEXT NOT NULL UNIQUE,
-        confirmed BOOLEAN DEFAULT false,
         password TEXT NOT NULL,
+        confirmed BOOLEAN DEFAULT false,
         firstname VARCHAR(255) NOT NULL,
         lastname VARCHAR(255) NOT NULL,
         nickname VARCHAR(255) NOT NULL,
@@ -45,16 +45,16 @@ async function createTables() {
         sex sex_enum NOT NULL,
         biography TEXT,
         tags TEXT[],
-        complete BOOLEAN DEFAULT false,
         latitude DOUBLE PRECISION,
         longitude DOUBLE PRECISION,
         address TEXT,
+        sex_preferences sex_preferences_enum DEFAULT 'bisexual',
+        photos TEXT[],
+        complete BOOLEAN DEFAULT false,
+        popularity INT DEFAULT 0,
         registration_date TIMESTAMP WITH TIME ZONE,
         last_connection_date TIMESTAMP WITH TIME ZONE,
         online BOOLEAN DEFAULT false,
-        popularity INT DEFAULT 0,
-        sex_preferences sex_preferences_enum DEFAULT 'bisexual',
-        photos TEXT[],
         service_token TEXT
       );
     `);

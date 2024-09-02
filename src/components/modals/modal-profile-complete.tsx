@@ -43,10 +43,12 @@ const ModalProfileComplete = ({
   show,
   setShow,
   startLayout,
+  setProfileIsCompleted,
 }: {
   show: boolean;
   setShow: Dispatch<SetStateAction<boolean>>;
   startLayout: TProfileCompleteLayout;
+  setProfileIsCompleted: Dispatch<SetStateAction<boolean>>;
 }) => {
   const t = useTranslations();
   const { user, setUser } = useUserStore((state) => ({
@@ -63,7 +65,6 @@ const ModalProfileComplete = ({
   const [sexPreferences, setSexPreferences] = useState(user?.sex_preferences as string); // <'men' | 'women' | 'bisexual'>
   const [biography, setBiography] = useState(user?.biography || '');
   const [selectedTags, setSelectedTags] = useState<string[]>(user?.tags || []);
-  const [photosURLs, setPhotosURLs] = useState<string[]>(user?.photos || []);
 
   // Location vars
   const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(
@@ -219,11 +220,6 @@ const ModalProfileComplete = ({
         id: user?.id,
         tags: selectedTags,
       });
-    } else if (layout === 'photos') {
-      body = JSON.stringify({
-        id: user?.id,
-        photos: photosURLs,
-      });
     }
 
     let response: any;
@@ -238,6 +234,12 @@ const ModalProfileComplete = ({
 
       const result = await response.json();
       const updatedUserData: TUser = result.user;
+
+      // trigger showing the Modal profile completion if needed
+      if (result.changedToCompleteFlag) {
+        setProfileIsCompleted(true);
+      }
+
       if (response.ok) {
         setSuccessMessage(t(result.message));
         if (updatedUserData) {
@@ -403,11 +405,11 @@ const ModalProfileComplete = ({
           </div>
         </div>
         {/* warning */}
-        <div className="flex flex-row items-center justify-center gap-3 space-y-1 text-center">
+        <div className="flex max-w-96 flex-row items-center justify-center gap-3 space-y-1 self-center text-center">
           <div className="text-c42orange">
             <OctagonAlert size={25} />
           </div>
-          <div className="max-w-[400px] text-left text-xs">
+          <div className="text-left text-xs">
             <TextWithLineBreaks text={t('location-need-message')} />
           </div>
         </div>
@@ -441,14 +443,19 @@ const ModalProfileComplete = ({
     ),
     photos: (
       <div className="flex min-h-96 min-w-96 flex-col gap-1 text-left">
-        <Label htmlFor="about" className="mb-3 text-left">
-          {t(`photo-gallery`) + ':'}
-        </Label>
-        <ImageUploader id={0} />
-        <ImageUploader id={1} />
-        <ImageUploader id={2} />
-        <ImageUploader id={3} />
-        <ImageUploader id={4} />
+        <div className="mb-5 flex flex-row flex-wrap items-center justify-center gap-3 align-middle">
+          <Label htmlFor="about">{t(`photo-gallery`)}</Label>
+          <FilledOrNot
+            size={24}
+            filled={isProfileCategoryFilled(layout, user)}
+            warning={!(user?.photos?.length! >= 1 && user?.photos?.length! < 5 ? false : true)}
+          />
+        </div>
+        <ImageUploader id={0} setProfileIsCompleted={setProfileIsCompleted} />
+        <ImageUploader id={1} setProfileIsCompleted={setProfileIsCompleted} />
+        <ImageUploader id={2} setProfileIsCompleted={setProfileIsCompleted} />
+        <ImageUploader id={3} setProfileIsCompleted={setProfileIsCompleted} />
+        <ImageUploader id={4} setProfileIsCompleted={setProfileIsCompleted} />
       </div>
     ),
   };

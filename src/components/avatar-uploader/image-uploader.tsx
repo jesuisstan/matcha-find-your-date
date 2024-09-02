@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -13,7 +13,13 @@ import Spinner from '@/components/ui/spinner';
 import useUserStore from '@/stores/user';
 import { TUser } from '@/types/user';
 
-const ImageUploader = ({ id }: { id: number }) => {
+const ImageUploader = ({
+  id,
+  setProfileIsCompleted,
+}: {
+  id: number;
+  setProfileIsCompleted: Dispatch<SetStateAction<boolean>>;
+}) => {
   const t = useTranslations();
   const { user, setUser } = useUserStore((state) => ({
     user: state.user,
@@ -61,6 +67,12 @@ const ImageUploader = ({ id }: { id: number }) => {
 
           const result = await responseSQL.json();
           const updatedUserData: TUser = result.user;
+
+          // trigger showing the Modal profile completion if needed
+          if (result.changedToCompleteFlag) {
+            setProfileIsCompleted(true);
+          }
+
           if (responseSQL.ok) {
             if (updatedUserData) {
               setUser({ ...user, ...updatedUserData });

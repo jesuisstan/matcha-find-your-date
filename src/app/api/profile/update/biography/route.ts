@@ -2,12 +2,22 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
+import { checkIfUserDataIsFilled } from '@/utils/server/check-user-details-filled';
+
 export async function POST(req: Request) {
   const client = await db.connect();
 
   try {
     const body = await req.json();
     const { id, biography } = body;
+
+    // Step 0: Validate the biography length received from the frontend
+    if (biography.trim().length < 42) {
+      return NextResponse.json({ error: 'error-min-biography-length' }, { status: 400 });
+    }
+    if (biography.trim().length > 442) {
+      return NextResponse.json({ error: 'error-max-biography-length' }, { status: 400 });
+    }
 
     // Step 1: Check if the user exists
     const selectQuery = `
@@ -40,7 +50,17 @@ export async function POST(req: Request) {
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 
-    return NextResponse.json({ message: 'user-updated-successfully', user: updatedUser });
+    // Check if all required fields are filled to determine `complete` status & Update the `complete` status if necessary
+    const { complete, changedToCompleteFlag } = await checkIfUserDataIsFilled(client, id);
+    if (changedToCompleteFlag) {
+      await client.query('UPDATE users SET complete = $2 WHERE id = $1', [id, complete]);
+    }
+
+    return NextResponse.json({
+      message: 'user-updated-successfully',
+      user: { ...updatedUser, complete },
+      changedToCompleteFlag,
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'failed-to-update-user' }, { status: 500 });

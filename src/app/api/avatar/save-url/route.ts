@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
+import { checkIfUserDataIsFilled } from '@/utils/server/check-user-details-filled';
+
 export async function POST(req: Request) {
   const client = await db.connect();
 
@@ -38,7 +40,17 @@ export async function POST(req: Request) {
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 
-    return NextResponse.json({ message: 'user-updated-successfully', user: updatedUser });
+    // Check if all required fields are filled to determine `complete` status & Update the `complete` status if necessary
+    const { complete, changedToCompleteFlag } = await checkIfUserDataIsFilled(client, id);
+    if (changedToCompleteFlag) {
+      await client.query('UPDATE users SET complete = $2 WHERE id = $1', [id, complete]);
+    }
+
+    return NextResponse.json({
+      message: 'user-updated-successfully',
+      user: { ...updatedUser, complete },
+      changedToCompleteFlag,
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'failed-to-update-user' }, { status: 500 });
