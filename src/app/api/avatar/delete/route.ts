@@ -30,9 +30,9 @@ export async function DELETE(req: Request): Promise<NextResponse> {
     const currentDate = new Date().toISOString();
     const updateQuery = `
       UPDATE users 
-      SET photos = array_remove(photos, $2), last_connection_date = $3
+      SET photos = array_remove(photos, $2), last_action = $3
       WHERE id = $1
-      RETURNING id, photos, last_connection_date;
+      RETURNING id, photos, last_action;
     `;
     const updateValues = [userId, photoUrl, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);

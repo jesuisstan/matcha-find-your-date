@@ -204,7 +204,7 @@ const Login = () => {
         <h2 className="mb-5 text-center text-3xl text-foreground">
           {pageLayout === 'login' && t(`auth.sign-in`)}
           {pageLayout === 'register' && t(`auth.register-new`)}
-          {pageLayout === 'confirmation' && t(`auth.confirme-email`)}
+          {pageLayout === 'confirmation' && t(`auth.confirm-email`)}
           {pageLayout === 'forgot' && t(`auth.reset-password`)}
         </h2>
         {pageLayout === 'login' && (
@@ -346,7 +346,7 @@ const Login = () => {
                 />
                 <button
                   type="button"
-                  className="absolute right-2 top-2 text-secondary"
+                  className="absolute right-2 top-[7px] text-secondary"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff /> : <Eye />}
@@ -400,7 +400,7 @@ const Login = () => {
                 }}
                 disabled={loading}
               >
-                {t(`auth.resend-confirmation-email`)}
+                {t(`auth.confirm-email`)}
               </ButtonMatcha>
               <ButtonMatcha
                 variant="link"
@@ -418,7 +418,7 @@ const Login = () => {
         </div>
         <a
           href={`mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`}
-          className="hover:text-c42green my-6 text-center text-sm text-secondary transition-all duration-300 ease-in-out"
+          className="my-6 text-center text-sm text-secondary transition-all duration-300 ease-in-out hover:text-c42orange"
         >
           {t(`need-help`)}
         </a>

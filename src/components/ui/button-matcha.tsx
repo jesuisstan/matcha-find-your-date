@@ -7,12 +7,11 @@ import Spinner from '@/components/ui/spinner';
 import { cn } from '@/utils/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center space-x-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-300 ease-in-out',
+  'inline-flex items-center justify-center space-x-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-all duration-300 ease-in-out overflow-hidden',
   {
     variants: {
       variant: {
-        default:
-          'border bg-primary text-primary-foreground hover:bg-primary/80 smooth42transition',
+        default: 'border bg-primary text-primary-foreground hover:bg-primary/80 smooth42transition',
         destructive: 'bg-negative text-foreground hover:bg-negative/80 smooth42transition',
         outline:
           'border border-secondary bg-background hover:bg-accent hover:text-accent-foreground hover:border-c42orange smooth42transition',
@@ -52,15 +51,13 @@ const ButtonMatcha = React.forwardRef<HTMLButtonElement, TButtonProps>(
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        disabled={disabled || loading} // Block the button when loading is true or disabled is true
+        disabled={disabled || loading}
         {...props}
       >
         {loading ? (
-          //<div className="flex self-center items-center justify-center ">
           <Spinner size={6} />
         ) : (
-          //</div>
-          children
+          <span className="line-clamp-2 text-center">{children}</span>
         )}
       </Comp>
     );

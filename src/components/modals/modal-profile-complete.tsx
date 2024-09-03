@@ -29,6 +29,7 @@ import {
 } from '@/utils/geolocation-handlers';
 import { isProfileCategoryFilled } from '@/utils/user-handlers';
 
+const MIN_BIOGRAPHY_LENGTH = 42;
 const MAX_BIOGRAPHY_LENGTH = 442;
 
 export type TProfileCompleteLayout =
@@ -355,8 +356,10 @@ const ModalProfileComplete = ({
             value={biography}
             onChange={handleBiographyChange}
           />
-          <span className="mt-1 text-xs text-muted">
-            {t('auth.max-char') + ': ' + MAX_BIOGRAPHY_LENGTH}
+          <span className="mt-1 text-xs text-secondary/80">
+            {t('min') + ' ' + MIN_BIOGRAPHY_LENGTH}
+            {', '}
+            {t('max') + ' ' + MAX_BIOGRAPHY_LENGTH} {t('characters')}
           </span>
         </div>
       </div>
@@ -450,7 +453,7 @@ const ModalProfileComplete = ({
             filled={isProfileCategoryFilled(layout, user)}
             warning={!(user?.photos?.length! >= 1 && user?.photos?.length! < 5 ? false : true)}
           />
-          {user?.photos?.length} / 5
+          {user?.photos?.length ?? 0} / 5
         </div>
         <ImageUploader id={0} setProfileIsCompleted={setProfileIsCompleted} />
         <ImageUploader id={1} setProfileIsCompleted={setProfileIsCompleted} />

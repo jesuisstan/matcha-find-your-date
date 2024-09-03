@@ -5,7 +5,14 @@ import clsx from 'clsx';
 
 import { chipsOptionPropsSchema, TChipsOptionProps } from '@/types/chips';
 
-const ChipsOption = ({ paramName, value, isSelected, onSelect, children }: TChipsOptionProps) => {
+const ChipsOption = ({
+  paramName,
+  value,
+  isSelected,
+  onSelect,
+  children,
+  nonClickable,
+}: TChipsOptionProps) => {
   /* Verifying the passed Props of the component */
   const verif = chipsOptionPropsSchema.safeParse({
     paramName,
@@ -13,6 +20,7 @@ const ChipsOption = ({ paramName, value, isSelected, onSelect, children }: TChip
     isSelected,
     onSelect,
     children,
+    nonClickable,
   });
 
   if (!verif.success) {
@@ -44,9 +52,9 @@ const ChipsOption = ({ paramName, value, isSelected, onSelect, children }: TChip
       aria-labelledby={value}
       title={getTitleFromChildren(children)}
       className={clsx(
-        `flex h-5 min-w-[54px] cursor-pointer flex-row items-center justify-center gap-1 whitespace-nowrap break-words rounded-3xl border-[1px] border-secondary px-[9px] py-[2px] text-center text-xs font-normal normal-case leading-loose transition-all duration-300 ease-in-out`,
-        `hover:border-c42orange`,
-        isSelected ? 'bg-foreground text-card dark:bg-foreground' : 'bg-card text-foreground'
+        `flex h-5 min-w-[54px] flex-row items-center justify-center gap-1 whitespace-nowrap break-words rounded-3xl border-[1px] border-secondary px-[9px] py-[2px] text-center text-xs font-normal normal-case leading-loose transition-all duration-300 ease-in-out`,
+        isSelected ? 'bg-foreground text-card dark:bg-foreground' : 'bg-card text-foreground',
+        !nonClickable && 'cursor-pointer hover:border-c42orange'
       )}
       onClick={() => onSelect(value)}
     >
@@ -61,12 +69,7 @@ const ChipsOption = ({ paramName, value, isSelected, onSelect, children }: TChip
           />
         </div>
       )}
-      <div
-        className={clsx(
-          `flex cursor-pointer overflow-hidden text-ellipsis`,
-          isSelected ? 'selected' : ''
-        )}
-      >
+      <div className={clsx(`flex overflow-hidden text-ellipsis`, isSelected ? 'selected' : '')}>
         {children}
       </div>
     </div>

@@ -1,9 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import { PenLine } from 'lucide-react';
-
 import ChipsOption from '@/components/ui/chips/chips-option';
-import FilledOrNot from '@/components/ui/filled-or-not';
 
 type TStaticTagsGroupProps = {
   tagsList: string[];
@@ -26,6 +23,7 @@ const StaticTagsGroup: React.FC<TStaticTagsGroupProps> = ({ tagsList }) => {
               value={tag}
               isSelected={true}
               onSelect={() => {}} // No-op since this is static
+              nonClickable
             >
               <div>{t(`tags.${tag}`)}</div>
             </ChipsOption>

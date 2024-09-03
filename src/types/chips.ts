@@ -8,6 +8,7 @@ export const chipsOptionPropsSchema = z.object({
   isSelected: z.boolean(),
   onSelect: z.function(z.tuple([z.string()], z.void())),
   children: z.custom<ReactNode>(),
+  nonClickable: z.boolean().optional(),
 });
 
 export type TChipsOptionProps = z.infer<typeof chipsOptionPropsSchema>;

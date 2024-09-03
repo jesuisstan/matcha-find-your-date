@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { ShieldAlert, ShieldCheck } from 'lucide-react';
 import { PenLine } from 'lucide-react';
 
 import ModalChangeEmail from '@/components/modals/modal-change-email';
@@ -20,6 +19,7 @@ import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 import LocationWrapper from '@/components/ui/wrappers/location-wrapper';
 import PhotoGalleryWrapper from '@/components/ui/wrappers/photo-gallery-wrapper';
 import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrapper';
+import StatusWrapper from '@/components/ui/wrappers/status-wrapper';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
 import { calculateAge } from '@/utils/format-string';
@@ -67,7 +67,8 @@ const ProfilePage = () => {
           <div className="flex min-w-full flex-col justify-start">
             <div id="user-name" className="flex w-max max-w-96 flex-wrap md:max-w-fit">
               <h1 className="mb-2 overflow-hidden text-ellipsis text-4xl sm:text-3xl">
-                {user?.firstname} {user?.lastname.toUpperCase()}
+                {user?.nickname ?? '???'}
+                {/*{user?.firstname} {user?.lastname.toUpperCase()}*/}
               </h1>
             </div>
             <div
@@ -78,10 +79,11 @@ const ProfilePage = () => {
             >
               {/* LABELS */}
               <LabelsWrapper
-                nickname={user?.nickname ?? '???'}
+                firstName={user?.firstname ?? '???'}
+                lastName={user?.lastname ?? '???'}
                 age={calculateAge(user?.birthdate)}
                 sex={user?.sex ?? '???'}
-                lastConnection={formatApiDateLastUpdate(user?.last_connection_date)}
+                lastConnection={formatApiDateLastUpdate(user?.last_action)}
                 loading={false}
                 modifiable
                 onModify={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
@@ -95,10 +97,11 @@ const ProfilePage = () => {
                 }
               />
               {/* STATUS GROUP */}
-              <div className="flex min-h-[104px] items-center justify-center gap-4 rounded-2xl bg-card p-4 xs:flex-row">
-                <ShieldCheck size={42} className="text-c42green" />
-                <ShieldAlert size={42} className="text-negative" />
-              </div>
+              <StatusWrapper
+                confirmed={user?.confirmed}
+                onlineStatus={user?.online}
+                lastAction={user?.last_action}
+              />
               {/* BUTTONS GROUP */}
               <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
                 <ButtonMatcha
@@ -106,16 +109,24 @@ const ProfilePage = () => {
                   className="w-full min-w-32"
                   onClick={() => setShowChangeEmailModal(true)}
                 >
-                  <span>E-mail</span>
-                  <PenLine size={15} />
+                  <div className="flex flex-row items-center space-x-2">
+                    <span>{t('auth.email')}</span>
+                    <div>
+                      <PenLine size={15} />
+                    </div>
+                  </div>
                 </ButtonMatcha>
                 <ButtonMatcha
                   size="default"
                   className="w-full min-w-32"
                   onClick={() => setShowChangePasswordModal(true)}
                 >
-                  <span>Password</span>
-                  <PenLine size={15} />
+                  <div className="flex flex-row items-center space-x-2">
+                    <span>{t('auth.password')}</span>
+                    <div>
+                      <PenLine size={15} />
+                    </div>
+                  </div>
                 </ButtonMatcha>
               </div>
             </div>

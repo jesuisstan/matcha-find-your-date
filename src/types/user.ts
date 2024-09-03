@@ -11,7 +11,7 @@ export const userSchema = z.object({
   biography: z.string(),
   tags: z.array(z.string()),
   registration_date: z.string(),
-  last_connection_date: z.string(),
+  last_action: z.string(),
   latitude: z.number().nullable(),
   longitude: z.number().nullable(),
   address: z.string().nullable(),

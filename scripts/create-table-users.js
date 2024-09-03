@@ -53,7 +53,7 @@ async function createTables() {
         complete BOOLEAN DEFAULT false,
         popularity INT DEFAULT 0,
         registration_date TIMESTAMP WITH TIME ZONE,
-        last_connection_date TIMESTAMP WITH TIME ZONE,
+        last_action TIMESTAMP WITH TIME ZONE,
         online BOOLEAN DEFAULT false,
         service_token TEXT
       );

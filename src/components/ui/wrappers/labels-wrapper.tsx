@@ -4,14 +4,12 @@ import clsx from 'clsx';
 import { PenLine } from 'lucide-react';
 
 import FilledOrNot from '@/components/ui/filled-or-not';
+import { DateSkeleton } from '@/components/ui/skeletons/date-skeleton';
 import { capitalize } from '@/utils/format-string';
 
-export const DateSkeleton = () => {
-  return <div className="mt-1 h-3 w-36 animate-pulse rounded-full bg-muted" />;
-};
-
 type LabelsWrapperProps = {
-  nickname: string;
+  firstName: string;
+  lastName: string;
   age: Number;
   sex: string;
   lastConnection: string;
@@ -21,7 +19,8 @@ type LabelsWrapperProps = {
 };
 
 const LabelsWrapper = ({
-  nickname,
+  firstName,
+  lastName,
   age,
   sex,
   lastConnection,
@@ -34,12 +33,17 @@ const LabelsWrapper = ({
   return (
     <div
       className={clsx(
-        'relative grid max-h-28 min-h-[104px] min-w-80 grid-flow-col grid-rows-2 gap-x-4 rounded-2xl bg-card p-4 pb-2 pt-2'
+        'relative grid max-h-28 min-h-[104px] min-w-64 grid-flow-col grid-rows-2 gap-x-4 rounded-2xl bg-card p-4 pb-2 pt-2'
       )}
     >
       <div className="w-max">
-        <p className="text-base font-bold">{t('nickname')}</p>
-        <p className="flex-wrap text-sm">{nickname}</p>
+        <p className="text-base font-bold">{t('firstname')}</p>
+        <p className="flex-wrap text-sm">{firstName}</p>
+      </div>
+
+      <div className="w-max">
+        <p className="text-base font-bold">{t('lastname')}</p>
+        <p className="flex-wrap text-sm">{lastName}</p>
       </div>
 
       <div className="w-max">
@@ -55,20 +59,9 @@ const LabelsWrapper = ({
         </p>
       </div>
 
-      <div className="min-w-36">
-        <p className="text-base font-bold">{t('last-activity')}</p>
-        {loading || !lastConnection || lastConnection === t('invalid-date') ? (
-          <DateSkeleton />
-        ) : (
-          <p className="line-clamp-1 h-[max-content] text-ellipsis text-sm" title={lastConnection}>
-            {lastConnection}
-          </p>
-        )}
-      </div>
-
       {modifiable && (
         <div className={'absolute right-2 top-2 flex gap-1'}>
-          <FilledOrNot size={15} filled={!!nickname || !!age || !!sex} />
+          <FilledOrNot size={15} filled={!!lastName || !firstName || !!age || !!sex} />
           <div
             className={'text-foreground opacity-60 smooth42transition hover:opacity-100'}
             title={t('click-to-modify')}

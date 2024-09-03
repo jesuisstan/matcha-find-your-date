@@ -57,14 +57,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'login-failed' }, { status: 500 });
   }
 
-  // Update the last_connection_date
+  // Update the last_action
   try {
     const currentDate = new Date().toISOString();
     const updateQuery = `
         UPDATE users 
-        SET last_connection_date = $2
+        SET last_action = $2
         WHERE id = $1
-        RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_connection_date, online, popularity, sex_preferences, photos;
+        RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_action, online, popularity, sex_preferences, photos;
       `;
     const updateValues = [user.id, currentDate];
 
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ token, user: updatedUser });
   } catch (error) {
-    console.error('Error updating last_connection_date:', error);
+    console.error('Error updating last_action:', error);
     return NextResponse.json({ error: 'login-failed' }, { status: 500 });
   } finally {
     client.release();
