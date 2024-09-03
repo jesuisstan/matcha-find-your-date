@@ -2,22 +2,22 @@
 
 export const colorsHEX = {
   light: {
-    foreground: '#020817',
     background: '#F5F5F5',
+    foreground: '#020817',
     secondary: '#52616B',
     card: '#FFFFFF',
-    positive: '#4BBB3A',
-    negative: '#B72F2D',
+    positive: '##01a2a4',
+    negative: '#ce3a49',
     muted: '#BEC6CA',
   },
   dark: {
-    foreground: '#D9D9D9',
-    background: '#09090B',
-    secondary: '#52616B',
-    card: '#171717',
-    positive: '#4BBB3A',
-    negative: '#B72F2D',
-    muted: '#1E293B',
+    background: '#16181d',
+    foreground: '#f9fafb',
+    secondary: '#66a3cc',
+    card: '#21242c',
+    positive: '#22c35d',
+    negative: '#ff3a37',
+    muted: '#373d49',
   },
 };
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
+import { ShieldAlert, ShieldCheck } from 'lucide-react';
 import { PenLine } from 'lucide-react';
 
 import ModalChangeEmail from '@/components/modals/modal-change-email';
@@ -63,7 +64,7 @@ const ProfilePage = () => {
         {!user || loading ? (
           <HeaderSkeleton />
         ) : (
-          <div className="flex flex-col justify-start">
+          <div className="flex min-w-full flex-col justify-start">
             <div id="user-name" className="flex w-max max-w-96 flex-wrap md:max-w-fit">
               <h1 className="mb-2 overflow-hidden text-ellipsis text-4xl sm:text-3xl">
                 {user?.firstname} {user?.lastname.toUpperCase()}
@@ -93,6 +94,11 @@ const ProfilePage = () => {
                   handleModifyClick('biography' as keyof typeof TProfileCompleteLayout)
                 }
               />
+              {/* STATUS GROUP */}
+              <div className="flex min-h-[104px] items-center justify-center gap-4 rounded-2xl bg-card p-4 xs:flex-row">
+                <ShieldCheck size={42} className="text-c42green" />
+                <ShieldAlert size={42} className="text-negative" />
+              </div>
               {/* BUTTONS GROUP */}
               <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
                 <ButtonMatcha

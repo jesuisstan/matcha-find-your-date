@@ -24,7 +24,7 @@ const DashboardSkeleton = () => {
         <div className="flex w-[100%] flex-col content-center items-center justify-center gap-10 rounded-2xl bg-card p-5 align-middle">
           <div className="h-8 w-48 animate-pulse rounded bg-muted"></div>
           <div className="flex flex-row flex-wrap justify-center gap-20">
-            {[...Array(11)].map((_, index) => (
+            {[...Array(15)].map((_, index) => (
               <div key={index} className="flex flex-col items-center justify-between gap-3">
                 <div className="h-24 w-24 rounded bg-muted"></div>
                 <div className="h-4 w-16 rounded bg-muted"></div>
