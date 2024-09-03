@@ -55,7 +55,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
     <button
       type="button"
       {...restProps}
-      className="text-foreground smooth42transition hover:text-c42green"
+      className="text-secondary smooth42transition hover:text-c42orange"
     >
       <CircleChevronLeft size={35} />
       {/*{children}*/}
@@ -70,7 +70,7 @@ export const NextButton: React.FC<PropType> = (props) => {
     <button
       type="button"
       {...restProps}
-      className="text-foreground smooth42transition hover:text-c42green"
+      className="text-secondary smooth42transition hover:text-c42orange"
     >
       <CircleChevronRight size={35} />
       {/*{children}*/}

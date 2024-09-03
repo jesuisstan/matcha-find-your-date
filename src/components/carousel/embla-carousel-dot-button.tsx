@@ -52,9 +52,9 @@ export const DotButton: React.FC<TDotButtonProps> = ({ selected, ...restProps })
   return (
     <button type="button" {...restProps}>
       {selected ? (
-        <CircleDot size={18} className="text-foreground smooth42transition hover:text-c42green" />
+        <CircleDot size={18} className="text-foreground smooth42transition hover:text-c42orange" />
       ) : (
-        <Circle size={16} className="text-secondary smooth42transition hover:text-c42green" />
+        <Circle size={16} className="text-secondary smooth42transition hover:text-c42orange" />
       )}
     </button>
   );

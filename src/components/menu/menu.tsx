@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 
 import clsx from 'clsx';
-import { MenuIcon, Rows3 } from 'lucide-react';
+import { LayoutDashboard, MenuIcon } from 'lucide-react';
 
 import ContactSupportBlock from '@/components/menu/contact-support-block';
 import MenuList from '@/components/menu/menu-list';
@@ -140,12 +140,12 @@ const Menu: React.FC = () => {
                 id="dashboard-link"
                 className="ml-3 flex w-fit items-center gap-2 text-sm text-foreground"
               >
-                <Rows3 />
+                <LayoutDashboard />
                 <Link
                   href={`/dashboard`}
                   className={clsx(
                     `flex w-full items-center text-secondary smooth42transition`,
-                    `hover:text-c42green`,
+                    `hover:text-c42orange`,
                     pathname === `/dashboard` && 'font-bold'
                   )}
                   onClick={() => {

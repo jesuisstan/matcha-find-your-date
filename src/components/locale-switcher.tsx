@@ -26,7 +26,7 @@ const LocaleSwitcher = () => {
       <div
         className={clsx(
           `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] smooth42transition`,
-          `hover:border-c42green`,
+          `hover:border-c42orange`,
           localeActive === 'fr' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
         title="Français"
@@ -50,7 +50,7 @@ const LocaleSwitcher = () => {
       <div
         className={clsx(
           `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] smooth42transition`,
-          `hover:border-c42green`,
+          `hover:border-c42orange`,
           localeActive === 'en' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
         title="English"
@@ -74,7 +74,7 @@ const LocaleSwitcher = () => {
       <div
         className={clsx(
           `flex cursor-pointer items-center justify-center rounded-full border-[1px] px-[2px] py-[2px] smooth42transition`,
-          `hover:border-c42green`,
+          `hover:border-c42orange`,
           localeActive === 'ru' ? 'border-[1px] border-foreground' : 'bg-card'
         )}
         title="Русский"
