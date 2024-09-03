@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { PenLine } from 'lucide-react';
 
 import FilledOrNot from '@/components/ui/filled-or-not';
-import { DateSkeleton } from '@/components/ui/skeletons/date-skeleton';
 import { capitalize } from '@/utils/format-string';
 
 type LabelsWrapperProps = {

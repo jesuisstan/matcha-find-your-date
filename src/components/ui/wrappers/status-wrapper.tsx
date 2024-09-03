@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { ShieldAlert, ShieldCheck } from 'lucide-react';
 
-import { DateSkeleton } from '@/components/ui/skeletons/date-skeleton';
+import DateSkeleton from '@/components/ui/skeletons/date-skeleton';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
 
 const StatusWrapper = ({
