@@ -18,7 +18,7 @@ const StatusWrapper = ({
   return (
     <div
       className={clsx(
-        'relative grid max-h-28 min-w-64 grid-flow-col grid-rows-1 overflow-hidden rounded-2xl bg-card p-4 pb-2 pt-2',
+        'relative grid max-h-28 min-w-52 grid-flow-col grid-rows-1 overflow-hidden rounded-2xl bg-card p-4 pb-2 pt-2',
         'lg:max-w-fit lg:grid-rows-2'
       )}
     >

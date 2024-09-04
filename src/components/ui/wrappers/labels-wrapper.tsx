@@ -30,17 +30,27 @@ const LabelsWrapper = ({
   return (
     <div
       className={clsx(
-        'relative grid max-h-28 min-h-[104px] min-w-64 grid-flow-col grid-rows-2 gap-x-4 rounded-2xl bg-card p-4 pb-2 pt-2'
+        'relative grid max-h-28 min-h-[104px] min-w-64 grid-flow-col grid-rows-2 gap-x-0 rounded-2xl bg-card p-4 pb-2 pt-2'
       )}
     >
       <div className="w-max">
         <p className="text-base font-bold">{t('firstname')}</p>
-        <p className="flex-wrap text-sm">{firstName}</p>
+        <p
+          title={firstName}
+          className="max-w-44 flex-wrap truncate text-sm smooth42transition xs:max-w-min lg:max-w-32"
+        >
+          {firstName}
+        </p>
       </div>
 
       <div className="w-max">
         <p className="text-base font-bold">{t('lastname')}</p>
-        <p className="flex-wrap text-sm">{lastName}</p>
+        <p
+          title={lastName}
+          className="max-w-44 flex-wrap truncate text-sm smooth42transition xs:max-w-min lg:max-w-32"
+        >
+          {lastName}
+        </p>
       </div>
 
       <div className="w-max">
