@@ -288,5 +288,6 @@
   "offline": "Hors ligne",
   "status": "Statut",
   "not-confirmed": "Non confirmé",
-  "confirmed": "Confirmé"
+  "confirmed": "Confirmé",
+  "settings": "Paramètres"
 }

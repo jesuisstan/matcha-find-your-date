@@ -11,7 +11,6 @@ type LabelsWrapperProps = {
   lastName: string;
   age: Number;
   sex: string;
-  lastConnection: string;
   loading: boolean;
   modifiable?: boolean;
   onModify?: () => void;
@@ -22,7 +21,6 @@ const LabelsWrapper = ({
   lastName,
   age,
   sex,
-  lastConnection,
   loading,
   modifiable,
   onModify,

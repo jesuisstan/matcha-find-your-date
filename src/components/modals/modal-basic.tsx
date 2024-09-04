@@ -47,7 +47,7 @@ const ModalBasic = ({
 
             {setIsOpen && (
               <button
-                className="absolute right-2 top-2 rounded-full p-1 transition-all duration-300 ease-in-out hover:bg-muted"
+                className="absolute right-1 top-1 rounded-full p-1 transition-all duration-300 ease-in-out hover:bg-muted"
                 onClick={() => setIsOpen?.(false)}
                 aria-label="Close"
               >

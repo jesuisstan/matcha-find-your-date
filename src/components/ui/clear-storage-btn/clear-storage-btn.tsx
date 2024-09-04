@@ -21,13 +21,12 @@ const ClearLocalStorageButton = () => {
       <ButtonMatcha
         variant="ghost"
         size="icon"
-        title="Clear local storage and refresh data"
+        title="Clear local storage data"
         onClick={handleClearLocalStorage}
         className="transition-all duration-300 ease-in-out hover:bg-transparent hover:text-negative"
       >
         <Trash2 />
-
-        <span className="sr-only">Clear local storage and refresh data</span>
+        <span className="sr-only">Clear local storage data</span>
       </ButtonMatcha>
     </div>
   );

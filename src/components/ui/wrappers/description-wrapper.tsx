@@ -38,7 +38,7 @@ const DescriptionWrapper = ({
       <p className="text-base font-bold">{capitalize(t('bio'))}</p>
       <p
         className={clsx(
-          'text-justify text-sm',
+          'text-justify text-sm lg:max-w-md',
           isDescriptionExpanded ? 'h-auto' : 'line-clamp-3 h-[max-content] text-ellipsis'
         )}
       >

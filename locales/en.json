@@ -291,5 +291,6 @@
   "offline": "Offline",
   "status": "Status",
   "not-confirmed": "Not confirmed",
-  "confirmed": "Confirmed"
+  "confirmed": "Confirmed",
+  "settings": "Settings"
 }

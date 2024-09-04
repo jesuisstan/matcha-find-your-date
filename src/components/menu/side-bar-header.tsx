@@ -1,8 +1,12 @@
-import ClearLocalStorageButton from '../ui/clear-storage-btn/clear-storage-btn';
+import { useState } from 'react';
+
+import { Settings } from 'lucide-react';
 
 import LocaleSwitcher from '@/components/locale-switcher';
 import LogoutButton from '@/components/menu/logout-button';
 import { UserNameSkeleton } from '@/components/menu/menu-skeleton';
+import ModalSettings from '@/components/modals/modal-settings';
+import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ThemeToggler from '@/components/ui/theme-toggler';
 import { formatUserName, formatUserNameOneLetter } from '@/utils/format-string';
 
@@ -13,6 +17,8 @@ const SideBarHeader = ({
   name?: string;
   translate: (key: string) => string;
 }) => {
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+
   return (
     <div className="flex flex-col items-center justify-center gap-2 align-middle">
       <div
@@ -24,7 +30,7 @@ const SideBarHeader = ({
           {name && formatUserNameOneLetter(name)}
         </div>
 
-        {/* Username */}
+        {/* Nickname */}
         <div className="text-2xl text-foreground">
           {name ? (
             <div className="max-w-[180px] truncate">{name && formatUserName(name)}</div>
@@ -39,14 +45,22 @@ const SideBarHeader = ({
           <LocaleSwitcher />
         </div>
 
-        <div className="flex flex-row space-x-4 self-center align-middle">
+        <div className="flex flex-row gap-x-1 self-center align-middle">
+          <ThemeToggler translate={translate} />
           <div className="items-center">
-            <ThemeToggler translate={translate} />
+            <ModalSettings show={showSettingsModal} setShow={setShowSettingsModal} />
+            <ButtonMatcha
+              variant="ghost"
+              size="icon"
+              title={translate(`settings`)}
+              onClick={() => setShowSettingsModal(true)}
+              className="smooth42transition hover:bg-transparent hover:text-c42orange"
+            >
+              <Settings />
+              <span className="sr-only">{translate(`settings`)}</span>
+            </ButtonMatcha>
           </div>
           <LogoutButton translate={translate} />
-
-          {/* DEBUG todo:delete */}
-          <ClearLocalStorageButton />
         </div>
 
         {/* horizontal divider */}

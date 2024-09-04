@@ -288,5 +288,6 @@
   "offline": "Оффлайн",
   "status": "Статус",
   "not-confirmed": "Не подтвержден",
-  "confirmed": "Подтвержден"
+  "confirmed": "Подтвержден",
+  "settings": "Настройки"
 }

@@ -4,15 +4,12 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { PenLine } from 'lucide-react';
 
-import ModalChangeEmail from '@/components/modals/modal-change-email';
-import ModalChangePassword from '@/components/modals/modal-change-password';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import ModalProfileCongrats from '@/components/modals/modal-profile-congrats';
-import { ButtonMatcha } from '@/components/ui/button-matcha';
 import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
+import ConfirmationWrapper from '@/components/ui/wrappers/confirmation-wrapper';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import InterestsWrapper from '@/components/ui/wrappers/interests-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
@@ -21,16 +18,13 @@ import PhotoGalleryWrapper from '@/components/ui/wrappers/photo-gallery-wrapper'
 import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrapper';
 import StatusWrapper from '@/components/ui/wrappers/status-wrapper';
 import useUserStore from '@/stores/user';
-import { formatApiDateLastUpdate } from '@/utils/format-date';
 import { calculateAge } from '@/utils/format-string';
 
 const ProfilePage = () => {
   const t = useTranslations();
   const { user } = useUserStore();
   const [loading, setLoading] = useState(false); // todo
-  const [showChangeEmailModal, setShowChangeEmailModal] = useState(false);
   const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
-  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showProfileCongratsModal, setShowProfileCongratsModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
 
@@ -55,8 +49,6 @@ const ProfilePage = () => {
         startLayout={profileCompleteModalLayout as keyof typeof TProfileCompleteLayout}
         setProfileIsCompleted={setShowProfileCongratsModal}
       />
-      <ModalChangeEmail show={showChangeEmailModal} setShow={setShowChangeEmailModal} />
-      <ModalChangePassword show={showChangePasswordModal} setShow={setShowChangePasswordModal} />
       <ModalProfileCongrats show={showProfileCongratsModal} setShow={setShowProfileCongratsModal} />
 
       {/* HEADER */}
@@ -65,10 +57,17 @@ const ProfilePage = () => {
           <HeaderSkeleton />
         ) : (
           <div className="flex min-w-full flex-col justify-start">
-            <div id="user-name" className="flex w-max max-w-96 flex-wrap md:max-w-fit">
-              <h1 className="mb-2 overflow-hidden text-ellipsis text-4xl sm:text-3xl">
+            <div
+              id="user-nickname"
+              className="mb-2 flex w-fit flex-wrap gap-x-2 smooth42transition"
+            >
+              {/* CONFIRMED ? */}
+              <ConfirmationWrapper confirmed={user?.confirmed} />
+              <h1
+                title={user?.nickname ?? '???'}
+                className="max-w-96 truncate font-bold xs:max-w-fit "
+              >
                 {user?.nickname ?? '???'}
-                {/*{user?.firstname} {user?.lastname.toUpperCase()}*/}
               </h1>
             </div>
             <div
@@ -83,7 +82,6 @@ const ProfilePage = () => {
                 lastName={user?.lastname ?? '???'}
                 age={calculateAge(user?.birthdate)}
                 sex={user?.sex ?? '???'}
-                lastConnection={formatApiDateLastUpdate(user?.last_action)}
                 loading={false}
                 modifiable
                 onModify={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
@@ -97,38 +95,7 @@ const ProfilePage = () => {
                 }
               />
               {/* STATUS GROUP */}
-              <StatusWrapper
-                confirmed={user?.confirmed}
-                onlineStatus={user?.online}
-                lastAction={user?.last_action}
-              />
-              {/* BUTTONS GROUP */}
-              <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
-                <ButtonMatcha
-                  size="default"
-                  className="w-full min-w-32"
-                  onClick={() => setShowChangeEmailModal(true)}
-                >
-                  <div className="flex flex-row items-center space-x-2">
-                    <span>{t('auth.email')}</span>
-                    <div>
-                      <PenLine size={15} />
-                    </div>
-                  </div>
-                </ButtonMatcha>
-                <ButtonMatcha
-                  size="default"
-                  className="w-full min-w-32"
-                  onClick={() => setShowChangePasswordModal(true)}
-                >
-                  <div className="flex flex-row items-center space-x-2">
-                    <span>{t('auth.password')}</span>
-                    <div>
-                      <PenLine size={15} />
-                    </div>
-                  </div>
-                </ButtonMatcha>
-              </div>
+              <StatusWrapper onlineStatus={user?.online} lastAction={user?.last_action} />
             </div>
           </div>
         )}
