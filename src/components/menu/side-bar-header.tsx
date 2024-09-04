@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Settings } from 'lucide-react';
 
@@ -13,9 +13,11 @@ import { formatUserName, formatUserNameOneLetter } from '@/utils/format-string';
 const SideBarHeader = ({
   name,
   translate,
+  setLoading,
 }: {
   name?: string;
   translate: (key: string) => string;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
@@ -60,7 +62,7 @@ const SideBarHeader = ({
               <span className="sr-only">{translate(`settings`)}</span>
             </ButtonMatcha>
           </div>
-          <LogoutButton translate={translate} />
+          <LogoutButton translate={translate} setLoading={setLoading} />
         </div>
 
         {/* horizontal divider */}

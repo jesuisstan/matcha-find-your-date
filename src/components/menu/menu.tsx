@@ -20,7 +20,7 @@ const Menu: React.FC = () => {
   const { theme } = useTheme();
   const t = useTranslations();
   const user = useUserStore((state) => state.user);
-
+  const [loading, setLoading] = useState(false);
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
@@ -103,7 +103,7 @@ const Menu: React.FC = () => {
       </div>
 
       {/* Menu Sidebar */}
-      {isClient ? (
+      {isClient && !loading ? (
         <>
           <div
             id="sidebar"
@@ -133,7 +133,11 @@ const Menu: React.FC = () => {
                 />
               </div>
 
-              <SideBarHeader name={user?.nickname || user?.firstname} translate={t} />
+              <SideBarHeader
+                name={user?.nickname || user?.firstname}
+                translate={t}
+                setLoading={setLoading}
+              />
 
               {/* DASHBOARD LINK */}
               <div

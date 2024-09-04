@@ -39,7 +39,10 @@ const StatusWrapper = ({
       <div className="w-max">
         <p className="text-base font-bold">{t('status')}</p>
         <p
-          className="line-clamp-1 h-[max-content] text-ellipsis text-sm"
+          className={clsx(
+            'line-clamp-1 h-[max-content] text-ellipsis text-sm',
+            onlineStatus ? 'animate-pulse text-c42green' : 'text-negative'
+          )}
           title={onlineStatus ? t('online') : t('offline')}
         >
           {onlineStatus ? t('online') : t('offline')}

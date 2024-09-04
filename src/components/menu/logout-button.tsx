@@ -1,18 +1,32 @@
+import { Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { LogOut } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import useUserStore from '@/stores/user';
+import { setUserOffline } from '@/utils/user-handlers';
 
-const LogoutButton = ({ translate }: { name?: string; translate: (key: string) => string }) => {
-  const logout = useUserStore((state) => state.logout);
+const LogoutButton = ({
+  translate,
+  setLoading,
+}: {
+  translate: (key: string) => string;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const { user, logout } = useUserStore((state) => ({
+    user: state.user,
+    logout: state.logout,
+  }));
   const router = useRouter();
 
   const handleLogout = async () => {
+    setLoading(true);
+    await setUserOffline(user?.id!);
     logout();
     // wait for some time to ensure logout is processed
     await new Promise((resolve) => setTimeout(resolve, 100));
+    setLoading(false);
     router.push('/login');
   };
 

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
     // Step 1: Check if the user exists
     const selectQuery = `
-      SELECT complete
+      SELECT online, last_action
       FROM users 
       WHERE id = $1
     `;
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     const currentData = currentDataResult.rows[0];
 
     // Step 2: Check if the data is up-to-date
-    if (currentData.complete === false) {
+    if (currentData.online === false) {
       return NextResponse.json({ message: 'data-is-up-to-date' });
     }
 
@@ -32,9 +32,9 @@ export async function POST(req: Request) {
     const currentDate = new Date().toISOString();
     const updateQuery = `
       UPDATE users 
-      SET complete = false, last_action = $2
+      SET online = false, last_action = $2
       WHERE id = $1
-      RETURNING id, complete, last_action;
+      RETURNING id, online, last_action;
     `;
     const updateValues = [id, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);

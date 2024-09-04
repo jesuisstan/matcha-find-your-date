@@ -62,12 +62,11 @@ export async function POST(request: Request) {
     const currentDate = new Date().toISOString();
     const updateQuery = `
         UPDATE users 
-        SET last_action = $2
+        SET last_action = $2, online = true
         WHERE id = $1
         RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_action, online, popularity, sex_preferences, photos;
       `;
     const updateValues = [user.id, currentDate];
-
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 

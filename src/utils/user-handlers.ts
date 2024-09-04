@@ -42,3 +42,25 @@ export const isProfileComplete = (user: TUser | undefined | null): boolean => {
 
   return isComplete;
 };
+
+export const setUserOffline = async (userId: string) => {
+  let response: any;
+  try {
+    response = await fetch(`/api/profile/update/set-offline`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: userId,
+      }),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      console.log('User is offline');
+    }
+  } catch (error) {
+    console.log('Error setting user offline');
+  }
+};
