@@ -1,0 +1,14 @@
+name: Inactivity Check
+
+on:
+  schedule:
+    # Run the job every 10 minutes
+    - cron: '*/10 * * * *'
+
+jobs:
+  check-inactivity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make Request to API
+        run: |
+          curl -X GET https://matcha-find-your-date.vercel.app/api/check-inactivity
