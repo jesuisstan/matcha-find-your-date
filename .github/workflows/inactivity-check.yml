@@ -8,20 +8,26 @@ on:
 jobs:
   check-inactivity:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
+    steps:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install curl
+        run: sudo apt-get install curl
 
-      - name: Run Inactivity Check
-        env:
-          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      - name: Make Request to API
         run: |
           curl -X GET https://matcha-find-your-date.vercel.app/api/check-inactivity
+
+    env:
+      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }}
+      POSTGRES_URL_NO_SSL: ${{ secrets.POSTGRES_URL_NO_SSL }}
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_DATABASE: ${{ secrets.POSTGRES_DATABASE }}
