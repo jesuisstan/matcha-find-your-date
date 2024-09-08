@@ -47,9 +47,9 @@ export async function POST(req: Request) {
     const currentDate = new Date().toISOString();
     const updateQuery = `
       UPDATE users 
-      SET tags = $2, last_action = $3
+      SET tags = $2, last_action = $3, online = true
       WHERE id = $1
-      RETURNING id, tags, last_action;
+      RETURNING id, tags, last_action, online;
     `;
     const updateValues = [id, tags, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);
