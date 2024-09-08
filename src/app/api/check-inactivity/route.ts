@@ -7,30 +7,25 @@ const INACTIVITY_PERIOD_MINUTES = 1; // todo change to 10
 
 export async function GET() {
   const client = await db.connect();
-  console.log('Connected to DB');
 
   try {
-    // Log query execution
-    console.log('Running inactivity check query...');
+    const result = await client.query(`SELECT * FROM users WHERE online = true`); // debug
 
-    const result = await client.query(
-      `UPDATE users SET online = false WHERE online = true AND last_connection_date < NOW() - INTERVAL '${INACTIVITY_PERIOD_MINUTES} minutes' RETURNING id, online`
-    );
+    // SQL query to update users' online status based on inactivity
+    const updateQuery = `
+      UPDATE users
+      SET online = false
+      WHERE last_action < NOW() - INTERVAL '${INACTIVITY_PERIOD_MINUTES} minutes'
+      AND online = true;
+    `;
 
-    // Log the result of the query
-    if (result.rowCount === 0) {
-      console.log('No users were updated.');
-    } else {
-      console.log('Users set to offline:', result.rows);
-    }
+    await client.query(updateQuery);
 
-    return NextResponse.json(
-      `Inactivity check completed. Users inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
-      { status: 200 }
-    );
+    return NextResponse.json({
+      message: `Inactivity check completed. Users (${JSON.stringify(result, null, 2)}) inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
+    });
   } catch (error) {
-    // Log any errors
-    console.error('Error in inactivity check:', error);
+    console.error('Error updating user status:', error);
     return NextResponse.json({ error: 'Failed to update user status' }, { status: 500 });
   } finally {
     client.release();
