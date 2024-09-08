@@ -9,6 +9,19 @@ jobs:
   check-inactivity:
     runs-on: ubuntu-latest
     steps:
-      - name: Make Request to API
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Inactivity Check
+        env:
+          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
         run: |
           curl -X GET https://matcha-find-your-date.vercel.app/api/check-inactivity
