@@ -22,7 +22,7 @@ export async function GET() {
     await client.query(updateQuery);
 
     return NextResponse.json({
-      message: `Inactivity check completed. Users (${result}) inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
+      message: `Inactivity check completed. Users (${JSON.stringify(result, null, 2)}) inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
     });
   } catch (error) {
     console.error('Error updating user status:', error);
