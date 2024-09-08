@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently -n matcha-app,cron-job -c blue,magenta \"node ./scripts/start-dev.js\" \"node ./scripts/check-inactivity-cron-job.js\"",
     "build": "next build",
-    "start": "node ./scripts/start-build.js",
+    "start": "concurrently -n matcha-app,cron-job -c blue,magenta \"node ./scripts/start-build.js\" \"node ./scripts/check-inactivity-cron-job.js\"",
     "lint": "next lint",
     "clean": "npx rimraf .swc && npx rimraf .next && npx rimraf node_modules && npx rimraf package-lock.json && npx rimraf coverage",
     "c:i": "npm run clean && npm install",
