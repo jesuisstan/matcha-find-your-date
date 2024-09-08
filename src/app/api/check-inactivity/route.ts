@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-// the inactivity period (e.g., 10 minutes)
-const INACTIVITY_PERIOD_MINUTES = 1; // todo change to 10
+// the inactivity period (e.g., 15 minutes)
+const INACTIVITY_PERIOD_MINUTES = 15; // todo change to 15
 
 export async function GET() {
   const client = await db.connect();
@@ -22,7 +22,7 @@ export async function GET() {
     await client.query(updateQuery);
 
     return NextResponse.json({
-      message: `Inactivity check completed. Users (${JSON.stringify(result, null, 2)}) inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
+      message: `Inactivity check completed. Users inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
     });
   } catch (error) {
     console.error('Error updating user status:', error);

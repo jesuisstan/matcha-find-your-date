@@ -2,8 +2,8 @@ name: Inactivity Check
 
 on:
   schedule:
-    # Run the job every 10 minutes
-    - cron: '*/10 * * * *'
+    # Run the job every 15 minutes
+    - cron: '*/15 * * * *'
 
 jobs:
   check-inactivity:
