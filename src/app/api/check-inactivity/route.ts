@@ -10,22 +10,26 @@ export async function GET() {
   console.log('Connected to DB');
 
   try {
-    // Log before executing query
-    console.log('Checking for users inactive for more than 10 minutes...');
+    // Log query execution
+    console.log('Running inactivity check query...');
 
     const result = await client.query(
-      `UPDATE users SET online = false WHERE online = true AND last_action < NOW() - INTERVAL '${INACTIVITY_PERIOD_MINUTES} minutes' RETURNING id, online`
+      `UPDATE users SET online = false WHERE online = true AND last_connection_date < NOW() - INTERVAL '${INACTIVITY_PERIOD_MINUTES} minutes' RETURNING id, online`
     );
 
     // Log the result of the query
-    console.log('Users set to offline:', result.rows);
+    if (result.rowCount === 0) {
+      console.log('No users were updated.');
+    } else {
+      console.log('Users set to offline:', result.rows);
+    }
 
-    return new Response(
+    return NextResponse.json(
       `Inactivity check completed. Users inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
       { status: 200 }
     );
   } catch (error) {
-    // Log the error
+    // Log any errors
     console.error('Error in inactivity check:', error);
     return NextResponse.json({ error: 'Failed to update user status' }, { status: 500 });
   } finally {
