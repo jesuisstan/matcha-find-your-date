@@ -9,8 +9,6 @@ export async function GET() {
   const client = await db.connect();
 
   try {
-    const result = await client.query(`SELECT * FROM users WHERE online = true`); // debug
-
     // SQL query to update users' online status based on inactivity
     const updateQuery = `
       UPDATE users
@@ -19,7 +17,7 @@ export async function GET() {
       AND online = true;
     `;
 
-    await client.query(updateQuery);
+    const result = await client.query(updateQuery);
 
     return NextResponse.json({
       message: `Inactivity check completed. Users (${JSON.stringify(result, null, 2)}) inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
