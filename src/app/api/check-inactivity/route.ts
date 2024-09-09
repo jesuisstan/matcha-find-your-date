@@ -23,8 +23,8 @@ export async function GET() {
     await client.query(updateQuery);
 
     return NextResponse.json({
-      message: `Inactivity check completed. Users inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.\n
-      USERS ONLINE: ${JSON.stringify(result.rows, null, 2)}\n`, // debug parts of the message
+      message: `Inactivity check completed. Users inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.
+      USERS ONLINE: ${JSON.stringify(result.rows, null, 2)}`, // debug parts of the message
     });
   } catch (error) {
     console.error('Error updating user status:', error);
