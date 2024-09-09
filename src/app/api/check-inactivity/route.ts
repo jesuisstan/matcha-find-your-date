@@ -3,14 +3,15 @@ import { NextResponse } from 'next/server';
 import { db } from '@vercel/postgres';
 
 // the inactivity period (e.g., 15 minutes)
-const INACTIVITY_PERIOD_MINUTES = 15; // todo change to 15
+const INACTIVITY_PERIOD_MINUTES = 1; // todo change to 15
 
 export async function GET() {
   const client = await db.connect();
 
   try {
     const result = await client.query(`SELECT * FROM users WHERE online = true`); // debug
-
+    console.log(`USERS ONLINE: ${JSON.stringify(result.rows, null, 2)}\n`); // debug
+    
     // SQL query to update users' online status based on inactivity
     const updateQuery = `
       UPDATE users
