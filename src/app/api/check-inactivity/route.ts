@@ -8,8 +8,15 @@ export async function GET() {
   const client = await db.connect();
 
   try {
-    const result = await client.query(`SELECT * FROM users WHERE online = true`); // debug
-    console.log(`USERS ONLINE: ${JSON.stringify(result.rows, null, 2)}\n`); // debug
+    // Fetch users who are currently online
+    const onlineUsersResult = await client.query(`SELECT * FROM users WHERE online = true`);
+
+    // Fetch users who have been inactive for more than INACTIVITY_PERIOD_MINUTES
+    const inactiveUsersResult = await client.query(`
+      SELECT * FROM users
+      WHERE last_action < NOW() - INTERVAL '${INACTIVITY_PERIOD_MINUTES} minutes'
+      AND online = true;
+    `);
 
     // SQL query to update users' online status based on inactivity
     const updateQuery = `
@@ -18,12 +25,12 @@ export async function GET() {
       WHERE last_action < NOW() - INTERVAL '${INACTIVITY_PERIOD_MINUTES} minutes'
       AND online = true;
     `;
-
     await client.query(updateQuery);
 
     return NextResponse.json({
-      message: `Inactivity check completed. Users inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.
-      CHECK USERS ONLINE: ${JSON.stringify(result.rows, null, 2)}`, // debug parts of the message
+      message: `Inactivity check completed. Users inactive for more than ${INACTIVITY_PERIOD_MINUTES} minutes are now offline.`,
+      onlineUsers: onlineUsersResult.rows,      // Currently online users before the check
+      inactiveUsers: inactiveUsersResult.rows,  // Users marked as inactive
     });
   } catch (error) {
     console.error('Error updating user status:', error);
