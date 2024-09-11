@@ -66,10 +66,7 @@ const SmartSuggestions = () => {
           <p className="text-center text-lg">{t(`search.no-suggestions`)}</p>
         </div>
       ) : (
-        <div className="flex flex-row flex-wrap items-center justify-center gap-4">
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
+        <div className="flex flex-row flex-wrap items-center justify-center gap-4 smooth42transition">
           <ProfileCardWrapper profile={user} />
           <ProfileCardWrapper profile={user} />
           <ProfileCardWrapper profile={user} />
