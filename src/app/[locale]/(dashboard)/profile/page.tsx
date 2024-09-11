@@ -52,7 +52,7 @@ const ProfilePage = () => {
       <ModalProfileCongrats show={showProfileCongratsModal} setShow={setShowProfileCongratsModal} />
 
       {/* HEADER */}
-      <div className={clsx('mb-4 flex items-center justify-between text-4xl')}>
+      <div className={clsx('mb-4 flex items-center justify-between')}>
         {!user || loading ? (
           <HeaderSkeleton />
         ) : (
@@ -65,7 +65,7 @@ const ProfilePage = () => {
               <ConfirmationWrapper confirmed={user?.confirmed} />
               <h1
                 title={user?.nickname ?? '???'}
-                className="max-w-96 truncate font-bold xs:max-w-fit "
+                className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit"
               >
                 {user?.nickname ?? '???'}
               </h1>

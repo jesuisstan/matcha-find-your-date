@@ -4,80 +4,84 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { PlaySquareIcon } from 'lucide-react';
+import { Annoyed, RefreshCw } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
-import ChipsGroup from '@/components/ui/chips/chips-group';
-import RadioGroup from '@/components/ui/radio/radio-group';
-import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
-import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
+import SmartSuggestionsSeleton from '@/components/ui/skeletons/smart-suggestions-skeleton';
+import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
+import useUserStore from '@/stores/user';
 
 const SmartSuggestions = () => {
   // Translate hook
   const t = useTranslations();
+  const { user } = useUserStore();
   const [loading, setLoading] = useState(false); // todo
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleRefreshSuggestions = () => {
+    setLoading(true);
+    // todo
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // todo delete
+    //setLoading(false); // todo
+  };
 
   return (
     <div>
       {/* HEADER */}
-      <div className={clsx('mb-4 flex items-center justify-between text-4xl')}>
-        {loading ? (
-          <HeaderSkeleton />
-        ) : (
-          <div className="flex flex-col justify-start">
-            <h1 className="mb-2 text-4xl">{'metadata?.title'}</h1>
-            <div
-              className={clsx(
-                'flex flex-col items-stretch space-y-4',
-                'lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0'
-              )}
-            >
-
-              {/* DESCRIPTION */}
-              <DescriptionWrapper text={'metadata?.description'} />
-              {/* BUTTONS GROUP */}
-              <div className="flex flex-col items-center justify-center gap-4 xs:flex-row lg:flex-col">
-                <div className="flex w-full flex-row items-center justify-center gap-4">
-                  <ButtonMatcha size="icon">
-                    <PlaySquareIcon size={20} />
-                  </ButtonMatcha>
-                </div>
-              </div>
+      <div className={clsx('mb-4 flex items-center justify-between')}>
+        <div className="flex min-w-full flex-col justify-start">
+          <div className="mb-2 flex w-fit flex-wrap smooth42transition">
+            <h1 className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit">
+              {t(`search.smart-suggestions`)}
+            </h1>
+          </div>
+          <div className="flex flex-row items-stretch gap-4">
+            <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
+              <p className="text-justify text-sm">{t(`use-smart-suggestions`)}</p>
             </div>
-          </div>
-        )}
-      </div>
-      {/* GRID Cols 8 Rows 1 */}
-      <div className="mb-4 grid grid-cols-10 gap-4">
-        {/* OVERVIEW */}
-        <div
-          className={clsx(
-            'col-span-10 h-max items-center justify-center rounded-2xl bg-card',
-            'lg:col-span-3'
-          )}
-        >
-          <div className="m-5 flex flex-col justify-start">
-            <h3 className="text-3xl">{t`common:overview`}</h3>
-
-            <div className="mt-4">CONTENT</div>
-          </div>
-        </div>
-        <div className={clsx('col-span-10', 'lg:col-span-7')}>
-          {/* SELECTOR */}
-          <div className={clsx('mb-4 flex flex-col rounded-2xl bg-card p-2', 'xl:flex-row')}>
-            <div className={clsx('m-4', 'xl:w-2/3')}>
-
+            <div className="flex items-center justify-center">
+              <ButtonMatcha
+                size="icon"
+                disabled={!user || loading}
+                title={t(`search.refresh-suggestions`)}
+                onClick={handleRefreshSuggestions}
+              >
+                <RefreshCw size={20} />
+              </ButtonMatcha>
             </div>
-            {/* vertical divider */}
-            <div className={clsx('m-5 hidden w-[1px] bg-secondary opacity-40', 'xl:block')} />
-
-          </div>
-          {/* CHART */}
-          <div className="rounded-2xl bg-card p-2">
-            <div>Content</div>
           </div>
         </div>
       </div>
+
+      {/* MAIN CONTENT */}
+      {loading ? (
+        <SmartSuggestionsSeleton />
+      ) : suggestions.length !== 0 ? (
+        <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
+          <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
+            <Annoyed size={84} />
+          </div>
+          <p className="text-center text-lg">{t(`search.no-suggestions`)}</p>
+        </div>
+      ) : (
+        <div className="flex flex-row flex-wrap items-center justify-center gap-4">
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+          <ProfileCardWrapper profile={user} />
+        </div>
+      )}
     </div>
   );
 };

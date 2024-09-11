@@ -97,7 +97,9 @@
   "search": {
     "search": "Search",
     "smart-suggestions": "Smart Suggestions",
-    "advanced": "Advanced Search"
+    "advanced": "Advanced Search",
+    "no-suggestions": "No suggestions found for your profile yet",
+    "refresh-suggestions": "Refresh Suggestions"
   },
   "attension": "Attention!",
   "complete-your-profile-message": "Please complete your profile to continue using the service and gain access to advanced search",

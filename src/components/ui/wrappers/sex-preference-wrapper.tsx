@@ -10,7 +10,7 @@ import { PenLine } from 'lucide-react';
 
 import FilledOrNot from '@/components/ui/filled-or-not';
 
-const SexPreferenceIcon = ({
+export const SexPreferenceIcon = ({
   preference,
   theme,
   translate,
@@ -23,7 +23,7 @@ const SexPreferenceIcon = ({
     case 'men':
       return (
         <div
-          title={translate(`selector.${preference}`)}
+          title={`${translate('sexual-preferences')} - ${translate(`selector.${preference}`)}`}
           className={clsx(
             'flex items-center justify-center rounded-full',
             theme === 'dark' ? 'bg-foreground' : ''
@@ -47,7 +47,7 @@ const SexPreferenceIcon = ({
     case 'women':
       return (
         <div
-          title={translate(`selector.${preference}`)}
+          title={`${translate('sexual-preferences')} - ${translate(`selector.${preference}`)}`}
           className={clsx(
             'flex items-center justify-center rounded-full',
             theme === 'dark' ? 'bg-foreground' : ''
@@ -71,7 +71,7 @@ const SexPreferenceIcon = ({
     case 'bisexual':
       return (
         <div
-          title={translate(`selector.${preference}`)}
+          title={`${translate('sexual-preferences')} - ${translate(`selector.${preference}`)}`}
           className={clsx(
             'flex items-center justify-center rounded-full',
             theme === 'dark' ? 'bg-foreground' : ''
@@ -95,7 +95,7 @@ const SexPreferenceIcon = ({
     default:
       return (
         <div
-          title={translate(`selector.undefined`)}
+          title={`${translate('sexual-preferences')} - ${translate(`selector.undefined`)}`}
           className={clsx(
             'flex items-center justify-center rounded-full',
             theme === 'dark' ? 'bg-foreground' : ''

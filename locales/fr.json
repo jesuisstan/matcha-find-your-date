@@ -96,7 +96,9 @@
   "search": {
     "search": "Rechercher",
     "smart-suggestions": "Suggestions Intelligentes",
-    "advanced": "Recherche Avancée"
+    "advanced": "Recherche Avancée",
+    "no-suggestions": "Pas de suggestions pour le moment",
+    "refresh-suggestions": "Actualiser les Suggestions"
   },
   "attension": "Attention!",
   "complete-your-profile-message": "Veuillez compléter votre profil pour continuer à utiliser le service et accéder aux fonctionnalités de recherche avancée.",

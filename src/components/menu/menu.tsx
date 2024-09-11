@@ -135,6 +135,7 @@ const Menu: React.FC = () => {
 
               <SideBarHeader
                 name={user?.nickname || user?.firstname}
+                photoUrl={user?.photos[0]}
                 translate={t}
                 setLoading={setLoading}
               />

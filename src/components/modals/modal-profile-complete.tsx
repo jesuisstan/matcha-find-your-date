@@ -4,15 +4,13 @@ import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
 
 import clsx from 'clsx';
-import { OctagonAlert, Save } from 'lucide-react';
-import { MapPinned, MapPinOff } from 'lucide-react';
-
-import FilledOrNot from '../ui/filled-or-not';
+import { MapPinned, MapPinOff, OctagonAlert, Save } from 'lucide-react';
 
 import ImageUploader from '@/components/avatar-uploader/image-uploader';
 import ModalBasic from '@/components/modals/modal-basic';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
+import FilledOrNot from '@/components/ui/filled-or-not';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';

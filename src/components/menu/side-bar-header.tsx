@@ -6,16 +6,19 @@ import LocaleSwitcher from '@/components/locale-switcher';
 import LogoutButton from '@/components/menu/logout-button';
 import { UserNameSkeleton } from '@/components/menu/menu-skeleton';
 import ModalSettings from '@/components/modals/modal-settings';
+import AvatarMini from '@/components/ui/avatar-mini';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ThemeToggler from '@/components/ui/theme-toggler';
-import { formatUserName, formatUserNameOneLetter } from '@/utils/format-string';
+import { formatUserName } from '@/utils/format-string';
 
 const SideBarHeader = ({
   name,
+  photoUrl,
   translate,
   setLoading,
 }: {
   name?: string;
+  photoUrl?: string;
   translate: (key: string) => string;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -28,9 +31,7 @@ const SideBarHeader = ({
         className="flex items-center justify-center space-x-4 align-middle font-bold "
       >
         {/* Avatar */}
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-base text-card">
-          {name && formatUserNameOneLetter(name)}
-        </div>
+        <AvatarMini src={photoUrl!} nickname={name || ''} rounded />
 
         {/* Nickname */}
         <div className="text-2xl text-foreground">
