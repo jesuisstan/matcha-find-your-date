@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently -n matcha-app,cron-job -c blue,magenta \"node ./scripts/start-dev.js\" \"node ./scripts/check-inactivity-cron-job.js\"",
+    "dev": "node ./scripts/start-dev.js",
+    "cron": "node ./scripts/check-inactivity-cron-job.js",
+    "dev:cron": "concurrently -n matcha-app,cron-job -c blue,magenta \"node ./scripts/start-dev.js\" \"node ./scripts/check-inactivity-cron-job.js\"",
     "build": "next build",
     "start": "concurrently -n matcha-app,cron-job -c blue,magenta \"node ./scripts/start-build.js\" \"node ./scripts/check-inactivity-cron-job.js\"",
     "lint": "next lint",

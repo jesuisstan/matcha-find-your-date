@@ -51,7 +51,7 @@ async function createTables() {
         sex_preferences sex_preferences_enum DEFAULT 'bisexual',
         photos TEXT[],
         complete BOOLEAN DEFAULT false,
-        popularity INT DEFAULT 0,
+        popularity INT DEFAULT 21,
         registration_date TIMESTAMP WITH TIME ZONE,
         last_action TIMESTAMP WITH TIME ZONE,
         online BOOLEAN DEFAULT false,
