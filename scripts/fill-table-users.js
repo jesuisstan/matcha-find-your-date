@@ -7,10 +7,23 @@ const getConfirmedUsersFemale = require('./fake-users-list-confirmed-female');
 
 // Function to insert users into the 'users' table
 async function insertUsers() {
+  // Check if process.env.DEFAULT_PASS is defined
+  if (!process.env.DEFAULT_PASS) {
+    console.error('Environment variable DEFAULT_PASS is not defined.');
+    process.exit(1);
+  }
+
   const client = await db.connect();
 
-  const password = 'qweasZ1!';
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // Hash the password
+  let hashedPassword;
+  try {
+    hashedPassword = await bcrypt.hash(process.env.DEFAULT_PASS, 10);
+    console.log('Password successfully hashed');
+  } catch (error) {
+    console.error('Error hashing password:', error);
+    process.exit(1);
+  }
 
   const today = new Date();
   const yesterday = new Date(today);
@@ -22,6 +35,7 @@ async function insertUsers() {
 
   try {
     await client.query('BEGIN');
+    console.log('...');
 
     // Insert unconfirmed users
     for (const user of unconfirmedUsers) {
@@ -53,7 +67,8 @@ async function insertUsers() {
         ]
       );
     }
-    console.log('Unconfirmed users inserted successfully');
+    console.log('15 unconfirmed users are ready for inserting into database');
+    console.log('...');
 
     // Insert confirmed users-men
     for (const user of confirmedUsersMale) {
@@ -85,7 +100,8 @@ async function insertUsers() {
         ]
       );
     }
-    console.log('Confirmed male users inserted successfully');
+    console.log('218 confirmed male users are ready for inserting into database');
+    console.log('...');
 
     // Insert confirmed users-women
     for (const user of confirmedUsersFemale) {
@@ -117,7 +133,8 @@ async function insertUsers() {
         ]
       );
     }
-    console.log('Confirmed female users inserted successfully');
+    console.log('290 confirmed female users are ready for inserting into database');
+    console.log('...');
 
     await client.query('COMMIT');
     console.log('DONE! ALL USERS INSERTED SUCCESSFULLY');
