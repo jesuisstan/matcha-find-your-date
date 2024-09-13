@@ -64,7 +64,7 @@ export async function POST(request: Request) {
         UPDATE users 
         SET last_action = $2, online = true
         WHERE id = $1
-        RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_action, online, popularity, sex_preferences, photos;
+        RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_action, online, raiting, sex_preferences, photos;
       `;
     const updateValues = [user.id, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);

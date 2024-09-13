@@ -19,6 +19,7 @@ import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrappe
 import StatusWrapper from '@/components/ui/wrappers/status-wrapper';
 import useUserStore from '@/stores/user';
 import { calculateAge } from '@/utils/format-string';
+import RaitingWrapper from '@/components/ui/wrappers/raiting-wrapper';
 
 const ProfilePage = () => {
   const t = useTranslations();
@@ -110,6 +111,9 @@ const ProfilePage = () => {
             'lg:col-span-3'
           )}
         >
+          {/* RAITING */}
+          <RaitingWrapper raiting={user?.raiting} />
+
           {/* LOCATION */}
           <LocationWrapper
             address={user?.address}

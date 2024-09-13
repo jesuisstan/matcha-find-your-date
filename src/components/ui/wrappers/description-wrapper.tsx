@@ -34,6 +34,7 @@ const DescriptionWrapper = ({
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }} // Add these styles
     >
       <p className="text-base font-bold">{capitalize(t('bio'))}</p>
       <p
@@ -41,6 +42,7 @@ const DescriptionWrapper = ({
           'text-justify text-sm smooth42transition ',
           isDescriptionExpanded ? 'h-auto' : 'line-clamp-3 h-[max-content] text-ellipsis'
         )}
+        style={{ maxWidth: '100%' }} // Ensure the description doesn't exceed the container width
       >
         <TextWithLineBreaks text={text ?? t(`no-description`)} />
       </p>

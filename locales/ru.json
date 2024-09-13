@@ -291,5 +291,6 @@
   "status": "Статус",
   "not-confirmed": "Не подтвержден",
   "confirmed": "Подтвержден",
-  "settings": "Настройки"
+  "settings": "Настройки",
+  "raiting": "Флирт Фактор"
 }

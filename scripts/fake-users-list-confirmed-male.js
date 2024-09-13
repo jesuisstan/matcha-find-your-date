@@ -23,7 +23,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Adventurous person who loves outdoor activities and exploring new places.',
       tags: ['adventurous', 'globetrotter', 'fitness'],
       latitude: 48.8566, // Paris
@@ -49,7 +49,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Photographer by day, superhero by night. Looking for someone to share my adventures.',
       tags: ['photography', 'adventurous', 'fitness'],
@@ -76,7 +76,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative soul with a love for painting and design. Looking for a muse.',
       tags: ['creative', 'painter', 'art-lover'],
       latitude: 48.8566, // Paris
@@ -102,7 +102,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'I am an introvert who enjoys reading and spending time with my dog.',
       tags: ['bookworm', 'doglover', 'introvert'],
       latitude: 55.7558, // Moscow
@@ -128,7 +128,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love traveling the world, enjoying good wine, and exploring new cultures.',
       tags: ['wine-lover', 'traveller', 'foodie'],
       latitude: 51.5074, // London
@@ -154,7 +154,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'I enjoy outdoor adventures and discovering new hiking trails.',
       tags: ['hiker', 'adventurous', 'outdoorsy'],
       latitude: 48.8566, // Paris
@@ -196,7 +196,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m6-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -214,7 +214,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Lover of all things French culture, from the cuisine to the music. Looking for someone who shares my passion for art and history.',
       tags: ['art-lover', 'history-buff', 'foodie'],
@@ -241,7 +241,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Exploring life through photography and a deep appreciation for fine wine and art.',
       tags: ['photography', 'wine-lover', 'art-lover'],
@@ -268,7 +268,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Hiker and nature lover. Passionate about the environment and sustainability.',
       tags: ['hiker', 'eco-friendly', 'nature-lover'],
       latitude: 43.7102, // Nice
@@ -295,7 +295,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Cyclist and adventure seeker. I love exploring new routes and paths wherever I travel.',
       tags: ['cyclist', 'traveller', 'outdoorsy'],
@@ -323,7 +323,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Wine expert and foodie, I spend my time finding the best pairings across France.',
       tags: ['wine-lover', 'foodie', 'traveller'],
       latitude: 45.764, // Lyon
@@ -351,7 +351,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Jazz lover and a bit of a night owl. I love spending my nights at live music events.',
       tags: ['jazz', 'live-music', 'nightowl'],
@@ -379,7 +379,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness enthusiast with a love for outdoor sports. Running keeps me focused.',
       tags: ['runner', 'fitness', 'outdoorsy'],
       latitude: 45.764, // Lyon
@@ -406,7 +406,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Food lover and baker. Passionate about creating delicious pastries and bread.',
       tags: ['foodie', 'creative', 'baker'],
       latitude: 48.5734, // Strasbourg
@@ -433,7 +433,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Avid traveler and language learner. I’m constantly trying to improve my skills and explore the world.',
       tags: ['traveller', 'language-learner', 'openminded'],
@@ -462,7 +462,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Bookworm with a passion for history and literature. Looking for someone to share long conversations and deep thoughts.',
       tags: ['bookworm', 'history-buff', 'introvert'],
@@ -490,7 +490,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Lover of live music and spontaneous adventures. Always ready for a last-minute road trip.',
       tags: ['live-music', 'spontaneous', 'traveller'],
@@ -518,7 +518,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Techie by profession, foodie by heart. Always trying new recipes and gadgets.',
       tags: ['techie', 'foodie', 'gamer'],
       latitude: 48.1173, // Rennes
@@ -545,7 +545,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Sports fanatic, especially soccer and basketball. Always active and looking for a new challenge.',
       tags: ['sports-fan', 'fitness', 'runner'],
@@ -573,7 +573,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about art and painting. Exploring creativity through various mediums.',
       tags: ['art-lover', 'painter', 'creative'],
       latitude: 48.5734, // Strasbourg
@@ -607,7 +607,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m21-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -634,7 +634,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m22-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -661,7 +661,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m23-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -688,7 +688,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m24-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -715,7 +715,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m25-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -742,7 +742,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m26-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -769,7 +769,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m27-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -796,7 +796,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m28-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -824,7 +824,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m29-2.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -851,7 +851,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m30-2.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -878,7 +878,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m31-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -904,7 +904,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m32-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -931,7 +931,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m33-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -957,7 +957,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m34-1.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -985,7 +985,7 @@ module.exports = function (hashedPassword, yesterday) {
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m35-2.jpg',
       ],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1009,7 +1009,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m36-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -1033,7 +1033,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m37-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1057,7 +1057,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m38-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1080,7 +1080,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m39-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -1103,7 +1103,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m40-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1128,7 +1128,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m41-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -1152,7 +1152,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m42-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1175,7 +1175,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m43-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1199,7 +1199,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m44-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -1222,7 +1222,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m45-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -1245,7 +1245,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m46-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1268,7 +1268,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m47-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -1292,7 +1292,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m48-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: true,
@@ -1316,7 +1316,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       photos: ['https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/m49-0.jpg'],
       complete: true,
-      popularity: 21,
+      raiting: 21,
       registration_date: yesterday.toISOString(),
       last_action: new Date().toISOString(),
       online: false,
@@ -1335,7 +1335,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness enthusiast, marathon runner, and world traveler.',
       tags: ['fitness', 'runner', 'traveller'],
       latitude: 48.8566, // Paris
@@ -1358,7 +1358,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative artist who loves painting and exploring art galleries.',
       tags: ['art-lover', 'painter', 'creative'],
       latitude: 48.8566, // Paris
@@ -1381,7 +1381,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Animal lover and dedicated vegan, passionate about environmental causes.',
       tags: ['vegan', 'animal-lover', 'eco-friendly'],
       latitude: 48.8566, // Paris
@@ -1404,7 +1404,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'History enthusiast and museum lover.',
       tags: [
         'history-buff',
@@ -1435,7 +1435,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoys hiking and exploring the outdoors. Looking for an adventure partner.',
       tags: ['hiker', 'outdoorsy', 'adventurous'],
       latitude: 48.8566, // Paris
@@ -1458,7 +1458,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Music lover who plays guitar in a local band.',
       tags: ['music-lover', 'festival-goer', 'fitness', 'foodie', 'free-relations', 'live-music'],
       latitude: 48.8566, // Paris
@@ -1481,7 +1481,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Yoga practitioner and zen enthusiast. I value peace and mindfulness.',
       tags: ['yoga', 'zen', 'student', 'tattoo', 'techie', 'theater-lover', 'traveller'],
       latitude: 48.8566, // Paris
@@ -1504,7 +1504,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Nature lover and trail runner. I spend my weekends exploring nature trails.',
       tags: ['nature-lover', 'runner', 'outdoorsy'],
       latitude: 48.8566, // Paris
@@ -1527,7 +1527,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Photographer with a passion for urban exploration and street photography.',
       tags: [
         'photography',
@@ -1558,7 +1558,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid traveler who enjoys discovering new cultures and cuisines.',
       tags: ['traveller', 'foodie', 'voyages', 'volunteer', 'wine-lover'],
       latitude: 48.8566, // Paris
@@ -1581,7 +1581,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Traveler and lover of new experiences. I enjoy spontaneous adventures.',
       tags: ['traveller', 'spontaneous', 'globetrotter'],
       latitude: 48.8566, // Paris
@@ -1604,7 +1604,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Bookworm with a passion for historical novels and museums.',
       tags: ['bookworm', 'history-buff', 'museum-lover'],
       latitude: 48.8566, // Paris
@@ -1627,7 +1627,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness coach with a love for health and wellness.',
       tags: ['fitness', 'health-conscious', 'sports-fan'],
       latitude: 48.8566, // Paris
@@ -1650,7 +1650,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative writer and poet who enjoys expressing feelings through words.',
       tags: ['writer', 'creative', 'bookworm', 'poet'],
       latitude: 48.8566, // Paris
@@ -1673,7 +1673,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Cyclist and fitness enthusiast. Always up for a challenge.',
       tags: ['cyclist', 'fitness', 'outdoorsy'],
       latitude: 48.8566, // Paris
@@ -1696,7 +1696,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Traveler and minimalist, looking for a simple life full of adventures.',
       tags: ['traveller', 'minimalist', 'adventurous'],
       latitude: 48.8566, // Paris
@@ -1719,7 +1719,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Jazz lover and live-music enthusiast.',
       tags: ['jazz', 'music-lover', 'live-music'],
       latitude: 48.8566, // Paris
@@ -1742,7 +1742,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Gamer and tech enthusiast, always looking for the latest innovations.',
       tags: ['gamer', 'techie', 'creative'],
       latitude: 48.8566, // Paris
@@ -1765,7 +1765,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Outdoor lover, spending my time hiking, camping, and enjoying nature.',
       tags: ['outdoorsy', 'nature-lover', 'hiker'],
       latitude: 48.8566, // Paris
@@ -1788,7 +1788,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Cyclist and adventurer. I enjoy exploring new places on my bike.',
       tags: ['cyclist', 'adventurous', 'fitness'],
       latitude: 48.8566, // Paris
@@ -1812,7 +1812,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoy reading and exploring new genres of books. Also a fitness enthusiast.',
       tags: ['bookworm', 'fitness', 'nature-lover'],
       latitude: 48.8566, // Paris
@@ -1835,7 +1835,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love exploring new places, cultures, and food from around the world.',
       tags: ['traveller', 'foodie', 'globetrotter'],
       latitude: 48.8566, // Paris
@@ -1858,7 +1858,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Musician and jazz enthusiast. Love attending live music events and festivals.',
       tags: ['jazz', 'music-lover', 'festival-goer', 'english', 'french', 'spanish', 'german'],
       latitude: 48.8566, // Paris
@@ -1881,7 +1881,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Creative soul who loves art and design. Searching for new inspirations every day.',
       tags: ['art-lover', 'creative', 'painter'],
@@ -1905,7 +1905,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Love hiking, camping, and exploring nature. Always looking for my next adventure.',
       tags: ['hiker', 'outdoorsy', 'nature-lover', 'english', 'french', 'spanish', 'german'],
@@ -1929,7 +1929,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Passionate about fitness and wellness. Looking for someone with the same mindset.',
       tags: ['fitness', 'health-conscious', 'runner'],
@@ -1953,7 +1953,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Coffee lover who enjoys good books and great conversations.',
       tags: ['coffee-lover', 'bookworm', 'introvert'],
       latitude: 48.8566, // Paris
@@ -1976,7 +1976,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Entrepreneur and investor. Always looking for new opportunities and growth.',
       tags: ['investor', 'traveller', 'business-minded'],
       latitude: 48.8566, // Paris
@@ -1999,7 +1999,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Food enthusiast who loves trying out new recipes and exploring local cuisines.',
       tags: ['foodie', 'cooking', 'wine-lover', 'traveller', 'voyages', 'volunteer', 'french'],
       latitude: 48.8566, // Paris
@@ -2022,7 +2022,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love traveling the world and experiencing new cultures.',
       tags: ['traveller', 'globetrotter', 'language-learner', 'lgbt-friendly', 'live-music'],
       latitude: 48.8566, // Paris
@@ -2045,7 +2045,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Entrepreneur and tech enthusiast. Always looking for new challenges.',
       tags: ['techie', 'traveller', 'investor'],
       latitude: 48.8566, // Paris
@@ -2068,7 +2068,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Music lover and passionate guitarist. Playing for local bands in my free time.',
       tags: ['music-lover', 'guitarist', 'live-music'],
       latitude: 48.8566, // Paris
@@ -2091,7 +2091,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Photographer and adventure seeker. Love capturing moments that inspire.',
       tags: ['photography', 'adventurous', 'globetrotter'],
       latitude: 48.8566, // Paris
@@ -2114,7 +2114,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid book reader and history buff. Love spending time with family and friends.',
       tags: ['bookworm', 'history-buff', 'family'],
       latitude: 48.8566, // Paris
@@ -2137,7 +2137,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Sports enthusiast and fitness trainer. Helping people reach their goals.',
       tags: ['fitness', 'sports-fan', 'trainer'],
       latitude: 48.8566, // Paris
@@ -2160,7 +2160,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Motorcycle enthusiast and adrenaline junkie. Love the open road and freedom.',
       tags: ['motorcyclist', 'adventurous', 'outdoorsy'],
       latitude: 48.8566, // Paris
@@ -2183,7 +2183,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative professional who enjoys art and design. Looking for my next muse.',
       tags: ['creative', 'art-lover', 'painter'],
       latitude: 48.8566, // Paris
@@ -2206,7 +2206,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Esoteric thinker who loves deep discussions about the mysteries of life.',
       tags: ['esoteric', 'introvert', 'openminded'],
       latitude: 48.8566, // Paris
@@ -2229,7 +2229,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Cycling enthusiast and lover of the outdoors. Always looking for new trails.',
       tags: ['cyclist', 'outdoorsy', 'nature-lover'],
       latitude: 48.8566, // Paris
@@ -2252,7 +2252,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Tech geek and outdoor enthusiast. I spend my weekends hiking and gaming.',
       tags: ['techie', 'hiker', 'gamer'],
       latitude: 48.8566, // Paris
@@ -2277,7 +2277,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Hiker and lover of the outdoors. Always on the lookout for the next adventure.',
       tags: ['hiker', 'nature-lover', 'outdoorsy'],
       latitude: 45.1885, // Grenoble
@@ -2301,7 +2301,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Jazz musician and lover of the arts. I play the saxophone and love improvisation.',
       tags: ['jazz', 'music-lover', 'live-music'],
@@ -2326,7 +2326,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Political enthusiast and avid reader. I love engaging in thoughtful discussions.',
       tags: ['political', 'reliable', 'bookworm'],
       latitude: 44.8378, // Bordeaux
@@ -2350,7 +2350,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness lover who enjoys a good challenge. Always pushing my limits.',
       tags: ['fitness', 'runner', 'sports-fan'],
       latitude: 43.2965, // Marseille
@@ -2374,7 +2374,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Introverted but passionate about music. I enjoy playing guitar and attending live shows.',
       tags: ['music-lover', 'introvert', 'live-music'],
@@ -2399,7 +2399,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Gamer and bookworm. I spend most of my free time either reading or playing games.',
       tags: ['gamer', 'bookworm', 'nightowl'],
@@ -2424,7 +2424,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid traveller and food lover. I enjoy discovering new cultures and cuisines.',
       tags: ['traveller', 'foodie', 'adventurous'],
       latitude: 45.764, // Lyon
@@ -2448,7 +2448,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Enjoy outdoor adventures and long hikes. Looking for someone to share the journey.',
       tags: ['hiker', 'outdoorsy', 'fitness'],
@@ -2473,7 +2473,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative photographer with a passion for capturing the beauty of life.',
       tags: ['photography', 'creative', 'traveller'],
       latitude: 50.6292, // Lille
@@ -2497,7 +2497,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Music enthusiast and coffee lover. Always looking for the next great coffee shop.',
       tags: ['coffee-lover', 'music-lover', 'introvert'],
@@ -2522,7 +2522,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Tech enthusiast and minimalist. I love simplifying life and focusing on what matters.',
       tags: ['minimalist', 'techie', 'cyclist'],
@@ -2547,7 +2547,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative chef, always experimenting with new dishes and flavors.',
       tags: ['cooking', 'foodie', 'creative'],
       latitude: 43.2965, // Marseille
@@ -2571,7 +2571,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Sports fan and outdoor enthusiast. Love spending time outside, no matter the season.',
       tags: ['sports-fan', 'outdoorsy', 'traveller'],
@@ -2596,7 +2596,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Cycling fanatic and nature lover. I spend most weekends exploring new trails.',
       tags: ['cyclist', 'nature-lover', 'adventurous'],
       latitude: 43.5297, // Montpellier
@@ -2620,7 +2620,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Avid gamer and movie enthusiast. Looking for someone to share these passions with.',
       tags: ['gamer', 'moviebuff', 'introvert'],
@@ -2645,7 +2645,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Fashion enthusiast and party animal. I love attending fashion shows and festivals.',
       tags: ['fashion', 'party-animal', 'festival-goer'],
@@ -2670,7 +2670,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Motorcyclist and adventurer. Exploring the world on two wheels.',
       tags: ['motorcyclist', 'adventurous', 'globetrotter'],
       latitude: 48.853, // Paris
@@ -2694,7 +2694,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'LGBT-friendly and language learner. Love to travel and meet new people.',
       tags: ['lgbt-friendly', 'language-learner', 'traveller'],
       latitude: 40.7128, // New York
@@ -2718,7 +2718,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Photographer and art lover. Always looking for new inspirations.',
       tags: ['photography', 'art-lover', 'creative'],
       latitude: 43.2965, // Marseille
@@ -2742,7 +2742,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness addict and foodie. Love experimenting with healthy recipes.',
       tags: ['fitness', 'foodie', 'nature-lover'],
       latitude: 48.5734, // Strasbourg
@@ -2766,7 +2766,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Entrepreneur and jazz lover. I enjoy attending live music events.',
       tags: ['entrepreneur', 'jazz', 'music-lover'],
       latitude: 50.6292, // Lille
@@ -2790,7 +2790,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Techie and gamer. I love spending time working on innovative projects.',
       tags: ['techie', 'gamer', 'spontaneous'],
       latitude: 45.764, // Lyon
@@ -2814,7 +2814,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Gamer, traveler, and lover of new experiences.',
       tags: ['gamer', 'traveller', 'extrovert'],
       latitude: 48.5734, // Strasbourg
@@ -2838,7 +2838,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Crypto enthusiast and tech investor.',
       tags: ['crypto', 'investor', 'techie'],
       latitude: 50.6292, // Lille
@@ -2862,7 +2862,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Bookworm and introvert, I love spending time reading.',
       tags: ['bookworm', 'introvert', 'homebody'],
       latitude: 45.764, // Lyon
@@ -2886,7 +2886,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Adventurous globetrotter, always looking for the next exciting destination.',
       tags: ['adventurous', 'globetrotter', 'outdoorsy'],
       latitude: 43.7102, // Nice
@@ -2910,7 +2910,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Food lover and tech enthusiast. I enjoy learning new languages and traveling the world.',
       tags: ['foodie', 'techie', 'traveller', 'french', 'english'],
@@ -2935,7 +2935,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Fitness enthusiast who loves running and hiking. Passionate about learning new cultures.',
       tags: ['fitness', 'runner', 'traveller', 'spanish', 'english'],
@@ -2960,7 +2960,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'I am a musician who enjoys live performances and learning new instruments.',
       tags: ['music-lover', 'live-music', 'creative', 'french', 'german'],
       latitude: 48.8566, // Paris
@@ -2984,7 +2984,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love cooking, exploring new flavors, and cycling around the countryside.',
       tags: ['cooking', 'cyclist', 'traveller', 'italian', 'english'],
       latitude: 45.4642, // Milan
@@ -3008,7 +3008,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Nature lover and outdoor enthusiast. I enjoy hiking and capturing beautiful landscapes.',
       tags: ['nature-lover', 'hiker', 'photography', 'japanese', 'english'],
@@ -3033,7 +3033,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Art lover who enjoys painting and visiting galleries. Fascinated by different art forms.',
       tags: ['art-lover', 'painter', 'creative', 'french', 'english'],
@@ -3058,7 +3058,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Historian with a love for exploring ancient cultures and civilizations.',
       tags: ['history-buff', 'traveller', 'humanitarian', 'german', 'english'],
       latitude: 52.52, // Berlin
@@ -3082,7 +3082,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Bookworm with a passion for learning new languages and cultures.',
       tags: ['bookworm', 'language-learner', 'introvert', 'english', 'portuguese'],
       latitude: 39.9042, // Beijing
@@ -3106,7 +3106,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Music lover and guitarist. Always looking for new jams and collaborations.',
       tags: ['music-lover', 'live-music', 'creative', 'spanish', 'french'],
       latitude: 19.4326, // Mexico City
@@ -3130,7 +3130,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Fitness enthusiast and bodybuilder. I love working out and motivating others to do the same.',
       tags: ['fitness', 'bodybuilding', 'motivator', 'arabic', 'english'],
@@ -3155,7 +3155,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid traveler and foodie. I love trying out new cuisines and learning languages.',
       tags: ['traveller', 'foodie', 'language-learner', 'french', 'english'],
       latitude: 48.8566, // Paris
@@ -3179,7 +3179,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Music and dance lover. I enjoy salsa dancing and live music performances.',
       tags: ['dancer', 'music-lover', 'live-music', 'spanish', 'portuguese'],
       latitude: -23.5505, // Sao Paulo
@@ -3203,7 +3203,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Tech enthusiast who loves coding and working on side projects.',
       tags: ['techie', 'gamer', 'crypto', 'french', 'english'],
       latitude: 45.764, // Lyon
@@ -3227,7 +3227,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Jazz lover who enjoys going to live performances and playing the saxophone.',
       tags: ['jazz', 'music-lover', 'live-music', 'german', 'english'],
       latitude: 52.52, // Berlin
@@ -3251,7 +3251,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness and nature enthusiast. Love hiking and exploring nature.',
       tags: ['fitness', 'hiker', 'nature-lover', 'spanish', 'english'],
       latitude: 41.3851, // Barcelona
@@ -3275,7 +3275,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Photography lover who enjoys capturing beautiful moments in life.',
       tags: ['photography', 'creative', 'outdoorsy', 'english', 'chinese'],
       latitude: 1.3521, // Singapore
@@ -3299,7 +3299,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Italian chef who loves cooking and discovering new flavors.',
       tags: ['cooking', 'foodie', 'traveller', 'italian', 'english'],
       latitude: 41.9028, // Rome
@@ -3323,7 +3323,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'I am a movie enthusiast who enjoys watching and analyzing films from different cultures.',
       tags: ['moviebuff', 'traveller', 'english', 'hindi'],
@@ -3348,7 +3348,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Bookworm who loves reading historical fiction and learning about new cultures.',
       tags: ['bookworm', 'history-buff', 'introvert', 'french', 'german'],
       latitude: 45.764, // Lyon
@@ -3372,7 +3372,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Motorcycling is my passion. I love exploring new routes and feeling the wind on my face.',
       tags: ['motorcyclist', 'traveller', 'adventurous', 'chinese', 'english'],
@@ -3397,7 +3397,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'An adventurous soul who enjoys hiking and being outdoors.',
       tags: ['hiker', 'nature-lover', 'outdoorsy', 'english', 'french'],
       latitude: 40.7128, // New York
@@ -3421,7 +3421,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about food and wine, I enjoy discovering new places to eat.',
       tags: ['wine-lover', 'foodie', 'traveller', 'french', 'german'],
       latitude: 48.8584, // Paris
@@ -3445,7 +3445,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Motorcycle enthusiast who loves hitting the road and exploring new places.',
       tags: ['motorcyclist', 'traveller', 'adventurous', 'italian', 'english'],
       latitude: 41.9028, // Rome
@@ -3469,7 +3469,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid photographer with a passion for exploring and capturing new cultures.',
       tags: ['photography', 'traveller', 'nature-lover', 'spanish', 'portuguese'],
       latitude: -34.6037, // Buenos Aires
@@ -3493,7 +3493,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Tech enthusiast who enjoys working on new projects and playing video games.',
       tags: ['techie', 'gamer', 'scifi-fan', 'portuguese', 'english'],
       latitude: -23.5505, // Sao Paulo
@@ -3517,7 +3517,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Fitness enthusiast and personal trainer. I love helping people reach their goals.',
       tags: ['fitness', 'trainer', 'sports-fan', 'korean', 'english'],
@@ -3542,7 +3542,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'I am a jazz lover and enjoy attending live music events.',
       tags: ['jazz', 'music-lover', 'live-music', 'chinese', 'english'],
       latitude: 31.2304, // Shanghai
@@ -3566,7 +3566,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'An artist at heart, I love painting and creating abstract art.',
       tags: ['painter', 'art-lover', 'creative', 'english', 'spanish'],
       latitude: 34.0522, // Los Angeles
@@ -3590,7 +3590,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A fitness trainer who enjoys helping people achieve their health goals.',
       tags: ['fitness', 'trainer', 'sports-fan', 'german', 'english'],
       latitude: 52.52, // Berlin
@@ -3614,7 +3614,7 @@ module.exports = function (hashedPassword, yesterday) {
       registration_date: yesterday.toISOString(),
       confirmed: true,
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A lover of languages and cultures, I enjoy traveling and learning new things.',
       tags: ['traveller', 'language-learner', 'spanish', 'english'],
       latitude: 40.4168, // Madrid
@@ -3637,7 +3637,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about music and movies. Always on the lookout for new releases.',
       tags: ['moviebuff', 'music-lover', 'live-music', 'english', 'french'],
       latitude: 51.5074, // London
@@ -3660,7 +3660,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'A fan of outdoor activities and nature. Hiking is my favorite way to spend weekends.',
       tags: ['hiker', 'nature-lover', 'outdoorsy', 'russian', 'english'],
@@ -3684,7 +3684,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'I am an introvert who loves spending time with books and my cat.',
       tags: ['bookworm', 'catlover', 'homebody', 'english', 'german'],
       latitude: 40.7306, // New York
@@ -3707,7 +3707,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about new technologies, I spend my time exploring innovative ideas.',
       tags: ['techie', 'investor', 'creative', 'english', 'chinese'],
       latitude: 34.0522, // Los Angeles
@@ -3730,7 +3730,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A lover of fitness and good music. I enjoy attending live performances.',
       tags: ['fitness', 'music-lover', 'live-music', 'english', 'spanish'],
       latitude: 41.9028, // Rome
@@ -3753,7 +3753,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Aspiring chef who loves exploring new cuisines and cooking for friends.',
       tags: ['cooking', 'foodie', 'traveller', 'spanish', 'portuguese'],
       latitude: -23.5505, // Sao Paulo
@@ -3776,7 +3776,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'A globetrotter who enjoys traveling to new places and learning about different cultures.',
       tags: ['traveller', 'globetrotter', 'adventurous', 'portuguese', 'english'],
@@ -3800,7 +3800,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative soul with a passion for photography and art.',
       tags: ['photography', 'art-lover', 'creative', 'japanese', 'english'],
       latitude: 35.6895, // Tokyo
@@ -3823,7 +3823,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A jazz lover who enjoys attending live music events.',
       tags: ['jazz', 'music-lover', 'live-music', 'french', 'english'],
       latitude: 48.8566, // Paris
@@ -3846,7 +3846,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about history and languages. Enjoys spending weekends at the museum.',
       tags: ['history-buff', 'museum-goer', 'language-learner', 'hindi', 'english'],
       latitude: 28.6139, // Delhi
@@ -3869,7 +3869,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A language learner who enjoys connecting with people from different cultures.',
       tags: ['language-learner', 'traveller', 'globetrotter', 'german', 'french'],
       latitude: 48.1351, // Munich
@@ -3892,7 +3892,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about food and travel. I love discovering new cuisines.',
       tags: ['foodie', 'traveller', 'wine-lover', 'portuguese', 'english'],
       latitude: 41.1579, // Porto
@@ -3915,7 +3915,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A creative person who enjoys painting and expressing ideas through art.',
       tags: ['painter', 'creative', 'art-lover', 'german', 'italian'],
       latitude: 52.52, // Berlin
@@ -3938,7 +3938,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoys adventure and sports. Always looking for new outdoor activities.',
       tags: ['adventurous', 'outdoorsy', 'sports-fan', 'spanish', 'french'],
       latitude: 41.3851, // Barcelona
@@ -3961,7 +3961,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative artist who loves designing and discovering new artistic ideas.',
       tags: ['creative', 'painter', 'art-lover', 'arabic', 'english'],
       latitude: 30.0444, // Cairo
@@ -3984,7 +3984,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A tech enthusiast who loves discovering the latest innovations and gadgets.',
       tags: ['techie', 'investor', 'traveller', 'japanese', 'english'],
       latitude: 35.6895, // Tokyo
@@ -4007,7 +4007,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about technology and outdoor adventures. I love exploring new places.',
       tags: ['adventurous', 'traveller', 'techie', 'italian', 'english'],
       latitude: 45.4642, // Milan
@@ -4030,7 +4030,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoys discovering new places and experiencing different cultures.',
       tags: ['traveller', 'globetrotter', 'wine-lover', 'english', 'french'],
       latitude: 48.8566, // Paris
@@ -4053,7 +4053,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'A fitness lover who enjoys keeping active and discovering new workout techniques.',
       tags: ['fitness', 'traveller', 'sports-fan', 'english', 'spanish'],
@@ -4077,7 +4077,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A fan of historical novels and art museums. Enjoys traveling around Europe.',
       tags: ['history-buff', 'art-lover', 'traveller', 'french', 'german'],
       latitude: 48.8584, // Paris
@@ -4100,7 +4100,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoys nature walks and exploring new cultures. Looking for a fellow adventurer.',
       tags: ['nature-lover', 'traveller', 'outdoorsy', 'arabic', 'english'],
       latitude: 25.276987, // Dubai
@@ -4123,7 +4123,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Tech enthusiast and nature lover. Enjoys hiking and exploring new tech gadgets.',
       tags: ['techie', 'hiker', 'outdoorsy', 'arabic', 'english'],
       latitude: 33.6844, // Riyadh
@@ -4146,7 +4146,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love spending time at the beach and exploring the great outdoors.',
       tags: ['outdoorsy', 'traveller', 'beach-lover', 'portuguese', 'spanish'],
       latitude: -22.9068, // Rio de Janeiro
@@ -4169,7 +4169,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A lover of the mountains and hiking. Looking for someone who loves adventure.',
       tags: ['hiker', 'traveller', 'mountaineer', 'english', 'french'],
       latitude: 40.7128, // New York
@@ -4192,7 +4192,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love music and dancing. Always up for a party or music festival.',
       tags: ['dancer', 'festival-goer', 'music-lover', 'french', 'arabic'],
       latitude: 14.7167, // Dakar
@@ -4216,7 +4216,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A French tech lover with a passion for cooking and discovering new recipes.',
       tags: ['techie', 'cooking', 'traveller', 'french', 'english'],
       latitude: 48.8566, // Paris
@@ -4239,7 +4239,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A music lover and introvert who enjoys jazz and playing the guitar.',
       tags: ['music-lover', 'introvert', 'jazz', 'japanese', 'english'],
       latitude: 35.6895, // Tokyo
@@ -4262,7 +4262,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love hiking and nature. I often spend weekends exploring new trails.',
       tags: ['hiker', 'nature-lover', 'outdoorsy', 'french', 'german'],
       latitude: 48.8566, // Paris
@@ -4285,7 +4285,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative photographer who loves capturing the beauty of the world.',
       tags: ['photography', 'creative', 'traveller', 'arabic', 'english'],
       latitude: 30.0444, // Cairo
@@ -4308,7 +4308,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A foodie and a language learner. I love experiencing new cuisines and cultures.',
       tags: ['foodie', 'language-learner', 'traveller', 'spanish', 'portuguese'],
       latitude: 40.4168, // Madrid
@@ -4331,7 +4331,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about fitness and hiking. Always looking for new outdoor challenges.',
       tags: ['fitness', 'hiker', 'traveller', 'english', 'french'],
       latitude: 34.0522, // Los Angeles
@@ -4354,7 +4354,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A passionate globetrotter who enjoys discovering new cultures and languages.',
       tags: ['globetrotter', 'traveller', 'language-learner', 'spanish', 'italian'],
       latitude: -34.6037, // Buenos Aires
@@ -4377,7 +4377,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A nature lover who enjoys hiking and exploring the beauty of the outdoors.',
       tags: ['hiker', 'nature-lover', 'outdoorsy', 'english', 'spanish'],
       latitude: 51.5074, // London
@@ -4400,7 +4400,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A creative individual who loves experimenting with art and design.',
       tags: ['creative', 'art-lover', 'traveller', 'english', 'korean'],
       latitude: 37.5665, // Seoul
@@ -4423,7 +4423,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A coffee lover and food enthusiast who enjoys exploring new cafes.',
       tags: ['coffee-lover', 'foodie', 'traveller', 'english', 'german'],
       latitude: 52.52, // Berlin
@@ -4447,7 +4447,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Food enthusiast and passionate about travelling. Love discovering new flavors.',
       tags: ['foodie', 'traveller', 'wine-lover', 'italian', 'spanish'],
       latitude: 45.4642, // Milan
@@ -4470,7 +4470,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography:
         'A passionate cyclist and outdoors lover. Always on the lookout for the next adventure.',
       tags: ['cyclist', 'outdoorsy', 'adventurous', 'french', 'english'],
@@ -4494,7 +4494,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Love learning languages and exploring different cultures. Fluent in five languages.',
       tags: ['language-learner', 'traveller', 'globetrotter', 'arabic', 'french'],
@@ -4518,7 +4518,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoys sailing, adventure, and exploring the open seas.',
       tags: ['adventurous', 'traveller', 'nature-lover', 'french', 'english'],
       latitude: 43.2965, // Marseille
@@ -4541,7 +4541,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'Tech geek and passionate about photography. I capture moments of beauty around the world.',
       tags: ['techie', 'photography', 'traveller', 'vietnamese', 'english'],
@@ -4565,7 +4565,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A movie enthusiast who enjoys long movie nights and discovering new genres.',
       tags: ['moviebuff', 'traveller', 'outdoorsy', 'english', 'french'],
       latitude: 51.5074, // London
@@ -4588,7 +4588,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'An eco-friendly enthusiast who loves volunteering for environmental causes.',
       tags: ['eco-friendly', 'volunteer', 'traveller', 'arabic', 'english'],
       latitude: 33.3152, // Baghdad
@@ -4611,7 +4611,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Cycling around the world and exploring new places on two wheels.',
       tags: ['cyclist', 'outdoorsy', 'nature-lover', 'german', 'english'],
       latitude: 50.1109, // Frankfurt
@@ -4634,7 +4634,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Creative and passionate about designing and crafting innovative projects.',
       tags: ['creative', 'traveller', 'language-learner', 'hindi', 'english'],
       latitude: 28.6139, // New Delhi
@@ -4657,7 +4657,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Jazz enthusiast and music lover. Enjoy going to live concerts.',
       tags: ['jazz', 'music-lover', 'traveller', 'english', 'french'],
       latitude: 40.7128, // New York
@@ -4680,7 +4680,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A passionate chef and foodie, always looking for new recipes to try out.',
       tags: ['foodie', 'traveller', 'spanish', 'cooking', 'wine-lover'],
       latitude: 40.4168, // Madrid
@@ -4703,7 +4703,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Animal lover and outdoor enthusiast, enjoy spending time with my dogs.',
       tags: ['doglover', 'traveller', 'french', 'outdoorsy', 'adventurous'],
       latitude: 48.8584, // Paris
@@ -4726,7 +4726,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Tech enthusiast and traveler, constantly learning and exploring new cultures.',
       tags: ['techie', 'traveller', 'japanese', 'language-learner', 'creative'],
       latitude: 35.6762, // Tokyo
@@ -4749,7 +4749,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Love outdoor adventures, photography, and capturing nature at its finest.',
       tags: ['photography', 'traveller', 'portuguese', 'nature-lover', 'hiker'],
       latitude: -22.9068, // Rio de Janeiro
@@ -4772,7 +4772,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid cyclist and nature lover, always seeking new routes to explore.',
       tags: ['cyclist', 'traveller', 'german', 'outdoorsy', 'nature-lover'],
       latitude: 48.1351, // Munich
@@ -4795,7 +4795,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness coach who loves helping others achieve their health and fitness goals.',
       tags: ['fitness', 'traveller', 'english', 'sports-fan', 'health-conscious'],
       latitude: 40.7128, // New York
@@ -4818,7 +4818,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoys spending time outdoors and volunteering for humanitarian causes.',
       tags: ['humanitarian', 'traveller', 'arabic', 'volunteer', 'outdoorsy'],
       latitude: 30.0444, // Cairo
@@ -4841,7 +4841,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A dedicated traveler who enjoys discovering new cultures and languages.',
       tags: ['traveller', 'language-learner', 'english', 'german', 'adventurous'],
       latitude: 51.1657, // Germany
@@ -4864,7 +4864,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography:
         'A music lover and frequent traveler, seeking someone to share new experiences with.',
       tags: ['music-lover', 'traveller', 'arabic', 'english', 'extrovert'],
@@ -4888,7 +4888,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Enjoys long bike rides and exploring the countryside.',
       tags: ['cyclist', 'outdoorsy', 'english', 'traveller', 'fitness'],
       latitude: 51.5074, // London
@@ -4911,7 +4911,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Cyclist and hiker, love exploring the outdoors and keeping active.',
       tags: ['hiker', 'cyclist', 'spanish', 'nature-lover', 'outdoorsy'],
       latitude: 19.4326, // Mexico City
@@ -4934,7 +4934,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Aspiring tech entrepreneur with a passion for innovation and startups.',
       tags: ['techie', 'traveller', 'english', 'gamer', 'investor'],
       latitude: 51.5074, // London
@@ -4957,7 +4957,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'A creative mind who enjoys painting, writing, and learning languages.',
       tags: ['painter', 'creative', 'french', 'language-learner', 'art-lover'],
       latitude: 48.8566, // Paris
@@ -4980,7 +4980,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Photographer who loves capturing the beauty of nature.',
       tags: ['photography', 'traveller', 'portuguese', 'nature-lover', 'outdoorsy'],
       latitude: 41.1496, // Porto
@@ -5003,7 +5003,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Fitness lover and outdoor enthusiast, always ready for a new adventure.',
       tags: ['fitness', 'traveller', 'portuguese', 'hiker', 'outdoorsy'],
       latitude: -23.5505, // Sao Paulo
@@ -5026,7 +5026,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Motorcycle enthusiast who loves the thrill of the open road.',
       tags: ['motorcyclist', 'traveller', 'russian', 'adventurous', 'outdoorsy'],
       latitude: 55.7558, // Moscow
@@ -5049,7 +5049,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid gamer and lover of sci-fi books and movies.',
       tags: ['gamer', 'scifi-fan', 'chinese', 'techie', 'moviebuff'],
       latitude: 39.9042, // Beijing
@@ -5072,7 +5072,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'bisexual',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'A creative soul who enjoys painting and music.',
       tags: ['painter', 'creative', 'french', 'art-lover', 'music-lover'],
       latitude: 48.8566, // Paris
@@ -5095,7 +5095,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'History buff and avid reader, always seeking new knowledge.',
       tags: ['history-buff', 'bookworm', 'russian', 'traveller', 'outdoorsy'],
       latitude: 55.7558, // Moscow
@@ -5118,7 +5118,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Jazz lover and musician, always attending live performances.',
       tags: ['jazz', 'music-lover', 'spanish', 'traveller', 'live-music'],
       latitude: 40.4168, // Madrid
@@ -5141,7 +5141,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Adventurer who loves the outdoors and getting lost in nature.',
       tags: ['hiker', 'traveller', 'french', 'nature-lover', 'outdoorsy'],
       latitude: 45.5017, // Montreal
@@ -5164,7 +5164,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'men',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'LGBT advocate and open-minded adventurer who loves traveling.',
       tags: ['lgbt-friendly', 'spanish', 'traveller', 'openminded', 'outdoorsy'],
       latitude: -34.6037, // Buenos Aires
@@ -5187,7 +5187,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Football fan and fitness enthusiast who enjoys a good workout.',
       tags: ['sports-fan', 'fitness', 'spanish', 'outdoorsy', 'traveller'],
       latitude: 4.711, // Bogota
@@ -5210,7 +5210,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Passionate about cooking and exploring world cuisines.',
       tags: ['cooking', 'foodie', 'hindi', 'traveller', 'adventurous'],
       latitude: 28.6139, // Delhi
@@ -5233,7 +5233,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'History buff who loves exploring ancient sites and learning about cultures.',
       tags: ['history-buff', 'traveller', 'italian', 'culture', 'outdoorsy'],
       latitude: 41.9028, // Rome
@@ -5256,7 +5256,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      popularity: 21,
+      raiting: 21,
       biography: 'Avid reader and fan of science fiction and fantasy novels.',
       tags: ['bookworm', 'scifi-fan', 'english', 'introvert', 'gamer'],
       latitude: 51.1657, // Berlin
@@ -5279,7 +5279,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: true,
-      popularity: 21,
+      raiting: 21,
       biography: 'Tech enthusiast and motorbike rider with a passion for adventure.',
       tags: ['techie', 'motorcyclist', 'swedish', 'adventurous', 'traveller'],
       latitude: 59.3293, // Stockholm
