@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import { CircleHelp } from 'lucide-react';
 
-const RaitingWrapper = ({ raiting }: { raiting: number }) => {
+const RaitingWrapper = ({ raiting }: { raiting: number | undefined }) => {
   const t = useTranslations();
 
   return (

@@ -15,11 +15,11 @@ import InterestsWrapper from '@/components/ui/wrappers/interests-wrapper';
 import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
 import LocationWrapper from '@/components/ui/wrappers/location-wrapper';
 import PhotoGalleryWrapper from '@/components/ui/wrappers/photo-gallery-wrapper';
+import RaitingWrapper from '@/components/ui/wrappers/raiting-wrapper';
 import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrapper';
 import StatusWrapper from '@/components/ui/wrappers/status-wrapper';
 import useUserStore from '@/stores/user';
 import { calculateAge } from '@/utils/format-string';
-import RaitingWrapper from '@/components/ui/wrappers/raiting-wrapper';
 
 const ProfilePage = () => {
   const t = useTranslations();
