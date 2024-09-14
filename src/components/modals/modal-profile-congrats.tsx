@@ -18,8 +18,8 @@ const ModalProfileCongrats = ({
   return (
     <ModalBasic isOpen={show} setIsOpen={setShow} title={t('congrats')}>
       <div className="flex min-h-[30vh] flex-col items-center justify-center gap-10 text-center">
-        <div className="text-c42green">
-          <CircleCheck size={60} />
+        <div className="mb-5 text-c42green">
+          <CircleCheck size={60} className="smooth42transition hover:scale-150" />
         </div>
         <TextWithLineBreaks text={t('profile-is-completed')} />
       </div>

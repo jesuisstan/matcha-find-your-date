@@ -1652,7 +1652,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 21,
       biography: 'Creative writer and poet who enjoys expressing feelings through words.',
-      tags: ['writer', 'creative', 'bookworm', 'poet'],
+      tags: ['writer', 'creative', 'bookworm', 'romantic', 'free-relations', 'french', 'english'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',

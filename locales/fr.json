@@ -82,7 +82,7 @@
     "missing-token-or-password": "Jeton ou mot de passe manquant",
     "login-method": "Méthode de connexion",
     "login-failed": "Échec de la connexion",
-    "password-change-message": "Pour renforcer votre sécurité, vous allez être déconnecté et redirigé vers la page de connexion. À partir de là, veuillez sélectionner l'option 'Mot de passe oublié?' pour continuer à changer votre mot de passe.\n Souhaitez-vous continuer?",
+    "password-change-message": "Pour renforcer votre sécurité, vous allez être déconnecté et redirigé vers la page de connexion.\nÀ partir de là, veuillez sélectionner l'option 'Mot de passe oublié?' pour continuer à changer votre mot de passe.\n Souhaitez-vous continuer?",
     "password-invalid": "Mot de passe invalide"
   },
   "slogan": "Trouvez votre date",
@@ -292,5 +292,7 @@
   "not-confirmed": "Non confirmé",
   "confirmed": "Confirmé",
   "settings": "Paramètres",
-  "raiting": "Facteur de Flirt"
+  "raiting": "Facteur de Flirt",
+  "what-is-this": "Qu'est-ce que c'est?",
+  "raiting-description-message": "Flirt Factor est une note qui montre à quel point vous êtes attrayant pour les autres utilisateurs.\nPlus la note est élevée, plus vous avez de chances de trouver un match.\nLa note est calculée en fonction:\n - de l’exhaustivité de votre profil,\n - du nombre de photos,\n - du nombre de likes que vous recevez des autres utilisateurs,\n - de votre activité quotidienne.\nPlus vous êtes actif, plus votre cote sera élevée.\nMoins vous êtes actif, plus votre cote est basse"
 }
