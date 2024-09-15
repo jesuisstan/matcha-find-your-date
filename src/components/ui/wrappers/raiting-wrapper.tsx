@@ -26,7 +26,7 @@ const RaitingWrapper = ({ raiting }: { raiting: number | undefined }) => {
         setShow={setShowModalRaitingDescription}
       />
       <div className="flex flex-col justify-start">
-        <h3 className="text-2xl font-bold">{t('raiting')}</h3>
+        <h3 className="text-xl font-bold">{t('raiting')}</h3>
 
         <div className="mt-4">
           <div className="flex items-center gap-2">

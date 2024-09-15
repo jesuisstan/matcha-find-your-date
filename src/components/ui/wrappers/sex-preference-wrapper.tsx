@@ -134,7 +134,7 @@ const SexPreferenceWrapper = ({
   return (
     <div className="relative rounded-2xl bg-card p-5">
       <div className="flex flex-col justify-start">
-        <h3 className="text-2xl font-bold">{t(`selector.preferences`)}</h3>
+        <h3 className="text-xl font-bold">{t(`selector.preferences`)}</h3>
         <div className="mt-4">
           <div className=" flex items-center">
             {sexPreference ? (

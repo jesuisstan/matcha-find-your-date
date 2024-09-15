@@ -10,7 +10,7 @@
   "age": "Age",
   "sex": "Sex",
   "sexual-orientation": "Sexual Orientation",
-  "sexual-preferences": "Sexual Preferences",
+  "sexual-preferences": "Sex-preferences",
   "need-help": "Need help? Contact Support",
   "contact-support": "Contact Support",
   "error": "Error",
@@ -22,7 +22,7 @@
   "theme-toggle": "Toggle theme",
   "selector": {
     "sex": "Sex",
-    "preferences": "Sexual preferences",
+    "preferences": "Sex-preferences",
     "select-all": "Select all",
     "unselect-all": "Unselect all",
     "men": "Men",

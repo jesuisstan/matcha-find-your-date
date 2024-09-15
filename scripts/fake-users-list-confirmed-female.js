@@ -142,8 +142,8 @@ module.exports = function (hashedPassword, yesterday) {
       longitude: 2.3428,
       address: 'Paris, France',
       photos: [
-        'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/w4-0.jpg',
         'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/w4-1.jpg',
+        'https://kdbxq6eseiqtwhzx.public.blob.vercel-storage.com/w4-0.jpg',
       ],
       last_action: getRandomLastAction(yesterday),
       complete: true,

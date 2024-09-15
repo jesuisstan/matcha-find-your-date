@@ -10,7 +10,7 @@
   "age": "Возраст",
   "sex": "Пол",
   "sexual-orientation": "Сексуальная ориентация",
-  "sexual-preferences": "Сексуальные предпочтения",
+  "sexual-preferences": "Секс-предпочтения",
   "need-help": "Нужна помощь? Свяжитесь с поддержкой",
   "contact-support": "Связаться с поддержкой",
   "error": "Ошибка",
@@ -22,7 +22,7 @@
   "theme-toggle": "Переключить тему",
   "selector": {
     "sex": "Пол",
-    "preferences": "Сексуальные предпочтения",
+    "preferences": "Секс-предпочтения",
     "select-all": "Выбрать все",
     "unselect-all": "Отменить все",
     "men": "Мужчины",
