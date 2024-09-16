@@ -4,6 +4,8 @@ import { db } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
 import { SignJWT } from 'jose';
 
+import { updateUserRaiting } from '@/utils/server/update-rating';
+
 const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-key';
 
 export async function POST(request: Request) {
@@ -57,16 +59,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'login-failed' }, { status: 500 });
   }
 
-  // Update the last_action
+  // Update the last_action, online status and raiting of the user
   try {
-    const currentDate = new Date().toISOString();
+    const currentDate = new Date();
+    const updatedRaiting = updateUserRaiting(user.last_action, user.raiting, 100, currentDate);
     const updateQuery = `
         UPDATE users 
-        SET last_action = $2, online = true
+        SET last_action = $2, online = true, raiting = $3
         WHERE id = $1
         RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_action, online, raiting, sex_preferences, photos;
       `;
-    const updateValues = [user.id, currentDate];
+    const updateValues = [user.id, currentDate.toISOString(), updatedRaiting];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 
