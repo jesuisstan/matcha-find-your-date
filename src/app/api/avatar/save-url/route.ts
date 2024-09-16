@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 404 });
     }
 
-    // Step 3: Update the user's photos array by appending the new URL
+    // Step 3: Update the user's photos array by appending the new URL. Update the last action, online status, and rating in one query.
     const currentDate = new Date();
     const updateQuery = `
       UPDATE users 

@@ -53,7 +53,7 @@ export const TAGS_LIST = [
   'nightowl',
   'non-smoker',
   'openminded',
-  'outdoorsy',
+  'optimist',
   'painter',
   'party-animal',
   'pet-parent',

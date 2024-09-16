@@ -25,7 +25,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 62,
       biography: 'Adventurous person who loves outdoor activities and exploring new places.',
-      tags: ['adventurous', 'globetrotter', 'fitness', 'outdoorsy', 'hiker', 'english'],
+      tags: ['adventurous', 'globetrotter', 'fitness', 'optimist', 'hiker', 'english'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -52,7 +52,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 62,
       biography:
         'Photographer by day, superhero by night. Looking for someone to share my adventures.',
-      tags: ['photography', 'adventurous', 'fitness', 'english', 'outdoorsy'],
+      tags: ['photography', 'adventurous', 'fitness', 'english', 'optimist'],
       latitude: 51.5074, // London
       longitude: -0.1278,
       address: 'London, United Kingdom',
@@ -156,7 +156,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 62,
       biography: 'I enjoy outdoor adventures and discovering new hiking trails.',
-      tags: ['hiker', 'adventurous', 'outdoorsy', 'french', 'english'],
+      tags: ['hiker', 'adventurous', 'optimist', 'french', 'english'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -182,7 +182,7 @@ module.exports = function (hashedPassword, yesterday) {
       tags: [
         'traveller',
         'language-learner',
-        'outdoorsy',
+        'optimist',
         'horoscopes',
         'humanitarian',
         'humorist',
@@ -299,7 +299,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 62,
       biography:
         'Cyclist and adventure seeker. I love exploring new routes and paths wherever I travel.',
-      tags: ['cyclist', 'traveller', 'outdoorsy', 'french', 'english'],
+      tags: ['cyclist', 'traveller', 'optimist', 'french', 'english'],
       latitude: 44.8378, // Bordeaux
       longitude: -0.5792,
       address: 'Bordeaux, France',
@@ -382,7 +382,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 62,
       biography: 'Fitness enthusiast with a love for outdoor sports. Running keeps me focused.',
-      tags: ['runner', 'fitness', 'outdoorsy', 'french', 'english'],
+      tags: ['runner', 'fitness', 'optimist', 'french', 'english'],
       latitude: 45.764, // Lyon
       longitude: 4.8357,
       address: 'Lyon, France',
@@ -598,7 +598,7 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1985-02-14',
       sex: 'male',
       biography: 'Love fitness and traveling the world. Always on the lookout for new adventures.',
-      tags: ['fitness', 'traveller', 'adventurous', 'outdoorsy', 'hiker', 'english', 'french'],
+      tags: ['fitness', 'traveller', 'adventurous', 'optimist', 'hiker', 'english', 'french'],
       latitude: 48.853, // Paris
       longitude: 2.3499,
       address: 'Paris, France',
@@ -652,7 +652,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Nature lover and adventurer at heart, seeking someone with the same passion for the outdoors.',
-      tags: ['nature-lover', 'hiker', 'outdoorsy', 'adventurous', 'english', 'french'],
+      tags: ['nature-lover', 'hiker', 'optimist', 'adventurous', 'english', 'french'],
       latitude: 51.5074, // London
       longitude: -0.1278,
       address: 'London, United Kingdom',
@@ -1027,7 +1027,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Cyclist and outdoors lover. Looking for someone to join me on my cycling adventures.',
-      tags: ['cyclist', 'outdoorsy', 'nature-lover', 'spanish', 'english'],
+      tags: ['cyclist', 'optimist', 'nature-lover', 'spanish', 'english'],
       latitude: -23.5505, // Sao Paulo
       longitude: -46.6333,
       address: 'Sao Paulo, Brazil',
@@ -1216,7 +1216,7 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1985-11-22',
       sex: 'male',
       biography: 'Outdoor adventurer who enjoys hiking, biking, and kayaking in my free time.',
-      tags: ['hiker', 'cyclist', 'outdoorsy', 'english', 'french'],
+      tags: ['hiker', 'cyclist', 'optimist', 'english', 'french'],
       latitude: 37.7749,
       longitude: -122.4194,
       address: 'San Francisco, USA',
@@ -1438,7 +1438,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 83,
       biography: 'Enjoys hiking and exploring the outdoors. Looking for an adventure partner.',
-      tags: ['hiker', 'outdoorsy', 'adventurous', 'english', 'french'],
+      tags: ['hiker', 'optimist', 'adventurous', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1507,7 +1507,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 83,
       biography: 'Nature lover and trail runner. I spend my weekends exploring nature trails.',
-      tags: ['nature-lover', 'runner', 'outdoorsy', 'english', 'french'],
+      tags: ['nature-lover', 'runner', 'optimist', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1676,7 +1676,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 77,
       biography: 'Cyclist and fitness enthusiast. Always up for a challenge.',
-      tags: ['cyclist', 'fitness', 'outdoorsy', 'english', 'french'],
+      tags: ['cyclist', 'fitness', 'optimist', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1768,7 +1768,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 77,
       biography: 'Outdoor lover, spending my time hiking, camping, and enjoying nature.',
-      tags: ['outdoorsy', 'nature-lover', 'hiker', 'english', 'french'],
+      tags: ['optimist', 'nature-lover', 'hiker', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1909,7 +1909,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 77,
       biography:
         'Love hiking, camping, and exploring nature. Always looking for my next adventure.',
-      tags: ['hiker', 'outdoorsy', 'nature-lover', 'english', 'french', 'spanish', 'german'],
+      tags: ['hiker', 'optimist', 'nature-lover', 'english', 'french', 'spanish', 'german'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -2163,7 +2163,15 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 69,
       biography: 'Motorcycle enthusiast and adrenaline junkie. Love the open road and freedom.',
-      tags: ['motorcyclist', 'adventurous', 'outdoorsy, lgbt-friendly', 'english', 'french'],
+      tags: [
+        'motorcyclist',
+        'adventurous',
+        'optimist',
+        'vintage-lover',
+        'lgbt-friendly',
+        'english',
+        'french',
+      ],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -2232,7 +2240,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 69,
       biography: 'Cycling enthusiast and lover of the outdoors. Always looking for new trails.',
-      tags: ['cyclist', 'outdoorsy', 'nature-lover', 'lgbt-friendly', 'english', 'french'],
+      tags: ['cyclist', 'optimist', 'nature-lover', 'lgbt-friendly', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -2280,7 +2288,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 69,
       biography: 'Hiker and lover of the outdoors. Always on the lookout for the next adventure.',
-      tags: ['hiker', 'nature-lover', 'outdoorsy', 'english', 'french'],
+      tags: ['hiker', 'nature-lover', 'optimist', 'english', 'french'],
       latitude: 45.1885, // Grenoble
       longitude: 5.7245,
       address: 'Grenoble, France',
@@ -2452,7 +2460,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 69,
       biography:
         'Enjoy outdoor adventures and long hikes. Looking for someone to share the journey.',
-      tags: ['hiker', 'outdoorsy', 'fitness', 'english', 'french'],
+      tags: ['hiker', 'optimist', 'fitness', 'english', 'french'],
       latitude: 48.1173, // Rennes
       longitude: -1.6778,
       address: 'Rennes, France',
@@ -2575,7 +2583,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 69,
       biography:
         'Sports fan and outdoor enthusiast. Love spending time outside, no matter the season.',
-      tags: ['sports-fan', 'outdoorsy', 'traveller', 'english', 'french'],
+      tags: ['sports-fan', 'optimist', 'traveller', 'english', 'french'],
       latitude: 49.1193, // Reims
       longitude: 4.0317,
       address: 'Reims, France',
@@ -2897,7 +2905,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 69,
       biography: 'Adventurous globetrotter, always looking for the next exciting destination.',
-      tags: ['adventurous', 'globetrotter', 'outdoorsy', 'english', 'french'],
+      tags: ['adventurous', 'globetrotter', 'optimist', 'english', 'french'],
       latitude: 43.7102, // Nice
       longitude: 7.262,
       address: 'Nice, France',
@@ -3286,7 +3294,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 21,
       biography: 'Photography lover who enjoys capturing beautiful moments in life.',
-      tags: ['photography', 'creative', 'outdoorsy', 'english', 'chinese'],
+      tags: ['photography', 'creative', 'optimist', 'english', 'chinese'],
       latitude: 1.3521, // Singapore
       longitude: 103.8198,
       address: 'Singapore',
@@ -3408,7 +3416,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 21,
       biography: 'An adventurous soul who enjoys hiking and being outdoors.',
-      tags: ['hiker', 'nature-lover', 'outdoorsy', 'english', 'french'],
+      tags: ['hiker', 'nature-lover', 'optimist', 'english', 'french'],
       latitude: 40.7128, // New York
       longitude: -74.006,
       address: 'New York, USA',
@@ -3672,7 +3680,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 33,
       biography:
         'A fan of outdoor activities and nature. Hiking is my favorite way to spend weekends.',
-      tags: ['hiker', 'nature-lover', 'outdoorsy', 'russian', 'english'],
+      tags: ['hiker', 'nature-lover', 'optimist', 'russian', 'english'],
       latitude: 55.7558, // Moscow
       longitude: 37.6173,
       address: 'Moscow, Russia',
@@ -3949,7 +3957,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 57,
       biography: 'Enjoys adventure and sports. Always looking for new outdoor activities.',
-      tags: ['adventurous', 'outdoorsy', 'sports-fan', 'spanish', 'french'],
+      tags: ['adventurous', 'optimist', 'sports-fan', 'spanish', 'french'],
       latitude: 41.3851, // Barcelona
       longitude: 2.1734,
       address: 'Barcelona, Spain',
@@ -4111,7 +4119,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 57,
       biography: 'Enjoys nature walks and exploring new cultures. Looking for a fellow adventurer.',
-      tags: ['nature-lover', 'traveller', 'outdoorsy', 'arabic', 'english'],
+      tags: ['nature-lover', 'traveller', 'optimist', 'arabic', 'english'],
       latitude: 25.276987, // Dubai
       longitude: 55.296249,
       address: 'Dubai, UAE',
@@ -4134,7 +4142,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 57,
       biography: 'Tech enthusiast and nature lover. Enjoys hiking and exploring new tech gadgets.',
-      tags: ['techie', 'hiker', 'outdoorsy', 'arabic', 'english'],
+      tags: ['techie', 'hiker', 'optimist', 'arabic', 'english'],
       latitude: 33.6844, // Riyadh
       longitude: 44.0144,
       address: 'Riyadh, Saudi Arabia',
@@ -4157,7 +4165,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 57,
       biography: 'Love spending time at the beach and exploring the great outdoors.',
-      tags: ['outdoorsy', 'traveller', 'beach-lover', 'portuguese', 'spanish'],
+      tags: ['optimist', 'traveller', 'beach-lover', 'portuguese', 'spanish'],
       latitude: -22.9068, // Rio de Janeiro
       longitude: -43.1729,
       address: 'Rio de Janeiro, Brazil',
@@ -4273,7 +4281,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 57,
       biography: 'Love hiking and nature. I often spend weekends exploring new trails.',
-      tags: ['hiker', 'nature-lover', 'outdoorsy', 'french', 'german'],
+      tags: ['hiker', 'nature-lover', 'optimist', 'french', 'german'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -4388,7 +4396,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 75,
       biography: 'A nature lover who enjoys hiking and exploring the beauty of the outdoors.',
-      tags: ['hiker', 'nature-lover', 'outdoorsy', 'english', 'spanish'],
+      tags: ['hiker', 'nature-lover', 'optimist', 'english', 'spanish'],
       latitude: 51.5074, // London
       longitude: -0.1278,
       address: 'London, United Kingdom',
@@ -4482,7 +4490,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 75,
       biography:
         'A passionate cyclist and outdoors lover. Always on the lookout for the next adventure.',
-      tags: ['cyclist', 'outdoorsy', 'adventurous', 'french', 'english'],
+      tags: ['cyclist', 'optimist', 'adventurous', 'french', 'english'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -4576,7 +4584,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 91,
       biography: 'A movie enthusiast who enjoys long movie nights and discovering new genres.',
-      tags: ['moviebuff', 'traveller', 'outdoorsy', 'english', 'french'],
+      tags: ['moviebuff', 'traveller', 'optimist', 'english', 'french'],
       latitude: 51.5074, // London
       longitude: -0.1278,
       address: 'London, United Kingdom',
@@ -4622,7 +4630,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 91,
       biography: 'Cycling around the world and exploring new places on two wheels.',
-      tags: ['cyclist', 'outdoorsy', 'nature-lover', 'german', 'english'],
+      tags: ['cyclist', 'optimist', 'nature-lover', 'german', 'english'],
       latitude: 50.1109, // Frankfurt
       longitude: 8.6821,
       address: 'Frankfurt, Germany',
@@ -4714,7 +4722,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 85,
       biography: 'Animal lover and outdoor enthusiast, enjoy spending time with my dogs.',
-      tags: ['doglover', 'traveller', 'french', 'outdoorsy', 'adventurous'],
+      tags: ['doglover', 'traveller', 'french', 'optimist', 'adventurous'],
       latitude: 48.8584, // Paris
       longitude: 2.2945,
       address: 'Paris, France',
@@ -4783,7 +4791,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 85,
       biography: 'Avid cyclist and nature lover, always seeking new routes to explore.',
-      tags: ['cyclist', 'traveller', 'german', 'outdoorsy', 'nature-lover'],
+      tags: ['cyclist', 'traveller', 'german', 'optimist', 'nature-lover'],
       latitude: 48.1351, // Munich
       longitude: 11.582,
       address: 'Munich, Germany',
@@ -4829,7 +4837,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 85,
       biography: 'Enjoys spending time outdoors and volunteering for humanitarian causes.',
-      tags: ['humanitarian', 'traveller', 'arabic', 'volunteer', 'outdoorsy'],
+      tags: ['humanitarian', 'traveller', 'arabic', 'volunteer', 'optimist'],
       latitude: 30.0444, // Cairo
       longitude: 31.2357,
       address: 'Cairo, Egypt',
@@ -4899,7 +4907,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 59,
       biography: 'Enjoys long bike rides and exploring the countryside.',
-      tags: ['cyclist', 'outdoorsy', 'english', 'traveller', 'fitness'],
+      tags: ['cyclist', 'optimist', 'english', 'traveller', 'fitness'],
       latitude: 51.5074, // London
       longitude: -0.1278,
       address: 'London, United Kingdom',
@@ -4922,7 +4930,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 59,
       biography: 'Cyclist and hiker, love exploring the outdoors and keeping active.',
-      tags: ['hiker', 'cyclist', 'spanish', 'nature-lover', 'outdoorsy'],
+      tags: ['hiker', 'cyclist', 'spanish', 'nature-lover', 'optimist'],
       latitude: 19.4326, // Mexico City
       longitude: -99.1332,
       address: 'Mexico City, Mexico',
@@ -4991,7 +4999,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 74,
       biography: 'Photographer who loves capturing the beauty of nature.',
-      tags: ['photography', 'traveller', 'portuguese', 'nature-lover', 'outdoorsy'],
+      tags: ['photography', 'traveller', 'portuguese', 'nature-lover', 'optimist'],
       latitude: 41.1496, // Porto
       longitude: -8.611,
       address: 'Porto, Portugal',
@@ -5014,7 +5022,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 74,
       biography: 'Fitness lover and outdoor enthusiast, always ready for a new adventure.',
-      tags: ['fitness', 'traveller', 'portuguese', 'hiker', 'outdoorsy'],
+      tags: ['fitness', 'traveller', 'portuguese', 'hiker', 'optimist'],
       latitude: -23.5505, // Sao Paulo
       longitude: -46.6333,
       address: 'Sao Paulo, Brazil',
@@ -5037,7 +5045,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 74,
       biography: 'Motorcycle enthusiast who loves the thrill of the open road.',
-      tags: ['motorcyclist', 'traveller', 'russian', 'adventurous', 'outdoorsy'],
+      tags: ['motorcyclist', 'traveller', 'russian', 'adventurous', 'optimist'],
       latitude: 55.7558, // Moscow
       longitude: 37.6173,
       address: 'Moscow, Russia',
@@ -5106,7 +5114,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 74,
       biography: 'History buff and avid reader, always seeking new knowledge.',
-      tags: ['history-buff', 'bookworm', 'russian', 'traveller', 'outdoorsy'],
+      tags: ['history-buff', 'bookworm', 'russian', 'traveller', 'optimist'],
       latitude: 55.7558, // Moscow
       longitude: 37.6173,
       address: 'Moscow, Russia',
@@ -5152,7 +5160,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 80,
       biography: 'Adventurer who loves the outdoors and getting lost in nature.',
-      tags: ['hiker', 'traveller', 'french', 'nature-lover', 'outdoorsy'],
+      tags: ['hiker', 'traveller', 'french', 'nature-lover', 'optimist'],
       latitude: 45.5017, // Montreal
       longitude: -73.5673,
       address: 'Montreal, Canada',
@@ -5175,7 +5183,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 46,
       biography: 'LGBT advocate and open-minded adventurer who loves traveling.',
-      tags: ['lgbt-friendly', 'spanish', 'traveller', 'openminded', 'outdoorsy'],
+      tags: ['lgbt-friendly', 'spanish', 'traveller', 'openminded', 'optimist'],
       latitude: -34.6037, // Buenos Aires
       longitude: -58.3816,
       address: 'Buenos Aires, Argentina',
@@ -5198,7 +5206,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 46,
       biography: 'Football fan and fitness enthusiast who enjoys a good workout.',
-      tags: ['sports-fan', 'fitness', 'spanish', 'outdoorsy', 'traveller'],
+      tags: ['sports-fan', 'fitness', 'spanish', 'optimist', 'traveller'],
       latitude: 4.711, // Bogota
       longitude: -74.0721,
       address: 'Bogota, Colombia',
@@ -5244,7 +5252,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 46,
       biography: 'History buff who loves exploring ancient sites and learning about cultures.',
-      tags: ['history-buff', 'traveller', 'italian', 'culture', 'outdoorsy'],
+      tags: ['history-buff', 'traveller', 'italian', 'culture', 'optimist'],
       latitude: 41.9028, // Rome
       longitude: 12.4964,
       address: 'Rome, Italy',
@@ -5290,7 +5298,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 46,
       biography: 'Tech enthusiast and motorbike rider with a passion for adventure.',
-      tags: ['techie', 'motorcyclist', 'swedish', 'adventurous', 'traveller'],
+      tags: ['techie', 'motorcyclist', 'swedish', 'adventurous', 'traveller', 'vintage-lover'],
       latitude: 59.3293, // Stockholm
       longitude: 18.0686,
       address: 'Stockholm, Sweden',
