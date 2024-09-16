@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     // Step 1: Validate the tags received from the frontend
     if (
       !Array.isArray(tags) ||
-      tags.length < 3 ||
+      tags.length < 5 ||
       !tags.every((tag) => typeof tag === 'string' && tag.trim() !== '')
     ) {
       return NextResponse.json({ error: 'error-minimum-tags-array' }, { status: 400 });

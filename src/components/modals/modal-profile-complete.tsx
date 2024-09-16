@@ -29,6 +29,7 @@ import { isProfileCategoryFilled } from '@/utils/user-handlers';
 
 const MIN_BIOGRAPHY_LENGTH = 42;
 const MAX_BIOGRAPHY_LENGTH = 442;
+const MIN_TAGS_LENGTH = 5;
 
 export type TProfileCompleteLayout =
   | 'basics'
@@ -210,7 +211,7 @@ const ModalProfileComplete = ({
         sex_preferences: sexPreferences,
       });
     } else if (layout === 'tags') {
-      if (selectedTags.length < 3) {
+      if (selectedTags.length < MIN_TAGS_LENGTH) {
         setError(t('error-minimum-tags-array'));
         setLoading(false);
         return;

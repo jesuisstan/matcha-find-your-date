@@ -256,7 +256,7 @@
   "city": "Ville",
   "get-location": "Obtenir l'emplacement",
   "set-fake-location": "Définir un faux emplacement",
-  "error-minimum-tags-array": "Minimum 3 #tags requis",
+  "error-minimum-tags-array": "Minimum 5 #tags requis",
   "error-getting-location": "Erreur lors de l'obtention de la géolocalisation ou l'accessibilité à la géolocalisation est désactivée",
   "geolocation-not-supported": "La géolocalisation n'est pas prise en charge par votre navigateur",
   "location-need-message": "Pour améliorer la précision de la recherche et la sécurité des comptes, nous vous recommandons de partager votre emplacement. Si vous préférez ne pas le faire, vous pouvez sélectionner manuellement une ville ou utiliser un faux emplacement en fonction de la langue de service actuelle: Paris (fr), Londres (en), Moscou (ru).",

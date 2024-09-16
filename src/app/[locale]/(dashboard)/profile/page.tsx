@@ -29,7 +29,6 @@ const ProfilePage = () => {
   const [showProfileCongratsModal, setShowProfileCongratsModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
 
-  // Automatically show the modal on first load if the profile is incomplete
   useEffect(() => {
     if (!user) return;
     if (!user?.complete) {
@@ -103,14 +102,9 @@ const ProfilePage = () => {
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="mb-4 grid grid-cols-10 gap-4">
+      <div className="mb-4 grid grid-cols-12 gap-4">
         {/* LEFT SECTOR */}
-        <div
-          className={clsx(
-            'col-span-10 h-max items-center justify-center space-y-5',
-            'lg:col-span-3'
-          )}
-        >
+        <div className={clsx('col-span-12 h-max space-y-5', 'lg:col-span-3')}>
           {/* RAITING */}
           <RaitingWrapper raiting={user?.raiting} />
 
@@ -129,22 +123,25 @@ const ProfilePage = () => {
               handleModifyClick('sexpreferences' as keyof typeof TProfileCompleteLayout)
             }
           />
-
-          {/* INTERESTS */}
-          <InterestsWrapper
-            tagsList={user?.tags!}
-            modifiable
-            onModify={() => handleModifyClick('tags' as keyof typeof TProfileCompleteLayout)}
-          />
         </div>
 
-        {/* RIGHT SECTOR */}
-        <div className={clsx('col-span-10 space-y-5', 'lg:col-span-7')}>
+        {/* CENTER SECTOR */}
+        <div className={clsx('col-span-12 space-y-5', 'lg:col-span-6')}>
           {/* PHOTOS */}
           <PhotoGalleryWrapper
             user={user}
             modifiable
             onModify={() => handleModifyClick('photos' as keyof typeof TProfileCompleteLayout)}
+          />
+        </div>
+
+        {/* RIGHT SECTOR */}
+        <div className={clsx('col-span-12 space-y-5', 'lg:col-span-3')}>
+          {/* INTERESTS */}
+          <InterestsWrapper
+            tagsList={user?.tags!}
+            modifiable
+            onModify={() => handleModifyClick('tags' as keyof typeof TProfileCompleteLayout)}
           />
         </div>
       </div>

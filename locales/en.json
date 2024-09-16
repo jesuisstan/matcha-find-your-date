@@ -259,7 +259,7 @@
   "error-getting-geolocation": "Error getting geolocation",
   "get-location": "Get current location",
   "set-fake-location": "Set fake location",
-  "error-minimum-tags-array": "Minimum 3 #tags are required",
+  "error-minimum-tags-array": "Minimum 5 #tags are required",
   "error-getting-location": "Error getting location or access to location denied",
   "geolocation-not-supported": "Geolocation is not supported by your browser",
   "location-need-message": "To improve search accuracy and account security, we recommend sharing your location. If you prefer not to, you can manually select a city or use fake location based on the current service language: London (en), Paris (fr), Moscow (ru).",
