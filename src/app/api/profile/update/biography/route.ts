@@ -38,15 +38,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'data-is-up-to-date' });
     }
 
-    // Step 3: Update the user data if needed
-    const currentDate = new Date().toISOString();
+    // Step 3: Conditionally update the biography, last action, online status, and rating in one query
+    const currentDate = new Date();
     const updateQuery = `
-      UPDATE users 
-      SET biography = $2, last_action = $3, online = true
+      UPDATE users
+      SET biography = $2, last_action = $3, online = true,
+          raiting = CASE
+                WHEN biography IS NULL THEN
+                  GREATEST(LEAST(raiting + 5, 100), raiting)
+                ELSE raiting
+              END
       WHERE id = $1
-      RETURNING id, biography, last_action, online;
+      RETURNING id, biography, last_action, online, raiting;
     `;
-    const updateValues = [id, biography, currentDate];
+    const updateValues = [id, biography, currentDate.toISOString()];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
 

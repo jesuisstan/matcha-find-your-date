@@ -7,7 +7,7 @@
  * @param currentDate - The current date (optional, defaults to new Date())
  * @returns The updated rating
  */
-export function updateUserRaiting(
+export function updateUserRaitingForLogin(
   lastActionDate: string,
   currentRaiting: number,
   maxRaiting = 100,

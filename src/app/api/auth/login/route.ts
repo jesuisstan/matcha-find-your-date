@@ -4,7 +4,7 @@ import { db } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
 import { SignJWT } from 'jose';
 
-import { updateUserRaiting } from '@/utils/server/update-rating';
+import { updateUserRaitingForLogin } from '@/utils/server/update-rating';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-key';
 
@@ -62,7 +62,12 @@ export async function POST(request: Request) {
   // Update the last_action, online status and raiting of the user
   try {
     const currentDate = new Date();
-    const updatedRaiting = updateUserRaiting(user.last_action, user.raiting, 100, currentDate);
+    const updatedRaiting = updateUserRaitingForLogin(
+      user.last_action,
+      user.raiting,
+      100,
+      currentDate
+    );
     const updateQuery = `
         UPDATE users 
         SET last_action = $2, online = true, raiting = $3

@@ -22,10 +22,10 @@ export async function POST(req: Request) {
 
     // Step 2: Check if the user exists
     const selectQuery = `
-      SELECT tags
-      FROM users 
-      WHERE id = $1
-    `;
+        SELECT tags
+        FROM users 
+        WHERE id = $1
+      `;
     const currentDataResult = await client.query(selectQuery, [id]);
 
     if (currentDataResult.rowCount === 0) {
@@ -46,11 +46,16 @@ export async function POST(req: Request) {
     // Step 4: Update the user data if needed
     const currentDate = new Date().toISOString();
     const updateQuery = `
-      UPDATE users 
-      SET tags = $2, last_action = $3, online = true
-      WHERE id = $1
-      RETURNING id, tags, last_action, online;
-    `;
+        UPDATE users
+        SET tags = $2, last_action = $3, online = true,
+            raiting = CASE
+                        WHEN tags IS NULL THEN 
+                          GREATEST(LEAST(raiting + 5, 100), raiting)
+                        ELSE raiting
+                      END
+        WHERE id = $1
+        RETURNING id, tags, last_action, online, raiting;
+      `;
     const updateValues = [id, tags, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     const updatedUser = updatedUserResult.rows[0];
