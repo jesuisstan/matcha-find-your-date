@@ -117,7 +117,7 @@ const ProfilePage = () => {
 
           {/* PREFERENCES */}
           <SexPreferenceWrapper
-            sexPreference={user?.sex_preferences}
+            sexPreference={user?.sex_preferences ?? undefined}
             modifiable
             onModify={() =>
               handleModifyClick('sexpreferences' as keyof typeof TProfileCompleteLayout)
