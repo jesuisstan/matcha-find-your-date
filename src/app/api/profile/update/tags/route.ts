@@ -50,7 +50,7 @@ export async function POST(req: Request) {
         SET tags = $2, last_action = $3, online = true,
             raiting = CASE
                         WHEN tags IS NULL THEN 
-                          GREATEST(LEAST(raiting + 5, 100), raiting)
+                          LEAST(raiting + 5, 100)
                         ELSE raiting
                       END
         WHERE id = $1

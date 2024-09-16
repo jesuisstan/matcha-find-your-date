@@ -26,15 +26,15 @@ export async function DELETE(req: Request): Promise<NextResponse> {
       return NextResponse.json({ error: 'failed-to-delete-photo' }, { status: 500 });
     }
 
-    // Step 3: Remove the photo URL from the user's photos[] array in PostgreSQL
-    const currentDate = new Date().toISOString();
+    // Step 3: Remove the photo URL from the user's photos[] array in PostgreSQL. Decrease the user's rating by 5 points, but not below 21.
+    const currentDate = new Date();
     const updateQuery = `
       UPDATE users 
-      SET photos = array_remove(photos, $2), last_action = $3, online = true
+      SET photos = array_remove(photos, $2), last_action = $3, online = true, raiting = GREATEST(raiting - 5, 21)
       WHERE id = $1
-      RETURNING id, photos, last_action, online;
+      RETURNING id, photos, last_action, online, raiting;
     `;
-    const updateValues = [userId, photoUrl, currentDate];
+    const updateValues = [userId, photoUrl, currentDate.toISOString()];
     const updatedUserResult = await client.query(updateQuery, updateValues);
     if (updatedUserResult.rowCount === 0) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 404 });

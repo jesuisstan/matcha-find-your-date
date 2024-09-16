@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       SET latitude = $2, longitude = $3, address = $4, last_action = $5, online = true,
           raiting = CASE
                 WHEN latitude IS NULL OR longitude IS NULL OR address IS NULL THEN
-                  GREATEST(LEAST(raiting + 5, 100), raiting)
+                  LEAST(raiting + 5, 100)
                 ELSE raiting
               END
       WHERE id = $1
