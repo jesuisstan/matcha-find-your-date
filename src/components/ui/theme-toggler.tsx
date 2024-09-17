@@ -13,12 +13,15 @@ const ThemeToggler = ({ translate }: { translate: (key: string) => string }) => 
   return (
     <ButtonMatcha
       variant="ghost"
-      size="icon"
+      size="default"
       title={translate(`theme-toggle`)}
       onClick={() => (theme === 'light' ? setTheme('dark') : setTheme('light'))}
       className="smooth42transition hover:bg-transparent hover:text-c42orange"
     >
-      {theme === 'light' ? <Sun /> : <Moon />}
+      <div className="flex flex-row items-center gap-2">
+        {theme === 'light' ? <Sun /> : <Moon />}
+        <p>{translate(`theme`)}</p>
+      </div>
     </ButtonMatcha>
   );
 };

@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { Annoyed, RefreshCw } from 'lucide-react';
 
+import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import SmartSuggestionsSeleton from '@/components/ui/skeletons/smart-suggestions-skeleton';
 import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
@@ -29,6 +30,7 @@ const SmartSuggestions = () => {
 
   return (
     <div>
+      {user && <ModalProfileWarning user={user} />}
       {/* HEADER */}
       <div className={clsx('mb-4 flex items-center justify-between')}>
         <div className="flex min-w-full flex-col justify-start">
@@ -43,12 +45,19 @@ const SmartSuggestions = () => {
             </div>
             <div className="flex items-center justify-center">
               <ButtonMatcha
-                size="icon"
+                size="default"
                 disabled={!user || loading}
                 title={t(`search.refresh-suggestions`)}
                 onClick={handleRefreshSuggestions}
+                loading={loading}
+                className="min-w-40"
               >
-                <RefreshCw size={20} />
+                <div className="flex flex-row items-center space-x-3">
+                  <span>{t('refresh')}</span>
+                  <div>
+                    <RefreshCw size={20} />
+                  </div>
+                </div>
               </ButtonMatcha>
             </div>
           </div>

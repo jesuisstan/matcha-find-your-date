@@ -48,19 +48,21 @@ const SideBarHeader = ({
           <LocaleSwitcher />
         </div>
 
-        <div className="flex flex-row gap-x-1 self-center align-middle">
-          <ThemeToggler translate={translate} />
+        <div className="flex flex-col gap-x-1 self-center align-middle">
           <div className="items-center">
             <ModalSettings show={showSettingsModal} setShow={setShowSettingsModal} />
+            <ThemeToggler translate={translate} />
             <ButtonMatcha
               variant="ghost"
-              size="icon"
+              size="default"
               title={translate(`settings`)}
               onClick={() => setShowSettingsModal(true)}
               className="smooth42transition hover:bg-transparent hover:text-c42orange"
             >
-              <Settings />
-              <span className="sr-only">{translate(`settings`)}</span>
+              <div className="flex flex-row items-center gap-2">
+                <Settings />
+                <p>{translate(`settings`)}</p>
+              </div>
             </ButtonMatcha>
           </div>
           <LogoutButton translate={translate} setLoading={setLoading} />

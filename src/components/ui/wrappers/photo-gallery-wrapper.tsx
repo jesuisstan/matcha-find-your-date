@@ -190,7 +190,7 @@ const PhotoGalleryWrapper = ({
     <div className="relative self-center rounded-2xl bg-card p-5">
       <div className="flex flex-col items-center">
         <div className="flex w-full max-w-screen-md flex-col items-center">
-          <h3 className="mb-4 text-left text-xl font-bold">{t('photo-gallery')}</h3>
+          {/*<h3 className="mb-4 text-left text-xl font-bold">{t('photo-gallery')}</h3>*/}
           {user?.photos ? (
             <div className="w-full max-w-4xl rounded-xl py-5">
               <EmblaCarousel slides={SLIDES!} options={OPTIONS} />

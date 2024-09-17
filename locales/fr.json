@@ -173,7 +173,7 @@
     "nightowl": "Noctambule",
     "non-smoker": "Non-fumeur",
     "openminded": "Ouvert d'esprit",
-    "optimist": "Optimiste", 
+    "optimist": "Optimiste",
     "painter": "Peintre",
     "party-animal": "Fêtard",
     "pet-parent": "Parent d'animal",
@@ -283,8 +283,8 @@
   "congrats": "Félicitations!",
   "profile-is-completed": "Votre profil est complet.\n Vous pouvez maintenant utiliser toutes les fonctionnalités de Matcha",
   "click-to-modify": "Cliquez pour modifier",
-  "min": "minimum",
-  "max": "maximum",
+  "min": "min",
+  "max": "max",
   "characters": "caractères",
   "online": "En ligne",
   "offline": "Hors ligne",
@@ -294,5 +294,7 @@
   "settings": "Paramètres",
   "raiting": "Facteur de Flirt",
   "what-is-this": "Qu'est-ce que c'est?",
-  "raiting-description-message": "Flirt Factor est une note qui montre à quel point vous êtes attrayant pour les autres utilisateurs.\nPlus la note est élevée, plus vous avez de chances de trouver un match.\nLa note est calculée en fonction:\n - de l’exhaustivité de votre profil,\n - du nombre de photos,\n - du nombre de likes que vous recevez des autres utilisateurs,\n - de votre activité quotidienne.\nPlus vous êtes actif, plus votre cote sera élevée.\nMoins vous êtes actif, plus votre cote est basse"
+  "raiting-description-message": "Flirt Factor est une note qui montre à quel point vous êtes attrayant pour les autres utilisateurs.\nPlus la note est élevée, plus vous avez de chances de trouver un match.\nLa note est calculée en fonction:\n - de l’exhaustivité de votre profil,\n - du nombre de photos,\n - du nombre de likes que vous recevez des autres utilisateurs,\n - de votre activité quotidienne.\nPlus vous êtes actif, plus votre cote sera élevée.\nMoins vous êtes actif, plus votre cote est basse",
+  "theme": "Thème",
+  "refresh": "Actualiser"
 }

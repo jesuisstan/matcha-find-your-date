@@ -34,13 +34,15 @@ const LogoutButton = ({
     <div className="items-center">
       <ButtonMatcha
         variant="ghost"
-        size="icon"
+        size="default"
         title={translate(`auth.logout`)}
         onClick={handleLogout}
         className="smooth42transition hover:bg-transparent hover:text-c42orange"
       >
-        <LogOut />
-        <span className="sr-only">{translate(`auth.logout`)}</span>
+        <div className="flex flex-row items-center gap-2">
+          <LogOut />
+          <p>{translate(`auth.logout`)}</p>
+        </div>
       </ButtonMatcha>
     </div>
   );
