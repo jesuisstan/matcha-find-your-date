@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { Annoyed, RefreshCw } from 'lucide-react';
 import { MapPinned } from 'lucide-react';
+import { OctagonAlert } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
@@ -127,45 +128,20 @@ const AdvancedSearch = () => {
               {t(`search.advanced`)}
             </h1>
           </div>
-          {/* DESCRIPTION */}
-          <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
-            <p className="text-justify text-sm">{t(`use-advanced-search`)}</p>
-          </div>
+
           {/* SEARCH FORM */}
           <div className="mt-4 flex w-full min-w-28 flex-row flex-wrap items-center justify-center gap-4 overflow-hidden text-ellipsis">
-            {/* AGE */}
-            <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 md:w-fit">
-              <Label>{capitalize(t(`age`) + ':')}</Label>
-              <div className="flex flex-row flex-wrap items-center gap-3">
-                <RequiredInput
-                  type="number"
-                  id="from-age"
-                  name="from-age"
-                  placeholder={t(`from`)}
-                  errorMessage="18-99"
-                  className="-mb-1 w-20"
-                  min={18}
-                  max={99}
-                />
-                <p className="self-start pt-2">{' - '}</p>
-                <RequiredInput
-                  type="number"
-                  id="to-age"
-                  name="to-age"
-                  placeholder={t(`to`)}
-                  errorMessage="18-999"
-                  className="-mb-1 w-20"
-                  min={18}
-                  max={999}
-                />
+            {/* DESCRIPTION */}
+            <div className="flex min-h-fit w-full min-w-28 flex-row items-center justify-center gap-5 overflow-hidden text-ellipsis rounded-2xl bg-card p-4 xl:max-w-72">
+              <div className="text-c42orange">
+                <OctagonAlert size={25} />
               </div>
+              <p className="text-left text-sm">{t(`search.advanced-search-note`)}</p>
             </div>
             {/* LOCATION */}
-            <div className="flex w-full flex-col rounded-2xl bg-card p-4 smooth42transition md:w-fit">
-              <Label htmlFor="geolocation" className="mb-2 ml-5">
-                {t(`location`) + ':'}
-              </Label>
-              <div id="geolocation" className="m-5 flex flex-col gap-5 md:flex-row">
+            <div className="flex w-full flex-col rounded-2xl bg-card p-4 smooth42transition xl:w-fit">
+              <Label htmlFor="geolocation">{t(`location`) + ':'}</Label>
+              <div id="geolocation" className="mt-5 flex flex-col gap-5 sm:flex-row">
                 <div className="flex flex-row gap-5">
                   <div id="geo-locator" className="self-center" title={t('get-location')}>
                     <MapPinned
@@ -225,31 +201,60 @@ const AdvancedSearch = () => {
                 </div>
               </div>
             </div>
-            {/* RAITING */}
-            <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 md:w-fit">
-              <Label>{capitalize(t('raiting') + ':')}</Label>
-              <div className="flex flex-row flex-wrap items-center gap-3">
-                <RequiredInput
-                  type="number"
-                  id="from-raiting"
-                  name="from-raiting"
-                  placeholder={t(`from`)}
-                  errorMessage="0-99"
-                  className="-mb-1 w-20"
-                  min={0}
-                  max={99}
-                />
-                <p className="self-start pt-2">{' - '}</p>
-                <RequiredInput
-                  type="number"
-                  id="to-raiting"
-                  name="to-raiting"
-                  placeholder={t(`to`)}
-                  errorMessage="1-100"
-                  className="-mb-1 w-20"
-                  min={1}
-                  max={100}
-                />
+            <div className="flex w-full flex-col items-center justify-center gap-3 align-middle sm:flex-row xl:w-fit">
+              {/* AGE */}
+              <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 xl:w-fit">
+                <Label>{capitalize(t(`age`) + ':')}</Label>
+                <div className="flex flex-row flex-wrap items-center gap-3">
+                  <RequiredInput
+                    type="number"
+                    id="from-age"
+                    name="from-age"
+                    placeholder={t(`from`)}
+                    errorMessage="18-99"
+                    className="-mb-1 w-20"
+                    min={18}
+                    max={99}
+                  />
+                  <p className="self-start pt-2">{' - '}</p>
+                  <RequiredInput
+                    type="number"
+                    id="to-age"
+                    name="to-age"
+                    placeholder={t(`to`)}
+                    errorMessage="18-999"
+                    className="-mb-1 w-20"
+                    min={18}
+                    max={999}
+                  />
+                </div>
+              </div>
+              {/* RAITING */}
+              <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 xl:w-fit">
+                <Label>{capitalize(t('raiting') + ':')}</Label>
+                <div className="flex flex-row flex-wrap items-center gap-3">
+                  <RequiredInput
+                    type="number"
+                    id="from-raiting"
+                    name="from-raiting"
+                    placeholder={t(`from`)}
+                    errorMessage="0-99"
+                    className="-mb-1 w-20"
+                    min={0}
+                    max={99}
+                  />
+                  <p className="self-start pt-2">{' - '}</p>
+                  <RequiredInput
+                    type="number"
+                    id="to-raiting"
+                    name="to-raiting"
+                    placeholder={t(`to`)}
+                    errorMessage="1-100"
+                    className="-mb-1 w-20"
+                    min={1}
+                    max={100}
+                  />
+                </div>
               </div>
             </div>
 
@@ -284,7 +289,7 @@ const AdvancedSearch = () => {
                 </div>
               </div>
               {/* TAGS */}
-              <div className="max-w-fit rounded-2xl bg-card p-4">
+              <div className="max-h-80 max-w-fit overflow-y-auto rounded-2xl bg-card p-4">
                 <ChipsGroup
                   name="tags"
                   label={t('tags.tags')}
