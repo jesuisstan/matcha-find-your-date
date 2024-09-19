@@ -291,7 +291,7 @@ const AdvancedSearch = () => {
           </div>
 
           {/* TAGS */}
-          <div className="max-h-80 max-w-fit overflow-y-auto rounded-2xl bg-card p-4">
+          <div className="max-w-fit rounded-2xl bg-card p-4">
             <ChipsGroup
               name="tags"
               label={'#' + t(`tags.tags`) + ':'}

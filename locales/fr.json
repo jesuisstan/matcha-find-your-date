@@ -23,8 +23,8 @@
   "selector": {
     "sex": "Sexe",
     "preferences": "Sex-préférences",
-    "select-all": "Tout sélectionner",
-    "unselect-all": "Tout désélectionner",
+    "select-all": "Tout",
+    "unselect-all": "Aucun",
     "men": "Hommes",
     "women": "Femmes",
     "bisexual": "Bisexuel",
@@ -302,5 +302,6 @@
   "to": "à",
   "from": "de",
   "distance": "Distance",
-  "km": "km"
+  "km": "km",
+  "category-filled-?": "Catégorie remplie?"
 }

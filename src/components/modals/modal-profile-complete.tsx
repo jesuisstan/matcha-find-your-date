@@ -392,15 +392,13 @@ const ModalProfileComplete = ({
     ),
     tags: (
       <div className="m-5">
-        <div className="max-h-[350px] overflow-y-auto">
-          <ChipsGroup
-            name="tags"
-            label={'#' + t(`tags.tags`) + ':'}
-            options={TAGS_LIST || []}
-            selectedChips={selectedTags}
-            setSelectedChips={setSelectedTags}
-          />
-        </div>
+        <ChipsGroup
+          name="tags"
+          label={'#' + t(`tags.tags`) + ':'}
+          options={TAGS_LIST || []}
+          selectedChips={selectedTags}
+          setSelectedChips={setSelectedTags}
+        />
       </div>
     ),
     photos: (
@@ -519,8 +517,11 @@ const ModalProfileComplete = ({
               ref={formRef}
             >
               {layouts[layout as keyof typeof layouts]}
-              <div className="flex flex-row items-center justify-center gap-3 self-center text-center">
-                <FilledOrNot size={24} filled={isProfileCategoryFilled(layout, user)} />
+              <div className="flex flex-col items-center justify-center gap-1 self-center text-center">
+                <div className="flex flex-row items-center gap-2">
+                  <p className="text-xs italic">{t('category-filled-?')}</p>
+                  <FilledOrNot size={18} filled={isProfileCategoryFilled(layout, user)} />
+                </div>
                 {/*<ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
                   <Save size={24} />
                 </ButtonMatcha>*/}
@@ -556,7 +557,7 @@ const ModalProfileComplete = ({
       {/* Next and Previous buttons */}
       <div
         className={clsx(
-          'flex flex-col items-center gap-3 xs:flex-row ',
+          'flex flex-col items-center gap-2 xs:flex-row ',
           layout === 'basics' ? 'justify-end' : 'justify-between'
         )}
       >

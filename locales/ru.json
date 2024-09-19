@@ -23,8 +23,8 @@
   "selector": {
     "sex": "Пол",
     "preferences": "Секс-предпочтения",
-    "select-all": "Выбрать все",
-    "unselect-all": "Отменить все",
+    "select-all": "Все",
+    "unselect-all": "Ничего",
     "men": "Мужчины",
     "women": "Женщины",
     "bisexual": "Бисексуал",
@@ -302,5 +302,6 @@
   "to": "до",
   "from": "от",
   "distance": "Расстояние",
-  "km": "км"
+  "km": "км",
+  "category-filled-?": "Категория заполнена?"
 }

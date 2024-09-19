@@ -69,7 +69,7 @@ const ChipsGroup = ({
           </button>
         </div>
       </div>
-      <div className="relative flex flex-row flex-wrap justify-start gap-2">
+      <div className="relative flex max-h-80 flex-row flex-wrap justify-start gap-2 overflow-y-auto p-1 sm:max-h-[350px]">
         {options.map((option: string, index: number) => {
           return (
             <ChipsOption
