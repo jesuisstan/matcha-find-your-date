@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
+import useSearchFiltersStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 import { setUserOffline } from '@/utils/user-handlers';
 
@@ -18,14 +19,15 @@ const LogoutButton = ({
     user: state.user,
     logout: state.logout,
   }));
+  const { resetSearchFiltersStore } = useSearchFiltersStore();
   const router = useRouter();
 
   const handleLogout = async () => {
     setLoading(true);
-    await setUserOffline(user?.id!);
-    logout();
-    // wait for some time to ensure logout is processed
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await setUserOffline(user?.id!); // set user offline
+    resetSearchFiltersStore(); // reset search filters
+    logout(); // logout users
+    await new Promise((resolve) => setTimeout(resolve, 100)); // wait for some time to ensure logout is processed
     setLoading(false);
     router.push('/login');
   };

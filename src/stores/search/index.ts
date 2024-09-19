@@ -37,7 +37,7 @@ const initialSearchFiltersState: TSearchFilters = {
   latitude: 0,
   longitude: 0,
   address: '',
-  distance: 42,
+  distance: 10,
   tags: [],
   flirt_factor_min: 42,
 };

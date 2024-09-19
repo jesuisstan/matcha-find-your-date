@@ -53,10 +53,10 @@ const SmartSuggestions = () => {
                 className="min-w-40"
               >
                 <div className="flex flex-row items-center space-x-3">
-                  <span>{t('refresh')}</span>
                   <div>
                     <RefreshCw size={20} />
                   </div>
+                  <span>{t('refresh')}</span>
                 </div>
               </ButtonMatcha>
             </div>

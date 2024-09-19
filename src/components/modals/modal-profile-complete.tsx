@@ -392,13 +392,15 @@ const ModalProfileComplete = ({
     ),
     tags: (
       <div className="m-5">
-        <ChipsGroup
-          name="tags"
-          label={'#' + t(`tags.tags`) + ':'}
-          options={TAGS_LIST || []}
-          selectedChips={selectedTags}
-          setSelectedChips={setSelectedTags}
-        />
+        <div className="max-h-[350px] overflow-y-auto">
+          <ChipsGroup
+            name="tags"
+            label={'#' + t(`tags.tags`) + ':'}
+            options={TAGS_LIST || []}
+            selectedChips={selectedTags}
+            setSelectedChips={setSelectedTags}
+          />
+        </div>
       </div>
     ),
     photos: (
@@ -519,8 +521,23 @@ const ModalProfileComplete = ({
               {layouts[layout as keyof typeof layouts]}
               <div className="flex flex-row items-center justify-center gap-3 self-center text-center">
                 <FilledOrNot size={24} filled={isProfileCategoryFilled(layout, user)} />
-                <ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
+                {/*<ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
                   <Save size={24} />
+                </ButtonMatcha>*/}
+                <ButtonMatcha
+                  type="submit"
+                  size="default"
+                  disabled={!user || loading}
+                  title={t('save')}
+                  loading={loading}
+                  className="min-w-32"
+                >
+                  <div className="flex flex-row items-center space-x-3">
+                    <div>
+                      <Save size={20} />
+                    </div>
+                    <span>{t('save')}</span>
+                  </div>
                 </ButtonMatcha>
               </div>
             </form>
@@ -538,7 +555,10 @@ const ModalProfileComplete = ({
 
       {/* Next and Previous buttons */}
       <div
-        className={clsx('flex flex-row', layout === 'basics' ? 'justify-end' : 'justify-between')}
+        className={clsx(
+          'flex flex-col items-center gap-3 xs:flex-row ',
+          layout === 'basics' ? 'justify-end' : 'justify-between'
+        )}
       >
         {layout !== 'basics' && (
           <ButtonMatcha

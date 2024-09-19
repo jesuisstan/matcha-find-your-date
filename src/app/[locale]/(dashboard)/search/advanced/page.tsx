@@ -32,7 +32,6 @@ const AdvancedSearch = () => {
   const { user } = useUserStore();
   const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
     useSearchFiltersStore();
-
   const ageMin: number = getValueOfSearchFilter('age_min') as number;
   const ageMax: number = getValueOfSearchFilter('age_max') as number;
   const flirtFactorMin: number = getValueOfSearchFilter('flirt_factor_min') as number;
@@ -312,10 +311,10 @@ const AdvancedSearch = () => {
             className="min-w-40"
           >
             <div className="flex flex-row items-center space-x-3">
-              <span>{t('search.search')}</span>
               <div>
                 <UserRoundSearch size={20} />
               </div>
+              <span>{t('search.search')}</span>
             </div>
           </ButtonMatcha>
         </div>
