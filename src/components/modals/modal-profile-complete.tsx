@@ -24,6 +24,8 @@ import {
   createTGeoCoordinates,
   createTSelectGeoOption,
   getFakeLocation,
+  loadCityOptions,
+  reverseGeocode,
 } from '@/utils/geolocation-handlers';
 import { isProfileCategoryFilled } from '@/utils/user-handlers';
 
@@ -91,26 +93,6 @@ const ModalProfileComplete = ({
     setSelectedCityOption({ value: fakeLocation.address, label: fakeLocation.address });
   };
 
-  const loadCityOptions = async (inputValue: string): Promise<TSelectGeoOption[]> => {
-    setError('');
-    if (inputValue) {
-      try {
-        const response = await fetch(`/api/location-proxy?input=${inputValue}&type=autocomplete`);
-        const data = await response.json();
-        return (
-          data?.predictions?.map((place: any) => ({
-            value: place.description,
-            label: place.description,
-          })) || []
-        );
-      } catch (error) {
-        setError(t('error-loading-city-options'));
-        return [];
-      }
-    }
-    return [];
-  };
-
   const getGeoCoordinates = async (address: string) => {
     setError('');
     try {
@@ -124,30 +106,6 @@ const ModalProfileComplete = ({
     }
   };
 
-  const reverseGeocode = async (lat: number, lng: number) => {
-    setError('');
-    try {
-      const response = await fetch(
-        `/api/location-proxy?lat=${lat}&lng=${lng}&type=reverse-geocode`
-      );
-      const data = await response.json();
-      const addressComponents = data?.results[0]?.address_components || [];
-      const country = addressComponents.find((c: any) => c.types.includes('country'));
-
-      const city = addressComponents.find(
-        (c: any) => c.types.includes('locality') || c.types.includes('sublocality')
-      );
-      return {
-        city: city
-          ? { value: city.long_name, label: `${city.long_name}, ${country.long_name}` }
-          : null,
-      };
-    } catch (error) {
-      setError(t('error-getting-location'));
-      return null;
-    }
-  };
-
   const handleGeoLocatorClick = async () => {
     setError('');
     setSuccessMessage('');
@@ -157,7 +115,7 @@ const ModalProfileComplete = ({
         async (position) => {
           const { latitude, longitude } = position.coords;
           setGeoCoordinates({ lat: latitude, lng: longitude });
-          const locationData = await reverseGeocode(latitude, longitude);
+          const locationData = await reverseGeocode(latitude, longitude, setError, t);
           if (locationData) setSelectedCityOption(locationData.city);
         },
         (error) => {
@@ -388,7 +346,7 @@ const ModalProfileComplete = ({
                 className="w-52 text-xs text-foreground/85 placeholder-foreground placeholder-opacity-25"
                 value={selectedCityOption}
                 onChange={setSelectedCityOption}
-                loadOptions={loadCityOptions}
+                loadOptions={(input) => loadCityOptions(input, setError, t)}
                 id="city"
                 placeholder={t('selector.select-city')}
                 required

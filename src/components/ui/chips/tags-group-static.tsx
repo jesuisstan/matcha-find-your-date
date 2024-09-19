@@ -11,7 +11,9 @@ const StaticTagsGroup: React.FC<TStaticTagsGroupProps> = ({ tagsList }) => {
 
   return (
     <div id="tags" className="flex flex-col justify-center">
-      <div className="mb-4 text-base font-bold text-foreground">{'#' + t(`tags.tags`) + ':'}</div>
+      <div className="mb-4 text-base font-medium italic text-foreground">
+        {'#' + t(`tags.tags`) + ':'}
+      </div>
       <div className="flex flex-row flex-wrap justify-start gap-2">
         {!tagsList || tagsList.length === 0 ? (
           <p className="italic">{t('data-incomplete')}</p>

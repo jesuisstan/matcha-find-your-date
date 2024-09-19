@@ -8,16 +8,16 @@ import { CircleHelp, Star } from 'lucide-react';
 
 import ModalRaitingDescription from '@/components/modals/modal-raiting-description';
 
+export const getColorByRating = (rating: number) => {
+  if (rating >= 80) return 'text-c42green';
+  if (rating >= 60) return 'text-yellow-500';
+  if (rating >= 40) return 'text-c42orange';
+  return 'text-negative';
+};
+
 const RaitingWrapper = ({ raiting }: { raiting: number | undefined }) => {
   const t = useTranslations();
   const [showModalRaitingDescription, setShowModalRaitingDescription] = useState(false);
-
-  const getColorByRating = (rating: number) => {
-    if (rating >= 80) return 'text-c42green';
-    if (rating >= 60) return 'text-yellow-500';
-    if (rating >= 40) return 'text-c42orange';
-    return 'text-negative';
-  };
 
   return (
     <div className="relative rounded-2xl bg-card p-5 shadow-md">

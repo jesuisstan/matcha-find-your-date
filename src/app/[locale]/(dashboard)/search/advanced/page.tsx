@@ -1,13 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { Annoyed, RefreshCw } from 'lucide-react';
-import { MapPinned } from 'lucide-react';
-import { OctagonAlert } from 'lucide-react';
+import { Annoyed, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
@@ -16,25 +14,29 @@ import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
 import SmartSuggestionsSeleton from '@/components/ui/skeletons/smart-suggestions-skeleton';
+import { getColorByRating } from '@/components/ui/wrappers/raiting-wrapper';
 import { TAGS_LIST } from '@/constants/tags-list';
 import useSearchFiltersStore from '@/stores/search';
 import useUserStore from '@/stores/user';
-import { TGeoCoordinates, TSelectGeoOption } from '@/types/geolocation';
+import { TSelectGeoOption } from '@/types/geolocation';
 import { capitalize } from '@/utils/format-string';
-import { createTGeoCoordinates, createTSelectGeoOption } from '@/utils/geolocation-handlers';
+import {
+  createTSelectGeoOption,
+  geocodeCity,
+  loadCityOptions,
+  reverseGeocode,
+} from '@/utils/geolocation-handlers';
 
 const AdvancedSearch = () => {
   const t = useTranslations();
   const { user } = useUserStore();
-  const {
-    getValueOfSearchFilter,
-    setValueOfSearchFilter,
-    addOneItemToSearchFilter,
-    removeOneItemOfSearchFilter,
-    clearAllItemsOfSearchFilter,
-    replaceAllItemsOfSearchFilter,
-  } = useSearchFiltersStore();
+  const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
+    useSearchFiltersStore();
 
+  const ageMin: number = getValueOfSearchFilter('age_min') as number;
+  const ageMax: number = getValueOfSearchFilter('age_max') as number;
+  const flirtFactorMin: number = getValueOfSearchFilter('flirt_factor_min') as number;
+  const selectedTags: string[] = getValueOfSearchFilter('tags') as string[];
   const sex: string = String(
     getValueOfSearchFilter('sex')
       ? getValueOfSearchFilter('sex')
@@ -52,76 +54,34 @@ const AdvancedSearch = () => {
               : 'bisexual'
         )
   );
-
-  console.log('sexPreferences', sexPreferences);
-  console.log('sex', sex);
-  const ageMin: number = getValueOfSearchFilter('age_min') as number;
-  const ageMax: number = getValueOfSearchFilter('age_max') as number;
-  const latitude: number = getValueOfSearchFilter('latitude') as number;
-  const longitude: number = getValueOfSearchFilter('longitude') as number;
-  const address: string = getValueOfSearchFilter('address') as string;
+  const latitude: number = Number(
+    getValueOfSearchFilter('latitude')
+      ? getValueOfSearchFilter('latitude')
+      : setValueOfSearchFilter('latitude', user?.latitude!)
+  );
+  const longitude: number = Number(
+    getValueOfSearchFilter('longitude')
+      ? getValueOfSearchFilter('longitude')
+      : setValueOfSearchFilter('longitude', user?.longitude!)
+  );
+  const address: string = String(
+    getValueOfSearchFilter('address')
+      ? getValueOfSearchFilter('address')
+      : setValueOfSearchFilter('address', user?.address!)
+  );
   const distance: number = getValueOfSearchFilter('distance') as number;
-  const tags: string[] = getValueOfSearchFilter('tags') as string[];
-  const flirtFactorMin: number = getValueOfSearchFilter('flirt_factor_min') as number;
 
   const [loading, setLoading] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [selectedTags, setSelectedTags] = useState<string[]>(user?.tags || []); // todo
+  const [suggestions, setSuggestions] = useState([]);
 
   // Location vars
   const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(
-    createTSelectGeoOption(user?.address)
-  );
-  const [geoCoordinates, setGeoCoordinates] = useState<TGeoCoordinates | null>(
-    createTGeoCoordinates(user?.latitude, user?.longitude)
+    address ? createTSelectGeoOption(address) : createTSelectGeoOption(user?.address)
   );
 
-  const loadCityOptions = async (inputValue: string): Promise<TSelectGeoOption[]> => {
-    setError('');
-    if (inputValue) {
-      try {
-        const response = await fetch(`/api/location-proxy?input=${inputValue}&type=autocomplete`);
-        const data = await response.json();
-        return (
-          data?.predictions?.map((place: any) => ({
-            value: place.description,
-            label: place.description,
-          })) || []
-        );
-      } catch (error) {
-        setError(t('error-loading-city-options'));
-        return [];
-      }
-    }
-    return [];
-  };
-
-  const reverseGeocode = async (lat: number, lng: number) => {
-    setError('');
-    try {
-      const response = await fetch(
-        `/api/location-proxy?lat=${lat}&lng=${lng}&type=reverse-geocode`
-      );
-      const data = await response.json();
-      const addressComponents = data?.results[0]?.address_components || [];
-      const country = addressComponents.find((c: any) => c.types.includes('country'));
-
-      const city = addressComponents.find(
-        (c: any) => c.types.includes('locality') || c.types.includes('sublocality')
-      );
-      return {
-        city: city
-          ? { value: city.long_name, label: `${city.long_name}, ${country.long_name}` }
-          : null,
-      };
-    } catch (error) {
-      setError(t('error-getting-location'));
-      return null;
-    }
-  };
-
+  // get user's location based on browser geolocation
   const handleGeoLocatorClick = async () => {
     setError('');
     setSuccessMessage('');
@@ -130,9 +90,13 @@ const AdvancedSearch = () => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-          setGeoCoordinates({ lat: latitude, lng: longitude });
-          const locationData = await reverseGeocode(latitude, longitude);
-          if (locationData) setSelectedCityOption(locationData.city);
+          setValueOfSearchFilter('latitude', latitude);
+          setValueOfSearchFilter('longitude', longitude);
+          const locationData = await reverseGeocode(latitude, longitude, setError, t);
+          if (locationData) {
+            setSelectedCityOption(locationData.city);
+            setValueOfSearchFilter('address', locationData.city?.value);
+          }
         },
         (error) => {
           setError(t('error-getting-location'));
@@ -167,7 +131,6 @@ const AdvancedSearch = () => {
       </div>
       {/* SEARCH FORM */}
       <div className={clsx('mb-4 flex items-center justify-between')}>
-        {/*<div className="flex min-w-full flex-col justify-start">*/}
         <div className="flex w-full min-w-28 flex-row flex-wrap items-center justify-center gap-4 overflow-hidden text-ellipsis">
           {/* LOCATION */}
           <div className="flex w-full flex-col rounded-2xl bg-card p-4 smooth42transition sm:w-fit">
@@ -192,8 +155,19 @@ const AdvancedSearch = () => {
                     <AsyncSelect
                       className="mt-1 w-52 text-xs text-foreground/85 placeholder-foreground placeholder-opacity-25"
                       value={selectedCityOption}
-                      onChange={setSelectedCityOption}
-                      loadOptions={loadCityOptions}
+                      onChange={(value) => {
+                        setSelectedCityOption(value);
+                        setValueOfSearchFilter('address', value?.value!);
+                        // set latitude and longitude in store based on selected city
+                        geocodeCity(value?.value!).then((data) => {
+                          console.log('geocodeCity data', data);
+                          if (data) {
+                            setValueOfSearchFilter('latitude', data.lat);
+                            setValueOfSearchFilter('longitude', data.lng);
+                          }
+                        });
+                      }}
+                      loadOptions={(input) => loadCityOptions(input, setError, t)}
                       id="city"
                       placeholder={t('selector.select-city')}
                       required
@@ -205,18 +179,21 @@ const AdvancedSearch = () => {
               <div className={clsx('w-[1px] bg-secondary opacity-40', 'xl:block')} />
               {/* DISTANCE */}
               <div className="flex max-w-fit flex-col items-start gap-3">
-                <Label>{capitalize(t('distance') + ':')}</Label>
-                <div className="flex flex-row flex-wrap items-center gap-3">
+                <Label>{capitalize(t('distance') + ' (' + t('max') + ')' + ':')}</Label>
+                <div className="flex flex-row items-center gap-2">
                   <RequiredInput
                     type="number"
                     id="distance"
                     name="distance"
                     placeholder={t(`max`)}
+                    value={distance}
                     errorMessage="0-9999"
                     className="-mb-1 w-20"
                     min={0}
                     max={9999}
+                    onChange={(e) => setValueOfSearchFilter('distance', Number(e.target.value))}
                   />
+                  <p className="self-start pt-2">{t('km')}</p>
                 </div>
               </div>
             </div>
@@ -232,10 +209,12 @@ const AdvancedSearch = () => {
                   id="from-age"
                   name="from-age"
                   placeholder={t(`from`)}
+                  value={ageMin}
                   errorMessage="18-99"
                   className="-mb-1 w-20"
                   min={18}
                   max={99}
+                  onChange={(e) => setValueOfSearchFilter('age_min', Number(e.target.value))}
                 />
                 <p className="self-start pt-2">{' - '}</p>
                 <RequiredInput
@@ -243,27 +222,40 @@ const AdvancedSearch = () => {
                   id="to-age"
                   name="to-age"
                   placeholder={t(`to`)}
+                  value={ageMax}
                   errorMessage="18-999"
                   className="-mb-1 w-20"
                   min={18}
                   max={999}
+                  onChange={(e) => setValueOfSearchFilter('age_max', Number(e.target.value))}
                 />
               </div>
             </div>
 
             {/* RAITING */}
             <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 xl:w-fit">
-              <Label>{capitalize(t('raiting') + ':')}</Label>
-              <div className="flex flex-row flex-wrap items-center gap-3">
+              <Label>{capitalize(t('raiting') + ' (' + t('min') + ')' + ':')}</Label>
+              <div className="flex flex-row items-center gap-2">
+                <Star
+                  size={28}
+                  className={clsx(
+                    'animate-bounce smooth42transition',
+                    getColorByRating(flirtFactorMin)
+                  )}
+                />
                 <RequiredInput
                   type="number"
                   id="raiting"
                   name="raiting"
                   placeholder={t(`min`)}
+                  value={flirtFactorMin}
                   errorMessage="0-100"
                   className="-mb-1 w-20"
                   min={0}
                   max={100}
+                  onChange={(e) =>
+                    setValueOfSearchFilter('flirt_factor_min', Number(e.target.value))
+                  }
                 />
               </div>
             </div>
@@ -306,10 +298,26 @@ const AdvancedSearch = () => {
               label={'#' + t(`tags.tags`) + ':'}
               options={TAGS_LIST || []}
               selectedChips={selectedTags}
-              setSelectedChips={setSelectedTags}
+              setSelectedChips={(tags) => replaceAllItemsOfSearchFilter('tags', tags)}
             />
           </div>
-          {/*</div>*/}
+          <ButtonMatcha
+            size="default"
+            disabled={!user || loading}
+            title={t(`search.refresh-suggestions`)}
+            onClick={() => {
+              console.log('SEARCH!');
+            }} // todo
+            loading={loading}
+            className="min-w-40"
+          >
+            <div className="flex flex-row items-center space-x-3">
+              <span>{t('search.search')}</span>
+              <div>
+                <UserRoundSearch size={20} />
+              </div>
+            </div>
+          </ButtonMatcha>
         </div>
       </div>
 
@@ -327,22 +335,22 @@ const AdvancedSearch = () => {
         <div className="grid grid-cols-10 items-center gap-4">
           <div className={clsx('col-span-10 h-max items-center justify-center')}>
             <ButtonMatcha size="icon" disabled={!user || loading}>
-              <RefreshCw size={20} />
+              <Annoyed size={20} />
             </ButtonMatcha>{' '}
             <ButtonMatcha size="icon" disabled={!user || loading}>
-              <RefreshCw size={20} />
+              <Annoyed size={20} />
             </ButtonMatcha>{' '}
             <ButtonMatcha size="icon" disabled={!user || loading}>
-              <RefreshCw size={20} />
+              <Annoyed size={20} />
             </ButtonMatcha>{' '}
             <ButtonMatcha size="icon" disabled={!user || loading}>
-              <RefreshCw size={20} />
+              <Annoyed size={20} />
             </ButtonMatcha>{' '}
             <ButtonMatcha size="icon" disabled={!user || loading}>
-              <RefreshCw size={20} />
+              <Annoyed size={20} />
             </ButtonMatcha>{' '}
             <ButtonMatcha size="icon" disabled={!user || loading}>
-              <RefreshCw size={20} />
+              <Annoyed size={20} />
             </ButtonMatcha>
           </div>
         </div>

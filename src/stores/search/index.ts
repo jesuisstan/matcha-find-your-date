@@ -19,19 +19,12 @@ export type TSearchFilters = {
 
 export type TSearchFiltersStore = {
   searchFilters: TSearchFilters;
-
-  setValueOfSearchFilter: (filterKey: string, newValue: string) => void;
-
-  addOneItemToSearchFilter: (itemKey: string, newValue: string) => void;
-
-  removeOneItemOfSearchFilter: (itemKey: string, newValue: string) => void;
-
-  clearAllItemsOfSearchFilter: (filterKey: string) => void;
-
+  setValueOfSearchFilter: (filterKey: string, newValue: string | number) => string | number;
   getValueOfSearchFilter: (filterKey: string) => string | string[] | number;
-
-  replaceAllItemsOfSearchFilter: (itemKey: string, newValue: string[]) => void;
-
+  addOneItemToSearchFilter: (itemKey: string, newValue: string | number) => void;
+  removeOneItemOfSearchFilter: (itemKey: string, valueToRemove: string | number) => void;
+  clearAllItemsOfSearchFilter: (filterKey: string) => void;
+  replaceAllItemsOfSearchFilter: (itemKey: string, newValue: string[] | number[]) => void;
   resetSearchFiltersStore: () => void;
 };
 
@@ -56,19 +49,22 @@ const useSearchFiltersStore = create<TSearchFiltersStore>()(
         (set, get) => ({
           searchFilters: initialSearchFiltersState,
 
-          setValueOfSearchFilter: (filterKey: string, newValue: string) =>
+          setValueOfSearchFilter: (
+            filterKey: string,
+            newValue: string | number
+          ): string | number => {
             set(
               produce((draft) => {
-                if (!newValue) return; // (!) NO null-able value is acceptable
-                {
-                  draft.searchFilters[filterKey] = newValue;
-                }
+                draft.searchFilters[filterKey] = newValue || '';
               }),
               false,
               `set${capitalize(filterKey)}`
-            ),
+            );
 
-          addOneItemToSearchFilter: (filterKey: string, newValue: string) =>
+            return newValue || '';
+          },
+
+          addOneItemToSearchFilter: (filterKey: string, newValue: string | number) =>
             set(
               produce((draft) => {
                 if (!newValue) return; // (!) NO null-able value is acceptable
@@ -82,12 +78,12 @@ const useSearchFiltersStore = create<TSearchFiltersStore>()(
               `set${capitalize(filterKey)}`
             ),
 
-          removeOneItemOfSearchFilter: (filterKey: string, newValue: string) =>
+          removeOneItemOfSearchFilter: (filterKey: string, valueToRemove: string | number) =>
             set(
               produce((draft) => {
                 {
                   const index = draft.searchFilters[filterKey]?.findIndex(
-                    (el: string) => el === newValue
+                    (el: string) => el === valueToRemove
                   );
                   draft.searchFilters[filterKey]?.splice(index, 1);
                 }
@@ -113,7 +109,7 @@ const useSearchFiltersStore = create<TSearchFiltersStore>()(
             }
           },
 
-          replaceAllItemsOfSearchFilter: (filterKey: string, newValue: string[]) =>
+          replaceAllItemsOfSearchFilter: (filterKey: string, newValue: string[] | number[]) =>
             set(
               produce((draft) => {
                 if (!newValue) return; // (!) NO null-able value is acceptable
