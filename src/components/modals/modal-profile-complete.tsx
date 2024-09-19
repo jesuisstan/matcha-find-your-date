@@ -436,7 +436,7 @@ const ModalProfileComplete = ({
       <div className="m-5">
         <ChipsGroup
           name="tags"
-          label={t('tags.tags')}
+          label={'#' + t(`tags.tags`) + ':'}
           options={TAGS_LIST || []}
           selectedChips={selectedTags}
           setSelectedChips={setSelectedTags}

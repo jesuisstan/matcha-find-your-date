@@ -39,7 +39,7 @@ const SmartSuggestions = () => {
               {t(`search.smart-suggestions`)}
             </h1>
           </div>
-          <div className="flex flex-row items-stretch gap-4">
+          <div className="flex flex-col items-stretch gap-4 xs:flex-row ">
             <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
               <p className="text-justify text-sm">{t(`use-smart-suggestions`)}</p>
             </div>

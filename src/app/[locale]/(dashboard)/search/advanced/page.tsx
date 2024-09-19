@@ -17,23 +17,59 @@ import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
 import SmartSuggestionsSeleton from '@/components/ui/skeletons/smart-suggestions-skeleton';
 import { TAGS_LIST } from '@/constants/tags-list';
+import useSearchFiltersStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 import { TGeoCoordinates, TSelectGeoOption } from '@/types/geolocation';
 import { capitalize } from '@/utils/format-string';
 import { createTGeoCoordinates, createTSelectGeoOption } from '@/utils/geolocation-handlers';
 
 const AdvancedSearch = () => {
-  // Translate hook
   const t = useTranslations();
   const { user } = useUserStore();
-  const [loading, setLoading] = useState(false); // todo
+  const {
+    getValueOfSearchFilter,
+    setValueOfSearchFilter,
+    addOneItemToSearchFilter,
+    removeOneItemOfSearchFilter,
+    clearAllItemsOfSearchFilter,
+    replaceAllItemsOfSearchFilter,
+  } = useSearchFiltersStore();
+
+  const sex: string = String(
+    getValueOfSearchFilter('sex')
+      ? getValueOfSearchFilter('sex')
+      : setValueOfSearchFilter('sex', user?.sex === 'male' ? 'female' : 'male')
+  );
+  const sexPreferences: string = String(
+    getValueOfSearchFilter('sex_preferences')
+      ? getValueOfSearchFilter('sex_preferences')
+      : setValueOfSearchFilter(
+          'sex_preferences',
+          user?.sex_preferences === 'women'
+            ? 'men'
+            : user?.sex_preferences === 'men'
+              ? 'women'
+              : 'bisexual'
+        )
+  );
+
+  console.log('sexPreferences', sexPreferences);
+  console.log('sex', sex);
+  const ageMin: number = getValueOfSearchFilter('age_min') as number;
+  const ageMax: number = getValueOfSearchFilter('age_max') as number;
+  const latitude: number = getValueOfSearchFilter('latitude') as number;
+  const longitude: number = getValueOfSearchFilter('longitude') as number;
+  const address: string = getValueOfSearchFilter('address') as string;
+  const distance: number = getValueOfSearchFilter('distance') as number;
+  const tags: string[] = getValueOfSearchFilter('tags') as string[];
+  const flirtFactorMin: number = getValueOfSearchFilter('flirt_factor_min') as number;
+
+  const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [selectedTags, setSelectedTags] = useState<string[]>(user?.tags || []); // todo
 
-  const [sexPreferences, setSexPreferences] = useState(user?.sex_preferences as string); // <'men' | 'women' | 'bisexual'>
-  const [selectedTags, setSelectedTags] = useState<string[]>(user?.tags || []);
-  const [sex, setSex] = useState(user?.sex === 'male' ? 'female' : 'male'); // <'male' | 'female'>
   // Location vars
   const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(
     createTSelectGeoOption(user?.address)
@@ -108,15 +144,6 @@ const AdvancedSearch = () => {
     setLoading(false);
   };
 
-  const handleRefreshSuggestions = () => {
-    setLoading(true);
-    // todo
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000); // todo delete
-    //setLoading(false); // todo
-  };
-
   return (
     <div>
       {user && <ModalProfileWarning user={user} />}
@@ -124,182 +151,165 @@ const AdvancedSearch = () => {
       <div className={clsx('mb-4 flex items-center justify-between')}>
         <div className="flex min-w-full flex-col justify-start">
           <div className="mb-2 flex w-fit flex-wrap smooth42transition">
-            <h1 className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit">
+            <h1 className="max-w-96 truncate text-wrap p-2 text-4xl font-bold xs:max-w-fit">
               {t(`search.advanced`)}
             </h1>
           </div>
-
-          {/* SEARCH FORM */}
-          <div className="mt-4 flex w-full min-w-28 flex-row flex-wrap items-center justify-center gap-4 overflow-hidden text-ellipsis">
-            {/* DESCRIPTION */}
-            <div className="flex min-h-fit w-full min-w-28 flex-row items-center justify-center gap-5 overflow-hidden text-ellipsis rounded-2xl bg-card p-4 xl:max-w-72">
-              <div className="text-c42orange">
-                <OctagonAlert size={25} />
-              </div>
-              <p className="text-left text-sm">{t(`search.advanced-search-note`)}</p>
+          <div className="flex flex-col items-stretch gap-4 xs:flex-row ">
+            <div className="flex items-center justify-center text-c42orange">
+              <OctagonAlert size={25} />
             </div>
-            {/* LOCATION */}
-            <div className="flex w-full flex-col rounded-2xl bg-card p-4 smooth42transition xl:w-fit">
-              <Label htmlFor="geolocation">{t(`location`) + ':'}</Label>
-              <div id="geolocation" className="mt-5 flex flex-col gap-5 sm:flex-row">
-                <div className="flex flex-row gap-5">
-                  <div id="geo-locator" className="self-center" title={t('get-location')}>
-                    <MapPinned
-                      size={24}
-                      onClick={handleGeoLocatorClick}
-                      className="cursor-pointer transition-all duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  {/* vertical divider */}
-                  <div className={clsx('w-[1px] bg-secondary opacity-40', 'xl:block')} />
-                  {/* city selector */}
-                  <div id="geo-selector" className="flex flex-col gap-3">
-                    <div className="w-full">
-                      <Label htmlFor="city" className="mb-2">
-                        {t(`city`)}
-                      </Label>
-                      <AsyncSelect
-                        className="mt-1 w-52 text-xs text-foreground/85 placeholder-foreground placeholder-opacity-25"
-                        value={selectedCityOption}
-                        onChange={setSelectedCityOption}
-                        loadOptions={loadCityOptions}
-                        id="city"
-                        placeholder={t('selector.select-city')}
-                        required
-                      />
-                    </div>
-                  </div>
+            <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
+              <p className="text-justify text-sm">{t(`search.advanced-search-note`)}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* SEARCH FORM */}
+      <div className={clsx('mb-4 flex items-center justify-between')}>
+        {/*<div className="flex min-w-full flex-col justify-start">*/}
+        <div className="flex w-full min-w-28 flex-row flex-wrap items-center justify-center gap-4 overflow-hidden text-ellipsis">
+          {/* LOCATION */}
+          <div className="flex w-full flex-col rounded-2xl bg-card p-4 smooth42transition sm:w-fit">
+            <Label htmlFor="geolocation">{t(`location`) + t(`his-her`) + ':'}</Label>
+            <div id="geolocation" className="mt-5 flex flex-col gap-5 xs:flex-row">
+              <div className="flex flex-row gap-5">
+                <div id="geo-locator" className="self-center" title={t('get-location')}>
+                  <MapPinned
+                    size={24}
+                    onClick={handleGeoLocatorClick}
+                    className="cursor-pointer transition-all duration-300 ease-in-out hover:scale-110"
+                  />
                 </div>
                 {/* vertical divider */}
                 <div className={clsx('w-[1px] bg-secondary opacity-40', 'xl:block')} />
-                {/* DISTANCE */}
-                <div className="flex max-w-fit flex-col items-start gap-3">
-                  <Label>{capitalize(t('distance') + ':')}</Label>
-                  <div className="flex flex-row flex-wrap items-center gap-3">
-                    <RequiredInput
-                      type="number"
-                      id="from-distance"
-                      name="from-distance"
-                      placeholder={t(`from`)}
-                      errorMessage="0-999"
-                      className="-mb-1 w-20"
-                      min={0}
-                      max={999}
-                    />
-                    <p className="self-start pt-2">{' - '}</p>
-                    <RequiredInput
-                      type="number"
-                      id="to-distance"
-                      name="to-distance"
-                      placeholder={t(`to`)}
-                      errorMessage="1-1000"
-                      className="-mb-1 w-20"
-                      min={1}
-                      max={1000}
+                {/* city selector */}
+                <div id="geo-selector" className="flex flex-col gap-3">
+                  <div className="w-full">
+                    <Label htmlFor="city" className="mb-2">
+                      {t(`city`)}
+                    </Label>
+                    <AsyncSelect
+                      className="mt-1 w-52 text-xs text-foreground/85 placeholder-foreground placeholder-opacity-25"
+                      value={selectedCityOption}
+                      onChange={setSelectedCityOption}
+                      loadOptions={loadCityOptions}
+                      id="city"
+                      placeholder={t('selector.select-city')}
+                      required
                     />
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex w-full flex-col items-center justify-center gap-3 align-middle sm:flex-row xl:w-fit">
-              {/* AGE */}
-              <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 xl:w-fit">
-                <Label>{capitalize(t(`age`) + ':')}</Label>
+              {/* vertical divider */}
+              <div className={clsx('w-[1px] bg-secondary opacity-40', 'xl:block')} />
+              {/* DISTANCE */}
+              <div className="flex max-w-fit flex-col items-start gap-3">
+                <Label>{capitalize(t('distance') + ':')}</Label>
                 <div className="flex flex-row flex-wrap items-center gap-3">
                   <RequiredInput
                     type="number"
-                    id="from-age"
-                    name="from-age"
-                    placeholder={t(`from`)}
-                    errorMessage="18-99"
+                    id="distance"
+                    name="distance"
+                    placeholder={t(`max`)}
+                    errorMessage="0-9999"
                     className="-mb-1 w-20"
-                    min={18}
-                    max={99}
-                  />
-                  <p className="self-start pt-2">{' - '}</p>
-                  <RequiredInput
-                    type="number"
-                    id="to-age"
-                    name="to-age"
-                    placeholder={t(`to`)}
-                    errorMessage="18-999"
-                    className="-mb-1 w-20"
-                    min={18}
-                    max={999}
+                    min={0}
+                    max={9999}
                   />
                 </div>
               </div>
-              {/* RAITING */}
-              <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 xl:w-fit">
-                <Label>{capitalize(t('raiting') + ':')}</Label>
-                <div className="flex flex-row flex-wrap items-center gap-3">
-                  <RequiredInput
-                    type="number"
-                    id="from-raiting"
-                    name="from-raiting"
-                    placeholder={t(`from`)}
-                    errorMessage="0-99"
-                    className="-mb-1 w-20"
-                    min={0}
-                    max={99}
-                  />
-                  <p className="self-start pt-2">{' - '}</p>
-                  <RequiredInput
-                    type="number"
-                    id="to-raiting"
-                    name="to-raiting"
-                    placeholder={t(`to`)}
-                    errorMessage="1-100"
-                    className="-mb-1 w-20"
-                    min={1}
-                    max={100}
-                  />
-                </div>
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col items-center justify-center gap-4 align-middle xs:flex-row xl:w-fit">
+            {/* AGE */}
+            <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 xl:w-fit">
+              <Label>{capitalize(t(`age`) + t(`his-her`) + ':')}</Label>
+              <div className="flex flex-row flex-wrap items-center gap-3">
+                <RequiredInput
+                  type="number"
+                  id="from-age"
+                  name="from-age"
+                  placeholder={t(`from`)}
+                  errorMessage="18-99"
+                  className="-mb-1 w-20"
+                  min={18}
+                  max={99}
+                />
+                <p className="self-start pt-2">{' - '}</p>
+                <RequiredInput
+                  type="number"
+                  id="to-age"
+                  name="to-age"
+                  placeholder={t(`to`)}
+                  errorMessage="18-999"
+                  className="-mb-1 w-20"
+                  min={18}
+                  max={999}
+                />
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center gap-3 align-middle md:flex-row">
-              <div className="flex w-full min-w-48 flex-col items-center justify-center gap-3 align-middle md:w-fit">
-                {/* SEX */}
-                <div className="w-full rounded-2xl bg-card p-4 md:w-fit">
-                  <RadioGroup
-                    label={t(`selector.sex`) + ':'}
-                    options={[
-                      { value: 'male', label: t(`male`) },
-                      { value: 'female', label: t(`female`) },
-                    ]}
-                    defaultValue="male"
-                    selectedItem={sex}
-                    onSelectItem={setSex}
-                  />
-                </div>
-                {/* SEX PREFERENCES */}
-                <div className="w-full rounded-2xl bg-card p-4 md:w-fit">
-                  <RadioGroup
-                    label={t(`selector.preferences`) + ':'}
-                    options={[
-                      { value: 'men', label: t(`selector.men`) },
-                      { value: 'women', label: t(`selector.women`) },
-                      { value: 'bisexual', label: t(`selector.bisexual`) },
-                    ]}
-                    defaultValue="bisexual"
-                    selectedItem={sexPreferences ?? 'bisexual'}
-                    onSelectItem={setSexPreferences}
-                  />
-                </div>
-              </div>
-              {/* TAGS */}
-              <div className="max-h-80 max-w-fit overflow-y-auto rounded-2xl bg-card p-4">
-                <ChipsGroup
-                  name="tags"
-                  label={t('tags.tags')}
-                  options={TAGS_LIST || []}
-                  selectedChips={selectedTags}
-                  setSelectedChips={setSelectedTags}
+            {/* RAITING */}
+            <div className="flex w-full flex-col items-start gap-3 rounded-2xl bg-card p-4 xl:w-fit">
+              <Label>{capitalize(t('raiting') + ':')}</Label>
+              <div className="flex flex-row flex-wrap items-center gap-3">
+                <RequiredInput
+                  type="number"
+                  id="raiting"
+                  name="raiting"
+                  placeholder={t(`min`)}
+                  errorMessage="0-100"
+                  className="-mb-1 w-20"
+                  min={0}
+                  max={100}
                 />
               </div>
             </div>
           </div>
+
+          <div className="flex w-full flex-col items-center justify-center gap-3 align-middle sm:flex-row xl:w-fit">
+            {/* SEX */}
+            <div className="w-full rounded-2xl bg-card p-4 xl:w-fit">
+              <RadioGroup
+                label={t(`selector.sex`) + t(`his-her`) + ':'}
+                options={[
+                  { value: 'male', label: t(`male`) },
+                  { value: 'female', label: t(`female`) },
+                ]}
+                defaultValue="male"
+                selectedItem={sex}
+                onSelectItem={(value) => setValueOfSearchFilter('sex', value)}
+              />
+            </div>
+            {/* SEX PREFERENCES */}
+            <div className="w-full rounded-2xl bg-card p-4 xl:w-fit">
+              <RadioGroup
+                label={t(`selector.preferences`) + t(`his-her`) + ':'}
+                options={[
+                  { value: 'men', label: t(`selector.men`) },
+                  { value: 'women', label: t(`selector.women`) },
+                  { value: 'bisexual', label: t(`selector.bisexual`) },
+                ]}
+                defaultValue="bisexual"
+                selectedItem={sexPreferences}
+                onSelectItem={(value) => setValueOfSearchFilter('sex_preferences', value)}
+              />
+            </div>
+          </div>
+
+          {/* TAGS */}
+          <div className="max-h-80 max-w-fit overflow-y-auto rounded-2xl bg-card p-4">
+            <ChipsGroup
+              name="tags"
+              label={'#' + t(`tags.tags`) + ':'}
+              options={TAGS_LIST || []}
+              selectedChips={selectedTags}
+              setSelectedChips={setSelectedTags}
+            />
+          </div>
+          {/*</div>*/}
         </div>
       </div>
 
