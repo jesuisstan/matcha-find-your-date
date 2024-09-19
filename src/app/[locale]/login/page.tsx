@@ -121,7 +121,7 @@ const Login = () => {
             setLoading(true);
             document.cookie = `token=${result.token}; path=/`;
             setUser(result.user);
-            window.location.href = `/profile`;
+            //window.location.href = `/profile`; todo: redirect to /profile or count on middleware?
           } else {
             setError(t(`auth.${result.error}`));
           }

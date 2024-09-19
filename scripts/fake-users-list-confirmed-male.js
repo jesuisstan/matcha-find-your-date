@@ -409,7 +409,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 62,
       biography: 'Food lover and baker. Passionate about creating delicious pastries and bread.',
-      tags: ['foodie', 'creative', 'baker', 'french', 'english'],
+      tags: ['foodie', 'polyamorous', 'baker', 'french', 'english'],
       latitude: 48.5734, // Strasbourg
       longitude: 7.7521,
       address: 'Strasbourg, France',
@@ -549,7 +549,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 62,
       biography:
         'Sports fanatic, especially soccer and basketball. Always active and looking for a new challenge.',
-      tags: ['sports-fan', 'fitness', 'runner', 'french', 'english'],
+      tags: ['sports-fan', 'fitness', 'runner', 'pragmatist', 'french', 'english'],
       latitude: 50.8503, // Brussels
       longitude: 4.3517,
       address: 'Brussels, Belgium',
@@ -576,7 +576,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 62,
       biography: 'Passionate about art and painting. Exploring creativity through various mediums.',
-      tags: ['art-lover', 'painter', 'creative', 'french', 'english'],
+      tags: ['art-lover', 'painter', 'polyamorous', 'french', 'english'],
       latitude: 48.5734, // Strasbourg
       longitude: 7.7521,
       address: 'Strasbourg, France',
@@ -625,7 +625,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Writer by profession, I am passionate about sharing stories and connecting with people.',
-      tags: ['writer', 'creative', 'bookworm', 'english', 'french'],
+      tags: ['writer', 'polyamorous', 'bookworm', 'english', 'french'],
       latitude: 48.8357, // Paris Suburb
       longitude: 2.2419,
       address: 'Versailles, France',
@@ -787,7 +787,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Passionate about photography and art. I love capturing moments and expressing emotions through images.',
-      tags: ['photography', 'art-lover', 'creative', 'russian', 'english'],
+      tags: ['photography', 'art-lover', 'polyamorous', 'russian', 'english'],
       latitude: 55.7558, // Moscow
       longitude: 37.6176,
       address: 'Moscow, Russia',
@@ -841,7 +841,7 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1986-03-12',
       sex: 'male',
       biography: 'I enjoy reading, and I am a huge fan of science fiction and fantasy novels.',
-      tags: ['scifi-fan', 'bookworm', 'creative', 'arabic', 'english'],
+      tags: ['scifi-fan', 'bookworm', 'polyamorous', 'arabic', 'english'],
       latitude: 25.276987, // Dubai
       longitude: 55.296249,
       address: 'Dubai, UAE',
@@ -1193,7 +1193,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Music producer and movie enthusiast. Always seeking new inspiration for my projects.',
-      tags: ['music-lover', 'moviebuff', 'creative', 'english', 'french'],
+      tags: ['music-lover', 'moviebuff', 'polyamorous', 'english', 'french'],
       latitude: 51.1657,
       longitude: 10.4515,
       address: 'Frankfurt, Germany',
@@ -1361,7 +1361,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 87,
       biography: 'Creative artist who loves painting and exploring art galleries.',
-      tags: ['art-lover', 'painter', 'creative', 'english', 'french'],
+      tags: ['art-lover', 'painter', 'polyamorous', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1533,7 +1533,7 @@ module.exports = function (hashedPassword, yesterday) {
       tags: [
         'photography',
         'foodie',
-        'creative',
+        'polyamorous',
         'dancer',
         'doglover',
         'early-bird',
@@ -1653,7 +1653,15 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 77,
       biography: 'Creative writer and poet who enjoys expressing feelings through words.',
-      tags: ['writer', 'creative', 'bookworm', 'romantic', 'free-relations', 'french', 'english'],
+      tags: [
+        'writer',
+        'polyamorous',
+        'bookworm',
+        'romantic',
+        'free-relations',
+        'french',
+        'english',
+      ],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1745,7 +1753,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 77,
       biography: 'Gamer and tech enthusiast, always looking for the latest innovations.',
-      tags: ['gamer', 'techie', 'creative', 'english', 'french'],
+      tags: ['gamer', 'techie', 'polyamorous', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1885,7 +1893,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 77,
       biography:
         'Creative soul who loves art and design. Searching for new inspirations every day.',
-      tags: ['art-lover', 'creative', 'painter', 'english', 'french'],
+      tags: ['art-lover', 'polyamorous', 'painter', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -2194,7 +2202,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 69,
       biography: 'Creative professional who enjoys art and design. Looking for my next muse.',
-      tags: ['creative', 'art-lover', 'painter', 'lgbt-friendly', 'english', 'french'],
+      tags: ['polyamorous', 'art-lover', 'painter', 'lgbt-friendly', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -2484,7 +2492,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 69,
       biography: 'Creative photographer with a passion for capturing the beauty of life.',
-      tags: ['photography', 'creative', 'traveller', 'english', 'french'],
+      tags: ['photography', 'polyamorous', 'traveller', 'english', 'french'],
       latitude: 50.6292, // Lille
       longitude: 3.0573,
       address: 'Lille, France',
@@ -2558,7 +2566,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 69,
       biography: 'Creative chef, always experimenting with new dishes and flavors.',
-      tags: ['cooking', 'foodie', 'creative', 'english', 'french'],
+      tags: ['cooking', 'foodie', 'polyamorous', 'english', 'french'],
       latitude: 43.2965, // Marseille
       longitude: 5.3698,
       address: 'Marseille, France',
@@ -2737,7 +2745,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 69,
       biography: 'Photographer and art lover. Always looking for new inspirations.',
-      tags: ['photography', 'art-lover', 'creative', 'english', 'french'],
+      tags: ['photography', 'art-lover', 'polyamorous', 'english', 'french'],
       latitude: 43.2965, // Marseille
       longitude: 5.3698,
       address: 'Marseille, France',
@@ -2979,7 +2987,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 61,
       biography: 'I am a musician who enjoys live performances and learning new instruments.',
-      tags: ['music-lover', 'live-music', 'creative', 'french', 'german'],
+      tags: ['music-lover', 'live-music', 'polyamorous', 'french', 'german'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -3101,7 +3109,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 61,
       biography: 'Bookworm with a passion for learning new languages and cultures.',
-      tags: ['bookworm', 'language-learner', 'introvert', 'english', 'portuguese'],
+      tags: ['bookworm', 'language-learner', 'introvert', 'pragmatist', 'english', 'portuguese'],
       latitude: 39.9042, // Beijing
       longitude: 116.4074,
       address: 'Beijing, China',
@@ -3150,7 +3158,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 61,
       biography:
         'Fitness enthusiast and bodybuilder. I love working out and motivating others to do the same.',
-      tags: ['fitness', 'bodybuilding', 'motivator', 'arabic', 'english'],
+      tags: ['fitness', 'bodybuilding', 'pragmatist', 'motivator', 'arabic', 'english'],
       latitude: 30.0444, // Cairo
       longitude: 31.2357,
       address: 'Cairo, Egypt',
@@ -5252,7 +5260,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 46,
       biography: 'History buff who loves exploring ancient sites and learning about cultures.',
-      tags: ['history-buff', 'traveller', 'italian', 'culture', 'optimist'],
+      tags: ['history-buff', 'traveller', 'pragmatist', 'italian', 'culture', 'optimist'],
       latitude: 41.9028, // Rome
       longitude: 12.4964,
       address: 'Rome, Italy',
@@ -5275,7 +5283,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 46,
       biography: 'Avid reader and fan of science fiction and fantasy novels.',
-      tags: ['bookworm', 'scifi-fan', 'english', 'introvert', 'gamer'],
+      tags: ['bookworm', 'scifi-fan', 'pragmatist', 'english', 'introvert', 'gamer'],
       latitude: 51.1657, // Berlin
       longitude: 10.4515,
       address: 'Berlin, Germany',
@@ -5298,7 +5306,15 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 46,
       biography: 'Tech enthusiast and motorbike rider with a passion for adventure.',
-      tags: ['techie', 'motorcyclist', 'swedish', 'adventurous', 'traveller', 'vintage-lover'],
+      tags: [
+        'techie',
+        'motorcyclist',
+        'pragmatist',
+        'swedish',
+        'adventurous',
+        'traveller',
+        'vintage-lover',
+      ],
       latitude: 59.3293, // Stockholm
       longitude: 18.0686,
       address: 'Stockholm, Sweden',

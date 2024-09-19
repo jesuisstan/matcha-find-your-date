@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState } from 'react';
+import { use, useRef, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 
@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
 import SmartSuggestionsSeleton from '@/components/ui/skeletons/smart-suggestions-skeleton';
+import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
 import { getColorByRating } from '@/components/ui/wrappers/raiting-wrapper';
 import { TAGS_LIST } from '@/constants/tags-list';
 import useSearchFiltersStore from '@/stores/search';
@@ -29,6 +30,7 @@ import {
 
 const AdvancedSearch = () => {
   const t = useTranslations();
+  const formRef = useRef<HTMLFormElement>(null);
   const { user } = useUserStore();
   const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
     useSearchFiltersStore();
@@ -73,7 +75,7 @@ const AdvancedSearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
 
   // Location vars
   const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(
@@ -107,6 +109,57 @@ const AdvancedSearch = () => {
     setLoading(false);
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError('');
+    setSuccessMessage('');
+    setLoading(true);
+
+    const currentForm = formRef.current;
+    if (!currentForm) return;
+
+    const formData = new FormData(currentForm);
+
+    // create body for request:
+    const body = JSON.stringify({
+      id: user?.id,
+      ageMin: formData.get('age-min'),
+      ageMax: formData.get('age-max'),
+      flirtFactorMin: formData.get('raiting'),
+      tags: selectedTags,
+      sex: sex,
+      sexPreferences: sexPreferences,
+      latitude: latitude,
+      longitude: longitude,
+      distance: formData.get('distance'),
+      address: address,
+    });
+
+    let response: any;
+    try {
+      response = await fetch(`/api/search/advanced`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSuccessMessage(t(result.message));
+        setSearchResult(result.data);
+      } else {
+        setError(t(result.error));
+      }
+    } catch (error) {
+      setError(t(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       {user && <ModalProfileWarning user={user} />}
@@ -123,13 +176,17 @@ const AdvancedSearch = () => {
               <OctagonAlert size={25} />
             </div>
             <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
-              <p className="text-justify text-sm">{t(`search.advanced-search-note`)}</p>
+              <p className="text-xs">{t(`search.advanced-search-note`)}</p>
             </div>
           </div>
         </div>
       </div>
       {/* SEARCH FORM */}
-      <div className={clsx('mb-4 flex items-center justify-between')}>
+      <form
+        className={clsx('mb-4 flex items-center justify-between')}
+        onSubmit={handleSubmit}
+        ref={formRef}
+      >
         <div className="flex w-full min-w-28 flex-row flex-wrap items-center justify-center gap-4 overflow-hidden text-ellipsis">
           {/* LOCATION */}
           <div className="flex w-full flex-col rounded-2xl bg-card p-4 smooth42transition sm:w-fit">
@@ -205,8 +262,8 @@ const AdvancedSearch = () => {
               <div className="flex flex-row flex-wrap items-center gap-3">
                 <RequiredInput
                   type="number"
-                  id="from-age"
-                  name="from-age"
+                  id="age-min"
+                  name="age-min"
                   placeholder={t(`from`)}
                   value={ageMin}
                   errorMessage="18-99"
@@ -218,8 +275,8 @@ const AdvancedSearch = () => {
                 <p className="self-start pt-2">{' - '}</p>
                 <RequiredInput
                   type="number"
-                  id="to-age"
-                  name="to-age"
+                  id="age-max"
+                  name="age-max"
                   placeholder={t(`to`)}
                   value={ageMax}
                   errorMessage="18-999"
@@ -289,9 +346,7 @@ const AdvancedSearch = () => {
               />
             </div>
           </div>
-
-          {/* TAGS */}
-          <div className="max-w-fit rounded-2xl bg-card p-4">
+          <div id="tags" className="max-w-fit rounded-2xl bg-card p-4">
             <ChipsGroup
               name="tags"
               label={'#' + t(`tags.tags`) + ':'}
@@ -304,9 +359,6 @@ const AdvancedSearch = () => {
             size="default"
             disabled={!user || loading}
             title={t(`search.refresh-suggestions`)}
-            onClick={() => {
-              console.log('SEARCH!');
-            }} // todo
             loading={loading}
             className="min-w-40"
           >
@@ -318,12 +370,12 @@ const AdvancedSearch = () => {
             </div>
           </ButtonMatcha>
         </div>
-      </div>
+      </form>
 
       {/* MAIN CONTENT */}
       {loading ? (
         <SmartSuggestionsSeleton />
-      ) : suggestions.length === 0 ? (
+      ) : searchResult.length === 0 ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
             <Annoyed size={84} />
@@ -331,27 +383,33 @@ const AdvancedSearch = () => {
           <p className="text-center text-lg">{t(`search.no-suggestions`)}</p>
         </div>
       ) : (
-        <div className="grid grid-cols-10 items-center gap-4">
-          <div className={clsx('col-span-10 h-max items-center justify-center')}>
-            <ButtonMatcha size="icon" disabled={!user || loading}>
-              <Annoyed size={20} />
-            </ButtonMatcha>{' '}
-            <ButtonMatcha size="icon" disabled={!user || loading}>
-              <Annoyed size={20} />
-            </ButtonMatcha>{' '}
-            <ButtonMatcha size="icon" disabled={!user || loading}>
-              <Annoyed size={20} />
-            </ButtonMatcha>{' '}
-            <ButtonMatcha size="icon" disabled={!user || loading}>
-              <Annoyed size={20} />
-            </ButtonMatcha>{' '}
-            <ButtonMatcha size="icon" disabled={!user || loading}>
-              <Annoyed size={20} />
-            </ButtonMatcha>{' '}
-            <ButtonMatcha size="icon" disabled={!user || loading}>
-              <Annoyed size={20} />
-            </ButtonMatcha>
-          </div>
+        //<div className="grid grid-cols-10 items-center gap-4">
+        //  <div className={clsx('col-span-10 h-max items-center justify-center')}>
+        //    <ButtonMatcha size="icon" disabled={!user || loading}>
+        //      <Annoyed size={20} />
+        //    </ButtonMatcha>{' '}
+        //    <ButtonMatcha size="icon" disabled={!user || loading}>
+        //      <Annoyed size={20} />
+        //    </ButtonMatcha>{' '}
+        //    <ButtonMatcha size="icon" disabled={!user || loading}>
+        //      <Annoyed size={20} />
+        //    </ButtonMatcha>{' '}
+        //    <ButtonMatcha size="icon" disabled={!user || loading}>
+        //      <Annoyed size={20} />
+        //    </ButtonMatcha>{' '}
+        //    <ButtonMatcha size="icon" disabled={!user || loading}>
+        //      <Annoyed size={20} />
+        //    </ButtonMatcha>{' '}
+        //    <ButtonMatcha size="icon" disabled={!user || loading}>
+        //      <Annoyed size={20} />
+        //    </ButtonMatcha>
+        //  </div>
+        //</div>
+        <div className="flex flex-row flex-wrap items-center justify-center gap-4 smooth42transition">
+          {searchResult.map((user: any, index: number) => (
+            <ProfileCardWrapper key={`${user.id}-${index}`} profile={user} />
+          ))}
+
         </div>
       )}
     </div>
