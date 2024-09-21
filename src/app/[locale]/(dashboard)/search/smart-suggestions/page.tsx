@@ -13,7 +13,6 @@ import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
 import useUserStore from '@/stores/user';
 
 const SmartSuggestions = () => {
-  // Translate hook
   const t = useTranslations();
   const { user, globalLoading } = useUserStore();
   const [loading, setLoading] = useState(false);

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import { db } from '@vercel/postgres';
 
 // Define the POST request handler for fetching profile data
