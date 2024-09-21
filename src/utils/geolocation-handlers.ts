@@ -139,7 +139,6 @@ export const loadCityOptions = async (
     try {
       const response = await fetch(`/api/location-proxy?input=${inputValue}&type=autocomplete`);
       const data = await response.json();
-      console.log(data);
       return (
         data?.predictions?.map((place: any) => ({
           value: place.description,

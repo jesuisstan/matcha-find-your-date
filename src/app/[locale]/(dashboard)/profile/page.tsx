@@ -8,7 +8,6 @@ import clsx from 'clsx';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import ModalProfileCongrats from '@/components/modals/modal-profile-congrats';
-import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 import ConfirmationWrapper from '@/components/ui/wrappers/confirmation-wrapper';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import InterestsWrapper from '@/components/ui/wrappers/interests-wrapper';
@@ -20,11 +19,12 @@ import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrappe
 import StatusWrapper from '@/components/ui/wrappers/status-wrapper';
 import useUserStore from '@/stores/user';
 import { calculateAge } from '@/utils/format-string';
+import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 
 const ProfilePage = () => {
   const t = useTranslations();
-  const { user } = useUserStore();
-  const [loading, setLoading] = useState(false); // todo
+  const { user, globalLoading } = useUserStore();
+  const [loading, setLoading] = useState(false);
   const [showProfileCompleteModal, setShowProfileCompleteModal] = useState(false);
   const [showProfileCongratsModal, setShowProfileCongratsModal] = useState(false);
   const [profileCompleteModalLayout, setProfileCompleteModalLayout] = useState('basics');
@@ -41,7 +41,9 @@ const ProfilePage = () => {
     setShowProfileCompleteModal(true);
   };
 
-  return (
+  return loading || globalLoading || !user ? (
+    <ProfilePageSkeleton />
+  ) : (
     <div>
       <ModalProfileComplete
         show={showProfileCompleteModal}
@@ -53,52 +55,43 @@ const ProfilePage = () => {
 
       {/* HEADER */}
       <div className={clsx('mb-4 flex items-center justify-between')}>
-        {!user || loading ? (
-          <HeaderSkeleton />
-        ) : (
-          <div className="flex min-w-full flex-col justify-start">
-            <div
-              id="user-nickname"
-              className="mb-2 flex w-fit flex-wrap gap-x-2 smooth42transition"
+        <div className="flex min-w-full flex-col justify-start">
+          <div id="user-nickname" className="mb-2 flex w-fit flex-wrap gap-x-2 smooth42transition">
+            {/* CONFIRMED ? */}
+            <ConfirmationWrapper confirmed={user?.confirmed} />
+            <h1
+              title={user?.nickname ?? '???'}
+              className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit"
             >
-              {/* CONFIRMED ? */}
-              <ConfirmationWrapper confirmed={user?.confirmed} />
-              <h1
-                title={user?.nickname ?? '???'}
-                className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit"
-              >
-                {user?.nickname ?? '???'}
-              </h1>
-            </div>
-            <div
-              className={clsx(
-                'flex flex-col items-stretch space-y-4',
-                'lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0'
-              )}
-            >
-              {/* LABELS */}
-              <LabelsWrapper
-                firstName={user?.firstname ?? '???'}
-                lastName={user?.lastname ?? '???'}
-                age={calculateAge(user?.birthdate)}
-                sex={user?.sex ?? '???'}
-                loading={false}
-                modifiable
-                onModify={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
-              />
-              {/* DESCRIPTION */}
-              <DescriptionWrapper
-                text={user?.biography}
-                modifiable
-                onModify={() =>
-                  handleModifyClick('biography' as keyof typeof TProfileCompleteLayout)
-                }
-              />
-              {/* STATUS GROUP */}
-              <StatusWrapper onlineStatus={user?.online} lastAction={user?.last_action} />
-            </div>
+              {user?.nickname ?? '???'}
+            </h1>
           </div>
-        )}
+          <div
+            className={clsx(
+              'flex flex-col items-stretch space-y-4',
+              'lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0'
+            )}
+          >
+            {/* LABELS */}
+            <LabelsWrapper
+              firstName={user?.firstname ?? '???'}
+              lastName={user?.lastname ?? '???'}
+              age={calculateAge(user?.birthdate)}
+              sex={user?.sex ?? '???'}
+              loading={false}
+              modifiable
+              onModify={() => handleModifyClick('basics' as keyof typeof TProfileCompleteLayout)}
+            />
+            {/* DESCRIPTION */}
+            <DescriptionWrapper
+              text={user?.biography}
+              modifiable
+              onModify={() => handleModifyClick('biography' as keyof typeof TProfileCompleteLayout)}
+            />
+            {/* STATUS GROUP */}
+            <StatusWrapper onlineStatus={user?.online} lastAction={user?.last_action} />
+          </div>
+        </div>
       </div>
 
       {/* MAIN CONTENT */}
@@ -129,7 +122,7 @@ const ProfilePage = () => {
         <div className={clsx('col-span-12 space-y-5', 'lg:col-span-6')}>
           {/* PHOTOS */}
           <PhotoGalleryWrapper
-            user={user}
+            profile={user}
             modifiable
             onModify={() => handleModifyClick('photos' as keyof typeof TProfileCompleteLayout)}
           />

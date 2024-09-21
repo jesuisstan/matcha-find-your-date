@@ -8,6 +8,8 @@ type UserStore = {
   setUser: (userData: TUser) => void;
   clearUser: () => void;
   logout: () => void;
+  globalLoading: boolean;
+  setGlobalLoading: (loading: boolean) => void;
 };
 
 const useUserStore = create<UserStore>()(
@@ -20,6 +22,8 @@ const useUserStore = create<UserStore>()(
         set({ user: null });
         document.cookie = 'token=; Max-Age=0; path=/';
       },
+      globalLoading: false,
+      setGlobalLoading: (loading: boolean) => set({ globalLoading: loading }),
     }),
     {
       name: 'user-storage',

@@ -45,9 +45,10 @@ export async function middleware(req: NextRequest) {
     const { payload } = await jwtVerify(token, secretKey);
     const userId = (payload as JWTPayload & { userId: string }).userId;
 
-    if (userId) {
-      req.nextUrl.searchParams.set('userId', userId);
-    }
+    //// Add userId to the query string
+    //if (userId) {
+    //  req.nextUrl.searchParams.set('userId', userId);
+    //}
   } catch (error) {
     console.error('JWT verification failed:', error);
     return NextResponse.redirect(new URL('/login', req.url));

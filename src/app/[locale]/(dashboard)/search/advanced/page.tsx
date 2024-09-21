@@ -5,7 +5,7 @@ import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { Annoyed, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
+import { Frown, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
@@ -13,7 +13,7 @@ import ChipsGroup from '@/components/ui/chips/chips-group';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
-import SmartSuggestionsSeleton from '@/components/ui/skeletons/smart-suggestions-skeleton';
+import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
 import { getColorByRating } from '@/components/ui/wrappers/raiting-wrapper';
 import { TAGS_LIST } from '@/constants/tags-list';
@@ -31,7 +31,7 @@ import {
 const AdvancedSearch = () => {
   const t = useTranslations();
   const formRef = useRef<HTMLFormElement>(null);
-  const { user } = useUserStore();
+  const { user, globalLoading } = useUserStore();
   const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
     useSearchFiltersStore();
   const ageMin: number = getValueOfSearchFilter('age_min') as number;
@@ -100,11 +100,11 @@ const AdvancedSearch = () => {
           }
         },
         (error) => {
-          setError(t('error-getting-location'));
+          setError('error-getting-location');
         }
       );
     } else {
-      setError(t('geolocation-not-supported'));
+      setError('geolocation-not-supported');
     }
     setLoading(false);
   };
@@ -151,10 +151,10 @@ const AdvancedSearch = () => {
         setSuccessMessage(t(result.message));
         setSearchResult(result.data);
       } else {
-        setError(t(result.error));
+        setError(result.error ? result.error : 'error-fetching-suggestions');
       }
     } catch (error) {
-      setError(t(error));
+      setError(String(error));
     } finally {
       setLoading(false);
     }
@@ -357,7 +357,7 @@ const AdvancedSearch = () => {
           </div>
           <ButtonMatcha
             size="default"
-            disabled={!user || loading}
+            disabled={!user || loading || globalLoading}
             title={t(`search.refresh-suggestions`)}
             loading={loading}
             className="min-w-40"
@@ -373,43 +373,22 @@ const AdvancedSearch = () => {
       </form>
 
       {/* MAIN CONTENT */}
-      {loading ? (
-        <SmartSuggestionsSeleton />
-      ) : searchResult.length === 0 ? (
+      {loading || globalLoading ? (
+        <SuggestionsSkeleton />
+      ) : searchResult.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
-            <Annoyed size={84} />
+            <Frown size={84} />
           </div>
-          <p className="text-center text-lg">{t(`search.no-suggestions`)}</p>
+          <p className="text-center text-lg">
+            {error ? t(`${error}`) : t(`search.no-suggestions`)}
+          </p>
         </div>
       ) : (
-        //<div className="grid grid-cols-10 items-center gap-4">
-        //  <div className={clsx('col-span-10 h-max items-center justify-center')}>
-        //    <ButtonMatcha size="icon" disabled={!user || loading}>
-        //      <Annoyed size={20} />
-        //    </ButtonMatcha>{' '}
-        //    <ButtonMatcha size="icon" disabled={!user || loading}>
-        //      <Annoyed size={20} />
-        //    </ButtonMatcha>{' '}
-        //    <ButtonMatcha size="icon" disabled={!user || loading}>
-        //      <Annoyed size={20} />
-        //    </ButtonMatcha>{' '}
-        //    <ButtonMatcha size="icon" disabled={!user || loading}>
-        //      <Annoyed size={20} />
-        //    </ButtonMatcha>{' '}
-        //    <ButtonMatcha size="icon" disabled={!user || loading}>
-        //      <Annoyed size={20} />
-        //    </ButtonMatcha>{' '}
-        //    <ButtonMatcha size="icon" disabled={!user || loading}>
-        //      <Annoyed size={20} />
-        //    </ButtonMatcha>
-        //  </div>
-        //</div>
         <div className="flex flex-row flex-wrap items-center justify-center gap-4 smooth42transition">
           {searchResult.map((user: any, index: number) => (
             <ProfileCardWrapper key={`${user.id}-${index}`} profile={user} />
           ))}
-
         </div>
       )}
     </div>

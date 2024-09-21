@@ -15,12 +15,10 @@ const SideBarHeader = ({
   name,
   photoUrl,
   translate,
-  setLoading,
 }: {
   name?: string;
   photoUrl?: string;
   translate: (key: string) => string;
-  setLoading: Dispatch<SetStateAction<boolean>>;
 }) => {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
@@ -48,24 +46,23 @@ const SideBarHeader = ({
           <LocaleSwitcher />
         </div>
 
-        <div className="flex flex-col gap-x-1 self-center align-middle">
-          <div className="items-center">
-            <ModalSettings show={showSettingsModal} setShow={setShowSettingsModal} />
-            <ThemeToggler translate={translate} />
-            <ButtonMatcha
-              variant="ghost"
-              size="default"
-              title={translate(`settings`)}
-              onClick={() => setShowSettingsModal(true)}
-              className="smooth42transition hover:bg-transparent hover:text-c42orange"
-            >
-              <div className="flex flex-row items-center gap-2">
-                <Settings />
-                <p>{translate(`settings`)}</p>
-              </div>
-            </ButtonMatcha>
-          </div>
-          <LogoutButton translate={translate} setLoading={setLoading} />
+        <div className="flex flex-row items-center gap-x-1 self-center align-middle">
+          <ModalSettings show={showSettingsModal} setShow={setShowSettingsModal} />
+          <ThemeToggler translate={translate} />
+          <ButtonMatcha
+            variant="ghost"
+            size="icon"
+            title={translate(`settings`)}
+            onClick={() => setShowSettingsModal(true)}
+            className="smooth42transition hover:bg-transparent hover:text-c42orange"
+          >
+            <div className="flex flex-row items-center gap-2">
+              <Settings />
+              {/*<p>{translate(`settings`)}</p>*/}
+              <span className="sr-only">{translate(`settings`)}</span>
+            </div>
+          </ButtonMatcha>
+          <LogoutButton translate={translate} />
         </div>
 
         {/* horizontal divider */}

@@ -19,8 +19,10 @@ import useUserStore from '@/stores/user';
 const Menu: React.FC = () => {
   const { theme } = useTheme();
   const t = useTranslations();
-  const user = useUserStore((state) => state.user);
-  const [loading, setLoading] = useState(false);
+  const { user, globalLoading } = useUserStore((state) => ({
+    user: state.user,
+    globalLoading: state.globalLoading,
+  }));
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
@@ -103,7 +105,7 @@ const Menu: React.FC = () => {
       </div>
 
       {/* Menu Sidebar */}
-      {isClient && !loading ? (
+      {isClient && !globalLoading ? (
         <>
           <div
             id="sidebar"
@@ -139,7 +141,6 @@ const Menu: React.FC = () => {
                   Array.isArray(user?.photos) && user?.photos.length > 0 ? user.photos[0] : ''
                 }
                 translate={t}
-                setLoading={setLoading}
               />
 
               {/* DASHBOARD LINK */}

@@ -303,5 +303,13 @@
   "from": "de",
   "distance": "Distance",
   "km": "km",
-  "category-filled-?": "Catégorie remplie?"
+  "category-filled-?": "Catégorie remplie?",
+  "light": "Clair",
+  "dark": "Sombre",
+  "error-fetching-profile": "Erreur lors de la récupération du profil. Veuillez réessayer",
+  "error-fetching-suggestions": "Erreur lors de la récupération des suggestions. Veuillez réessayer",
+  "profile-not-found": "Profil non trouvé",
+  "nickname-not-provided": "Nickname non fourni",
+  "SyntaxError: Unexpected end of JSON input": "Erreur de syntaxe: fin inattendue de l'entrée JSON",
+  "???": "???"
 }

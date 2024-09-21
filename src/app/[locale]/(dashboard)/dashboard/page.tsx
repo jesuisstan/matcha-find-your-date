@@ -45,7 +45,7 @@ const Dashboard = () => {
           )}
         >
           <div
-            className="hover:border-c42green flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out hover:border-c42green"
             onClick={() => router.push('/profile')}
           >
             <p>{t('customize-profile')}</p>
@@ -56,7 +56,7 @@ const Dashboard = () => {
           </div>
 
           <div
-            className="hover:border-c42green flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out hover:border-c42green"
             onClick={() => router.push('/search/smart-suggestions')}
           >
             <p>{t('use-smart-suggestions')}</p>
@@ -67,7 +67,7 @@ const Dashboard = () => {
           </div>
 
           <div
-            className="hover:border-c42green flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out"
+            className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-5 rounded-2xl border bg-card p-5 text-center transition-all duration-300 ease-in-out hover:border-c42green"
             onClick={() => router.push('/search/advanced')}
           >
             <p>{t('use-advanced-search')}</p>
@@ -190,6 +190,21 @@ const Dashboard = () => {
                 priority
               />
               <p>TailwindCSS</p>
+            </div>
+
+            <div className="flex flex-col items-center justify-between gap-3">
+              <Image
+                src="https://lucide.dev/logo.light.svg"
+                alt="lucide"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className={clsx(`h-auto w-16`)}
+                placeholder="blur"
+                blurDataURL={'https://lucide.dev/logo.light.svg'}
+                priority
+              />
+              <p>Lucide</p>
             </div>
 
             <div className="flex flex-col items-center justify-between gap-3">

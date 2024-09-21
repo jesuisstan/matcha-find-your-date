@@ -1,9 +1,9 @@
 import ProfileCardSkeleton from './profile-card-skeleton';
 
-const SmartSuggestionsSeleton = () => {
+const SuggestionsSkeleton = () => {
   return (
     <div>
-      <div className="flex w-[100%] flex-row flex-wrap content-center items-center justify-center gap-4 align-middle">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-4 smooth42transition">
         {[...Array(10)].map((_, index) => (
           <div key={index}>
             <ProfileCardSkeleton />
@@ -14,4 +14,4 @@ const SmartSuggestionsSeleton = () => {
   );
 };
 
-export default SmartSuggestionsSeleton;
+export default SuggestionsSkeleton;

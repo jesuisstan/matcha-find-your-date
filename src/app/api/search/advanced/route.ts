@@ -2,23 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-// Helper function to calculate distance between two coordinates using the Haversine formula
-const haversineDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
-  const toRad = (value: number) => (value * Math.PI) / 180;
-  const R = 6371; // Radius of the Earth in kilometers
-
-  const dLat = toRad(lat2 - lat1);
-  const dLon = toRad(lon2 - lon1);
-  const lat1Rad = toRad(lat1);
-  const lat2Rad = toRad(lat2);
-
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1Rad) * Math.cos(lat2Rad);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  return R * c; // Distance in km
-};
+import { haversineDistance } from '@/utils/server/haversine-distance';
 
 export async function POST(request: Request) {
   const {
@@ -97,7 +81,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Error fetching users:', error);
-    return NextResponse.json({ error: 'Error fetching users' }, { status: 500 });
+    return NextResponse.json({ error: 'error-fetching-suggestions' }, { status: 500 });
   } finally {
     client.release();
   }

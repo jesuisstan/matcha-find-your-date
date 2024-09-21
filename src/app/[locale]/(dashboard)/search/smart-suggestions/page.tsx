@@ -1,31 +1,62 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { Annoyed, RefreshCw } from 'lucide-react';
+import { Frown, RefreshCw } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
-import SmartSuggestionsSeleton from '@/components/ui/skeletons/smart-suggestions-skeleton';
+import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
 import useUserStore from '@/stores/user';
 
 const SmartSuggestions = () => {
   // Translate hook
   const t = useTranslations();
-  const { user } = useUserStore();
-  const [loading, setLoading] = useState(false); // todo
-  const [suggestions, setSuggestions] = useState([]);
+  const { user, globalLoading } = useUserStore();
+  const [loading, setLoading] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+  const [error, setError] = useState('');
+
+  const fetchSmartSuggestions = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/search/smart-suggestions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user?.id,
+          latitude: user?.latitude,
+          longitude: user?.longitude,
+          sexPreferences: user?.sex_preferences || 'bisexual',
+          tags: user?.tags || [],
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setSearchResult(result.data);
+      } else {
+        setError(result.error ? result.error : 'error-fetching-suggestions');
+      }
+    } catch (error) {
+      setError(String(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch smart suggestions on component mount
+  useEffect(() => {
+    if (user) fetchSmartSuggestions();
+  }, [user]);
 
   const handleRefreshSuggestions = () => {
-    setLoading(true);
-    // todo
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000); // todo delete
-    //setLoading(false); // todo
+    fetchSmartSuggestions();
   };
 
   return (
@@ -39,9 +70,16 @@ const SmartSuggestions = () => {
               {t(`search.smart-suggestions`)}
             </h1>
           </div>
+          <div className="mb-2 w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
+            <p className="text-left text-xs italic">{t(`use-smart-suggestions`)}</p>
+          </div>
+
+          {/* FILTER & SORTINN BAR */}
           <div className="flex flex-col items-stretch gap-4 xs:flex-row ">
             <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
-              <p className="text-justify text-sm">{t(`use-smart-suggestions`)}</p>
+              <p className="text-justify text-sm">!!! FILTER & SORTING BAR WOULLD BE HERE !!!</p>
+              <p className="text-justify text-sm">!!! FILTER & SORTING BAR WOULLD BE HERE !!!</p>
+              <p className="text-justify text-sm">!!! FILTER & SORTING BAR WOULLD BE HERE !!!</p>
             </div>
             <div className="flex items-center justify-center">
               <ButtonMatcha
@@ -65,27 +103,22 @@ const SmartSuggestions = () => {
       </div>
 
       {/* MAIN CONTENT */}
-      {loading ? (
-        <SmartSuggestionsSeleton />
-      ) : suggestions.length !== 0 ? (
+      {loading || globalLoading || !user ? (
+        <SuggestionsSkeleton />
+      ) : searchResult.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
-            <Annoyed size={84} />
+            <Frown size={84} />
           </div>
-          <p className="text-center text-lg">{t(`search.no-suggestions`)}</p>
+          <p className="text-center text-lg">
+            {error ? t(`${error}`) : t(`search.no-suggestions`)}
+          </p>
         </div>
       ) : (
         <div className="flex flex-row flex-wrap items-center justify-center gap-4 smooth42transition">
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
-          <ProfileCardWrapper profile={user} />
+          {searchResult.map((dateProfile: any, index: number) => (
+            <ProfileCardWrapper key={`${dateProfile.id}-${index}`} profile={dateProfile} />
+          ))}
         </div>
       )}
     </div>

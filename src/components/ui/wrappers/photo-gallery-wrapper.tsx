@@ -10,6 +10,7 @@ import { PenLine } from 'lucide-react';
 import EmblaCarousel from '@/components/carousel/embla-carousel';
 import FilledOrNot from '@/components/ui/filled-or-not';
 import { TUser } from '@/types/user';
+import { TDateProfile } from '@/types/date-profile';
 
 const EmptyPhoto = () => {
   return (
@@ -29,17 +30,17 @@ const EmptyPhoto = () => {
 };
 
 const PhotoGalleryWrapper = ({
-  user,
+  profile,
   modifiable,
   onModify,
 }: {
-  user: TUser | null | undefined;
+  profile: TUser | TDateProfile | null | undefined;
   modifiable?: boolean;
   onModify?: () => void;
 }) => {
   const t = useTranslations();
   const [allPhotosFilled, setAllPhotosFilled] = useState<boolean>(
-    user?.photos?.length! >= 1 && user?.photos?.length! < 5 ? false : true
+    profile?.photos?.length! >= 1 && profile?.photos?.length! < 5 ? false : true
   );
 
   const OPTIONS: EmblaOptionsType = { loop: true };
@@ -48,9 +49,9 @@ const PhotoGalleryWrapper = ({
       key="slide1"
       className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
-      {user?.photos?.[0] ? (
+      {profile?.photos?.[0] ? (
         <Image
-          src={`${user?.photos?.[0]}`}
+          src={`${profile?.photos?.[0]}`}
           alt="photo1"
           width={0}
           height={0}
@@ -70,9 +71,9 @@ const PhotoGalleryWrapper = ({
       key="slide2"
       className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
-      {user?.photos?.[1] ? (
+      {profile?.photos?.[1] ? (
         <Image
-          src={`${user?.photos?.[1]}`}
+          src={`${profile?.photos?.[1]}`}
           alt="photo2"
           width={0}
           height={0}
@@ -92,9 +93,9 @@ const PhotoGalleryWrapper = ({
       key="slide3"
       className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
-      {user?.photos?.[2] ? (
+      {profile?.photos?.[2] ? (
         <Image
-          src={`${user?.photos?.[2]}`}
+          src={`${profile?.photos?.[2]}`}
           alt="photo2"
           width={0}
           height={0}
@@ -114,9 +115,9 @@ const PhotoGalleryWrapper = ({
       key="slide4"
       className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
-      {user?.photos?.[3] ? (
+      {profile?.photos?.[3] ? (
         <Image
-          src={`${user?.photos?.[3]}`}
+          src={`${profile?.photos?.[3]}`}
           alt="photo2"
           width={0}
           height={0}
@@ -136,9 +137,9 @@ const PhotoGalleryWrapper = ({
       key="slide5"
       className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
     >
-      {user?.photos?.[4] ? (
+      {profile?.photos?.[4] ? (
         <Image
-          src={`${user?.photos?.[4]}`}
+          src={`${profile?.photos?.[4]}`}
           alt="photo2"
           width={0}
           height={0}
@@ -157,8 +158,8 @@ const PhotoGalleryWrapper = ({
   ];
 
   // Alternative to create slides dynamically with no EmptyPhoto for nullable photos
-  //const SLIDE_COUNT = user?.photos?.length || 0;
-  //const SLIDES = user?.photos.map((photo, index) => (
+  //const SLIDE_COUNT = profile?.photos?.length || 0;
+  //const SLIDES = profile?.photos.map((photo, index) => (
   //  <div
   //    key={`slide-${index}`}
   //    className="m-3 mx-10 flex h-[335px] w-[335px] justify-center self-center smooth42transition sm:w-[400px] md:h-[400px]"
@@ -183,15 +184,17 @@ const PhotoGalleryWrapper = ({
   //));
 
   useEffect(() => {
-    setAllPhotosFilled(user?.photos?.length! >= 1 && user?.photos?.length! < 5 ? false : true);
-  }, [user?.photos]);
+    setAllPhotosFilled(
+      profile?.photos?.length! >= 1 && profile?.photos?.length! < 5 ? false : true
+    );
+  }, [profile?.photos]);
 
   return (
     <div className="relative self-center rounded-2xl bg-card p-5">
       <div className="flex flex-col items-center">
         <div className="flex w-full max-w-screen-md flex-col items-center">
           {/*<h3 className="mb-4 text-left text-xl font-bold">{t('photo-gallery')}</h3>*/}
-          {user?.photos ? (
+          {profile?.photos ? (
             <div className="w-full max-w-4xl rounded-xl py-5">
               <EmblaCarousel slides={SLIDES!} options={OPTIONS} />
             </div>
@@ -204,7 +207,7 @@ const PhotoGalleryWrapper = ({
           <div className="absolute right-2 top-2 flex gap-1">
             <FilledOrNot
               size={15}
-              filled={!!user?.photos && user?.photos?.length >= 1}
+              filled={!!profile?.photos && profile?.photos?.length >= 1}
               warning={!allPhotosFilled}
             />
             <div
