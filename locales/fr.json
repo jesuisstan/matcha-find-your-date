@@ -104,6 +104,7 @@
   "attension": "Attention!",
   "complete-your-profile-message": "Veuillez compléter votre profil pour continuer à utiliser le service et accéder aux fonctionnalités de recherche avancée.",
   "complete-profile": "Compléter le profil",
+  "not-available-for-search": "De plus, votre profil ne sera pas visible dans la recherche tant qu'il ne sera pas entièrement complété.",
   "ignore": "Ignorer",
   "ok": "D'accord",
   "yes": "Oui",
@@ -116,7 +117,7 @@
   "save": "Sauvegarder",
   "personal-data": "Données personnelles",
   "about-youself": "À propos de vous",
-  "describe-youself": "Décrivez brièvement vous-même et ce que vous recherchez chez un partenaire",
+  "describe-youself": "Décrivez brièvement vous-même",
   "tags": {
     "tags": "Tags",
 
@@ -282,7 +283,7 @@
   "error-min-biography-length": "Minimum 42 caractères requis",
   "error-max-biography-length": "Maximum 442 caractères autorisés",
   "congrats": "Félicitations!",
-  "profile-is-completed": "Votre profil est complet.\n Vous pouvez maintenant utiliser toutes les fonctionnalités de Matcha",
+  "profile-is-completed": "Votre profil est complet.\n Vous pouvez maintenant utiliser toutes les fonctionnalités de Matcha.",
   "click-to-modify": "Cliquez pour modifier",
   "min": "min",
   "max": "max",

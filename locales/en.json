@@ -103,8 +103,9 @@
     "advanced-search-note": "Choose the characteristics your ideal match should have (age, tags, preferences, etc.), focusing on what you're looking for in a partner, not about yourself."
   },
   "attension": "Attention!",
-  "complete-your-profile-message": "Please complete your profile to continue using the service and gain access to advanced search",
+  "complete-your-profile-message": "Please complete your profile to continue using the service and gain access to advanced search.",
   "complete-profile": "Complete profile",
+  "not-available-for-search": "Additionally, your profile won't be visible in search until it is fully completed.",
   "ignore": "Ignore",
   "ok": "Ok",
   "yes": "Yes",
@@ -117,7 +118,7 @@
   "save": "Save",
   "personal-data": "Personal Data",
   "about-youself": "About youself",
-  "describe-youself": "Briefly describe yourself and what you are looking for in a partner",
+  "describe-youself": "Briefly describe yourself",
   "tags": {
     "tags": "Tags",
 

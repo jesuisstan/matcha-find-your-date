@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 

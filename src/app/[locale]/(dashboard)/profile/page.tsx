@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import ModalProfileComplete from '@/components/modals/modal-profile-complete';
 import TProfileCompleteLayout from '@/components/modals/modal-profile-complete';
 import ModalProfileCongrats from '@/components/modals/modal-profile-congrats';
+import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 import ConfirmationWrapper from '@/components/ui/wrappers/confirmation-wrapper';
 import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
 import InterestsWrapper from '@/components/ui/wrappers/interests-wrapper';
@@ -19,7 +20,6 @@ import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrappe
 import StatusWrapper from '@/components/ui/wrappers/status-wrapper';
 import useUserStore from '@/stores/user';
 import { calculateAge } from '@/utils/format-string';
-import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 
 const ProfilePage = () => {
   const t = useTranslations();

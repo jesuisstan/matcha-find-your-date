@@ -1,13 +1,13 @@
 'use client';
-import { useTranslations } from 'next-intl';
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+
 import { Frown } from 'lucide-react';
 
+import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 import DateProfileWrapper from '@/components/ui/wrappers/date-profile-wrapper';
 import useUserStore from '@/stores/user';
-import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 
 const DateProfilePage = () => {
   const t = useTranslations();

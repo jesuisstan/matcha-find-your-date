@@ -26,11 +26,15 @@ const ModalProfileWarning = ({ user }: { user: TUser }) => {
 
   return (
     <ModalBasic isOpen={!user?.complete} title={t('attension')}>
-      <div className="flex min-h-[30vh] flex-col items-center justify-center space-y-10 text-center">
-        <div className="mb-5 text-c42orange">
+      <div className="flex min-h-[30vh] flex-col items-center justify-center space-y-5 text-center">
+        <div className="text-c42orange">
           <OctagonAlert size={60} className="smooth42transition hover:scale-150" />
         </div>
-        <p className="max-w-[60vh]">{t('complete-your-profile-message')}</p>
+        <div>
+          <p className="max-w-[60vh]">{t('complete-your-profile-message')}</p>
+          <br />
+          <p className="max-w-[60vh]">{t('not-available-for-search')}</p>
+        </div>
       </div>
 
       <div className="flex flex-row justify-center">
