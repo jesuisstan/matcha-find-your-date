@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 
-import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton'; // Import the skeleton you already have
+import HeaderSkeleton from '@/components/ui/skeletons/header-skeleton';
 
 const ProfilePageSkeleton = () => {
   return (
