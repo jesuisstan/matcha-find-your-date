@@ -315,5 +315,7 @@
   "profile-not-found": "Profile not found",
   "nickname-not-provided": "Nickname not provided",
   "SyntaxError: Unexpected end of JSON input": "SyntaxError: Unexpected end of JSON input",
-  "???": "???"
+  "???": "???",
+  "suggestions-retrieved-successfully": "Suggestions retrieved successfully",
+  "failed-to-update-user-activity": "Failed to update user activity"
 }

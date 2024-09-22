@@ -697,7 +697,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Music enthusiast, especially jazz. Enjoy going to live concerts and hanging out with friends.',
-      tags: ['jazz', 'music-lover', 'live-music', 'french', 'english'],
+      tags: ['jazz', 'music-lover', 'live-music', 'lgbt-friendly', 'french', 'english'],
       latitude: 48.8499, // Paris
       longitude: 2.3428,
       address: 'Paris, France',
@@ -805,7 +805,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Passionate about photography and art. I love capturing moments and expressing emotions through images.',
-      tags: ['photography', 'art-lover', 'polyamorous', 'russian', 'english'],
+      tags: ['photography', 'art-lover', 'polyamorous', 'lgbt-friendly', 'russian', 'english'],
       latitude: 55.7558, // Moscow
       longitude: 37.6176,
       address: 'Moscow, Russia',
@@ -913,7 +913,7 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1985-09-23',
       sex: 'male',
       biography: 'German entrepreneur. I enjoy investing and exploring new business opportunities.',
-      tags: ['investor', 'traveller', 'techie', 'dutch', 'english', 'french'],
+      tags: ['investor', 'traveller', 'techie', 'lgbt-friendly', 'dutch', 'english', 'french'],
       latitude: 52.52, // Berlin
       longitude: 13.405,
       address: 'Berlin, Germany',
@@ -940,7 +940,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Fitness enthusiast and personal trainer. I help people achieve their fitness goals.',
-      tags: ['fitness', 'openminded', 'trainer', 'sports-fan', 'dutch', 'english', 'french'],
+      tags: ['fitness', 'openminded', 'hiker', 'sports-fan', 'dutch', 'english', 'french'],
       latitude: 34.0522, // Los Angeles
       longitude: -118.2437,
       address: 'Los Angeles, USA',
@@ -1656,7 +1656,15 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 77,
       biography: 'Fitness coach with a love for health and wellness.',
-      tags: ['fitness', 'openminded', 'health-conscious', 'sports-fan', 'english', 'french'],
+      tags: [
+        'fitness',
+        'openminded',
+        'health-conscious',
+        'sports-fan',
+        'cyclist',
+        'english',
+        'french',
+      ],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -2174,15 +2182,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 69,
       biography: 'Sports enthusiast and fitness trainer. Helping people reach their goals.',
-      tags: [
-        'fitness',
-        'openminded',
-        'sports-fan',
-        'trainer',
-        'lgbt-friendly',
-        'english',
-        'french',
-      ],
+      tags: ['fitness', 'openminded', 'sports-fan', 'hiker', 'lgbt-friendly', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -3596,7 +3596,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 21,
       biography:
         'Fitness enthusiast and personal trainer. I love helping people reach their goals.',
-      tags: ['fitness', 'openminded', 'trainer', 'sports-fan', 'korean', 'english'],
+      tags: ['fitness', 'openminded', 'cyclist', 'sports-fan', 'korean', 'english'],
       latitude: 37.5665, // Seoul
       longitude: 126.978,
       address: 'Seoul, South Korea',
@@ -3644,7 +3644,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 21,
       biography: 'An artist at heart, I love painting and creating abstract art.',
-      tags: ['painter', 'art-lover', 'creative', 'english', 'spanish'],
+      tags: ['painter', 'art-lover', 'creative', 'live-music', 'english', 'spanish'],
       latitude: 34.0522, // Los Angeles
       longitude: -118.2437,
       address: 'Los Angeles, USA',
@@ -3668,7 +3668,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 33,
       biography: 'A fitness trainer who enjoys helping people achieve their health goals.',
-      tags: ['fitness', 'openminded', 'trainer', 'sports-fan', 'german', 'english'],
+      tags: ['fitness', 'openminded', 'live-music', 'sports-fan', 'german', 'english'],
       latitude: 52.52, // Berlin
       longitude: 13.405,
       address: 'Berlin, Germany',

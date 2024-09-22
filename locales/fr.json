@@ -312,5 +312,7 @@
   "profile-not-found": "Profil non trouvé",
   "nickname-not-provided": "Nickname non fourni",
   "SyntaxError: Unexpected end of JSON input": "Erreur de syntaxe: fin inattendue de l'entrée JSON",
-  "???": "???"
+  "???": "???",
+  "suggestions-retrieved-successfully": "Suggestions récupérées avec succès",
+  "failed-to-update-user-activity": "Échec de la mise à jour de l'activité de l'utilisateur"
 }

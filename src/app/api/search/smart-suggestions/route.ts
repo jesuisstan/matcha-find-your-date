@@ -5,47 +5,71 @@ import { db } from '@vercel/postgres';
 import { haversineDistance } from '@/utils/server/haversine-distance';
 
 export async function POST(request: Request) {
-  const { userId, latitude, longitude, sexPreferences, tags } = await request.json();
-  const maxDistance = 21; // Max distance in km
+  const { userId, latitude, longitude, sex, sexPreferences, tags } = await request.json();
+  const maxDistance = 42; // Max distance in km
   const client = await db.connect();
 
   try {
-    // Get user's data to ensure valid request
     const userResult = await client.query('SELECT * FROM users WHERE id = $1', [userId]);
     const user = userResult.rows[0];
 
     if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+      return NextResponse.json({ error: 'user-not-found' }, { status: 404 });
     }
 
-    const queryFilters: string[] = [];
-    const queryValues: any[] = [userId];
+    // Update user's last action and set online status to true
+    const currentDate = new Date().toISOString();
+    const updateQuery = `
+      UPDATE users 
+      SET last_action = $2, online = true 
+      WHERE id = $1
+      RETURNING id, last_action, online;
+    `;
+    const updatedUserResult = await client.query(updateQuery, [userId, currentDate]);
+    const updatedUserData = updatedUserResult.rows[0];
 
-    // Filter by sexual orientation
-    if (sexPreferences === 'bisexual') {
-      queryFilters.push(`sex_preferences = ANY(ARRAY['men', 'women', 'bisexual'])`);
-    } else {
-      queryFilters.push(`sex_preferences = $2`);
-      queryValues.push(sexPreferences);
+    if (!updatedUserData) {
+      return NextResponse.json({ error: 'failed-to-update-user-activity' }, { status: 500 });
     }
 
-    // Prepare the SQL query for nearby users
+    // Filter users by sex & sex-preferences
+    let sexFilter: string = '';
+    if (sexPreferences === 'men') {
+      if (sex === 'male') {
+        sexFilter = `(sex = 'male' AND sex_preferences IN ('men', 'bisexual'))`;
+      } else {
+        sexFilter = `(sex = 'male' AND sex_preferences IN ('women', 'bisexual'))`;
+      }
+    } else if (sexPreferences === 'women') {
+      if (sex == 'male') {
+        sexFilter = `(sex = 'female' AND sex_preferences IN ('men', 'bisexual'))`;
+      } else {
+        sexFilter = `(sex = 'female' AND sex_preferences IN ('women', 'bisexual'))`;
+      }
+    } else if (sexPreferences === 'bisexual') {
+      if (sex === 'male') {
+        sexFilter = `(sex = 'female' AND sex_preferences IN ('men', 'bisexual')) OR (sex = 'male' AND sex_preferences = 'bisexual') OR (sex = 'male' AND sex_preferences = 'men')`;
+      } else if (sex === 'female') {
+        sexFilter = `(sex = 'male' AND sex_preferences IN ('women', 'bisexual')) OR (sex = 'female' AND sex_preferences = 'bisexual') OR (sex = 'female' AND sex_preferences = 'women')`;
+      }
+    }
+
+    // Filter users by tags & sort by tags count & raiting
     const queryString = `
       SELECT 
-        id, email, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address
+        id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address
       FROM users
       WHERE 
         id != $1
-        AND ${queryFilters.join(' AND ')}
+        AND ${sexFilter}
       ORDER BY (
         SELECT count(*) 
         FROM unnest(tags) AS tag 
-        WHERE tag = ANY($3)
+        WHERE tag = ANY($2)
       ) DESC, raiting DESC;
     `;
 
-    // Execute the query
-    const result = await client.query(queryString, [userId, sexPreferences, tags]);
+    const result = await client.query(queryString, [userId, tags]);
     const users = result.rows;
 
     // Filter users by distance
@@ -61,8 +85,9 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({
-      message: 'Suggestions retrieved successfully',
-      data: matchingUsers,
+      message: 'suggestions-retrieved-successfully',
+      matchingUsers,
+      updatedUserData,
     });
   } catch (error) {
     console.error('Error fetching suggestions:', error);

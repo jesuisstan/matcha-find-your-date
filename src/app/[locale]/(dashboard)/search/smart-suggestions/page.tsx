@@ -14,7 +14,7 @@ import useUserStore from '@/stores/user';
 
 const SmartSuggestions = () => {
   const t = useTranslations();
-  const { user, globalLoading } = useUserStore();
+  const { user, setUser, globalLoading } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [error, setError] = useState('');
@@ -31,6 +31,7 @@ const SmartSuggestions = () => {
           userId: user?.id,
           latitude: user?.latitude,
           longitude: user?.longitude,
+          sex: user?.sex,
           sexPreferences: user?.sex_preferences || 'bisexual',
           tags: user?.tags || [],
         }),
@@ -38,7 +39,8 @@ const SmartSuggestions = () => {
 
       const result = await response.json();
       if (response.ok) {
-        setSearchResult(result.data);
+        setSearchResult(result.matchingUsers);
+        setUser({ ...user, ...result.updatedUserData });
       } else {
         setError(result.error ? result.error : 'error-fetching-suggestions');
       }
@@ -52,7 +54,7 @@ const SmartSuggestions = () => {
   // Fetch smart suggestions on component mount
   useEffect(() => {
     if (user) fetchSmartSuggestions();
-  }, [user]);
+  }, []);
 
   const handleRefreshSuggestions = () => {
     fetchSmartSuggestions();

@@ -171,12 +171,12 @@ const AdvancedSearch = () => {
               {t(`search.advanced`)}
             </h1>
           </div>
-          <div className="flex flex-col items-stretch gap-4 xs:flex-row ">
+          <div className="flex flex-col items-stretch gap-3 xs:flex-row ">
             <div className="flex items-center justify-center text-c42orange">
-              <OctagonAlert size={25} />
+              <OctagonAlert size={21} />
             </div>
-            <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
-              <p className="text-xs">{t(`search.advanced-search-note`)}</p>
+            <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
+              <p className="text-left text-xs italic">{t(`search.advanced-search-note`)}</p>
             </div>
           </div>
         </div>
