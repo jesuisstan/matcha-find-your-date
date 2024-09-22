@@ -105,7 +105,7 @@ const Menu: React.FC = () => {
       </div>
 
       {/* Menu Sidebar */}
-      {isClient && globalLoading ? (
+      {isClient && !globalLoading ? (
         <>
           <div
             id="sidebar"
