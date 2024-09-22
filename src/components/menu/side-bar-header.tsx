@@ -4,10 +4,10 @@ import { Settings } from 'lucide-react';
 
 import LocaleSwitcher from '@/components/locale-switcher';
 import LogoutButton from '@/components/menu/logout-button';
-import { UserNameSkeleton } from '@/components/menu/menu-skeleton';
 import ModalSettings from '@/components/modals/modal-settings';
 import AvatarMini from '@/components/ui/avatar-mini';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
+import { UserNameSkeleton } from '@/components/ui/skeletons/menu-skeleton';
 import ThemeToggler from '@/components/ui/theme-toggler';
 import { formatUserName } from '@/utils/format-string';
 

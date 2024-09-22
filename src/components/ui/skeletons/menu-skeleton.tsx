@@ -3,12 +3,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 
 export const UserNameSkeleton = () => {
-  return (
-    <div className="flex animate-pulse flex-row gap-1">
-      <div className="h-5 w-16 rounded-full bg-muted" />
-      <div className="h-5 w-8 rounded-full bg-muted" />
-    </div>
-  );
+  return <div className="flex h-5 w-28 animate-pulse rounded-full bg-muted" />;
 };
 
 export const generateSkeletonItems = (count: number) => {
@@ -41,7 +36,7 @@ const MenuSkeleton = ({ isSidebarOpen }: { isSidebarOpen?: boolean }) => {
     >
       <div
         id="rounded-menu-container"
-        className="flex max-h-full w-64 animate-pulse flex-col space-y-5 rounded-2xl bg-card px-3 py-4"
+        className="flex max-h-full w-64 animate-pulse flex-col space-y-6 rounded-2xl bg-card px-3 py-4"
       >
         <div className="flex justify-center">
           <Image
@@ -56,24 +51,25 @@ const MenuSkeleton = ({ isSidebarOpen }: { isSidebarOpen?: boolean }) => {
         </div>
 
         {/* Sidebar header */}
-        <div className="flex flex-col items-center justify-center space-y-3 align-middle">
+        <div className="flex flex-col items-center justify-center space-y-6 align-middle">
           <div className="flex items-center justify-center space-x-4 align-middle font-bold ">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-base text-card" />
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground text-base text-card" />
             <UserNameSkeleton />
           </div>
-          <div className="flex flex-col items-center space-y-3 text-xs font-normal text-foreground">
-            <div className="h-6 w-6 rounded-full bg-muted dark:bg-muted" />
-            <div className="h-2.5 w-28 rounded-full bg-muted dark:bg-muted" />
-            <div className="h-2.5 w-11 rounded-full bg-muted pb-3 dark:bg-muted" />
-            <div className="h-2.5 w-14 rounded-full bg-muted dark:bg-muted" />
-            <div className="w-52 border-t border-muted" />
+          <div className="flex flex-col items-center space-y-5 text-xs font-normal text-foreground">
+            <div className="flex flex-row items-center justify-center gap-5">
+              <div className="h-7 w-7 rounded-full bg-muted dark:bg-muted" />
+              <div className="h-7 w-7 rounded-full bg-muted dark:bg-muted" />
+              <div className="h-7 w-7 rounded-full bg-muted dark:bg-muted" />
+            </div>
+            <div className="flex flex-row items-center justify-center gap-5">
+              <div className="h-7 w-7 rounded-full bg-muted dark:bg-muted" />
+              <div className="h-7 w-7 rounded-full bg-muted dark:bg-muted" />
+              <div className="h-7 w-7 rounded-full bg-muted dark:bg-muted" />
+            </div>
           </div>
-        </div>
-
-        {/* Sidebar homepage link */}
-        <div className="group ml-4 flex items-center gap-2 pb-1 pt-1 text-sm text-foreground">
-          <div className="h-2.5 w-5 rounded-full bg-muted" />
-          <div className="h-2.5 w-24 rounded-full bg-muted" />
+          {/* horizontal divider */}
+          <div className="mt-3 w-52 border-t border-secondary opacity-40" />
         </div>
 
         {/* Sidebar search bar */}
@@ -82,7 +78,7 @@ const MenuSkeleton = ({ isSidebarOpen }: { isSidebarOpen?: boolean }) => {
         </div>
 
         {/* Smartdata list */}
-        {generateSkeletonItems(7)}
+        {generateSkeletonItems(3)}
       </div>
     </aside>
   );

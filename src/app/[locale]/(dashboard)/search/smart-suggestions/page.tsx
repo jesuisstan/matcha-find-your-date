@@ -118,7 +118,7 @@ const SmartSuggestions = () => {
           </p>
         </div>
       ) : (
-        <div className="flex flex-row flex-wrap items-center justify-center gap-4 smooth42transition">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-5 smooth42transition">
           {smartSuggestions.map((dateProfile: any, index: number) => (
             <ProfileCardWrapper key={`${dateProfile.id}-${index}`} profile={dateProfile} />
           ))}

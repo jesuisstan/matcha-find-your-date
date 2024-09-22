@@ -4,14 +4,17 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 
 import clsx from 'clsx';
+import { Star } from 'lucide-react';
 import { MapPinned } from 'lucide-react';
 
+import { getColorByRating } from './raiting-wrapper';
 import { SexPreferenceIcon } from './sex-preference-wrapper';
 
 import AvatarMini from '@/components/ui/avatar-mini';
+import { TDateProfile } from '@/types/date-profile';
 import { calculateAge } from '@/utils/format-string';
 
-const ProfileCardWrapper = ({ profile }: { profile: any }) => {
+const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
   const t = useTranslations();
   const { theme } = useTheme();
 
@@ -19,7 +22,25 @@ const ProfileCardWrapper = ({ profile }: { profile: any }) => {
     <Link href={`/search/${profile.id}`} passHref>
       {' '}
       {/* Link to the profile page */}
-      <div className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border bg-card p-2 smooth42transition hover:scale-105 hover:border-c42green">
+      <div className="relative flex max-w-72 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border bg-card p-2 smooth42transition hover:scale-105 hover:border-c42green">
+        {/* RAITING */}
+        <div
+          title={t(`raiting`)}
+          className="absolute -right-3 -top-3 flex w-8 flex-col items-center justify-center gap-1 rounded-2xl border bg-muted/70 p-1 "
+        >
+          <Star size={18} className={getColorByRating(profile?.raiting)} />
+          <p className="text-sm">{profile?.raiting}</p>
+        </div>
+
+        {/* STATUS */}
+        <div
+          title={profile?.online ? t('online') : t('offline')}
+          className={clsx(
+            'absolute bottom-2 right-2 rounded-full p-[6px]',
+            profile?.online ? 'animate-pulse bg-c42green' : 'bg-negative'
+          )}
+        ></div>
+
         <AvatarMini src={profile?.photos[0]} nickname={profile?.nickname} width={40} height={40} />
         <div className="h-fit w-[160px] items-center justify-center self-center rounded-2xl text-center align-middle">
           <div className="flex flex-row items-center justify-center gap-2">

@@ -11,8 +11,8 @@ import { LayoutDashboard, MenuIcon } from 'lucide-react';
 
 import ContactSupportBlock from '@/components/menu/contact-support-block';
 import MenuList from '@/components/menu/menu-list';
-import MenuSkeleton from '@/components/menu/menu-skeleton';
 import SideBarHeader from '@/components/menu/side-bar-header';
+import MenuSkeleton from '@/components/ui/skeletons/menu-skeleton';
 import { usePathname } from '@/navigation';
 import useUserStore from '@/stores/user';
 
@@ -105,7 +105,7 @@ const Menu: React.FC = () => {
       </div>
 
       {/* Menu Sidebar */}
-      {isClient && !globalLoading ? (
+      {isClient && globalLoading ? (
         <>
           <div
             id="sidebar"

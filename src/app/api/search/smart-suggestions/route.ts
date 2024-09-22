@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     // Filter users by tags & sort by tags count & raiting
     const queryString = `
       SELECT 
-        id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address
+        id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address, biography, last_action, online, confirmed, complete
       FROM users
       WHERE 
         id != $1
