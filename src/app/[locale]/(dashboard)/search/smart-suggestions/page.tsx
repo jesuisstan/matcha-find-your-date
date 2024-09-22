@@ -10,13 +10,15 @@ import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
+import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 
 const SmartSuggestions = () => {
   const t = useTranslations();
   const { user, setUser, globalLoading } = useUserStore();
+  const { smartSuggestions, setSmartSuggestions } = useSearchStore();
+
   const [loading, setLoading] = useState(false);
-  const [searchResult, setSearchResult] = useState([]);
   const [error, setError] = useState('');
 
   const fetchSmartSuggestions = async () => {
@@ -39,7 +41,7 @@ const SmartSuggestions = () => {
 
       const result = await response.json();
       if (response.ok) {
-        setSearchResult(result.matchingUsers);
+        setSmartSuggestions(result.matchingUsers);
         setUser({ ...user, ...result.updatedUserData });
       } else {
         setError(result.error ? result.error : 'error-fetching-suggestions');
@@ -106,7 +108,7 @@ const SmartSuggestions = () => {
       {/* MAIN CONTENT */}
       {loading || globalLoading || !user ? (
         <SuggestionsSkeleton />
-      ) : searchResult.length === 0 || error ? (
+      ) : smartSuggestions.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
             <Frown size={84} />
@@ -117,7 +119,7 @@ const SmartSuggestions = () => {
         </div>
       ) : (
         <div className="flex flex-row flex-wrap items-center justify-center gap-4 smooth42transition">
-          {searchResult.map((dateProfile: any, index: number) => (
+          {smartSuggestions.map((dateProfile: any, index: number) => (
             <ProfileCardWrapper key={`${dateProfile.id}-${index}`} profile={dateProfile} />
           ))}
         </div>

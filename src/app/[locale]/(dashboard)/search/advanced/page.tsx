@@ -17,7 +17,7 @@ import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton'
 import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
 import { getColorByRating } from '@/components/ui/wrappers/raiting-wrapper';
 import { TAGS_LIST } from '@/constants/tags-list';
-import useSearchFiltersStore from '@/stores/search';
+import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 import { TSelectGeoOption } from '@/types/geolocation';
 import { capitalize } from '@/utils/format-string';
@@ -33,7 +33,7 @@ const AdvancedSearch = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const { user, globalLoading } = useUserStore();
   const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
-    useSearchFiltersStore();
+    useSearchStore();
   const ageMin: number = getValueOfSearchFilter('age_min') as number;
   const ageMax: number = getValueOfSearchFilter('age_max') as number;
   const flirtFactorMin: number = getValueOfSearchFilter('flirt_factor_min') as number;

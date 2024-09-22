@@ -2,6 +2,7 @@ import { produce } from 'immer';
 import { create } from 'zustand';
 import { createJSONStorage, devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 
+import { TDateProfile } from '@/types/date-profile';
 import { capitalize } from '@/utils/format-string';
 
 export type TSearchFilters = {
@@ -17,8 +18,10 @@ export type TSearchFilters = {
   flirt_factor_min: number;
 };
 
-export type TSearchFiltersStore = {
+export type TSearchStore = {
   searchFilters: TSearchFilters;
+  smartSuggestions: TDateProfile[];
+  setSmartSuggestions: (newSuggestions: TDateProfile[]) => void;
   setValueOfSearchFilter: (filterKey: string, newValue: string | number) => string | number;
   getValueOfSearchFilter: (filterKey: string) => string | string[] | number;
   addOneItemToSearchFilter: (itemKey: string, newValue: string | number) => void;
@@ -42,12 +45,17 @@ const initialSearchFiltersState: TSearchFilters = {
   flirt_factor_min: 42,
 };
 
-const useSearchFiltersStore = create<TSearchFiltersStore>()(
+const useSearchStore = create<TSearchStore>()(
   devtools(
     subscribeWithSelector(
       persist(
         (set, get) => ({
           searchFilters: initialSearchFiltersState,
+          smartSuggestions: [],
+
+          setSmartSuggestions: (newSuggestions: TDateProfile[]) => {
+            set({ smartSuggestions: newSuggestions });
+          },
 
           setValueOfSearchFilter: (
             filterKey: string,
@@ -125,11 +133,11 @@ const useSearchFiltersStore = create<TSearchFiltersStore>()(
             set({ searchFilters: initialSearchFiltersState });
           },
         }),
-        { name: 'matcha-search-filters', storage: createJSONStorage(() => localStorage) }
+        { name: 'matcha-search-store', storage: createJSONStorage(() => localStorage) }
       )
     ),
-    { anonymousActionType: 'filtersActionStore' }
+    { anonymousActionType: 'searchFiltersActionStore' }
   )
 );
 
-export default useSearchFiltersStore;
+export default useSearchStore;

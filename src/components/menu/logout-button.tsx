@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
-import useSearchFiltersStore from '@/stores/search';
+import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 import { setUserOffline } from '@/utils/user-handlers';
 
@@ -14,7 +14,7 @@ const LogoutButton = ({ translate }: { translate: (key: string) => string }) => 
     logout: state.logout,
     setGlobalLoading: state.setGlobalLoading,
   }));
-  const { resetSearchFiltersStore } = useSearchFiltersStore();
+  const { resetSearchFiltersStore } = useSearchStore();
   const router = useRouter();
 
   const handleLogout = async () => {
