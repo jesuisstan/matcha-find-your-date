@@ -2827,7 +2827,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 69,
       biography: 'Entrepreneur and jazz lover. I enjoy attending live music events.',
-      tags: ['entrepreneur', 'jazz', 'music-lover', 'english', 'french'],
+      tags: ['netflix', 'jazz', 'music-lover', 'gamer', 'english', 'french'],
       latitude: 50.6292, // Lille
       longitude: 3.0573,
       address: 'Lille, France',

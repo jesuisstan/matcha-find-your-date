@@ -10,11 +10,33 @@ export async function POST(request: Request) {
   if (!profileToFindId) {
     return NextResponse.json({ error: 'id-not-provided' }, { status: 400 });
   }
-console.log('profileToFindId !!!!!!!!!!!!!!!!!!!!', profileToFindId);
+
   const client = await db.connect();
 
+  const userResult = await client.query('SELECT * FROM users WHERE id = $1', [userId]);
+  const user = userResult.rows[0];
+
+  if (!user) {
+    return NextResponse.json({ error: 'user-not-found' }, { status: 404 });
+  }
+
+  // Update user-requester's last action and set online status to true
+  const currentDate = new Date().toISOString();
+  const updateQuery = `
+      UPDATE users 
+      SET last_action = $2, online = true 
+      WHERE id = $1
+      RETURNING id, last_action, online;
+    `;
+  const updatedUserResult = await client.query(updateQuery, [userId, currentDate]);
+  const updatedUserData = updatedUserResult.rows[0];
+
+  if (!updatedUserData) {
+    return NextResponse.json({ error: 'failed-to-update-user-activity' }, { status: 500 });
+  }
+
   try {
-    // Fetch the user profile based on the provided profileToFindId
+    // Fetch the date profile based on the provided profileToFindId
     const query = `
       SELECT id, firstname, lastname, nickname, birthdate, sex, biography, tags, last_action, latitude, longitude, 
              address, online, raiting, sex_preferences, photos, confirmed, complete
@@ -29,14 +51,14 @@ console.log('profileToFindId !!!!!!!!!!!!!!!!!!!!', profileToFindId);
 
     // If no user is found, return an error response
     if (!result.rows || result.rows.length === 0) {
-      return NextResponse.json({ message: 'profile-not-found' }, { status: 200 });
+      return NextResponse.json({ message: 'profile-not-found', updatedUserData }, { status: 200 });
     }
 
     // Extract the user's profile data from the result
-    const userProfile = result.rows[0];
+    const matchingUserProfile = result.rows[0];
 
     // Return the profile data as a response
-    return NextResponse.json(userProfile, { status: 200 });
+    return NextResponse.json({ updatedUserData, matchingUserProfile }, { status: 200 });
   } catch (error) {
     console.error('Error fetching profile:', error);
     return NextResponse.json({ error: 'error-fetching-profile' }, { status: 500 });
