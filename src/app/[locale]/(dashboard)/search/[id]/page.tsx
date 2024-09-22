@@ -11,7 +11,7 @@ import useUserStore from '@/stores/user';
 
 const DateProfilePage = () => {
   const t = useTranslations();
-  const { nickname } = useParams(); // Grab the nickname from the dynamic route
+  const { id: profileToFindId } = useParams(); // Grab the id from the dynamic route
   const { user, globalLoading } = useUserStore();
   const [dateProfile, setDateProfile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -22,9 +22,9 @@ const DateProfilePage = () => {
       setLoading(true);
       setError('');
 
-      // Ensure the nickname is available
-      if (!nickname) {
-        setError('nickname-not-provided');
+      // Ensure the id is available
+      if (!profileToFindId) {
+        setError('id-not-provided');
         setLoading(false);
         return;
       }
@@ -37,7 +37,7 @@ const DateProfilePage = () => {
           },
           body: JSON.stringify({
             userId: user?.id,
-            nickname: nickname,
+            profileToFindId: profileToFindId,
           }),
         });
 
@@ -55,7 +55,7 @@ const DateProfilePage = () => {
     };
 
     fetchUserProfile();
-  }, [nickname]);
+  }, [profileToFindId]);
 
   return error ? (
     <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">

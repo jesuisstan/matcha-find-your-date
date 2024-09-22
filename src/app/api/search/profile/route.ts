@@ -4,26 +4,26 @@ import { db } from '@vercel/postgres';
 
 // Define the POST request handler for fetching profile data
 export async function POST(request: Request) {
-  const { userId, nickname } = await request.json();
+  const { userId, profileToFindId } = await request.json();
 
-  // If no nickname is provided, return an error response
-  if (!nickname) {
-    return NextResponse.json({ error: 'nickname-not-provided' }, { status: 400 });
+  // If no profileToFindId is provided, return an error response
+  if (!profileToFindId) {
+    return NextResponse.json({ error: 'id-not-provided' }, { status: 400 });
   }
-
+console.log('profileToFindId !!!!!!!!!!!!!!!!!!!!', profileToFindId);
   const client = await db.connect();
 
   try {
-    // Fetch the user profile based on the provided nickname
+    // Fetch the user profile based on the provided profileToFindId
     const query = `
       SELECT id, firstname, lastname, nickname, birthdate, sex, biography, tags, last_action, latitude, longitude, 
              address, online, raiting, sex_preferences, photos, confirmed, complete
       FROM users 
-      WHERE nickname = $1
+      WHERE id = $1
       AND confirmed = true
       AND complete = true
     `;
-    const values = [nickname];
+    const values = [profileToFindId];
 
     const result = await client.query(query, values);
 

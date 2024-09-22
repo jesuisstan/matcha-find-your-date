@@ -313,7 +313,7 @@
   "error-fetching-profile": "Error fetching profile. Please try again",
   "error-fetching-suggestions": "Error fetching suggestions. Please try again",
   "profile-not-found": "Profile not found",
-  "nickname-not-provided": "Nickname not provided",
+  "id-not-provided": "Identifier not provided",
   "SyntaxError: Unexpected end of JSON input": "SyntaxError: Unexpected end of JSON input",
   "???": "???",
   "suggestions-retrieved-successfully": "Suggestions retrieved successfully",

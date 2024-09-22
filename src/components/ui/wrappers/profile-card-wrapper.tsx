@@ -16,7 +16,7 @@ const ProfileCardWrapper = ({ profile }: { profile: any }) => {
   const { theme } = useTheme();
 
   return (
-    <Link href={`/search/${profile.nickname}`} passHref>
+    <Link href={`/search/${profile.id}`} passHref>
       {' '}
       {/* Link to the profile page */}
       <div className="flex max-w-72 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border bg-card p-2 smooth42transition hover:scale-105 hover:border-c42green">

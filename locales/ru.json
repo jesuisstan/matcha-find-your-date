@@ -310,7 +310,7 @@
   "error-fetching-profile": "Ошибка загрузки профиля. Попробуйте ещё раз",
   "error-fetching-suggestions": "Ошибка загрузки предложений. Попробуйте ещё раз",
   "profile-not-found": "Профиль не найден",
-  "nickname-not-provided": "Никнэйм не указан",
+  "id-not-provided": "Идентификатор не указан",
   "SyntaxError: Unexpected end of JSON input": "Ошибка синтаксиса: Неожиданный конец ввода JSON",
   "???": "???",
   "suggestions-retrieved-successfully": "Предложения успешно получены",
