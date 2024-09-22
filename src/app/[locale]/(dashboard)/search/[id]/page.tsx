@@ -7,13 +7,17 @@ import { Frown } from 'lucide-react';
 
 import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 import DateProfileWrapper from '@/components/ui/wrappers/date-profile-wrapper';
+import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 
 const DateProfilePage = () => {
   const t = useTranslations();
   const { id: profileToFindId } = useParams(); // Grab the id from the dynamic route
   const { user, globalLoading } = useUserStore();
-  const [dateProfile, setDateProfile] = useState(null);
+  const { getSmartSuggestionById } = useSearchStore();
+  const [dateProfile, setDateProfile] = useState(
+    getSmartSuggestionById(profileToFindId as string) ?? null
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -54,7 +58,7 @@ const DateProfilePage = () => {
       }
     };
 
-    fetchUserProfile();
+    if (user && !dateProfile) fetchUserProfile();
   }, [profileToFindId]);
 
   return error ? (

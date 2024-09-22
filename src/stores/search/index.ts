@@ -22,6 +22,7 @@ export type TSearchStore = {
   searchFilters: TSearchFilters;
   smartSuggestions: TDateProfile[];
   setSmartSuggestions: (newSuggestions: TDateProfile[]) => void;
+  getSmartSuggestionById: (id: string) => TDateProfile | undefined;
   setValueOfSearchFilter: (filterKey: string, newValue: string | number) => string | number;
   getValueOfSearchFilter: (filterKey: string) => string | string[] | number;
   addOneItemToSearchFilter: (itemKey: string, newValue: string | number) => void;
@@ -55,6 +56,12 @@ const useSearchStore = create<TSearchStore>()(
 
           setSmartSuggestions: (newSuggestions: TDateProfile[]) => {
             set({ smartSuggestions: newSuggestions });
+          },
+
+          getSmartSuggestionById: (id: string) => {
+            {
+              return get().smartSuggestions.find((suggestion) => suggestion.id === id);
+            }
           },
 
           setValueOfSearchFilter: (
