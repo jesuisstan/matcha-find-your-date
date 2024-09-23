@@ -5,8 +5,10 @@ import { db } from '@vercel/postgres';
 import { haversineDistance } from '@/utils/server/haversine-distance';
 
 export async function POST(request: Request) {
-  const { userId, latitude, longitude, sex, sexPreferences, tags } = await request.json();
-  const maxDistance = 42; // Max distance in km
+  const { userId } = await request.json();
+  let maxDistance = 42; // Max distance in km for the first iteration
+  const MAX_DISTANCE_LIMIT = 10000; // Max distance in km for the last iteration
+  const MIN_USERS_COUNT = 3; // Min number of users to return
   const client = await db.connect();
 
   try {
@@ -32,6 +34,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'failed-to-update-user-activity' }, { status: 500 });
     }
 
+    // Extract necessary data from user
+    const {
+      latitude,
+      longitude,
+      sex,
+      sex_preferences: sexPreferences,
+      tags: userTags,
+      raiting: userRaiting,
+    } = user;
+
     // Filter users by sex & sex-preferences
     let sexFilter: string = '';
     if (sexPreferences === 'men') {
@@ -54,7 +66,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // Filter users by tags & sort by tags count & raiting
+    // Query to select matching users based on tags intersection and rating
     const queryString = `
       SELECT 
         id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address, biography, last_action, online, confirmed, complete
@@ -62,27 +74,38 @@ export async function POST(request: Request) {
       WHERE 
         id != $1
         AND ${sexFilter}
-      ORDER BY (
-        SELECT count(*) 
-        FROM unnest(tags) AS tag 
-        WHERE tag = ANY($2)
-      ) DESC, raiting DESC;
+        AND raiting >= $2
+        AND (
+          SELECT count(*) 
+          FROM unnest(tags) AS tag 
+          WHERE tag = ANY($3)
+        ) >= 1
     `;
 
-    const result = await client.query(queryString, [userId, tags]);
+    const result = await client.query(queryString, [userId, userRaiting, userTags]);
     const users = result.rows;
 
+    let matchingUsers = [];
+
     // Filter users by distance
-    const matchingUsers = users.filter((suggestedUser) => {
-      if (!suggestedUser.latitude || !suggestedUser.longitude) return false;
-      const userDistance = haversineDistance(
-        latitude,
-        longitude,
-        suggestedUser.latitude,
-        suggestedUser.longitude
-      );
-      return userDistance <= maxDistance;
-    });
+    while (matchingUsers.length < MIN_USERS_COUNT && maxDistance <= MAX_DISTANCE_LIMIT) {
+      // Limiit the distance to MAX_DISTANCE_LIMIT km
+      matchingUsers = users.filter((suggestedUser) => {
+        if (!suggestedUser.latitude || !suggestedUser.longitude) return false;
+        const userDistance = haversineDistance(
+          latitude,
+          longitude,
+          suggestedUser.latitude,
+          suggestedUser.longitude
+        );
+        return userDistance <= maxDistance;
+      });
+
+      // If no users found, double the distance and try again
+      if (matchingUsers.length < MIN_USERS_COUNT) {
+        maxDistance *= 2;
+      }
+    }
 
     return NextResponse.json({
       message: 'suggestions-retrieved-successfully',
