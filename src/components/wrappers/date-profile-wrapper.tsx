@@ -4,15 +4,15 @@ import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
-import ConfirmationWrapper from '@/components/ui/wrappers/confirmation-wrapper';
-import DescriptionWrapper from '@/components/ui/wrappers/description-wrapper';
-import InterestsWrapper from '@/components/ui/wrappers/interests-wrapper';
-import LabelsWrapper from '@/components/ui/wrappers/labels-wrapper';
-import LocationWrapper from '@/components/ui/wrappers/location-wrapper';
-import PhotoGalleryWrapper from '@/components/ui/wrappers/photo-gallery-wrapper';
-import RaitingWrapper from '@/components/ui/wrappers/raiting-wrapper';
-import SexPreferenceWrapper from '@/components/ui/wrappers/sex-preference-wrapper';
-import StatusWrapper from '@/components/ui/wrappers/status-wrapper';
+import ConfirmationWrapper from '@/components/wrappers/confirmation-wrapper';
+import DescriptionWrapper from '@/components/wrappers/description-wrapper';
+import InterestsWrapper from '@/components/wrappers/interests-wrapper';
+import LabelsWrapper from '@/components/wrappers/labels-wrapper';
+import LocationWrapper from '@/components/wrappers/location-wrapper';
+import PhotoGalleryWrapper from '@/components/wrappers/photo-gallery-wrapper';
+import RaitingWrapper from '@/components/wrappers/raiting-wrapper';
+import SexPreferenceWrapper from '@/components/wrappers/sex-preference-wrapper';
+import StatusWrapper from '@/components/wrappers/status-wrapper';
 import { TDateProfile } from '@/types/date-profile';
 import { calculateAge } from '@/utils/format-string';
 

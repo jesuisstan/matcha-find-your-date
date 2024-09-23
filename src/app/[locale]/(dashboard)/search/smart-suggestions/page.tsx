@@ -11,7 +11,7 @@ import { ButtonMatcha } from '@/components/ui/button-matcha';
 import SelectMultiple from '@/components/ui/select-dropdown/select-multiple';
 import SelectSingle from '@/components/ui/select-dropdown/select-single';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
-import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
+import ProfileCardWrapper from '@/components/wrappers/profile-card-wrapper';
 import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 

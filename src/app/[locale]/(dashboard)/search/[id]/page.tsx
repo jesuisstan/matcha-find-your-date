@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Frown } from 'lucide-react';
 
 import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
-import DateProfileWrapper from '@/components/ui/wrappers/date-profile-wrapper';
+import DateProfileWrapper from '@/components/wrappers/date-profile-wrapper';
 import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 

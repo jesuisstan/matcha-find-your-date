@@ -29,7 +29,9 @@ export type TSearchStore = {
   removeOneItemOfSearchFilter: (itemKey: string, valueToRemove: string | number) => void;
   clearAllItemsOfSearchFilter: (filterKey: string) => void;
   replaceAllItemsOfSearchFilter: (itemKey: string, newValue: string[] | number[]) => void;
-  resetSearchFiltersStore: () => void;
+  resetSearchFilters: () => void;
+  resetSmartSuggestions: () => void;
+  resetSearchStore: () => void;
 };
 
 // initial state
@@ -136,8 +138,16 @@ const useSearchStore = create<TSearchStore>()(
               `replace${capitalize(filterKey)}`
             ),
 
-          resetSearchFiltersStore: () => {
+          resetSearchFilters: () => {
             set({ searchFilters: initialSearchFiltersState });
+          },
+
+          resetSmartSuggestions: () => {
+            set({ smartSuggestions: [] });
+          },
+
+          resetSearchStore: () => {
+            set({ searchFilters: initialSearchFiltersState, smartSuggestions: [] });
           },
         }),
         { name: 'matcha-search-store', storage: createJSONStorage(() => localStorage) }

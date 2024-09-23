@@ -13,13 +13,13 @@ const LogoutButton = ({ translate }: { translate: (key: string) => string }) => 
     logout: state.logout,
     setGlobalLoading: state.setGlobalLoading,
   }));
-  const { resetSearchFiltersStore } = useSearchStore();
+  const { resetSearchStore } = useSearchStore();
   const router = useRouter();
 
   const handleLogout = async () => {
     setGlobalLoading(true); // set global loading
     await setUserOffline(user?.id!); // set user offline
-    resetSearchFiltersStore(); // reset search filters
+    resetSearchStore(); // reset search store
     logout(); // logout users
     await new Promise((resolve) => setTimeout(resolve, 100)); // wait for some time to ensure logout is processed
     setGlobalLoading(false); // set global loading

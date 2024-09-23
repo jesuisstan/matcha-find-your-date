@@ -13,10 +13,12 @@ import { ButtonMatcha } from '@/components/ui/button-matcha';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
+import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 
 const Login = () => {
   const t = useTranslations();
+  const { resetSearchStore } = useSearchStore();
   const router = useRouter();
   const [pageLayout, setPageLayout] = React.useState('login');
   const formRef = React.useRef<HTMLFormElement>(null);
@@ -58,6 +60,7 @@ const Login = () => {
     switch (pageLayout) {
       case 'login':
         setLoading(true);
+        resetSearchStore(); // reset search store
         response = await fetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

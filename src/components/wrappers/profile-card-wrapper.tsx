@@ -36,8 +36,8 @@ const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
         <div
           title={profile?.online ? t('online') : t('offline')}
           className={clsx(
-            'absolute bottom-2 right-2 rounded-full p-[6px]',
-            profile?.online ? 'animate-pulse bg-c42green' : 'bg-negative'
+            'absolute bottom-2 right-2 rounded-full p-1',
+            profile?.online ? 'animate-ping bg-c42green' : 'animate-pulse bg-negative'
           )}
         ></div>
 

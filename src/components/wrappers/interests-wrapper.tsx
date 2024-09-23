@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import { PenLine } from 'lucide-react';
 
-import StaticTagsGroup from '../chips/tags-group-static';
+import StaticTagsGroup from '../ui/chips/tags-group-static';
 
 import FilledOrNot from '@/components/ui/filled-or-not';
 
