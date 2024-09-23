@@ -2,8 +2,6 @@
 
 import { useEffect } from 'react';
 
-import SelectSkeleton from '../skeletons/select-skeleton';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +10,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSelector,
 } from '@/components/ui/dropdown-primitives';
+import SelectSkeleton from '@/components/ui/skeletons/select-skeleton';
 import { SelectSinglePropsSchema, TSelectSingleProps } from '@/types/select-single';
+import { capitalize } from '@/utils/format-string';
 
 const SelectSingle = ({
   label,
@@ -59,11 +59,15 @@ const SelectSingle = ({
   ) : (
     <DropdownMenu>
       <div className="flex flex-col items-start justify-start align-middle">
+        <div className="mb-4 flex ">
+          {label && (
+            <div className="text-base font-normal text-foreground">{capitalize(label)}</div>
+          )}
+        </div>
         <DropdownMenuSelector
           asChild
           value={options.find((option) => option.value === selectedItem)?.label || ''}
         />
-        {label && <div className="mt-1 text-xs text-secondary">{label}</div>}
         <DropdownMenuPortal>
           <DropdownMenuContent sideOffset={5} side="right" align="start">
             <DropdownMenuRadioGroup value={selectedItem} onValueChange={handleSelect}>

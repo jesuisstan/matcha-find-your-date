@@ -8,6 +8,7 @@ import { Frown, RefreshCw } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
+import SelectMultiple from '@/components/ui/select-dropdown/select-multiple';
 import SelectSingle from '@/components/ui/select-dropdown/select-single';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
@@ -24,6 +25,7 @@ const SmartSuggestions = () => {
 
   const [sortOption, setSortOption] = useState('raiting'); // Sorting option
   const [filterDistance, setFilterDistance] = useState('21'); // Filter by distance
+  const [filterRaiting, setFilterRaiting] = useState('0'); // Filter by raiting
   const [filterAge, setFilterAge] = useState(''); // Filter by age
   const [filterSexPreferences, setFilterSexPreferences] = useState(''); // Filter by sex preferences
   const [filterTags, setFilterTags] = useState(user?.tags || []); // Filter by user's tags
@@ -126,59 +128,42 @@ const SmartSuggestions = () => {
                   { value: 'infinity', label: 'infinity' },
                 ]}
                 defaultValue="21"
-                label="Distance"
+                label={t('distance') + ':'}
                 selectedItem={filterDistance}
                 setSelectedItem={setFilterDistance}
                 loading={loading}
               />
 
-              {/* Sort Dropdown */}
-              <label htmlFor="sort" className="mb-2 block text-sm font-medium">
-                Sort by:
-              </label>
-              <select
-                id="sort"
-                value={sortOption}
-                onChange={handleSortChange}
-                className="mb-4 rounded border p-2"
-              >
-                <option value="raiting">Rating</option>
-                <option value="distance">Distance (km)</option>
-                <option value="age">Age</option>
-                <option value="sexPreferences">Sex Preferences</option>
-                <option value="tags">Common Tags</option>
-              </select>
-
-              {/* Age Filter */}
-              <label htmlFor="age" className="mb-2 block text-sm font-medium">
-                Age:
-              </label>
-              <input
-                type="number"
-                id="age"
-                value={filterAge}
-                onChange={(e) => handleFilterChange(e, 'age')}
-                className="mb-4 rounded border p-2"
+              {/* raiting Filter */}
+              <SelectSingle
+                options={[
+                  { value: '0', label: 'All' },
+                  { value: '1', label: '>=40' },
+                  { value: '2', label: '>=60' },
+                  { value: '3', label: '>=80' },
+                ]}
+                defaultValue="0"
+                label={t('raiting') + ':'}
+                selectedItem={filterRaiting}
+                setSelectedItem={setFilterRaiting}
+                loading={loading}
               />
+
+              {/* Tags Filter */}
+              <SelectMultiple
+                label={'#' + t(`tags.tags`) + ':'}
+                options={user?.tags || []}
+                defaultValues={['10', '100']}
+                selectedItems={filterTags}
+                setSelectedItems={setFilterTags}
+                loading={loading}
+              />
+
               {/* Sex Preferences Filter */}
-              <div className="flex flex-col items-start justify-start">
-                <label htmlFor="sexPreferences" className="mb-2 block text-sm font-medium">
-                  Sex Preferences:
-                </label>
-                <select
-                  id="sexPreferences"
-                  value={filterSexPreferences}
-                  onChange={(e) => handleFilterChange(e, 'sexPreferences')}
-                  className="mb-4 rounded border p-2"
-                >
-                  <option value="bisexual">Bisexual</option>
-                  <option value="men">Men</option>
-                  <option value="women">Women</option>
-                </select>
-              </div>
+
               {/* Online Filter */}
               <label htmlFor="online" className="mb-2 block text-sm font-medium">
-                Online:
+                Only Online:
               </label>
               <input
                 type="checkbox"
@@ -187,24 +172,8 @@ const SmartSuggestions = () => {
                 onChange={(e) => handleFilterChange(e, 'online')}
                 className="mb-4 rounded border p-2"
               />
-
-              {/* Tags Filter */}
-              <label className="mb-2 block text-sm font-medium">Filter by Tags:</label>
-              {user?.tags.map((tag: string, index: number) => (
-                <div key={index} className="mb-2">
-                  <input
-                    type="checkbox"
-                    id={tag}
-                    value={tag}
-                    checked={filterTags.includes(tag)}
-                    onChange={(e) => handleFilterChange(e, 'tags')}
-                  />
-                  <label htmlFor={tag} className="ml-2">
-                    {tag}
-                  </label>
-                </div>
-              ))}
             </div>
+            {/* REFRESH BUTTON */}
             <div className="flex items-center justify-center">
               <ButtonMatcha
                 size="default"
