@@ -7,9 +7,7 @@ const SelectSkeleton = ({ showLabel, showTitle }: { showLabel?: boolean; showTit
         </div>
       )}
       <div className="h-[38px] w-40 animate-pulse rounded-full bg-muted" />
-      {/*{showLabel && (
-        <div className="mt-1 text-xs text-secondary">{t`common:selector.select` + ' ...'}</div>
-      )}*/}
+      {showLabel && <div className="mt-1 text-xs text-secondary">{'...'}</div>}
     </div>
   );
 };

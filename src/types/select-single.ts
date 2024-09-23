@@ -6,11 +6,11 @@ const SelectSingleOptionSchema = z.object({
 });
 
 export const SelectSinglePropsSchema = z.object({
-  smartdataFilterKey: z.string(),
-  smartdataSubFilterKey: z.string().optional(),
   label: z.string().optional(),
   options: z.array(SelectSingleOptionSchema),
   defaultValue: z.string(),
+  selectedItem: z.string(),
+  setSelectedItem: z.function(z.tuple([z.string()]), z.void()),
   loading: z.boolean().optional(),
 });
 

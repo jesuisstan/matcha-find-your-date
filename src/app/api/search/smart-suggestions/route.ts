@@ -75,6 +75,8 @@ export async function POST(request: Request) {
         id != $1
         AND ${sexFilter}
         AND raiting >= $2
+        AND confirmed
+        AND complete
         AND (
           SELECT count(*) 
           FROM unnest(tags) AS tag 

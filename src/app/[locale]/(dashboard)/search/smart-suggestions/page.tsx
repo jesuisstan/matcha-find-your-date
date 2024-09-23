@@ -8,6 +8,7 @@ import { Frown, RefreshCw } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
+import SelectSingle from '@/components/ui/select-dropdown/select-single';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/ui/wrappers/profile-card-wrapper';
 import useSearchStore from '@/stores/search';
@@ -20,6 +21,13 @@ const SmartSuggestions = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const [sortOption, setSortOption] = useState('raiting'); // Sorting option
+  const [filterDistance, setFilterDistance] = useState('21'); // Filter by distance
+  const [filterAge, setFilterAge] = useState(''); // Filter by age
+  const [filterSexPreferences, setFilterSexPreferences] = useState(''); // Filter by sex preferences
+  const [filterTags, setFilterTags] = useState(user?.tags || []); // Filter by user's tags
+  const [filterOnline, setFilterOnline] = useState(false); // Filter by online status
 
   const fetchSmartSuggestions = async () => {
     setLoading(true);
@@ -62,6 +70,34 @@ const SmartSuggestions = () => {
     fetchSmartSuggestions();
   };
 
+  const handleSortChange = (e: any) => {
+    setSortOption(e.target.value);
+    console.log('Sort option:', e.target.value); // debug
+  };
+
+  const handleFilterChange = (e: any, filter: string) => {
+    switch (filter) {
+      case 'distance':
+        setFilterDistance(e.target.value);
+        console.log('Distance filter:', e.target.value); // debug
+        break;
+      case 'age':
+        setFilterAge(e.target.value);
+        console.log('Age filter:', e.target.value); // debug
+        break;
+      case 'sexPreferences':
+        setFilterSexPreferences(e.target.value);
+        console.log('sex Preferences:', e.target.value); // debug
+        break;
+      case 'tags':
+        setFilterTags(e.target.value);
+        console.log('Tags filter:', e.target.value); // debug
+        break;
+      default:
+        console.error('Unknown filter:', filter);
+    }
+  };
+
   return (
     <div>
       {user && <ModalProfileWarning user={user} />}
@@ -77,12 +113,97 @@ const SmartSuggestions = () => {
             <p className="text-left text-xs italic">{t(`use-smart-suggestions`)}</p>
           </div>
 
-          {/* FILTER & SORTINN BAR */}
           <div className="flex flex-col items-stretch gap-4 xs:flex-row ">
-            <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
-              <p className="text-justify text-sm">!!! FILTER & SORTING BAR WOULLD BE HERE !!!</p>
-              <p className="text-justify text-sm">!!! FILTER & SORTING BAR WOULLD BE HERE !!!</p>
-              <p className="text-justify text-sm">!!! FILTER & SORTING BAR WOULLD BE HERE !!!</p>
+            {/* FILTER & SORTINN BAR */}
+            <div className="flex w-full min-w-28 flex-row flex-wrap items-center justify-center gap-4 overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
+              {/* Distance Filter */}
+              <SelectSingle
+                options={[
+                  { value: '10', label: '10' },
+                  { value: '21', label: '21' },
+                  { value: '42', label: '42' },
+                  { value: '84', label: '84' },
+                  { value: 'infinity', label: 'infinity' },
+                ]}
+                defaultValue="21"
+                label="Distance"
+                selectedItem={filterDistance}
+                setSelectedItem={setFilterDistance}
+                loading={loading}
+              />
+
+              {/* Sort Dropdown */}
+              <label htmlFor="sort" className="mb-2 block text-sm font-medium">
+                Sort by:
+              </label>
+              <select
+                id="sort"
+                value={sortOption}
+                onChange={handleSortChange}
+                className="mb-4 rounded border p-2"
+              >
+                <option value="raiting">Rating</option>
+                <option value="distance">Distance (km)</option>
+                <option value="age">Age</option>
+                <option value="sexPreferences">Sex Preferences</option>
+                <option value="tags">Common Tags</option>
+              </select>
+
+              {/* Age Filter */}
+              <label htmlFor="age" className="mb-2 block text-sm font-medium">
+                Age:
+              </label>
+              <input
+                type="number"
+                id="age"
+                value={filterAge}
+                onChange={(e) => handleFilterChange(e, 'age')}
+                className="mb-4 rounded border p-2"
+              />
+              {/* Sex Preferences Filter */}
+              <div className="flex flex-col items-start justify-start">
+                <label htmlFor="sexPreferences" className="mb-2 block text-sm font-medium">
+                  Sex Preferences:
+                </label>
+                <select
+                  id="sexPreferences"
+                  value={filterSexPreferences}
+                  onChange={(e) => handleFilterChange(e, 'sexPreferences')}
+                  className="mb-4 rounded border p-2"
+                >
+                  <option value="bisexual">Bisexual</option>
+                  <option value="men">Men</option>
+                  <option value="women">Women</option>
+                </select>
+              </div>
+              {/* Online Filter */}
+              <label htmlFor="online" className="mb-2 block text-sm font-medium">
+                Online:
+              </label>
+              <input
+                type="checkbox"
+                id="online"
+                checked={filterOnline}
+                onChange={(e) => handleFilterChange(e, 'online')}
+                className="mb-4 rounded border p-2"
+              />
+
+              {/* Tags Filter */}
+              <label className="mb-2 block text-sm font-medium">Filter by Tags:</label>
+              {user?.tags.map((tag: string, index: number) => (
+                <div key={index} className="mb-2">
+                  <input
+                    type="checkbox"
+                    id={tag}
+                    value={tag}
+                    checked={filterTags.includes(tag)}
+                    onChange={(e) => handleFilterChange(e, 'tags')}
+                  />
+                  <label htmlFor={tag} className="ml-2">
+                    {tag}
+                  </label>
+                </div>
+              ))}
             </div>
             <div className="flex items-center justify-center">
               <ButtonMatcha
