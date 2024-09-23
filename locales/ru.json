@@ -314,5 +314,6 @@
   "SyntaxError: Unexpected end of JSON input": "Ошибка синтаксиса: Неожиданный конец ввода JSON",
   "???": "???",
   "suggestions-retrieved-successfully": "Предложения успешно получены",
-  "failed-to-update-user-activity": "Не удалось обновить данные об активности пользователя"
+  "failed-to-update-user-activity": "Не удалось обновить данные об активности пользователя",
+  "online-only": "Только онлайн"
 }

@@ -1,4 +1,4 @@
-export const HeaderSkeleton = () => {
+const HeaderSkeleton = () => {
   return (
     <div className="flex w-full animate-pulse flex-col justify-start">
       {/* Skeleton for Title */}

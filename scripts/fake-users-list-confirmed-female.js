@@ -6014,6 +6014,8 @@ module.exports = function (hashedPassword, yesterday) {
         'traveller',
         'romantic',
         'spontaneous',
+        'polyamorous',
+        'free-relations',
         'creative',
         'french',
         'english',

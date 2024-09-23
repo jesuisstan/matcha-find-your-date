@@ -10,6 +10,7 @@ import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import SelectMultiple from '@/components/ui/select-dropdown/select-multiple';
 import SelectSingle from '@/components/ui/select-dropdown/select-single';
+import FiltersBarSkeleton from '@/components/ui/skeletons/filters-bar-skeleton';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/wrappers/profile-card-wrapper';
 import useSearchStore from '@/stores/search';
@@ -19,17 +20,19 @@ const SmartSuggestions = () => {
   const t = useTranslations();
   const { user, setUser, globalLoading } = useUserStore();
   const { smartSuggestions, setSmartSuggestions } = useSearchStore();
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const [sortOption, setSortOption] = useState('raiting'); // Sorting option
-  const [filterDistance, setFilterDistance] = useState('21'); // Filter by distance
+  const [sexOptions, setSexOptions] = useState([] as string[]);
+  const [sexPrefsOptions, setSexPrefsOptions] = useState([] as string[]);
+  const [citiesOptions, setCitiesOptions] = useState([] as string[]);
+
+  const [filterCities, setFilterCities] = useState((citiesOptions?.[0] || []) as string[]); // Filter by distance
   const [filterRaiting, setFilterRaiting] = useState('0'); // Filter by raiting
-  const [filterAge, setFilterAge] = useState(''); // Filter by age
+  const [filterAge, setFilterAge] = useState('0'); // Filter by age
   const [filterSexPreferences, setFilterSexPreferences] = useState(''); // Filter by sex preferences
   const [filterTags, setFilterTags] = useState(user?.tags || []); // Filter by user's tags
-  const [filterOnline, setFilterOnline] = useState(false); // Filter by online status
+  const [filterOnline, setFilterOnline] = useState('0'); // Filter by online status
 
   const fetchSmartSuggestions = async () => {
     setLoading(true);
@@ -72,34 +75,6 @@ const SmartSuggestions = () => {
     fetchSmartSuggestions();
   };
 
-  const handleSortChange = (e: any) => {
-    setSortOption(e.target.value);
-    console.log('Sort option:', e.target.value); // debug
-  };
-
-  const handleFilterChange = (e: any, filter: string) => {
-    switch (filter) {
-      case 'distance':
-        setFilterDistance(e.target.value);
-        console.log('Distance filter:', e.target.value); // debug
-        break;
-      case 'age':
-        setFilterAge(e.target.value);
-        console.log('Age filter:', e.target.value); // debug
-        break;
-      case 'sexPreferences':
-        setFilterSexPreferences(e.target.value);
-        console.log('sex Preferences:', e.target.value); // debug
-        break;
-      case 'tags':
-        setFilterTags(e.target.value);
-        console.log('Tags filter:', e.target.value); // debug
-        break;
-      default:
-        console.error('Unknown filter:', filter);
-    }
-  };
-
   return (
     <div>
       {user && <ModalProfileWarning user={user} />}
@@ -116,63 +91,115 @@ const SmartSuggestions = () => {
           </div>
 
           <div className="flex flex-col items-stretch gap-4 xs:flex-row ">
-            {/* FILTER & SORTINN BAR */}
-            <div className="flex w-full min-w-28 flex-row flex-wrap items-center justify-center gap-4 overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
-              {/* Distance Filter */}
-              <SelectSingle
-                options={[
-                  { value: '10', label: '10' },
-                  { value: '21', label: '21' },
-                  { value: '42', label: '42' },
-                  { value: '84', label: '84' },
-                  { value: 'infinity', label: 'infinity' },
-                ]}
-                defaultValue="21"
-                label={t('distance') + ':'}
-                selectedItem={filterDistance}
-                setSelectedItem={setFilterDistance}
-                loading={loading}
-              />
+            {/* FILTER BAR */}
+            {loading ? (
+              <FiltersBarSkeleton />
+            ) : (
+              <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5 overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
+                <div className="flex w-full flex-row flex-wrap items-center justify-center gap-5 overflow-hidden text-ellipsis">
+                  {/* Age Filter */}
+                  <SelectSingle
+                    options={[
+                      { value: '0', label: t('selector.select-all') },
+                      { value: '1', label: '18-24' },
+                      { value: '2', label: '25-34' },
+                      { value: '3', label: '35-44' },
+                      { value: '4', label: '45-54' },
+                      { value: '5', label: '55+' },
+                    ]}
+                    defaultValue="1"
+                    label={t('age') + ':'}
+                    selectedItem={filterAge}
+                    setSelectedItem={setFilterAge}
+                    disabled={loading}
+                  />
 
-              {/* raiting Filter */}
-              <SelectSingle
-                options={[
-                  { value: '0', label: 'All' },
-                  { value: '1', label: '>=40' },
-                  { value: '2', label: '>=60' },
-                  { value: '3', label: '>=80' },
-                ]}
-                defaultValue="0"
-                label={t('raiting') + ':'}
-                selectedItem={filterRaiting}
-                setSelectedItem={setFilterRaiting}
-                loading={loading}
-              />
+                  {/* Sex Filter */}
+                  <SelectSingle
+                    options={[
+                      { value: '0', label: t('selector.select-all') },
+                      { value: '1', label: '18-24' },
+                      { value: '2', label: '25-34' },
+                      { value: '3', label: '35-44' },
+                      { value: '4', label: '45-54' },
+                      { value: '5', label: '55+' },
+                    ]}
+                    defaultValue="1"
+                    label={t('sex') + ':'}
+                    selectedItem={filterAge}
+                    setSelectedItem={setFilterAge}
+                    disabled={loading}
+                  />
 
-              {/* Tags Filter */}
-              <SelectMultiple
-                label={'#' + t(`tags.tags`) + ':'}
-                options={user?.tags || []}
-                defaultValues={['10', '100']}
-                selectedItems={filterTags}
-                setSelectedItems={setFilterTags}
-                loading={loading}
-              />
+                  {/* Sex Preferences Filter */}
+                  <SelectSingle
+                    options={[
+                      { value: '0', label: t('selector.select-all') },
+                      { value: '1', label: '18-24' },
+                      { value: '2', label: '25-34' },
+                      { value: '3', label: '35-44' },
+                      { value: '4', label: '45-54' },
+                      { value: '5', label: '55+' },
+                    ]}
+                    defaultValue="1"
+                    label={t('sexual-preferences') + ':'}
+                    selectedItem={filterAge}
+                    setSelectedItem={setFilterAge}
+                    disabled={loading}
+                  />
 
-              {/* Sex Preferences Filter */}
+                  {/* Raiting Filter */}
+                  <SelectSingle
+                    options={[
+                      { value: '0', label: t('selector.select-all') },
+                      { value: '1', label: '>= 40' },
+                      { value: '2', label: '>= 60' },
+                      { value: '3', label: '>= 80' },
+                    ]}
+                    defaultValue="0"
+                    label={t('raiting') + ':'}
+                    selectedItem={filterRaiting}
+                    setSelectedItem={setFilterRaiting}
+                    disabled={loading}
+                  />
 
-              {/* Online Filter */}
-              <label htmlFor="online" className="mb-2 block text-sm font-medium">
-                Only Online:
-              </label>
-              <input
-                type="checkbox"
-                id="online"
-                checked={filterOnline}
-                onChange={(e) => handleFilterChange(e, 'online')}
-                className="mb-4 rounded border p-2"
-              />
-            </div>
+                  {/* Online Filter */}
+                  <SelectSingle
+                    label={t('status') + ':'}
+                    options={[
+                      { value: '0', label: t('selector.select-all') },
+                      { value: '1', label: t('online-only') },
+                    ]}
+                    defaultValue="0"
+                    selectedItem={filterOnline}
+                    setSelectedItem={setFilterOnline}
+                    disabled={loading}
+                  />
+                </div>
+                <div className="flex w-full flex-row flex-wrap items-center justify-center gap-5 overflow-hidden text-ellipsis">
+                  {/* Cities Filter */}
+                  {citiesOptions && (
+                    <SelectMultiple
+                      label={t(`city`) + ':'}
+                      options={citiesOptions || []}
+                      defaultValues={[]}
+                      selectedItems={filterCities}
+                      setSelectedItems={setFilterCities!}
+                    />
+                  )}
+
+                  {/* Tags Filter */}
+                  <SelectMultiple
+                    label={'#' + t(`tags.tags`) + ':'}
+                    options={user?.tags || []}
+                    defaultValues={[]}
+                    selectedItems={filterTags}
+                    setSelectedItems={setFilterTags}
+                    translator="tags"
+                  />
+                </div>
+              </div>
+            )}
             {/* REFRESH BUTTON */}
             <div className="flex items-center justify-center">
               <ButtonMatcha

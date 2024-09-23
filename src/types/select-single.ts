@@ -12,6 +12,7 @@ export const SelectSinglePropsSchema = z.object({
   selectedItem: z.string(),
   setSelectedItem: z.function(z.tuple([z.string()]), z.void()),
   loading: z.boolean().optional(),
+  disabled: z.boolean().optional(),
 });
 
 export type TSelectSingleProps = z.infer<typeof SelectSinglePropsSchema>;

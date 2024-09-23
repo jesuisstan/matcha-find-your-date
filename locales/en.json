@@ -317,5 +317,6 @@
   "SyntaxError: Unexpected end of JSON input": "SyntaxError: Unexpected end of JSON input",
   "???": "???",
   "suggestions-retrieved-successfully": "Suggestions retrieved successfully",
-  "failed-to-update-user-activity": "Failed to update user activity"
+  "failed-to-update-user-activity": "Failed to update user activity",
+  "online-only": "Online only"
 }

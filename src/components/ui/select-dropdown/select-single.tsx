@@ -21,6 +21,7 @@ const SelectSingle = ({
   selectedItem,
   setSelectedItem,
   loading,
+  disabled,
 }: TSelectSingleProps) => {
   const optionsValues = options.map((option) => option.value);
 
@@ -47,6 +48,7 @@ const SelectSingle = ({
     selectedItem,
     setSelectedItem,
     loading,
+    disabled,
   });
 
   if (!verif.success) {
@@ -54,17 +56,16 @@ const SelectSingle = ({
     return null;
   }
 
-  return loading || !options || options?.length === 0 ? (
+  return loading ? (
     <SelectSkeleton showLabel={!!label} />
   ) : (
     <DropdownMenu>
       <div className="flex flex-col items-start justify-start align-middle">
-        <div className="mb-4 flex ">
-          {label && (
-            <div className="text-base font-normal text-foreground">{capitalize(label)}</div>
-          )}
+        <div className="mb-1 flex ">
+          {label && <div className="text-sm font-normal text-foreground">{capitalize(label)}</div>}
         </div>
         <DropdownMenuSelector
+          disabled={disabled}
           asChild
           value={options.find((option) => option.value === selectedItem)?.label || ''}
         />

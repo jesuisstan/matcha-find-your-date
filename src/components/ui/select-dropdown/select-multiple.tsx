@@ -23,6 +23,7 @@ const SelectMultiple = ({
   selectedItems,
   setSelectedItems,
   loading,
+  translator,
 }: TSelectMultipleProps) => {
   const t = useTranslations();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // to handle closing on outside click
@@ -71,6 +72,7 @@ const SelectMultiple = ({
     selectedItems,
     setSelectedItems,
     loading,
+    translator,
   });
 
   if (!verif.success) {
@@ -78,22 +80,20 @@ const SelectMultiple = ({
     return null;
   }
 
-  /* Find labels corresponding to queryValues */
   const selectedLabels = options
     .filter((option) => selectedItems.includes(option))
-    .map((selectedOption) => selectedOption);
+    .map((selectedOption) =>
+      translator ? t(`${translator}.${selectedOption}`) : t(`${selectedOption}`)
+    );
 
-  return loading || options?.length === 0 ? (
+  return loading ? (
     <SelectSkeleton showLabel={!!label} />
   ) : (
     <DropdownMenu open={isDropdownOpen}>
-      <div className="flex max-w-24 flex-col items-start justify-start align-middle">
-        <div className="mb-4 flex flex-row items-end gap-5">
-          {label && (
-            <div className="text-base font-normal text-foreground">{capitalize(label)}</div>
-          )}
-
-          <div className="flex flex-row gap-7 text-xs font-normal text-secondary">
+      <div className="flex w-52 flex-col items-start justify-start align-middle">
+        <div className="mb-1 flex flex-row items-end gap-20">
+          {label && <div className="text-sm font-normal text-foreground">{capitalize(label)}</div>}
+          <div className="flex flex-row gap-5 text-xs font-normal text-secondary">
             <button className="min-w-fit text-left hover:text-negative" onClick={handleSelectAll}>
               {t(`selector.select-all`)}
             </button>
@@ -102,6 +102,7 @@ const SelectMultiple = ({
             </button>
           </div>
         </div>
+
         <DropdownMenuMultipleSelector
           asChild
           value={selectedLabels.join(', ')}
@@ -119,7 +120,7 @@ const SelectMultiple = ({
                     checked={isChecked}
                     onClick={() => handleSelect(option)}
                   >
-                    {option}
+                    {translator ? t(`${translator}.${option}`) : t(`${option}`)}
                   </DropdownMenuCheckboxItem>
                 );
               })}
