@@ -4,7 +4,15 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { Frown, RefreshCw } from 'lucide-react';
+import {
+  ArrowDown10,
+  ArrowDownWideNarrow,
+  ArrowUp10,
+  ArrowUpWideNarrow,
+  Frown,
+  ListRestart,
+  RefreshCw,
+} from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
@@ -24,6 +32,10 @@ const SmartSuggestions = () => {
   const { smartSuggestions, setSmartSuggestions } = useSearchStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // State to store the currently selected sorting criterion and order
+  const [sortCriterion, setSortCriterion] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
 
   const [ageOptions, setAgeOptions] = useState<TSelectorOption[]>([
     { value: '0', label: t('selector.select-all') },
@@ -186,15 +198,95 @@ const SmartSuggestions = () => {
     filterCities,
   ]);
 
-  // todo uncomment on release to save Vercel Blob limit
-  // Fetch smart suggestions on component mount
-  //useEffect(() => {
-  //  if (user) fetchSmartSuggestions();
-  //}, []);
-
-  const handleRefreshSuggestions = () => {
-    fetchSmartSuggestions();
+  // Sorting function for selected criterion
+  const sortSuggestions = (suggestions: any[], criterion: string, order: 'desc' | 'asc') => {
+    if (order === 'desc') {
+      switch (criterion) {
+        case 'raiting':
+          return [...suggestions].sort((a, b) => b.raiting - a.raiting);
+        case 'age':
+          return [...suggestions].sort(
+            (a, b) => calculateAge(b.birthdate) - calculateAge(a.birthdate)
+          );
+        case 'online':
+          return [...suggestions].sort((a, b) => (b.online ? 1 : -1)); // Corrected for online: true first
+        case 'tags':
+          return [...suggestions].sort((a, b) => {
+            const matchesA = user?.tags.filter((tag) => a.tags.includes(tag)).length || 0;
+            const matchesB = user?.tags.filter((tag) => b.tags.includes(tag)).length || 0;
+            return matchesB - matchesA; // Sort by descending tag matches
+          });
+        case 'cities':
+          return [...suggestions].sort((a, b) => {
+            const matchesA = filterCities.filter((city) => a.address === city).length || 0;
+            const matchesB = filterCities.filter((city) => b.address === city).length || 0;
+            return matchesB - matchesA; // Sort by descending city matches
+          });
+        default:
+          return suggestions;
+      }
+    } else {
+      switch (criterion) {
+        case 'raiting':
+          return [...suggestions].sort((a, b) => a.raiting - b.raiting);
+        case 'age':
+          return [...suggestions].sort(
+            (a, b) => calculateAge(a.birthdate) - calculateAge(b.birthdate)
+          );
+        case 'online':
+          return [...suggestions].sort((a, b) => (b.online ? -1 : 1)); // Corrected for offline first
+        case 'tags':
+          return [...suggestions].sort((a, b) => {
+            const matchesA = user?.tags.filter((tag) => a.tags.includes(tag)).length || 0;
+            const matchesB = user?.tags.filter((tag) => b.tags.includes(tag)).length || 0;
+            return matchesA - matchesB; // Sort by ascending tag matches
+          });
+        case 'cities':
+          return [...suggestions].sort((a, b) => {
+            const matchesA = filterCities.filter((city) => a.address === city).length || 0;
+            const matchesB = filterCities.filter((city) => b.address === city).length || 0;
+            return matchesA - matchesB; // Sort by ascending city matches
+          });
+        default:
+          return suggestions;
+      }
+    }
   };
+
+  // Apply the sorting on filtered suggestions
+  const sortedSuggestions = useMemo(() => {
+    if (!sortCriterion || !sortOrder) return filteredSuggestions;
+    return sortSuggestions(filteredSuggestions, sortCriterion, sortOrder);
+  }, [filteredSuggestions, sortCriterion, sortOrder]);
+
+  // Reset all filters and sorting
+  const resetFiltersAndSorting = () => {
+    setFilterAge('0');
+    setFilterSex('0');
+    setFilterSexPreferences('0');
+    setFilterRaiting('0');
+    setFilterTags(user?.tags || ([] as string[]));
+    setFilterOnline('0');
+    setFilterCities(citiesOptions);
+    setSortCriterion(null);
+    setSortOrder(null);
+  };
+
+  // Handler to set sorting
+  const handleSort = (criterion: string, order: 'asc' | 'desc') => {
+    if (sortCriterion === criterion && sortOrder === order) {
+      // Toggle off sorting if clicked again
+      setSortCriterion(null);
+      setSortOrder(null);
+    } else {
+      setSortCriterion(criterion);
+      setSortOrder(order);
+    }
+  };
+
+  useEffect(() => {
+    if (user) fetchSmartSuggestions();
+  }, []);
 
   return (
     <div>
@@ -209,14 +301,14 @@ const SmartSuggestions = () => {
           </div>
           <div className="mb-2 flex flex-col items-stretch justify-center gap-2 align-middle xs:flex-row">
             <div className="w-full min-w-28 flex-col items-center justify-center self-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
-              <p className="text-left text-xs italic">{t(`use-smart-suggestions`)}</p>
+              <p className="text-left text-sm italic">{t(`use-smart-suggestions`)}</p>
             </div>
             <div className="flex items-center justify-center text-c42orange">
               <ButtonMatcha
                 size="default"
                 disabled={!user || loading}
                 title={t(`search.refresh-suggestions`)}
-                onClick={handleRefreshSuggestions}
+                onClick={fetchSmartSuggestions}
                 loading={loading}
                 className="min-w-40"
               >
@@ -236,20 +328,23 @@ const SmartSuggestions = () => {
               <FiltersBarSkeleton />
             ) : (
               <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5 overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
-                <h2 className="max-w-96 truncate text-wrap text-lg font-semibold xs:max-w-fit">
-                  {t(`filter-suggestions`)}
-                </h2>
+                <div className="flex flex-row items-center justify-center gap-2 self-center align-middle">
+                  <h2 className="max-w-96 truncate text-wrap text-lg font-semibold xs:max-w-fit">
+                    {t(`filter-sort-suggestions`)}
+                  </h2>
+                  {' / '}
+                  {/* Reset Filters and Sorting */}
+                  <div className="flex items-center justify-center self-center align-middle">
+                    <div
+                      onClick={resetFiltersAndSorting}
+                      className="cursor-pointer rounded-full smooth42transition hover:text-c42orange"
+                      title={t('reset-filters-sorting')}
+                    >
+                      <ListRestart size={20} />
+                    </div>
+                  </div>
+                </div>
                 <div className="flex w-full flex-row flex-wrap items-center justify-center gap-5 overflow-hidden text-ellipsis">
-                  {/* Age Filter */}
-                  <SelectSingle
-                    options={ageOptions}
-                    defaultValue="1"
-                    label={t('age') + ':'}
-                    selectedItem={filterAge}
-                    setSelectedItem={setFilterAge}
-                    disabled={loading}
-                  />
-
                   {/* Sex Filter */}
                   <SelectSingle
                     options={sexOptions}
@@ -270,20 +365,80 @@ const SmartSuggestions = () => {
                     disabled={loading}
                   />
 
-                  {/* Raiting Filter */}
-                  <SelectSingle
-                    options={[
-                      { value: '0', label: t('selector.select-all') },
-                      { value: '1', label: '>= 40' },
-                      { value: '2', label: '>= 60' },
-                      { value: '3', label: '>= 80' },
-                    ]}
-                    defaultValue="0"
-                    label={t('raiting') + ':'}
-                    selectedItem={filterRaiting}
-                    setSelectedItem={setFilterRaiting}
-                    disabled={loading}
-                  />
+                  <div className="flex flex-row items-end gap-1">
+                    {/* Age Filter */}
+                    <SelectSingle
+                      options={ageOptions}
+                      defaultValue="1"
+                      label={t('age') + ':'}
+                      selectedItem={filterAge}
+                      setSelectedItem={setFilterAge}
+                      disabled={loading}
+                    />
+                    {/* Age Sorter */}
+                    <div className="flex flex-col gap-1">
+                      <div
+                        title={t('sort-ascending')}
+                        className={clsx(
+                          'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                          sortCriterion === 'age' && sortOrder === 'asc' && 'text-c42orange'
+                        )}
+                        onClick={() => handleSort('age', 'asc')}
+                      >
+                        <ArrowUpWideNarrow size={20} />
+                      </div>
+                      <div
+                        title={t('sort-descending')}
+                        className={clsx(
+                          'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                          sortCriterion === 'age' && sortOrder === 'desc' && 'text-c42orange'
+                        )}
+                        onClick={() => handleSort('age', 'desc')}
+                      >
+                        <ArrowDownWideNarrow size={20} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row items-end gap-1">
+                    {/* Raiting Filter */}
+                    <SelectSingle
+                      options={[
+                        { value: '0', label: t('selector.select-all') },
+                        { value: '1', label: '>= 40' },
+                        { value: '2', label: '>= 60' },
+                        { value: '3', label: '>= 80' },
+                      ]}
+                      defaultValue="0"
+                      label={t('raiting') + ':'}
+                      selectedItem={filterRaiting}
+                      setSelectedItem={setFilterRaiting}
+                      disabled={loading}
+                    />
+                    {/* Raiting Sorter */}
+                    <div className="flex flex-col gap-1">
+                      <div
+                        title={t('sort-ascending')}
+                        className={clsx(
+                          'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                          sortCriterion === 'raiting' && sortOrder === 'asc' && 'text-c42orange'
+                        )}
+                        onClick={() => handleSort('raiting', 'asc')}
+                      >
+                        <ArrowUpWideNarrow size={20} />
+                      </div>
+                      <div
+                        title={t('sort-descending')}
+                        className={clsx(
+                          'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                          sortCriterion === 'raiting' && sortOrder === 'desc' && 'text-c42orange'
+                        )}
+                        onClick={() => handleSort('raiting', 'desc')}
+                      >
+                        <ArrowDownWideNarrow size={20} />
+                      </div>
+                    </div>
+                  </div>
 
                   {/* Online Filter */}
                   <SelectSingle
@@ -298,27 +453,79 @@ const SmartSuggestions = () => {
                     disabled={loading}
                   />
                   <div className="flex flex-row flex-wrap items-center justify-center gap-5">
-                    {/* Tags Filter */}
-                    <SelectMultiple
-                      label={'#' + t(`tags.tags`) + ':'}
-                      options={user?.tags || []}
-                      defaultValues={[]}
-                      selectedItems={filterTags}
-                      setSelectedItems={setFilterTags}
-                      translator="tags"
-                    />
-
-                    {/* Cities Filter */}
-                    {citiesOptions && citiesOptions.length > 0 && (
+                    <div className="flex flex-row items-end gap-1">
+                      {/* Tags Filter */}
                       <SelectMultiple
-                        label={t(`city`) + ':'}
-                        options={citiesOptions}
+                        label={'#' + t(`tags.tags`) + ':'}
+                        options={user?.tags || []}
                         defaultValues={[]}
-                        selectedItems={filterCities}
-                        setSelectedItems={setFilterCities!}
-                        avoidTranslation
+                        selectedItems={filterTags}
+                        setSelectedItems={setFilterTags}
+                        translator="tags"
                       />
-                    )}
+                      {/* Tags Sorter */}
+                      <div className="flex flex-col gap-1">
+                        <div
+                          title={t('sort-ascending') + ' ' + t('by-tags-matches')}
+                          className={clsx(
+                            'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                            sortCriterion === 'tags' && sortOrder === 'asc' && 'text-c42orange'
+                          )}
+                          onClick={() => handleSort('tags', 'asc')}
+                        >
+                          <ArrowUp10 size={20} />
+                        </div>
+                        <div
+                          title={t('sort-descending') + ' ' + t('by-tags-matches')}
+                          className={clsx(
+                            'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                            sortCriterion === 'tags' && sortOrder === 'desc' && 'text-c42orange'
+                          )}
+                          onClick={() => handleSort('tags', 'desc')}
+                        >
+                          <ArrowDown10 size={20} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-row items-end gap-1">
+                      {/* Cities Filter */}
+                      {citiesOptions && citiesOptions.length > 0 && (
+                        <SelectMultiple
+                          label={t(`city`) + ':'}
+                          options={citiesOptions}
+                          defaultValues={[]}
+                          selectedItems={filterCities}
+                          setSelectedItems={setFilterCities!}
+                          avoidTranslation
+                        />
+                      )}
+                      {/* Cities Sorter */}
+                      {citiesOptions && citiesOptions.length > 0 && (
+                        <div className="flex flex-col gap-1">
+                          <div
+                            title={t('sort-ascending')}
+                            className={clsx(
+                              'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                              sortCriterion === 'cities' && sortOrder === 'asc' && 'text-c42orange'
+                            )}
+                            onClick={() => handleSort('cities', 'asc')}
+                          >
+                            <ArrowUpWideNarrow size={20} />
+                          </div>
+                          <div
+                            title={t('sort-descending')}
+                            className={clsx(
+                              'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
+                              sortCriterion === 'cities' && sortOrder === 'desc' && 'text-c42orange'
+                            )}
+                            onClick={() => handleSort('cities', 'desc')}
+                          >
+                            <ArrowDownWideNarrow size={20} />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -330,7 +537,7 @@ const SmartSuggestions = () => {
       {/* MAIN CONTENT */}
       {loading || globalLoading || !user ? (
         <SuggestionsSkeleton />
-      ) : filteredSuggestions.length === 0 || error ? (
+      ) : sortedSuggestions.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
             <Frown size={84} />
@@ -341,7 +548,7 @@ const SmartSuggestions = () => {
         </div>
       ) : (
         <div className="flex flex-row flex-wrap items-center justify-center gap-5 smooth42transition">
-          {filteredSuggestions.map((dateProfile: any, index: number) => (
+          {sortedSuggestions.map((dateProfile: any, index: number) => (
             <ProfileCardWrapper key={`${dateProfile.id}-${index}`} profile={dateProfile} />
           ))}
         </div>

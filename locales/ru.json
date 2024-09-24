@@ -316,5 +316,9 @@
   "suggestions-retrieved-successfully": "Предложения успешно получены",
   "failed-to-update-user-activity": "Не удалось обновить данные об активности пользователя",
   "online-only": "Только онлайн",
-  "filter-suggestions": "Фильтровать предложения"
+  "filter-sort-suggestions": "Фильтровать и сортировать предложения",
+  "sort-ascending": "Сортировать по возрастанию",
+  "sort-descending": "Сортировать по убыванию",
+  "reset-filters-sorting": "Сбросить фильтры и сортировку",
+  "by-tags-matches": "по совпадениям тэгов"
 }
