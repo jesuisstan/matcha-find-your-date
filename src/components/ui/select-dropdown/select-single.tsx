@@ -74,7 +74,7 @@ const SelectSingle = ({
             <DropdownMenuRadioGroup value={selectedItem} onValueChange={handleSelect}>
               {options.map((option) => {
                 return (
-                  <DropdownMenuRadioItem key={option.value} value={option.value}>
+                  <DropdownMenuRadioItem key={option.value} value={option.value} disabled={option.disabled}>
                     {option.label}
                   </DropdownMenuRadioItem>
                 );

@@ -315,5 +315,6 @@
   "???": "???",
   "suggestions-retrieved-successfully": "Suggestions récupérées avec succès",
   "failed-to-update-user-activity": "Échec de la mise à jour de l'activité de l'utilisateur",
-  "online-only": "En ligne uniquement"
+  "online-only": "En ligne uniquement",
+  "filter-suggestions": "Filtrer les suggestions"
 }

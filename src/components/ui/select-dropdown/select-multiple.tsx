@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/dropdown-primitives';
 import SelectSkeleton from '@/components/ui/skeletons/select-skeleton';
 import { TSelectMultipleProps, TSelectMultiplePropsSchema } from '@/types/select-multiple';
-import { verifyMultipleSelectorDefaultValues } from '@/utils/format-array'; // todo
 import { capitalize } from '@/utils/format-string';
 
 const SelectMultiple = ({
@@ -24,6 +23,7 @@ const SelectMultiple = ({
   setSelectedItems,
   loading,
   translator,
+  avoidTranslation,
 }: TSelectMultipleProps) => {
   const t = useTranslations();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // to handle closing on outside click
@@ -73,6 +73,7 @@ const SelectMultiple = ({
     setSelectedItems,
     loading,
     translator,
+    avoidTranslation,
   });
 
   if (!verif.success) {
@@ -83,7 +84,11 @@ const SelectMultiple = ({
   const selectedLabels = options
     .filter((option) => selectedItems.includes(option))
     .map((selectedOption) =>
-      translator ? t(`${translator}.${selectedOption}`) : t(`${selectedOption}`)
+      avoidTranslation
+        ? selectedOption
+        : translator
+          ? t(`${translator}.${selectedOption}`)
+          : t(`${selectedOption}`)
     );
 
   return loading ? (
@@ -91,7 +96,7 @@ const SelectMultiple = ({
   ) : (
     <DropdownMenu open={isDropdownOpen}>
       <div className="flex w-52 flex-col items-start justify-start align-middle">
-        <div className="mb-1 flex flex-row items-end gap-20">
+        <div className="mb-1 flex flex-row items-end gap-16">
           {label && <div className="text-sm font-normal text-foreground">{capitalize(label)}</div>}
           <div className="flex flex-row gap-5 text-xs font-normal text-secondary">
             <button className="min-w-fit text-left hover:text-negative" onClick={handleSelectAll}>
@@ -120,7 +125,11 @@ const SelectMultiple = ({
                     checked={isChecked}
                     onClick={() => handleSelect(option)}
                   >
-                    {translator ? t(`${translator}.${option}`) : t(`${option}`)}
+                    {avoidTranslation
+                      ? option
+                      : translator
+                        ? t(`${translator}.${option}`)
+                        : t(`${option}`)}
                   </DropdownMenuCheckboxItem>
                 );
               })}

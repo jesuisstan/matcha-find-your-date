@@ -8,6 +8,7 @@ export const TSelectMultiplePropsSchema = z.object({
   setSelectedItems: z.function(z.tuple([z.array(z.string())], z.void())),
   loading: z.boolean().optional(),
   translator: z.string().optional(),
+  avoidTranslation: z.boolean().optional(),
 });
 
 export type TSelectMultipleProps = z.infer<typeof TSelectMultiplePropsSchema>;

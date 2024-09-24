@@ -318,5 +318,6 @@
   "???": "???",
   "suggestions-retrieved-successfully": "Suggestions retrieved successfully",
   "failed-to-update-user-activity": "Failed to update user activity",
-  "online-only": "Online only"
+  "online-only": "Online only",
+  "filter-suggestions": "Filter suggestions"
 }

@@ -315,5 +315,6 @@
   "???": "???",
   "suggestions-retrieved-successfully": "Предложения успешно получены",
   "failed-to-update-user-activity": "Не удалось обновить данные об активности пользователя",
-  "online-only": "Только онлайн"
+  "online-only": "Только онлайн",
+  "filter-suggestions": "Фильтровать предложения"
 }
