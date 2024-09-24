@@ -298,18 +298,6 @@ const SmartSuggestions = () => {
                     disabled={loading}
                   />
                   <div className="flex flex-row flex-wrap items-center justify-center gap-5">
-                    {/* Cities Filter */}
-                    {citiesOptions && (
-                      <SelectMultiple
-                        label={t(`city`) + ':'}
-                        options={citiesOptions}
-                        defaultValues={[]}
-                        selectedItems={filterCities}
-                        setSelectedItems={setFilterCities!}
-                        avoidTranslation
-                      />
-                    )}
-
                     {/* Tags Filter */}
                     <SelectMultiple
                       label={'#' + t(`tags.tags`) + ':'}
@@ -319,6 +307,18 @@ const SmartSuggestions = () => {
                       setSelectedItems={setFilterTags}
                       translator="tags"
                     />
+
+                    {/* Cities Filter */}
+                    {citiesOptions && citiesOptions.length > 0 && (
+                      <SelectMultiple
+                        label={t(`city`) + ':'}
+                        options={citiesOptions}
+                        defaultValues={[]}
+                        selectedItems={filterCities}
+                        setSelectedItems={setFilterCities!}
+                        avoidTranslation
+                      />
+                    )}
                   </div>
                 </div>
               </div>

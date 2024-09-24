@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     } = user;
 
     // Calculate min raiting for matching users based on user's raiting but not less than 42% lower or 0
-    const minRaiting = Math.max(userRaiting * (1 - 0.42), 0);
+    const minRaiting = Math.max(Math.round(userRaiting * (1 - 0.42)), 0);
 
     // Filter users by sex & sex-preferences
     let sexFilter: string = '';
