@@ -36,7 +36,9 @@ const SmartSuggestions = () => {
   const [error, setError] = useState('');
 
   // State to store the currently selected sorting criterion and order
-  const [sortCriterion, setSortCriterion] = useState<string | null>(null);
+  const [sortCriterion, setSortCriterion] = useState<
+    'raiting' | 'location' | 'age' | 'tags' | null
+  >(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
 
   const [ageOptions, setAgeOptions] = useState<TSelectorOption[]>([
@@ -218,7 +220,7 @@ const SmartSuggestions = () => {
   // Sorting function for selected criterion
   const sortSuggestions = (
     suggestions: TDateProfile[],
-    criterion: string,
+    criterion: 'raiting' | 'location' | 'age' | 'tags',
     order: 'desc' | 'asc'
   ) => {
     if (order === 'desc') {
@@ -227,11 +229,9 @@ const SmartSuggestions = () => {
           return [...suggestions].sort((a, b) => b.raiting - a.raiting);
         case 'age':
           return [...suggestions].sort((a, b) => b.age - a.age);
-        case 'online':
-          return [...suggestions].sort((a, b) => (b.online ? 1 : -1)); // Corrected for online: true first
         case 'tags':
           return [...suggestions].sort((a, b) => b.tags_in_common - a.tags_in_common);
-        case 'cities': {
+        case 'location': {
           // Sort by distance in descending order
           return [...suggestions].sort((a, b) => {
             const distanceA = haversineDistance(
@@ -258,11 +258,9 @@ const SmartSuggestions = () => {
           return [...suggestions].sort((a, b) => a.raiting - b.raiting);
         case 'age':
           return [...suggestions].sort((a, b) => a.age - b.age);
-        case 'online':
-          return [...suggestions].sort((a, b) => (b.online ? -1 : 1)); // Corrected for offline first
         case 'tags':
           return [...suggestions].sort((a, b) => a.tags_in_common - b.tags_in_common);
-        case 'cities': {
+        case 'location': {
           // Sort by distance in ascending order
           return [...suggestions].sort((a, b) => {
             const distanceA = haversineDistance(
@@ -306,7 +304,10 @@ const SmartSuggestions = () => {
   };
 
   // Handler to set sorting
-  const handleSort = (criterion: string, order: 'asc' | 'desc') => {
+  const handleSort = (
+    criterion: 'raiting' | 'location' | 'age' | 'tags',
+    order: 'asc' | 'desc'
+  ) => {
     if (sortCriterion === criterion && sortOrder === order) {
       // Toggle off sorting if clicked again
       setSortCriterion(null);
@@ -485,6 +486,7 @@ const SmartSuggestions = () => {
                     setSelectedItem={setFilterOnline}
                     disabled={loading}
                   />
+
                   <div className="flex flex-row flex-wrap items-center justify-center gap-5">
                     <div className="flex flex-row items-end gap-1">
                       {/* Tags Filter */}
@@ -533,28 +535,32 @@ const SmartSuggestions = () => {
                           avoidTranslation
                         />
                       )}
-                      {/* Cities Sorter */}
+                      {/* Location Sorter */}
                       {citiesOptions && citiesOptions.length > 0 && (
                         <div className="flex flex-col gap-1">
                           <div
-                            title={t('sort-ascending')}
+                            title={t('sort-ascending') + ' ' + t('by-distance')}
                             className={clsx(
                               'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
-                              sortCriterion === 'cities' && sortOrder === 'asc' && 'text-c42orange'
+                              sortCriterion === 'location' &&
+                                sortOrder === 'asc' &&
+                                'text-c42orange'
                             )}
-                            onClick={() => handleSort('cities', 'asc')}
+                            onClick={() => handleSort('location', 'asc')}
                           >
-                            <ArrowUpWideNarrow size={20} />
+                            <ArrowUp10 size={20} />
                           </div>
                           <div
-                            title={t('sort-descending')}
+                            title={t('sort-descending') + ' ' + t('by-distance')}
                             className={clsx(
                               'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
-                              sortCriterion === 'cities' && sortOrder === 'desc' && 'text-c42orange'
+                              sortCriterion === 'location' &&
+                                sortOrder === 'desc' &&
+                                'text-c42orange'
                             )}
-                            onClick={() => handleSort('cities', 'desc')}
+                            onClick={() => handleSort('location', 'desc')}
                           >
-                            <ArrowDownWideNarrow size={20} />
+                            <ArrowDown10 size={20} />
                           </div>
                         </div>
                       )}

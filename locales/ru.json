@@ -321,5 +321,6 @@
   "sort-ascending": "Сортировать по возрастанию",
   "sort-descending": "Сортировать по убыванию",
   "reset-filters-sorting": "Сбросить фильтры и сортировку",
-  "by-tags-matches": "по совпадениям тэгов"
+  "by-tags-matches": "по совпадениям тэгов",
+  "by-distance": "по расстоянию"
 }

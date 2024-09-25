@@ -324,5 +324,6 @@
   "sort-ascending": "Sort ascending",
   "sort-descending": "Sort descending",
   "reset-filters-sorting": "Reset filters and sorting",
-  "by-tags-matches": "by tags matches"
+  "by-tags-matches": "by tags matches",
+  "by-distance": "by distance"
 }

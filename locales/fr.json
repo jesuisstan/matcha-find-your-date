@@ -321,5 +321,6 @@
   "sort-ascending": "Trier par ordre croissant",
   "sort-descending": "Trier par ordre décroissant",
   "reset-filters-sorting": "Réinitialiser les filtres et le tri",
-  "by-tags-matches": "par tags correspondants"
+  "by-tags-matches": "par tags correspondants",
+  "by-distance": "par distance"
 }
