@@ -1,24 +1,28 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 import { Frown, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
 
+import FilterSortBar from '@/components/filter-sort-bar';
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ChipsGroup from '@/components/ui/chips/chips-group';
 import { Label } from '@/components/ui/label';
 import RadioGroup from '@/components/ui/radio/radio-group';
 import { RequiredInput } from '@/components/ui/required-input';
+import FiltersBarSkeleton from '@/components/ui/skeletons/filters-bar-skeleton';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/wrappers/profile-card-wrapper';
 import { getColorByRating } from '@/components/wrappers/raiting-wrapper';
 import { TAGS_LIST } from '@/constants/tags-list';
 import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
+import { TDateProfile } from '@/types/date-profile';
+import { TSelectorOption } from '@/types/general';
 import { TSelectGeoOption } from '@/types/geolocation';
 import { capitalize } from '@/utils/format-string';
 import {
@@ -34,53 +38,92 @@ const AdvancedSearch = () => {
   const { user, globalLoading } = useUserStore();
   const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
     useSearchStore();
-  const ageMin: number = getValueOfSearchFilter('age_min') as number;
-  const ageMax: number = getValueOfSearchFilter('age_max') as number;
-  const flirtFactorMin: number = getValueOfSearchFilter('flirt_factor_min') as number;
-  const selectedTags: string[] = getValueOfSearchFilter('tags') as string[];
-  const sex: string = String(
-    getValueOfSearchFilter('sex')
-      ? getValueOfSearchFilter('sex')
-      : setValueOfSearchFilter('sex', user?.sex === 'male' ? 'female' : 'male')
+
+  const [ageMin, setAgeMin] = useState<number>(getValueOfSearchFilter('age_min') as number);
+  const [ageMax, setAgeMax] = useState<number>(getValueOfSearchFilter('age_max') as number);
+  const [flirtFactorMin, setFlirtFactorMin] = useState<number>(
+    getValueOfSearchFilter('flirt_factor_min') as number
   );
-  const sexPreferences: string = String(
-    getValueOfSearchFilter('sex_preferences')
-      ? getValueOfSearchFilter('sex_preferences')
-      : setValueOfSearchFilter(
-          'sex_preferences',
-          user?.sex_preferences === 'women'
-            ? 'men'
-            : user?.sex_preferences === 'men'
-              ? 'women'
-              : 'bisexual'
-        )
+  const [selectedTags, setSelectedTags] = useState<string[]>(
+    getValueOfSearchFilter('tags') as string[]
   );
-  const latitude: number = Number(
-    getValueOfSearchFilter('latitude')
-      ? getValueOfSearchFilter('latitude')
-      : setValueOfSearchFilter('latitude', user?.latitude!)
+  const [sex, setSex] = useState<string>(
+    String(
+      getValueOfSearchFilter('sex')
+        ? getValueOfSearchFilter('sex')
+        : setValueOfSearchFilter('sex', user?.sex === 'male' ? 'female' : 'male')
+    )
   );
-  const longitude: number = Number(
-    getValueOfSearchFilter('longitude')
-      ? getValueOfSearchFilter('longitude')
-      : setValueOfSearchFilter('longitude', user?.longitude!)
+  const [sexPreferences, setSexPreferences] = useState<string>(
+    String(
+      getValueOfSearchFilter('sex_preferences')
+        ? getValueOfSearchFilter('sex_preferences')
+        : setValueOfSearchFilter(
+            'sex_preferences',
+            user?.sex_preferences === 'women'
+              ? 'men'
+              : user?.sex_preferences === 'men'
+                ? 'women'
+                : 'bisexual'
+          )
+    )
   );
-  const address: string = String(
-    getValueOfSearchFilter('address')
-      ? getValueOfSearchFilter('address')
-      : setValueOfSearchFilter('address', user?.address!)
+  const [latitude, setLatitude] = useState<number>(
+    Number(
+      getValueOfSearchFilter('latitude')
+        ? getValueOfSearchFilter('latitude')
+        : setValueOfSearchFilter('latitude', user?.latitude!)
+    )
   );
-  const distance: number = getValueOfSearchFilter('distance') as number;
+  const [longitude, setLongitude] = useState<number>(
+    Number(
+      getValueOfSearchFilter('longitude')
+        ? getValueOfSearchFilter('longitude')
+        : setValueOfSearchFilter('longitude', user?.longitude!)
+    )
+  );
+  const [address, setAddress] = useState<string>(
+    String(
+      getValueOfSearchFilter('address')
+        ? getValueOfSearchFilter('address')
+        : setValueOfSearchFilter('address', user?.address!)
+    )
+  );
+  const [distance, setDistance] = useState<number>(getValueOfSearchFilter('distance') as number);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [searchResult, setSearchResult] = useState([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<TDateProfile[]>([]);
+  const [sortedSuggestions, setSortedSuggestions] = useState<TDateProfile[]>([]);
 
   // Location vars
   const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(
     address ? createTSelectGeoOption(address) : createTSelectGeoOption(user?.address)
   );
+
+  const [ageOptions, setAgeOptions] = useState<TSelectorOption[]>([
+    { value: '0', label: t('selector.select-all') },
+    { value: '1', label: '18-24' },
+    { value: '2', label: '25-34' },
+    { value: '3', label: '35-44' },
+    { value: '4', label: '45-54' },
+    { value: '5', label: '55+' },
+  ]);
+
+  // Update filters in the store after initialization
+  useEffect(() => {
+    setValueOfSearchFilter('age_min', ageMin);
+    setValueOfSearchFilter('age_max', ageMax);
+    setValueOfSearchFilter('flirt_factor_min', flirtFactorMin);
+    setValueOfSearchFilter('sex', sex);
+    setValueOfSearchFilter('sex_preferences', sexPreferences);
+    setValueOfSearchFilter('latitude', latitude);
+    setValueOfSearchFilter('longitude', longitude);
+    setValueOfSearchFilter('address', address);
+    setValueOfSearchFilter('distance', distance);
+  }, [ageMin, ageMax, flirtFactorMin, sex, sexPreferences, latitude, longitude, address, distance]);
 
   // get user's location based on browser geolocation
   const handleGeoLocatorClick = async () => {
@@ -158,6 +201,17 @@ const AdvancedSearch = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Handle the filtered suggestions (from FilterSortBar)
+  const handleFilterChange = (filtered: TDateProfile[]) => {
+    setFilteredSuggestions(filtered);
+    //setSortedSuggestions(filtered); // Reset sorted suggestions when filters change
+  };
+
+  // Handle the sorted suggestions (from FilterSortBar)
+  const handleSortChange = (sorted: TDateProfile[]) => {
+    setSortedSuggestions(sorted);
   };
 
   return (
@@ -328,7 +382,7 @@ const AdvancedSearch = () => {
                 ]}
                 defaultValue="male"
                 selectedItem={sex}
-                onSelectItem={(value) => setValueOfSearchFilter('sex', value)}
+                onSelectItem={(value) => setSex(value)}
               />
             </div>
             {/* SEX PREFERENCES */}
@@ -342,7 +396,7 @@ const AdvancedSearch = () => {
                 ]}
                 defaultValue="bisexual"
                 selectedItem={sexPreferences}
-                onSelectItem={(value) => setValueOfSearchFilter('sex_preferences', value)}
+                onSelectItem={(value) => setSexPreferences(value)}
               />
             </div>
           </div>
@@ -352,7 +406,10 @@ const AdvancedSearch = () => {
               label={'#' + t(`tags.tags`) + ':'}
               options={TAGS_LIST || []}
               selectedChips={selectedTags}
-              setSelectedChips={(tags) => replaceAllItemsOfSearchFilter('tags', tags)}
+              setSelectedChips={(tags) => {
+                setSelectedTags(tags);
+                replaceAllItemsOfSearchFilter('tags', tags);
+              }}
             />
           </div>
           <ButtonMatcha
@@ -371,6 +428,32 @@ const AdvancedSearch = () => {
           </ButtonMatcha>
         </div>
       </form>
+
+      <div className="mb-4">
+        {loading || !user ? (
+          <FiltersBarSkeleton />
+        ) : (
+          <FilterSortBar
+            user={user}
+            smartSuggestions={searchResult}
+            citiesOptions={[address]} // todo: add citiesOptions
+            loading={loading || globalLoading}
+            sexOptions={[
+              { value: 'male', label: t(`male`) },
+              { value: 'female', label: t(`female`) },
+            ]}
+            sexPrefsOptions={[
+              { value: 'men', label: t(`selector.men`) },
+              { value: 'women', label: t(`selector.women`) },
+              { value: 'bisexual', label: t(`selector.bisexual`) },
+            ]}
+            ageOptions={ageOptions}
+            tagsOptions={selectedTags} // todo: add tagsOptions
+            onFilterChange={handleFilterChange}
+            onSortChange={handleSortChange}
+          />
+        )}
+      </div>
 
       {/* MAIN CONTENT */}
       {loading || globalLoading ? (
