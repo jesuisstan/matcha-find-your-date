@@ -558,7 +558,16 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 62,
       biography:
         'Sports fanatic, especially soccer and basketball. Always active and looking for a new challenge.',
-      tags: ['sports-fan', 'fitness', 'openminded', 'runner', 'pragmatist', 'french', 'english'],
+      tags: [
+        'sports-fan',
+        'fitness',
+        'openminded',
+        'netflix',
+        'runner',
+        'pragmatist',
+        'french',
+        'english',
+      ],
       latitude: 50.8503, // Brussels
       longitude: 4.3517,
       address: 'Brussels, Belgium',
@@ -724,7 +733,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Originally from Moscow, I now live in Paris. Love exploring different cultures and cuisines.',
-      tags: ['foodie', 'globetrotter', 'coffee-lover', 'russian', 'french', 'english'],
+      tags: ['foodie', 'globetrotter', 'coffee-lover', 'netflix', 'russian', 'french', 'english'],
       latitude: 55.7558, // Moscow
       longitude: 37.6176,
       address: 'Moscow, Russia',
@@ -805,7 +814,15 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Passionate about photography and art. I love capturing moments and expressing emotions through images.',
-      tags: ['photography', 'art-lover', 'polyamorous', 'lgbt-friendly', 'russian', 'english'],
+      tags: [
+        'photography',
+        'art-lover',
+        'polyamorous',
+        'netflix',
+        'lgbt-friendly',
+        'russian',
+        'english',
+      ],
       latitude: 55.7558, // Moscow
       longitude: 37.6176,
       address: 'Moscow, Russia',
@@ -913,7 +930,16 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1985-09-23',
       sex: 'male',
       biography: 'German entrepreneur. I enjoy investing and exploring new business opportunities.',
-      tags: ['investor', 'traveller', 'techie', 'lgbt-friendly', 'dutch', 'english', 'french'],
+      tags: [
+        'investor',
+        'traveller',
+        'techie',
+        'netflix',
+        'lgbt-friendly',
+        'dutch',
+        'english',
+        'french',
+      ],
       latitude: 52.52, // Berlin
       longitude: 13.405,
       address: 'Berlin, Germany',
@@ -1021,7 +1047,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Digital nomad and minimalist. I enjoy exploring new places and meeting new people.',
-      tags: ['traveller', 'minimalist', 'adventurous', 'dutch', 'english', 'french'],
+      tags: ['traveller', 'minimalist', 'adventurous', 'netflix', 'dutch', 'english', 'french'],
       latitude: 22.3964, // Hong Kong
       longitude: 114.1095,
       address: 'Hong Kong, China',
@@ -1092,7 +1118,7 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1986-08-09',
       sex: 'male',
       biography: 'Motorcycle enthusiast. I love the thrill of the road and discovering new places.',
-      tags: ['motorcyclist', 'adventurous', 'traveller', 'spanish', 'english'],
+      tags: ['motorcyclist', 'adventurous', 'traveller', 'netflix', 'spanish', 'english'],
       latitude: -34.6037, // Buenos Aires
       longitude: -58.3816,
       address: 'Buenos Aires, Argentina',
@@ -1140,7 +1166,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Tech geek and sci-fi fan. I enjoy gaming and working on new tech projects in my free time.',
-      tags: ['techie', 'gamer', 'scifi-fan', 'introvert', 'english', 'french'],
+      tags: ['techie', 'gamer', 'scifi-fan', 'introvert', 'netflix', 'english', 'french'],
       latitude: 35.6895,
       longitude: 139.6917,
       address: 'Tokyo, Japan',
@@ -1304,7 +1330,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Cat lover and binge-watcher. I spend my weekends curled up with my cat and Netflix.',
-      tags: ['catlover', 'binge-watcher', 'homebody', 'english', 'french'],
+      tags: ['catlover', 'binge-watcher', 'homebody', 'netflix', 'english', 'french'],
       latitude: 43.6532,
       longitude: -79.3832,
       address: 'Toronto, Canada',
@@ -1656,15 +1682,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 77,
       biography: 'Fitness coach with a love for health and wellness.',
-      tags: [
-        'fitness',
-        'openminded',
-        'health-conscious',
-        'sports-fan',
-        'cyclist',
-        'english',
-        'french',
-      ],
+      tags: ['fitness', 'openminded', 'runner', 'sports-fan', 'cyclist', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -1975,7 +1993,7 @@ module.exports = function (hashedPassword, yesterday) {
       raiting: 71,
       biography:
         'Passionate about fitness and wellness. Looking for someone with the same mindset.',
-      tags: ['fitness', 'openminded', 'health-conscious', 'runner', 'english', 'french'],
+      tags: ['fitness', 'openminded', 'runner', 'runner', 'english', 'french'],
       latitude: 48.8566, // Paris
       longitude: 2.3522,
       address: 'Paris, France',
@@ -4873,7 +4891,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 85,
       biography: 'Fitness coach who loves helping others achieve their health and fitness goals.',
-      tags: ['fitness', 'openminded', 'traveller', 'english', 'sports-fan', 'health-conscious'],
+      tags: ['fitness', 'openminded', 'traveller', 'english', 'sports-fan', 'runner'],
       latitude: 40.7128, // New York
       longitude: -74.006,
       address: 'New York, USA',
@@ -5334,7 +5352,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 46,
       biography: 'Avid reader and fan of science fiction and fantasy novels.',
-      tags: ['bookworm', 'scifi-fan', 'pragmatist', 'english', 'introvert', 'gamer'],
+      tags: ['bookworm', 'scifi-fan', 'pragmatist', 'english', 'introvert', 'gamer', 'netflix'],
       latitude: 51.1657, // Berlin
       longitude: 10.4515,
       address: 'Berlin, Germany',

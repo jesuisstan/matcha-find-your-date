@@ -23,6 +23,7 @@ import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton'
 import ProfileCardWrapper from '@/components/wrappers/profile-card-wrapper';
 import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
+import { TDateProfile } from '@/types/date-profile';
 import { TSelectorOption } from '@/types/general';
 import { calculateAge } from '@/utils/format-string';
 
@@ -86,21 +87,48 @@ const SmartSuggestions = () => {
 
       const result = await response.json();
       if (response.ok) {
-        setSmartSuggestions(result.matchingUsers);
+        // Initialize containers for unique values
+        const uniqueAges: number[] = [];
+        const uniqueAgeRanges: Record<string, boolean> = {
+          '1': false,
+          '2': false,
+          '3': false,
+          '4': false,
+          '5': false,
+        };
+        const uniqueSexOptions = new Set<string>();
+        const uniqueSexPrefsOptions = new Set<string>();
+        const uniqueCitiesOptions = new Set<string>();
+
+        // Single iteration to process age, tags_in_common, and collect unique values
+        const matchingUsers = result.matchingUsers.map((u: any) => {
+          const age = calculateAge(u.birthdate);
+          const tagsInCommon = user?.tags.filter((tag) => u.tags.includes(tag)).length || 0;
+
+          // Add unique values
+          uniqueAges.push(age);
+          uniqueSexOptions.add(u.sex);
+          uniqueSexPrefsOptions.add(u.sex_preferences);
+          uniqueCitiesOptions.add(u.address);
+
+          // Track age ranges
+          if (age >= 18 && age <= 24) uniqueAgeRanges['1'] = true;
+          if (age >= 25 && age <= 34) uniqueAgeRanges['2'] = true;
+          if (age >= 35 && age <= 44) uniqueAgeRanges['3'] = true;
+          if (age >= 45 && age <= 54) uniqueAgeRanges['4'] = true;
+          if (age >= 55) uniqueAgeRanges['5'] = true;
+
+          return {
+            ...u,
+            age,
+            tags_in_common: tagsInCommon,
+          };
+        });
+
+        setSmartSuggestions(matchingUsers);
         setUser({ ...user, ...result.updatedUserData });
 
-        // Calculate ages based on birthdates and categorize them
-        const uniqueAges = result.matchingUsers.map((u: any) => calculateAge(u.birthdate));
-
-        const uniqueAgeRanges = {
-          '1': uniqueAges.filter((age: number) => age >= 18 && age <= 24).length > 0,
-          '2': uniqueAges.filter((age: number) => age >= 25 && age <= 34).length > 0,
-          '3': uniqueAges.filter((age: number) => age >= 35 && age <= 44).length > 0,
-          '4': uniqueAges.filter((age: number) => age >= 45 && age <= 54).length > 0,
-          '5': uniqueAges.filter((age: number) => age >= 55).length > 0,
-        };
-
-        // Update ageOptions to disable ranges that are not present
+        // Update filter options based on unique values
         setAgeOptions((prevOptions) =>
           prevOptions.map((option) => ({
             ...option,
@@ -110,34 +138,22 @@ const SmartSuggestions = () => {
           }))
         );
 
-        // Process unique values for sex, sex_preferences, and cities as strings
-        const uniqueSexOptions = Array.from(
-          new Set(result.matchingUsers.map((u: any) => u.sex as string))
-        );
-        const uniqueSexPrefsOptions = Array.from(
-          new Set(result.matchingUsers.map((u: any) => u.sex_preferences as string))
-        );
-        const uniqueCitiesOptions = Array.from(
-          new Set(result.matchingUsers.map((u: any) => u.address as string))
-        ) as string[];
-
-        // Update the options state, disabling unavailable options
         setSexOptions((prevOptions) =>
           prevOptions.map((option) => ({
             ...option,
-            disabled: !uniqueSexOptions.includes(option.value) && option.value !== '0',
+            disabled: !uniqueSexOptions.has(option.value) && option.value !== '0',
           }))
         );
 
         setSexPrefsOptions((prevOptions) =>
           prevOptions.map((option) => ({
             ...option,
-            disabled: !uniqueSexPrefsOptions.includes(option.value) && option.value !== '0',
+            disabled: !uniqueSexPrefsOptions.has(option.value) && option.value !== '0',
           }))
         );
 
-        setCitiesOptions(uniqueCitiesOptions);
-        setFilterCities(uniqueCitiesOptions);
+        setCitiesOptions(Array.from(uniqueCitiesOptions));
+        setFilterCities(Array.from(uniqueCitiesOptions));
       } else {
         setError(result.error ? result.error : 'error-fetching-suggestions');
       }
@@ -151,7 +167,7 @@ const SmartSuggestions = () => {
   // Function to apply all filters to smartSuggestions
   const filteredSuggestions = useMemo(() => {
     return smartSuggestions.filter((dateProfile) => {
-      const age = calculateAge(dateProfile.birthdate);
+      const age = dateProfile.age;
 
       const matchesAge =
         filterAge === '0' || // Select all
@@ -199,23 +215,21 @@ const SmartSuggestions = () => {
   ]);
 
   // Sorting function for selected criterion
-  const sortSuggestions = (suggestions: any[], criterion: string, order: 'desc' | 'asc') => {
+  const sortSuggestions = (
+    suggestions: TDateProfile[],
+    criterion: string,
+    order: 'desc' | 'asc'
+  ) => {
     if (order === 'desc') {
       switch (criterion) {
         case 'raiting':
           return [...suggestions].sort((a, b) => b.raiting - a.raiting);
         case 'age':
-          return [...suggestions].sort(
-            (a, b) => calculateAge(b.birthdate) - calculateAge(a.birthdate)
-          );
+          return [...suggestions].sort((a, b) => b.age - a.age);
         case 'online':
           return [...suggestions].sort((a, b) => (b.online ? 1 : -1)); // Corrected for online: true first
         case 'tags':
-          return [...suggestions].sort((a, b) => {
-            const matchesA = user?.tags.filter((tag) => a.tags.includes(tag)).length || 0;
-            const matchesB = user?.tags.filter((tag) => b.tags.includes(tag)).length || 0;
-            return matchesB - matchesA; // Sort by descending tag matches
-          });
+          return [...suggestions].sort((a, b) => b.tags_in_common - a.tags_in_common);
         case 'cities':
           return [...suggestions].sort((a, b) => {
             const matchesA = filterCities.filter((city) => a.address === city).length || 0;
@@ -230,17 +244,11 @@ const SmartSuggestions = () => {
         case 'raiting':
           return [...suggestions].sort((a, b) => a.raiting - b.raiting);
         case 'age':
-          return [...suggestions].sort(
-            (a, b) => calculateAge(a.birthdate) - calculateAge(b.birthdate)
-          );
+          return [...suggestions].sort((a, b) => a.age - b.age);
         case 'online':
           return [...suggestions].sort((a, b) => (b.online ? -1 : 1)); // Corrected for offline first
         case 'tags':
-          return [...suggestions].sort((a, b) => {
-            const matchesA = user?.tags.filter((tag) => a.tags.includes(tag)).length || 0;
-            const matchesB = user?.tags.filter((tag) => b.tags.includes(tag)).length || 0;
-            return matchesA - matchesB; // Sort by ascending tag matches
-          });
+          return [...suggestions].sort((a, b) => a.tags_in_common - b.tags_in_common);
         case 'cities':
           return [...suggestions].sort((a, b) => {
             const matchesA = filterCities.filter((city) => a.address === city).length || 0;

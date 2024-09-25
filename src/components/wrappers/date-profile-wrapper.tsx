@@ -14,7 +14,6 @@ import RaitingWrapper from '@/components/wrappers/raiting-wrapper';
 import SexPreferenceWrapper from '@/components/wrappers/sex-preference-wrapper';
 import StatusWrapper from '@/components/wrappers/status-wrapper';
 import { TDateProfile } from '@/types/date-profile';
-import { calculateAge } from '@/utils/format-string';
 
 const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
   const t = useTranslations();
@@ -44,7 +43,7 @@ const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
             <LabelsWrapper
               firstName={dateProfile?.firstname ?? '???'}
               lastName={dateProfile?.lastname ?? '???'}
-              age={calculateAge(dateProfile?.birthdate)}
+              age={dateProfile?.age}
               sex={dateProfile?.sex ?? '???'}
               loading={false}
             />

@@ -9,7 +9,7 @@ import { capitalize } from '@/utils/format-string';
 type LabelsWrapperProps = {
   firstName: string;
   lastName: string;
-  age: Number;
+  age: number;
   sex: string;
   loading: boolean;
   modifiable?: boolean;

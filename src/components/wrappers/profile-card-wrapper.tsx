@@ -12,7 +12,6 @@ import { SexPreferenceIcon } from './sex-preference-wrapper';
 
 import AvatarMini from '@/components/ui/avatar-mini';
 import { TDateProfile } from '@/types/date-profile';
-import { calculateAge } from '@/utils/format-string';
 
 const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
   const t = useTranslations();
@@ -48,7 +47,7 @@ const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
               {profile?.nickname}
             </p>
             {'/'}
-            <p className="text-base">{calculateAge(profile?.birthdate)}</p>
+            <p className="text-base">{profile?.age}</p>
           </div>
 
           <div className="m-2 flex flex-row items-center justify-center gap-2">
