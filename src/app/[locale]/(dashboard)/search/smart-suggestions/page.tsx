@@ -26,6 +26,7 @@ import useUserStore from '@/stores/user';
 import { TDateProfile } from '@/types/date-profile';
 import { TSelectorOption } from '@/types/general';
 import { calculateAge } from '@/utils/format-string';
+import { haversineDistance } from '@/utils/server/haversine-distance';
 
 const SmartSuggestions = () => {
   const t = useTranslations();
@@ -230,12 +231,24 @@ const SmartSuggestions = () => {
           return [...suggestions].sort((a, b) => (b.online ? 1 : -1)); // Corrected for online: true first
         case 'tags':
           return [...suggestions].sort((a, b) => b.tags_in_common - a.tags_in_common);
-        case 'cities':
+        case 'cities': {
+          // Sort by distance in descending order
           return [...suggestions].sort((a, b) => {
-            const matchesA = filterCities.filter((city) => a.address === city).length || 0;
-            const matchesB = filterCities.filter((city) => b.address === city).length || 0;
-            return matchesB - matchesA; // Sort by descending city matches
+            const distanceA = haversineDistance(
+              user?.latitude!,
+              user?.longitude!,
+              a.latitude,
+              a.longitude
+            );
+            const distanceB = haversineDistance(
+              user?.latitude!,
+              user?.longitude!,
+              b.latitude,
+              b.longitude
+            );
+            return distanceB - distanceA;
           });
+        }
         default:
           return suggestions;
       }
@@ -249,12 +262,24 @@ const SmartSuggestions = () => {
           return [...suggestions].sort((a, b) => (b.online ? -1 : 1)); // Corrected for offline first
         case 'tags':
           return [...suggestions].sort((a, b) => a.tags_in_common - b.tags_in_common);
-        case 'cities':
+        case 'cities': {
+          // Sort by distance in ascending order
           return [...suggestions].sort((a, b) => {
-            const matchesA = filterCities.filter((city) => a.address === city).length || 0;
-            const matchesB = filterCities.filter((city) => b.address === city).length || 0;
-            return matchesA - matchesB; // Sort by ascending city matches
+            const distanceA = haversineDistance(
+              user?.latitude!,
+              user?.longitude!,
+              a.latitude,
+              a.longitude
+            );
+            const distanceB = haversineDistance(
+              user?.latitude!,
+              user?.longitude!,
+              b.latitude,
+              b.longitude
+            );
+            return distanceA - distanceB;
           });
+        }
         default:
           return suggestions;
       }
@@ -543,15 +568,19 @@ const SmartSuggestions = () => {
       </div>
 
       {/* MAIN CONTENT */}
-      {loading || globalLoading || !user ? (
+      {loading || globalLoading ? (
         <SuggestionsSkeleton />
-      ) : sortedSuggestions.length === 0 || error ? (
+      ) : sortedSuggestions.length === 0 || smartSuggestions.length === 0 || error || !user ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
             <Frown size={84} />
           </div>
           <p className="text-center text-lg">
-            {error ? t(`${error}`) : t(`search.no-suggestions`)}
+            {error
+              ? t(`${error}`)
+              : sortedSuggestions.length === 0
+                ? t(`search.no-suggestions-for-filters-sorting`)
+                : t(`search.no-suggestions`)}
           </p>
         </div>
       ) : (

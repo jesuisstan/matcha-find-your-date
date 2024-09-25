@@ -100,7 +100,8 @@
     "advanced": "Advanced Search",
     "no-suggestions": "No suggestions found for your profile yet",
     "refresh-suggestions": "Refresh Suggestions",
-    "advanced-search-note": "Choose the characteristics your ideal match should have (age, tags, preferences, etc.), focusing on what you're looking for in a partner, not about yourself."
+    "advanced-search-note": "Choose the characteristics your ideal match should have (age, tags, preferences, etc.), focusing on what you're looking for in a partner, not about yourself.",
+    "no-suggestions-for-filters-sorting": "No suggestions found for the selected filters / sorting"
   },
   "attension": "Attention!",
   "complete-your-profile-message": "Please complete your profile to continue using the service and gain access to advanced search.",
