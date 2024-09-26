@@ -418,7 +418,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: false,
       raiting: 62,
       biography: 'Food lover and baker. Passionate about creating delicious pastries and bread.',
-      tags: ['foodie', 'polyamorous', 'baker', 'french', 'english'],
+      tags: ['foodie', 'bdsm', 'polyamorous', 'baker', 'french', 'english'],
       latitude: 48.5734, // Strasbourg
       longitude: 7.7521,
       address: 'Strasbourg, France',
@@ -594,7 +594,7 @@ module.exports = function (hashedPassword, yesterday) {
       online: true,
       raiting: 62,
       biography: 'Passionate about art and painting. Exploring creativity through various mediums.',
-      tags: ['art-lover', 'painter', 'polyamorous', 'french', 'english'],
+      tags: ['art-lover', 'painter', 'bdsm', 'polyamorous', 'french', 'english'],
       latitude: 48.5734, // Strasbourg
       longitude: 7.7521,
       address: 'Strasbourg, France',
@@ -652,7 +652,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Writer by profession, I am passionate about sharing stories and connecting with people.',
-      tags: ['writer', 'polyamorous', 'bookworm', 'english', 'french'],
+      tags: ['writer', 'bdsm', 'polyamorous', 'bookworm', 'english', 'french'],
       latitude: 48.8357, // Paris Suburb
       longitude: 2.2419,
       address: 'Versailles, France',
@@ -733,7 +733,16 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Originally from Moscow, I now live in Paris. Love exploring different cultures and cuisines.',
-      tags: ['foodie', 'globetrotter', 'coffee-lover', 'netflix', 'russian', 'french', 'english'],
+      tags: [
+        'foodie',
+        'globetrotter',
+        'jazz',
+        'coffee-lover',
+        'netflix',
+        'russian',
+        'french',
+        'english',
+      ],
       latitude: 55.7558, // Moscow
       longitude: 37.6176,
       address: 'Moscow, Russia',
@@ -817,6 +826,7 @@ module.exports = function (hashedPassword, yesterday) {
       tags: [
         'photography',
         'art-lover',
+        'bdsm',
         'polyamorous',
         'netflix',
         'lgbt-friendly',
@@ -849,7 +859,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Born and raised in Italy, I love food and wine. Seeking someone who enjoys the same.',
-      tags: ['wine-lover', 'foodie', 'traveller', 'italian', 'english'],
+      tags: ['wine-lover', 'jazz', 'foodie', 'traveller', 'italian', 'english'],
       latitude: 41.9028, // Rome
       longitude: 12.4964,
       address: 'Rome, Italy',
@@ -876,7 +886,7 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1986-03-12',
       sex: 'male',
       biography: 'I enjoy reading, and I am a huge fan of science fiction and fantasy novels.',
-      tags: ['scifi-fan', 'bookworm', 'polyamorous', 'arabic', 'english'],
+      tags: ['scifi-fan', 'bookworm', 'bdsm', 'polyamorous', 'arabic', 'english'],
       latitude: 25.276987, // Dubai
       longitude: 55.296249,
       address: 'Dubai, UAE',
@@ -966,7 +976,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex: 'male',
       biography:
         'Fitness enthusiast and personal trainer. I help people achieve their fitness goals.',
-      tags: ['fitness', 'openminded', 'hiker', 'sports-fan', 'dutch', 'english', 'french'],
+      tags: ['fitness', 'openminded', 'jazz', 'hiker', 'sports-fan', 'dutch', 'english', 'french'],
       latitude: 34.0522, // Los Angeles
       longitude: -118.2437,
       address: 'Los Angeles, USA',
@@ -1118,7 +1128,7 @@ module.exports = function (hashedPassword, yesterday) {
       birthdate: '1986-08-09',
       sex: 'male',
       biography: 'Motorcycle enthusiast. I love the thrill of the road and discovering new places.',
-      tags: ['motorcyclist', 'adventurous', 'traveller', 'netflix', 'spanish', 'english'],
+      tags: ['motorcyclist', 'adventurous', 'jazz', 'traveller', 'netflix', 'spanish', 'english'],
       latitude: -34.6037, // Buenos Aires
       longitude: -58.3816,
       address: 'Buenos Aires, Argentina',

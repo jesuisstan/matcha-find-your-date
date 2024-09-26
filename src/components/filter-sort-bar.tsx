@@ -22,20 +22,20 @@ import { haversineDistance } from '@/utils/server/haversine-distance';
 
 interface FilterSortBarProps {
   user: TUser;
-  smartSuggestions: TDateProfile[];
+  profileSuggestions: TDateProfile[];
   loading: boolean;
   citiesOptions: string[];
-  sexOptions: TSelectorOption[];
-  sexPrefsOptions: TSelectorOption[];
+  sexOptions?: TSelectorOption[];
+  sexPrefsOptions?: TSelectorOption[];
   ageOptions: TSelectorOption[];
-  tagsOptions?: string[];
+  tagsOptions: string[];
   onFilterChange: (filtered: TDateProfile[]) => void;
   onSortChange: (sorted: TDateProfile[]) => void;
 }
 
 const FilterSortBar = ({
   user,
-  smartSuggestions,
+  profileSuggestions,
   loading,
   citiesOptions,
   sexOptions,
@@ -58,13 +58,12 @@ const FilterSortBar = ({
   const [filterAge, setFilterAge] = useState('0');
   const [filterSex, setFilterSex] = useState('0');
   const [filterSexPreferences, setFilterSexPreferences] = useState('0');
-  const [filterTags, setFilterTags] = useState<string[]>(tagsOptions || user?.tags);
+  const [filterTags, setFilterTags] = useState<string[]>(tagsOptions);
   const [filterOnline, setFilterOnline] = useState('0');
-console.log('tagsOptions', tagsOptions);
 
-  // Function to apply all filters to smartSuggestions
+  // Function to apply all filters to profileSuggestions
   const filteredSuggestions = useMemo(() => {
-    return smartSuggestions.filter((dateProfile) => {
+    return profileSuggestions.filter((dateProfile) => {
       const age = dateProfile.age;
 
       const matchesAge =
@@ -100,7 +99,7 @@ console.log('tagsOptions', tagsOptions);
       );
     });
   }, [
-    smartSuggestions,
+    profileSuggestions,
     filterAge,
     filterSex,
     filterSexPreferences,
@@ -160,7 +159,7 @@ console.log('tagsOptions', tagsOptions);
     setFilterSex('0');
     setFilterSexPreferences('0');
     setFilterRaiting('0');
-    setFilterTags(tagsOptions || user?.tags);
+    setFilterTags(tagsOptions);
     setFilterOnline('0');
     setFilterCities(citiesOptions);
     setSortCriterion(null);
@@ -207,24 +206,28 @@ console.log('tagsOptions', tagsOptions);
           </div>
           <div className="flex w-full flex-row flex-wrap items-center justify-center gap-5 overflow-hidden text-ellipsis">
             {/* Sex Filter */}
-            <SelectSingle
-              options={sexOptions}
-              defaultValue="0"
-              label={t('sex') + ':'}
-              selectedItem={filterSex}
-              setSelectedItem={setFilterSex}
-              disabled={loading}
-            />
+            {sexOptions && (
+              <SelectSingle
+                options={sexOptions}
+                defaultValue="0"
+                label={t('sex') + ':'}
+                selectedItem={filterSex}
+                setSelectedItem={setFilterSex}
+                disabled={loading}
+              />
+            )}
 
             {/* Sex Preferences Filter */}
-            <SelectSingle
-              options={sexPrefsOptions}
-              defaultValue="0"
-              label={t('sexual-preferences') + ':'}
-              selectedItem={filterSexPreferences}
-              setSelectedItem={setFilterSexPreferences}
-              disabled={loading}
-            />
+            {sexPrefsOptions && (
+              <SelectSingle
+                options={sexPrefsOptions}
+                defaultValue="0"
+                label={t('sexual-preferences') + ':'}
+                selectedItem={filterSexPreferences}
+                setSelectedItem={setFilterSexPreferences}
+                disabled={loading}
+              />
+            )}
 
             <div className="flex flex-row items-end gap-1">
               {/* Age Filter */}
@@ -319,7 +322,7 @@ console.log('tagsOptions', tagsOptions);
                 {/* Tags Filter */}
                 <SelectMultiple
                   label={'#' + t(`tags.tags`) + ':'}
-                  options={user?.tags || []}
+                  options={tagsOptions}
                   defaultValues={[]}
                   selectedItems={filterTags}
                   setSelectedItems={setFilterTags}

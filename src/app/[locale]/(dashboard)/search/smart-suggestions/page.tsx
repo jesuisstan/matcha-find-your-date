@@ -69,7 +69,6 @@ const SmartSuggestions = () => {
 
       const result = await response.json();
       if (response.ok) {
-        // Initialize containers for unique values
         const uniqueAges: number[] = [];
         const uniqueAgeRanges: Record<string, boolean> = {
           '1': false,
@@ -201,12 +200,13 @@ const SmartSuggestions = () => {
           ) : (
             <FilterSortBar
               user={user}
-              smartSuggestions={smartSuggestions}
+              profileSuggestions={smartSuggestions}
               citiesOptions={citiesOptions}
               loading={loading || globalLoading}
               sexOptions={sexOptions}
               sexPrefsOptions={sexPrefsOptions}
               ageOptions={ageOptions}
+              tagsOptions={user.tags}
               onFilterChange={handleFilterChange}
               onSortChange={handleSortChange}
             />
@@ -232,7 +232,7 @@ const SmartSuggestions = () => {
         </div>
       ) : (
         <div className="flex flex-row flex-wrap items-center justify-center gap-5 smooth42transition">
-          {sortedSuggestions.map((dateProfile: any, index: number) => (
+          {sortedSuggestions.map((dateProfile: TDateProfile, index: number) => (
             <ProfileCardWrapper key={`${dateProfile.id}-${index}`} profile={dateProfile} />
           ))}
         </div>

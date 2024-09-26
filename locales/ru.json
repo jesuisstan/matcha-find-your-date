@@ -322,5 +322,7 @@
   "sort-descending": "Сортировать по убыванию",
   "reset-filters-sorting": "Сбросить фильтры и сортировку",
   "by-tags-matches": "по совпадениям тэгов",
-  "by-distance": "по расстоянию"
+  "by-distance": "по расстоянию до Вас",
+  "error-no-tags-selected": "Не выбраны тэги! Выберите хотя бы 1 тэг",
+  "no-matching-users-on-distance": "Нет пользователей в выбранном радиусе"
 }

@@ -40,7 +40,12 @@ const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
           )}
         ></div>
 
-        <AvatarMini src={profile?.photos[0]} nickname={profile?.nickname} width={40} height={40} />
+        <AvatarMini
+          src={profile?.photos?.[0] ?? ''}
+          nickname={profile?.nickname}
+          width={40}
+          height={40}
+        />
         <div className="h-fit w-[160px] items-center justify-center self-center rounded-2xl text-center align-middle">
           <div className="flex flex-row items-center justify-center gap-2">
             <p className="max-w-32 truncate text-base font-bold" title={profile?.nickname}>

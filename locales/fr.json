@@ -322,5 +322,7 @@
   "sort-descending": "Trier par ordre décroissant",
   "reset-filters-sorting": "Réinitialiser les filtres et le tri",
   "by-tags-matches": "par tags correspondants",
-  "by-distance": "par distance"
+  "by-distance": "par distance à vous",
+  "error-no-tags-selected": "Aucun tag sélectionné! Sélectionnez au moins 1 tag",
+  "no-matching-users-on-distance": "Aucun utilisateur correspondant à la distance sélectionnée"
 }

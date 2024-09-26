@@ -25,7 +25,7 @@ const Menu: React.FC = () => {
   }));
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
+  const menuRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
   const [isClient, setIsClient] = useState(false);
 
   const toggleSidebar = () => {
@@ -55,10 +55,10 @@ const Menu: React.FC = () => {
     };
   }, [isSidebarOpen]);
 
-  /* Event listener to close DropdownMenu when clicking outside */
+  /* Event listener to close Menu when clicking outside */
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsSidebarOpen(false);
       }
     };
@@ -108,14 +108,14 @@ const Menu: React.FC = () => {
       {isClient && !globalLoading ? (
         <>
           <div
-            id="sidebar"
+            id="menu-sidebar"
             className={clsx(
-              `fixed left-0 top-0 z-50 h-screen w-fit bg-transparent p-4 transition-transform`, // basic part
+              `fixed left-0 top-0 z-50 h-fit w-fit bg-transparent p-4 transition-transform`, // basic part
               `lg:translate-x-0`, // sm + md + xl (responsive part)
               isSidebarOpen ? 'translate-x-0 drop-shadow-2xl' : ' -translate-x-96' // Conditional style
             )}
-            aria-label="Sidebar"
-            ref={dropdownRef}
+            aria-label="menuSidebar"
+            ref={menuRef}
           >
             <div
               id="rounded-menu-container"

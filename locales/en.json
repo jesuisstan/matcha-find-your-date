@@ -98,7 +98,7 @@
     "search": "Search",
     "smart-suggestions": "Smart Suggestions",
     "advanced": "Advanced Search",
-    "no-suggestions": "No suggestions found for your profile yet",
+    "no-suggestions": "No suggestions for your profile yet",
     "refresh-suggestions": "Refresh Suggestions",
     "advanced-search-note": "Choose the characteristics your ideal match should have (age, tags, preferences, etc.), focusing on what you're looking for in a partner, not about yourself.",
     "no-suggestions-for-filters-sorting": "No suggestions found for the selected filters / sorting"
@@ -325,5 +325,7 @@
   "sort-descending": "Sort descending",
   "reset-filters-sorting": "Reset filters and sorting",
   "by-tags-matches": "by tags matches",
-  "by-distance": "by distance"
+  "by-distance": "by distance to you",
+  "error-no-tags-selected": "No tags selected! Please select at least 1 tag",
+  "no-matching-users-on-distance": "No matching users found within the selected distance"
 }

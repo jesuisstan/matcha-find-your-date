@@ -7,77 +7,96 @@ import { haversineDistance } from '@/utils/server/haversine-distance';
 export async function POST(request: Request) {
   const {
     id,
+    latitude,
+    longitude,
     distance,
     ageMin,
     ageMax,
     flirtFactorMin,
-    tags,
     sex,
     sexPreferences,
-    latitude,
-    longitude,
-    address,
+    tags,
   } = await request.json();
 
   const client = await db.connect();
 
   try {
-    const queryFilters = [];
-    const queryValues: any[] = [];
+    // Get the requester-user's data
+    const userResult = await client.query('SELECT * FROM users WHERE id = $1', [id]);
+    const user = userResult.rows[0];
 
-    // Filter users by sex
-    if (sex) {
-      queryFilters.push('sex = $1');
-      queryValues.push(sex);
+    if (!user) {
+      return NextResponse.json({ error: 'user-not-found' }, { status: 404 });
     }
 
-    // Filter users by sex preferences
-    if (sexPreferences) {
-      queryFilters.push('sex_preferences = $2');
-      queryValues.push(sexPreferences);
+    // Update user's last action and set online status to true
+    const currentDate = new Date().toISOString();
+    const updateQuery = `
+      UPDATE users 
+      SET last_action = $2, online = true 
+      WHERE id = $1
+      RETURNING id, last_action, online;
+    `;
+    const updatedUserResult = await client.query(updateQuery, [id, currentDate]);
+    const updatedUserData = updatedUserResult.rows[0];
+
+    if (!updatedUserData) {
+      return NextResponse.json({ error: 'failed-to-update-user-activity' }, { status: 500 });
     }
 
-    // Filter users by age, converting birthdate (TEXT) to DATE and calculating the age
-    if (ageMin && ageMax) {
-      queryFilters.push(
-        "EXTRACT(YEAR FROM AGE(TO_DATE(birthdate, 'YYYY-MM-DD'))) BETWEEN $3 AND $4"
-      );
-      queryValues.push(ageMin, ageMax);
-    }
-
-    // Filter users by tags (matching at least one tag)
-    if (tags && tags.length > 0) {
-      queryFilters.push(`tags && $5`);
-      queryValues.push(tags);
-    }
-
-    // Filter users by minimum rating
-    if (flirtFactorMin) {
-      queryFilters.push(`raiting >= $6`);
-      queryValues.push(flirtFactorMin);
-    }
-
+    // todo add "photos" to SELECT on release to fetch photos
     // Prepare the SQL query
     const queryString = `
-      SELECT id, email, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address
+      SELECT id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, address, biography, last_action, online, confirmed, complete
       FROM users
-      WHERE ${queryFilters.length > 0 ? queryFilters.join(' AND ') : 'TRUE'}
+      WHERE 
+        id != $1
+        AND sex = $2
+        AND sex_preferences = $3
+        AND EXTRACT(YEAR FROM AGE(CAST(birthdate AS DATE))) BETWEEN $4 AND $5
+        AND raiting >= $6
+        AND confirmed = true
+        AND complete = true
+        AND (
+          SELECT count(*) 
+          FROM unnest(tags) AS tag 
+          WHERE tag = ANY($7)
+        ) >= 1
     `;
 
     // Execute the query
-    const result = await client.query(queryString, queryValues);
+    const result = await client.query(queryString, [
+      id,
+      sex,
+      sexPreferences,
+      ageMin,
+      ageMax,
+      flirtFactorMin,
+      tags,
+    ]);
     const users = result.rows;
 
     // Filter users based on the distance
-    const matchingUsers = users.filter((user) => {
-      if (!user.latitude || !user.longitude || !latitude || !longitude) return false;
-      const userDistance = haversineDistance(latitude, longitude, user.latitude, user.longitude);
+    const matchingUsers = users.filter((suggestedUser) => {
+      if (!suggestedUser.latitude || !suggestedUser.longitude || !latitude || !longitude)
+        return false;
+      const userDistance = haversineDistance(
+        latitude,
+        longitude,
+        suggestedUser.latitude,
+        suggestedUser.longitude
+      );
       return userDistance <= distance;
     });
 
+    if (!matchingUsers.length && users.length) {
+      return NextResponse.json({ error: 'no-matching-users-on-distance' }, { status: 404 });
+    }
+
     return NextResponse.json({
-      message: 'Users found',
-      data: matchingUsers,
+      message: 'suggestions-retrieved-successfully',
+      matchingUsers,
+      updatedUserData,
     });
   } catch (error) {
     console.error('Error fetching users:', error);
