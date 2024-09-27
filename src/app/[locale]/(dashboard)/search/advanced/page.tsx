@@ -38,8 +38,13 @@ const AdvancedSearch = () => {
   const { user, setUser, globalLoading } = useUserStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const searchMenuRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
-  const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
-    useSearchStore();
+  const {
+    getValueOfSearchFilter,
+    setValueOfSearchFilter,
+    replaceAllItemsOfSearchFilter,
+    advancedSuggestions,
+    setAdvancedSuggestions,
+  } = useSearchStore();
 
   const [ageMin, setAgeMin] = useState<number>(getValueOfSearchFilter('age_min') as number);
   const [ageMax, setAgeMax] = useState<number>(getValueOfSearchFilter('age_max') as number);
@@ -236,7 +241,7 @@ const AdvancedSearch = () => {
 
         setUser({ ...user, ...result.updatedUserData });
         setSearchResult(matchingUsers);
-
+        setAdvancedSuggestions(matchingUsers);
         // Update filter options based on unique values
         setAgeOptions((prevOptions) =>
           prevOptions.map((option) => ({
@@ -307,7 +312,7 @@ const AdvancedSearch = () => {
               <OctagonAlert size={21} />
             </div>
             <div className="w-full min-w-28 flex-row items-center justify-center self-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
-              <p className="text-left text-xs italic">{t(`search.advanced-search-note`)}</p>
+              <p className="text-left text-sm italic">{t(`search.advanced-search-note`)}</p>
             </div>
             <div className="flex items-center justify-center text-c42orange">
               <ButtonMatcha
@@ -315,7 +320,7 @@ const AdvancedSearch = () => {
                 disabled={!user || loading || globalLoading}
                 title={t(`search.refresh-suggestions`)}
                 loading={loading}
-                className="min-w-40"
+                className="min-w-36"
                 onClick={toggleSidebar}
               >
                 <div className="flex flex-row items-center space-x-3">

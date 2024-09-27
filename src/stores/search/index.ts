@@ -19,10 +19,17 @@ export type TSearchFilters = {
 };
 
 export type TSearchStore = {
-  searchFilters: TSearchFilters;
   smartSuggestions: TDateProfile[];
   setSmartSuggestions: (newSuggestions: TDateProfile[]) => void;
   getSmartSuggestionById: (id: string) => TDateProfile | undefined;
+  resetSmartSuggestions: () => void;
+
+  advancedSuggestions: TDateProfile[];
+  setAdvancedSuggestions: (newSuggestions: TDateProfile[]) => void;
+  getAdvancedSuggestionById: (id: string) => TDateProfile | undefined;
+  resetAdvancedSuggestions: () => void;
+
+  searchFilters: TSearchFilters;
   setValueOfSearchFilter: (filterKey: string, newValue: string | number) => string | number;
   getValueOfSearchFilter: (filterKey: string) => string | string[] | number;
   addOneItemToSearchFilter: (itemKey: string, newValue: string | number) => void;
@@ -30,7 +37,7 @@ export type TSearchStore = {
   clearAllItemsOfSearchFilter: (filterKey: string) => void;
   replaceAllItemsOfSearchFilter: (itemKey: string, newValue: string[] | number[]) => void;
   resetSearchFilters: () => void;
-  resetSmartSuggestions: () => void;
+
   resetSearchStore: () => void;
 };
 
@@ -55,6 +62,7 @@ const useSearchStore = create<TSearchStore>()(
         (set, get) => ({
           searchFilters: initialSearchFiltersState,
           smartSuggestions: [],
+          advancedSuggestions: [],
 
           setSmartSuggestions: (newSuggestions: TDateProfile[]) => {
             set({ smartSuggestions: newSuggestions });
@@ -63,6 +71,16 @@ const useSearchStore = create<TSearchStore>()(
           getSmartSuggestionById: (id: string) => {
             {
               return get().smartSuggestions.find((suggestion) => suggestion.id === id);
+            }
+          },
+
+          setAdvancedSuggestions: (newSuggestions: TDateProfile[]) => {
+            set({ advancedSuggestions: newSuggestions });
+          },
+
+          getAdvancedSuggestionById: (id: string) => {
+            {
+              return get().advancedSuggestions.find((suggestion) => suggestion.id === id);
             }
           },
 
@@ -146,8 +164,16 @@ const useSearchStore = create<TSearchStore>()(
             set({ smartSuggestions: [] });
           },
 
+          resetAdvancedSuggestions: () => {
+            set({ advancedSuggestions: [] });
+          },
+
           resetSearchStore: () => {
-            set({ searchFilters: initialSearchFiltersState, smartSuggestions: [] });
+            set({
+              searchFilters: initialSearchFiltersState,
+              smartSuggestions: [],
+              advancedSuggestions: [],
+            });
           },
         }),
         { name: 'matcha-search-store', storage: createJSONStorage(() => localStorage) }

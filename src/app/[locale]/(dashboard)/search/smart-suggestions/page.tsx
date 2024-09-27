@@ -183,7 +183,7 @@ const SmartSuggestions = () => {
                 title={t(`search.refresh-suggestions`)}
                 onClick={fetchSmartSuggestions}
                 loading={loading}
-                className="min-w-40"
+                className="min-w-36"
               >
                 <div className="flex flex-row items-center space-x-3">
                   <div>

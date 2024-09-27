@@ -14,13 +14,15 @@ const DateProfilePage = () => {
   const t = useTranslations();
   const { id: profileToFindId } = useParams(); // Grab the id from the dynamic route
   const { user, setUser, globalLoading } = useUserStore();
-  const { getSmartSuggestionById } = useSearchStore();
+  const { getSmartSuggestionById, getAdvancedSuggestionById } = useSearchStore();
   const [dateProfile, setDateProfile] = useState(
-    getSmartSuggestionById(profileToFindId as string) ?? null
+    getAdvancedSuggestionById(profileToFindId as string) ??
+      getSmartSuggestionById(profileToFindId as string) ??
+      null
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  console.log(profileToFindId);
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       setLoading(true);
