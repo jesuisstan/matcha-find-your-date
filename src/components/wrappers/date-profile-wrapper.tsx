@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
+import ToastNotification from '@/components/toast-notification';
 import ConfirmationWrapper from '@/components/wrappers/confirmation-wrapper';
 import DescriptionWrapper from '@/components/wrappers/description-wrapper';
 import InterestsWrapper from '@/components/wrappers/interests-wrapper';
@@ -82,6 +83,9 @@ const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
         <div className={clsx('col-span-12 space-y-5', 'lg:col-span-3')}>
           {/* INTERESTS */}
           <InterestsWrapper tagsList={dateProfile?.tags!} />
+
+          {/* DEBUG TODO: DELETE*/}
+          <ToastNotification />
         </div>
       </div>
     </div>

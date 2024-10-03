@@ -564,7 +564,7 @@ const AdvancedSearch = () => {
       ) : searchResult.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
-            <Frown size={84} onClick={toggleSidebar} />
+            <Frown size={84} onClick={toggleSidebar} className='cursor-pointer' />
           </div>
           <p className="text-center text-lg">
             {error
