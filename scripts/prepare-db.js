@@ -21,7 +21,9 @@ try {
   chalk = require('chalk');
 } catch (err) {
   (async () => {
-    const answer = await promptUser('Chalk (text colorizer) is not installed. Do you want to install it? (y/n): ');
+    const answer = await promptUser(
+      'Chalk (text colorizer) is not installed. Do you want to install it? (y/n): '
+    );
     if (answer.toLowerCase() === 'y') {
       console.log('Installing chalk...');
       try {
@@ -56,9 +58,16 @@ const runCommand = (command) => {
 
 // Sequentially run each script
 const runCommands = () => {
+  runCommand('node ./scripts/delete-table.js visits');
+  runCommand('node ./scripts/delete-table.js likes');
+  runCommand('node ./scripts/delete-table.js matches');
+  runCommand('node ./scripts/delete-table.js blocked_users');
+  runCommand('node ./scripts/delete-table.js notifications');
   runCommand('node ./scripts/delete-table.js users');
+
   runCommand('node ./scripts/create-table-users.js');
   runCommand('node ./scripts/fill-table-users.js');
+  runCommand('node ./scripts/create-tables-activity.js');
 };
 
 // If chalk is already available, run commands directly
