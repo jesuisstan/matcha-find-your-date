@@ -18,7 +18,7 @@ async function createActivityTables() {
         id SERIAL PRIMARY KEY,
         visitor_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         visited_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        visit_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
         UNIQUE (visitor_id, visited_user_id)
       );
     `);
@@ -63,7 +63,7 @@ async function createActivityTables() {
         user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         type VARCHAR(50) NOT NULL CHECK (type IN ('visit', 'like', 'unlike', 'match', 'block', 'unblock')),
         from_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        notification_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
         viewed BOOLEAN DEFAULT false
       );
     `);

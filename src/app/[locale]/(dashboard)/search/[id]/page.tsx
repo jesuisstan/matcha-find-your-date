@@ -69,6 +69,31 @@ const DateProfilePage = () => {
     if (user && !dateProfile) fetchUserProfile();
   }, [profileToFindId]);
 
+  useEffect(() => {
+    // Log the visit once the user and dateProfile are available
+    if (user && dateProfile) {
+      const logVisit = async () => {
+        try {
+          await fetch('/api/interactions/visits', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              visitorId: user.id,
+              visitedUserId: dateProfile.id,
+            }),
+          });
+        } catch (error) {
+          console.error('Failed to log visit:', error);
+        }
+      };
+  
+      logVisit();
+    }
+  }, [user, dateProfile]); // Add user and dateProfile to the dependency array
+  
+
   return error ? (
     <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
       <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
