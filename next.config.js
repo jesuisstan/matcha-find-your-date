@@ -3,6 +3,7 @@ const createNextIntlPlugin = require('next-intl/plugin');
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = withNextIntl({
+  reactStrictMode: false, // Disable React Strict Mode
   images: {
     domains: ['kdbxq6eseiqtwhzx.public.blob.vercel-storage.com'],
   },
