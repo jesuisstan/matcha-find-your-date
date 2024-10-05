@@ -340,5 +340,13 @@
   "select-category": "Выберите категорию",
   "cannot-visit-own-profile": "Вы не можете посещать свой собственный профиль",
   "visit-logged-successfully": "Посещение успешно зарегистрировано",
-  "visit-logging-failed": "Ошибка регистрации посещения"
+  "visit-logging-failed": "Ошибка регистрации посещения",
+  "like": "Лайк",
+  "unlike": "Дислайк",
+  "chat": "Чат",
+  "report": "Жалоба",
+  "block": "Блок",
+  "unblock": "Разблок",
+  "match": "Мэтч",
+  "no-match": "Нет Мэтча"
 }

@@ -340,5 +340,13 @@
   "select-category": "Sélectionnez une catégorie",
   "cannot-visit-own-profile": "Vous ne pouvez pas visiter votre propre profil",
   "visit-logged-successfully": "Visite enregistrée avec succès",
-  "visit-logging-failed": "Échec de l'enregistrement de la visite"
+  "visit-logging-failed": "Échec de l'enregistrement de la visite",
+  "like": "Aimer",
+  "unlike": "N'aimer",
+  "chat": "Chat",
+  "report": "Signaler",
+  "block": "Bloquer",
+  "unblock": "Débloquer",
+  "match": "Match",
+  "no-match": "Pas d'Match"
 }

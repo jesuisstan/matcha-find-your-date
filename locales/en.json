@@ -295,7 +295,7 @@
   "online": "Online",
   "offline": "Offline",
   "status": "Status",
-  "not-confirmed": "Not confirmed",
+  "not-confirmed": "Unconfirmed",
   "confirmed": "Confirmed",
   "settings": "Settings",
   "raiting": "Flirt Factor",
@@ -343,5 +343,13 @@
   "select-category": "Select category",
   "cannot-visit-own-profile": "You cannot visit your own profile",
   "visit-logged-successfully": "Visit logged successfully",
-  "visit-logging-failed": "Visit logging failed"
+  "visit-logging-failed": "Visit logging failed",
+  "like": "Like",
+  "unlike": "Unlike",
+  "chat": "Chat",
+  "report": "Report",
+  "block": "Block",
+  "unblock": "Unblock",
+  "match": "Match",
+  "no-match": "No Match"
 }

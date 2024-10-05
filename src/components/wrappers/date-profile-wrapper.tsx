@@ -1,8 +1,8 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-
 import clsx from 'clsx';
+
+import ActionsWrapper from './actions-wrapper';
 
 import ToastNotification from '@/components/toast-notification';
 import ConfirmationWrapper from '@/components/wrappers/confirmation-wrapper';
@@ -10,6 +10,7 @@ import DescriptionWrapper from '@/components/wrappers/description-wrapper';
 import InterestsWrapper from '@/components/wrappers/interests-wrapper';
 import LabelsWrapper from '@/components/wrappers/labels-wrapper';
 import LocationWrapper from '@/components/wrappers/location-wrapper';
+import MatchnWrapper from '@/components/wrappers/match-wrapper';
 import PhotoGalleryWrapper from '@/components/wrappers/photo-gallery-wrapper';
 import RaitingWrapper from '@/components/wrappers/raiting-wrapper';
 import SexPreferenceWrapper from '@/components/wrappers/sex-preference-wrapper';
@@ -17,8 +18,6 @@ import StatusWrapper from '@/components/wrappers/status-wrapper';
 import { TDateProfile } from '@/types/date-profile';
 
 const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
-  const t = useTranslations();
-
   return (
     <div>
       {/* HEADER */}
@@ -33,6 +32,8 @@ const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
             >
               {dateProfile?.nickname ?? '???'}
             </h1>
+            {/* MATCH ? */}
+            <MatchnWrapper dateProfile={dateProfile} />
           </div>
           <div
             className={clsx(
@@ -55,6 +56,8 @@ const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
               onlineStatus={dateProfile?.online}
               lastAction={dateProfile?.last_action}
             />
+            {/* ACTION BUTTONS GROUP */}
+            <ActionsWrapper dateProfile={dateProfile} />
           </div>
         </div>
       </div>
