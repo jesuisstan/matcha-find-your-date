@@ -11,8 +11,8 @@ export const generateSkeletonItems = (count: number) => {
   for (let i = 0; i < count; i++) {
     items.push(
       <div key={i}>
-        <div className="ml-4 h-2.5 w-28 rounded-full bg-muted" />
-        <ul className="ml-4 mt-2 space-y-2 border-l-2 border-muted">
+        <div className="ml-4 h-4 w-28 rounded-full bg-muted" />
+        <ul className="ml-4 mt-4 space-y-2 border-l-2 border-muted">
           <div className="ml-6 h-2.5 w-36 rounded-full bg-muted" />
           <div className="ml-6 h-2.5 w-36 rounded-full bg-muted" />
           <div className="ml-6 h-2.5 w-36 rounded-full bg-muted" />
@@ -79,6 +79,12 @@ const MenuSkeleton = ({ isSidebarOpen }: { isSidebarOpen?: boolean }) => {
 
         {/* Smartdata list */}
         {generateSkeletonItems(3)}
+
+        {/* horizontal divider */}
+        <div className="mt-3 w-52 border-t border-secondary opacity-40" />
+        <div className="pb-1">
+          <div className="ml-4 h-2.5 w-44 rounded-full bg-muted pb-3" />
+        </div>
       </div>
     </aside>
   );

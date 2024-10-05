@@ -327,5 +327,21 @@
   "by-tags-matches": "by tags matches",
   "by-distance": "by distance to you",
   "error-no-tags-selected": "No tags selected! Please select at least 1 tag",
-  "no-matching-users-on-distance": "No matching users found within the selected distance"
+  "no-matching-users-on-distance": "No matching users found within the selected distance",
+  "activity": "Activity",
+  "visits": "Visits",
+  "visited": "You visited their profiles",
+  "visited-by": "They visited your profile",
+  "symphaties": "Sympathies",
+  "liked": "You liked them",
+  "liked-by": "They liked you",
+  "matches": "Matches",
+  "error-fetching-visited": "Error fetching visited profiles. Please try again",
+  "error-fetching-visited-by": "Error fetching profiles that visited you. Please try again",
+  "no-visited-profiles": "No profiles visited yet",
+  "no-visited-by-profiles": "No profiles visited your profile yet",
+  "select-category": "Select category",
+  "cannot-visit-own-profile": "You cannot visit your own profile",
+  "visit-logged-successfully": "Visit logged successfully",
+  "visit-logging-failed": "Visit logging failed"
 }

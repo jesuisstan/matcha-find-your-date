@@ -14,7 +14,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'invalid-input' }, { status: 400 });
     }
 
-    // Step 2: Log the visit (update the visit time if it already exists)
+    // Step 2: Prevent users from logging visits to their own profile
+    if (visitorId === visitedUserId) {
+      return NextResponse.json({ message: 'cannot-visit-own-profile' });
+    }
+
+    // Step 3: Log the visit (update the visit time if it already exists)
     await client.query(
       `
       INSERT INTO visits (visitor_id, visited_user_id, visit_time)
@@ -25,7 +30,7 @@ export async function POST(req: Request) {
       [visitorId, visitedUserId]
     );
 
-    // Step 3: Check if a notification was recently sent (in the last 42 minutes)
+    // Step 4: Check if a notification was recently sent (in the last 42 minutes)
     const recentNotificationCheck = await client.query(
       `
       SELECT 1
@@ -39,7 +44,7 @@ export async function POST(req: Request) {
       [visitedUserId, visitorId]
     );
 
-    // Step 4: Add a notification if no recent notification exists
+    // Step 5: Add a notification if no recent notification exists
     if (recentNotificationCheck.rowCount === 0) {
       await client.query(
         `
@@ -50,7 +55,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Step 5: Update the online status and last action of the visitor
+    // Step 6: Update the online status and last action of the visitor
     const currentDate = new Date().toISOString();
     const updatedUserResult = await client.query(
       `

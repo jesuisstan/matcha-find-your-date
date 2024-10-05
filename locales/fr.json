@@ -324,5 +324,21 @@
   "by-tags-matches": "par tags correspondants",
   "by-distance": "par distance à vous",
   "error-no-tags-selected": "Aucun tag sélectionné! Sélectionnez au moins 1 tag",
-  "no-matching-users-on-distance": "Aucun utilisateur correspondant à la distance sélectionnée"
+  "no-matching-users-on-distance": "Aucun utilisateur correspondant à la distance sélectionnée",
+  "activity": "Activité",
+  "visits": "Visites",
+  "visited": "Vous avez visité leur profil",
+  "visited-by": "Ils ont visité votre profil",
+  "symphaties": "Sympathies",
+  "liked": "Vous les avez aimés",
+  "liked-by": "Ils vous ont aimé",
+  "matches": "Matchs",
+  "error-fetching-visited": "Erreur lors de la récupération des profils que vous avez visités. Veuillez réessayer",
+  "error-fetching-visited-by": "Erreur lors de la récupération des profils qui vous ont visité. Veuillez réessayer",
+  "no-visited-profiles": "Aucun profil visité",
+  "no-visited-by-profiles": "Aucun profil vous a visité",
+  "select-category": "Sélectionnez une catégorie",
+  "cannot-visit-own-profile": "Vous ne pouvez pas visiter votre propre profil",
+  "visit-logged-successfully": "Visite enregistrée avec succès",
+  "visit-logging-failed": "Échec de l'enregistrement de la visite"
 }

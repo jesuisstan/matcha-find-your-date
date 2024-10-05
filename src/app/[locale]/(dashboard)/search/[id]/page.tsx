@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { Frown } from 'lucide-react';
@@ -12,6 +13,7 @@ import useUserStore from '@/stores/user';
 
 const DateProfilePage = () => {
   const t = useTranslations();
+  const router = useRouter();
   const { id: profileToFindId } = useParams(); // Grab the id from the dynamic route
   const { user, setUser, globalLoading } = useUserStore();
   const { getSmartSuggestionById, getAdvancedSuggestionById } = useSearchStore();
@@ -24,6 +26,12 @@ const DateProfilePage = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // Redirect to /profile if the user tries to visit their own profile
+    if (user && profileToFindId && user.id === profileToFindId) {
+      router.push('/profile'); // Redirect to /profile if it's the user's own profile
+      return;
+    }
+
     const fetchUserProfile = async () => {
       setLoading(true);
       setError('');
@@ -71,7 +79,7 @@ const DateProfilePage = () => {
 
   useEffect(() => {
     // Log the visit once the user and dateProfile are available
-    if (user && dateProfile) {
+    if (user && dateProfile && user.id !== dateProfile.id) {
       const logVisit = async () => {
         try {
           await fetch('/api/interactions/visits', {
@@ -88,11 +96,10 @@ const DateProfilePage = () => {
           console.error('Failed to log visit:', error);
         }
       };
-  
+
       logVisit();
     }
   }, [user, dateProfile]); // Add user and dateProfile to the dependency array
-  
 
   return error ? (
     <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
