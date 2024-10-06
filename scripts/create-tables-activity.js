@@ -22,7 +22,7 @@ async function createActivityTables() {
         UNIQUE (visitor_id, visited_user_id)
       );
     `);
-    
+
     // Create the 'likes' table
     await client.query(`
       CREATE TABLE IF NOT EXISTS likes (
@@ -61,7 +61,7 @@ async function createActivityTables() {
       CREATE TABLE IF NOT EXISTS notifications (
         id SERIAL PRIMARY KEY,
         user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        type VARCHAR(50) NOT NULL CHECK (type IN ('visit', 'like', 'unlike', 'match', 'block', 'unblock')),
+        type VARCHAR(50) NOT NULL CHECK (type IN ('visit', 'like', 'unlike', 'match', 'unmatch', 'block', 'unblock')),
         from_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         notification_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
         viewed BOOLEAN DEFAULT false
@@ -71,7 +71,9 @@ async function createActivityTables() {
     // Commit the transaction
     await client.query('COMMIT');
 
-    console.log('Tables "notifications", "blocked_users", "matches", "likes" & "visits" created successfully');
+    console.log(
+      'Tables "notifications", "blocked_users", "matches", "likes" & "visits" created successfully'
+    );
   } catch (error) {
     // Rollback the transaction in case of an error
     await client.query('ROLLBACK');

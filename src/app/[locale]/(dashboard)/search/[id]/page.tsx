@@ -82,7 +82,7 @@ const DateProfilePage = () => {
     if (user && dateProfile && user.id !== dateProfile.id) {
       const logVisit = async () => {
         try {
-          await fetch('/api/interactions/visits', {
+          await fetch('/api/interactions/visit', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

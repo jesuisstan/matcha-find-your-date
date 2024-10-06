@@ -44,6 +44,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'failed-to-update-user-activity' }, { status: 500 });
     }
 
+    // todo add photos (delete the line after)
     // todo add "photos" to SELECT on release to fetch photos
     // Prepare the SQL query
     const queryString = `

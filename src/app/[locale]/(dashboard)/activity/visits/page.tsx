@@ -44,6 +44,8 @@ const MatchaVisits = () => {
       });
 
       const result = await response.json();
+      console.log(result);
+
       if (response.ok) {
         selectedOption === '0'
           ? setProfilesVisited(result.visits)
@@ -98,7 +100,7 @@ const MatchaVisits = () => {
       {loading || globalLoading || !user ? (
         <SuggestionsSkeleton />
       ) : selectedOption === '0' ? (
-        profilesVisited.length === 0 || errorVisited ? (
+        !profilesVisited || profilesVisited?.length === 0 || errorVisited ? (
           <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
             <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
               <Frown size={84} />
@@ -114,7 +116,7 @@ const MatchaVisits = () => {
             ))}
           </div>
         )
-      ) : profilesVisitedBy.length === 0 || errorVisitedBy ? (
+      ) : !profilesVisitedBy || profilesVisitedBy?.length === 0 || errorVisitedBy ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
             <Frown size={84} />

@@ -351,5 +351,16 @@
   "block": "Block",
   "unblock": "Unblock",
   "match": "Match",
-  "no-match": "No Match"
+  "no-match": "No Match",
+  "error-fetching-liked": "Error fetching liked profiles. Please try again",
+  "error-fetching-liked-by": "Error fetching profiles that liked you. Please try again",
+  "invalid-category": "Invalid category",
+  "no-liked-profiles": "No profiles liked yet",
+  "no-liked-by-profiles": "No profiles liked you yet",
+  "cannot-like-own-profile": "You cannot like your own profile",
+  "like-logged-successfully": "Like logged successfully",
+  "like-logging-failed": "Like logging failed",
+  "unlike-logged-successfully": "Unlike logged successfully",
+  "error-fetching-matches": "Error fetching matches. Please try again",
+  "no-matches": "No matches yet"
 }

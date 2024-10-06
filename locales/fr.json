@@ -348,5 +348,16 @@
   "block": "Bloquer",
   "unblock": "Débloquer",
   "match": "Match",
-  "no-match": "Pas d'Match"
+  "no-match": "Pas d'Match",
+  "error-fetching-liked": "Erreur lors de la récupération des profils que vous avez aimés. Veuillez réessayer",
+  "error-fetching-liked-by": "Erreur lors de la récupération des profils qui vous ont aimé. Veuillez réessayer",
+  "invalid-category": "Catégorie invalide",
+  "no-liked-profiles": "Aucun profil aimé pour le moment",
+  "no-liked-by-profiles": "Personne ne vous a encore aimé",
+  "cannot-like-own-profile": "Vous ne pouvez pas aimer votre propre profil",
+  "like-logged-successfully": "Aimer enregistré avec succès",
+  "like-logging-failed": "Échec de l'enregistrement de l'aimer",
+  "unlike-logged-successfully": "N'aimer enregistré avec succès",
+  "error-fetching-matches": "Erreur lors de la récupération des matchs. Veuillez réessayer",
+  "no-matches": "Pas de matchs pour le moment"
 }

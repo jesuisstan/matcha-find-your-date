@@ -348,5 +348,16 @@
   "block": "Блок",
   "unblock": "Разблок",
   "match": "Мэтч",
-  "no-match": "Нет Мэтча"
+  "no-match": "Нет Мэтча",
+  "error-fetching-liked": "Ошибка загрузки профилей, которые Вы лайкнули. Попробуйте ещё раз",
+  "error-fetching-liked-by": "Ошибка загрузки профилей, которые лайкнули Вас. Попробуйте ещё раз",
+  "invalid-category": "Неверная категория",
+  "no-liked-profiles": "Вы еще никого не лайкнули",
+  "no-liked-by-profiles": "Вас еще никто не лайкнул",
+  "cannot-like-own-profile": "Вы не можете лайкнуть свой собственный профиль",
+  "like-logged-successfully": "Лайк успешно зарегистрирован",
+  "like-logging-failed": "Ошибка регистрации лайка",
+  "unlike-logged-successfully": "Дислайк успешно зарегистрирован",
+  "error-fetching-matches": "Ошибка загрузки мэтчей. Попробуйте ещё раз",
+  "no-matches": "У Вас пока нет мэтчей"
 }

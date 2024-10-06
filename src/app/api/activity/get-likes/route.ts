@@ -24,36 +24,34 @@ export async function POST(req: Request) {
 
     const userTags = userTagsResult.rows[0].tags || [];
 
-    // Step 2: Fetch visits based on the selected category (visited or visited by)
+    // Step 2: Fetch likes based on the selected category (liked or liked by)
     let query = '';
     let queryParams = [];
 
     if (category === '0') {
-      // Profiles the user has visited
-      // todo add photos (delete the line after)
+      // Profiles the user has liked
       query = `
         SELECT 
           users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
           users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
           users.address, users.online, users.raiting, users.sex_preferences, users.confirmed, users.complete
-        FROM visits
-        JOIN users ON visits.visited_user_id = users.id
-        WHERE visits.visitor_id = $1
+        FROM likes
+        JOIN users ON likes.liked_user_id = users.id
+        WHERE likes.liker_id = $1
         AND users.confirmed = true
         AND users.complete = true
       `;
       queryParams = [userId];
     } else if (category === '1') {
-      // Profiles that have visited the user
-      // todo add photos (delete the line after)
+      // Profiles that have liked the user
       query = `
         SELECT 
           users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
           users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
           users.address, users.online, users.raiting, users.sex_preferences, users.confirmed, users.complete
-        FROM visits
-        JOIN users ON visits.visitor_id = users.id
-        WHERE visits.visited_user_id = $1
+        FROM likes
+        JOIN users ON likes.liker_id = users.id
+        WHERE likes.liked_user_id = $1
         AND users.confirmed = true
         AND users.complete = true
       `;
@@ -62,34 +60,34 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'invalid-category' }, { status: 400 });
     }
 
-    // Execute the query to get the visits
-    const visitsResult = await client.query(query, queryParams);
-    const visits = visitsResult.rows;
+    // Execute the query to get the likes
+    const likesResult = await client.query(query, queryParams);
+    const likes = likesResult.rows;
 
-    // Step 3: Transform each visit to include `age` and `tags_in_common`
-    const transformedVisits = visits.map((visit) => {
-      const tagsInCommon = visit.tags.filter((tag: string) => userTags.includes(tag)).length || 0;
-      const age = calculateAge(visit.birthdate);
+    // Step 3: Transform each like to include `age` and `tags_in_common`
+    const transformedLikes = likes.map((like) => {
+      const tagsInCommon = like.tags.filter((tag: string) => userTags.includes(tag)).length || 0;
+      const age = calculateAge(like.birthdate);
 
       return {
-        id: visit.id,
-        firstname: visit.firstname,
-        lastname: visit.lastname,
-        nickname: visit.nickname,
+        id: like.id,
+        firstname: like.firstname,
+        lastname: like.lastname,
+        nickname: like.nickname,
         age, // Calculated age from birthdate
-        sex: visit.sex,
-        biography: visit.biography,
-        tags: visit.tags,
+        sex: like.sex,
+        biography: like.biography,
+        tags: like.tags,
         tags_in_common: tagsInCommon, // Calculated tags in common with the current user
-        last_action: visit.last_action,
-        latitude: visit.latitude,
-        longitude: visit.longitude,
-        address: visit.address,
-        online: visit.online,
-        raiting: visit.raiting,
-        sex_preferences: visit.sex_preferences,
-        confirmed: visit.confirmed,
-        complete: visit.complete,
+        last_action: like.last_action,
+        latitude: like.latitude,
+        longitude: like.longitude,
+        address: like.address,
+        online: like.online,
+        raiting: like.raiting,
+        sex_preferences: like.sex_preferences,
+        confirmed: like.confirmed,
+        complete: like.complete,
       };
     });
 
@@ -107,13 +105,13 @@ export async function POST(req: Request) {
 
     const updatedUser = updatedUserResult.rows[0];
 
-    // Step 5: Return the visits and updated user data
+    // Step 5: Return the likes and updated user data
     return NextResponse.json({
-      visits: transformedVisits,
+      likes: transformedLikes,
       updatedUserData: updatedUser,
     });
   } catch (error) {
-    console.error('Error fetching visits:', error);
+    console.error('Error fetching likes:', error);
 
     // Use body data to reference category within the catch block
     const body = await req.json();
@@ -122,7 +120,7 @@ export async function POST(req: Request) {
     // Return error based on category
     return NextResponse.json(
       {
-        error: category === '0' ? 'error-fetching-visited' : 'error-fetching-visited-by',
+        error: category === '0' ? 'error-fetching-liked' : 'error-fetching-liked-by',
       },
       { status: 500 }
     );

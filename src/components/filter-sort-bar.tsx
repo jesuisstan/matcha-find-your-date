@@ -196,11 +196,13 @@ const FilterSortBar = ({
             {/* Reset Filters and Sorting */}
             <div className="flex items-center justify-center self-center align-middle">
               <div
+                className="group relative flex cursor-pointer flex-row items-center justify-center rounded-full align-middle text-foreground smooth42transition hover:bg-transparent hover:text-c42orange"
                 onClick={resetFiltersAndSorting}
-                className="cursor-pointer rounded-full smooth42transition hover:text-c42orange"
-                title={t('reset-filters-sorting')}
               >
                 <ListRestart size={20} />
+                <div className="absolute -bottom-3 z-50 hidden w-fit transform text-nowrap rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
+                  {t('reset-filters-sorting')}
+                </div>
               </div>
             </div>
           </div>

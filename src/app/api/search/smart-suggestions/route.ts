@@ -69,9 +69,10 @@ export async function POST(request: Request) {
       }
     }
 
-    // ! debug insert the following line after SELECT on release to fetch photos:
+    // todo add photos (delete the line after)
+    // ! debug  to fetch photos:
     // id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address, biography, last_action, online, confirmed, complete
-    
+
     // Query to select matching users based on tags intersection and rating
     const queryString = `
       SELECT 
