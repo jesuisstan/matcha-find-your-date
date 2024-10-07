@@ -12,10 +12,10 @@ import {
 } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
+import MatchSkeleton from '@/components/ui/skeletons/match-skeleton';
 import MatchWrapper from '@/components/wrappers/match-wrapper';
 import useUserStore from '@/stores/user';
 import { TDateProfile } from '@/types/date-profile';
-import MatchSkeleton from '@/components/ui/skeletons/match-skeleton';
 
 const ActionsWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
   const t = useTranslations();
@@ -210,7 +210,7 @@ const ActionsWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
       </div>
 
       {/* MATCH ? */}
-      <MatchWrapper isMatch={isMatch} dateProfile={dateProfile} loading={loading} />
+      <MatchWrapper isMatch={isMatch} loading={loading} />
     </div>
   );
 };

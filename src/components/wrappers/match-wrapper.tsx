@@ -1,20 +1,10 @@
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { HeartCrack, HeartPulse } from 'lucide-react';
 
-import { TDateProfile } from '@/types/date-profile';
 import MatchSkeleton from '@/components/ui/skeletons/match-skeleton';
 
-const MatchWrapper = ({
-  isMatch,
-  dateProfile,
-  loading,
-}: {
-  isMatch: boolean;
-  dateProfile: TDateProfile;
-  loading: boolean;
-}) => {
+const MatchWrapper = ({ isMatch, loading }: { isMatch: boolean; loading: boolean }) => {
   const t = useTranslations();
 
   return loading ? (
