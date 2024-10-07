@@ -33,8 +33,6 @@ const MatchaMatches = () => {
       });
 
       const result = await response.json();
-      console.log(result);
-
       if (response.ok) {
         setMatches(result.matches);
         setUser({ ...user, ...result.user });

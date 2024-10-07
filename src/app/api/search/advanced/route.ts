@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
     // todo add photos (delete the line after)
     // todo add "photos" to SELECT on release to fetch photos
-    // Prepare the SQL query
+    // Prepare the SQL query (EXCLUDE BLOCKED USERS!)
     const queryString = `
       SELECT id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, address, biography, last_action, online, confirmed, complete
       FROM users
@@ -63,6 +63,12 @@ export async function POST(request: Request) {
           FROM unnest(tags) AS tag 
           WHERE tag = ANY($7)
         ) >= 1
+        AND id NOT IN (
+          SELECT blocked_user_id FROM blocked_users WHERE blocker_id = $1
+        )
+        AND id NOT IN (
+          SELECT blocker_id FROM blocked_users WHERE blocked_user_id = $1
+        )
     `;
 
     // Execute the query

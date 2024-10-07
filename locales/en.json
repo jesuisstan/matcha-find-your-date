@@ -366,5 +366,9 @@
   "profile-check-failed": "Profile check failed",
   "blocked": "Blocked",
   "error-fetching-blocked-profiles": "Error fetching blocked profiles. Please try again",
-  "no-blocked-profiles": "No profiles blocked"
+  "no-blocked-profiles": "No profiles blocked",
+  "user-blocked": "User is blocked",
+  "like-sent": "Like sent",
+  "blocked-profile": "Blocked",
+  "user-is-already-blocked": "User is already blocked"
 }

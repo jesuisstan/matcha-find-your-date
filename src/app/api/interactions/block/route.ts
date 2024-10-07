@@ -7,50 +7,136 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { visitorId, visitedUserId } = body;
+    const { blockerId, blockedUserId, blockAction } = body; // 'block' | 'unblock'
 
-    // Step 1: Validate input
-    if (!visitorId || !visitedUserId) {
+    // Validate input
+    if (!blockerId || !blockedUserId || !blockAction) {
       return NextResponse.json({ error: 'invalid-input' }, { status: 400 });
     }
 
-    // Step 2: Log the visit (update the visit time if it already exists)
-    await client.query(
-      `
-      INSERT INTO visits (visitor_id, visited_user_id, visit_time)
-      VALUES ($1, $2, NOW())
-      ON CONFLICT (visitor_id, visited_user_id)
-      DO UPDATE SET visit_time = EXCLUDED.visit_time;
-    `,
-      [visitorId, visitedUserId]
-    );
+    // Prevent users from blocking/unblocking themselves
+    if (blockerId === blockedUserId) {
+      return NextResponse.json({ message: 'cannot-block-own-profile' });
+    }
 
-    // Step 3: Check if a notification was recently sent (in the last 42 minutes)
-    const recentNotificationCheck = await client.query(
-      `
-      SELECT 1
-      FROM notifications
-      WHERE user_id = $1
-      AND from_user_id = $2
-      AND type = 'visit'
-      AND notification_time > NOW() - INTERVAL '42 minutes'
-      LIMIT 1;
-    `,
-      [visitedUserId, visitorId]
-    );
+    // Check if the user is already blocked
+    if (blockAction === 'block') {
+      const blockCheck = await client.query(
+        `
+        SELECT 1 FROM blocked_users
+        WHERE blocker_id = $1 AND blocked_user_id = $2;
+      `,
+        [blockerId, blockedUserId]
+      );
 
-    // Step 4: Add a notification if no recent notification exists
-    if (recentNotificationCheck.rowCount === 0) {
+      if (blockCheck?.rowCount && blockCheck.rowCount > 0) {
+        // User is already blocked, return a message without further processing
+        const currentDate = new Date().toISOString();
+        const updatedUserResult = await client.query(
+          `
+          UPDATE users
+          SET last_action = $2, online = true
+          WHERE id = $1
+          RETURNING id, last_action, online;
+        `,
+          [blockerId, currentDate]
+        );
+
+        const updatedUser = updatedUserResult.rows[0];
+
+        return NextResponse.json({
+          message: 'user-is-already-blocked',
+          user: { ...updatedUser },
+        });
+      }
+
+      // Block the user
+      await client.query(
+        `
+        INSERT INTO blocked_users (blocker_id, blocked_user_id, blocked_at)
+        VALUES ($1, $2, NOW())
+        ON CONFLICT (blocker_id, blocked_user_id) DO NOTHING;
+      `,
+        [blockerId, blockedUserId]
+      );
+
+      // Remove any existing likes between the two users
+      await client.query(
+        `
+        DELETE FROM likes
+        WHERE (liker_id = $1 AND liked_user_id = $2) OR (liker_id = $2 AND liked_user_id = $1);
+      `,
+        [blockerId, blockedUserId]
+      );
+
+      // Remove visits between the two users (both directions)
+      await client.query(
+        `
+        DELETE FROM visits
+        WHERE (visitor_id = $1 AND visited_user_id = $2) OR (visitor_id = $2 AND visited_user_id = $1);
+      `,
+        [blockerId, blockedUserId]
+      );
+
+      // Check if a match exists between the two users
+      const matchCheck = await client.query(
+        `
+        SELECT 1 FROM matches
+        WHERE (user_one_id = $1 AND user_two_id = $2) OR (user_one_id = $2 AND user_two_id = $1);
+      `,
+        [blockerId, blockedUserId]
+      );
+
+      // If a match exists, remove it and notify the other user
+      if (matchCheck?.rowCount && matchCheck.rowCount > 0) {
+        // Delete the match
+        await client.query(
+          `
+          DELETE FROM matches
+          WHERE (user_one_id = $1 AND user_two_id = $2) OR (user_one_id = $2 AND user_two_id = $1);
+        `,
+          [blockerId, blockedUserId]
+        );
+
+        // Add an unmatch notification
+        await client.query(
+          `
+          INSERT INTO notifications (user_id, type, from_user_id, notification_time)
+          VALUES ($1, 'unmatch', $2, NOW());
+        `,
+          [blockedUserId, blockerId]
+        );
+      }
+
+      // Add a block notification for the blocked user
       await client.query(
         `
         INSERT INTO notifications (user_id, type, from_user_id, notification_time)
-        VALUES ($1, 'visit', $2, NOW());
+        VALUES ($1, 'block', $2, NOW());
       `,
-        [visitedUserId, visitorId]
+        [blockedUserId, blockerId]
+      );
+    } else if (blockAction === 'unblock') {
+      // Unblock the user
+      await client.query(
+        `
+        DELETE FROM blocked_users
+        WHERE blocker_id = $1 AND blocked_user_id = $2;
+      `,
+        [blockerId, blockedUserId]
+      );
+
+      // Add an unblock notification for the unblocked user
+      await client.query(
+        `
+        INSERT INTO notifications (user_id, type, from_user_id, notification_time)
+        VALUES ($1, 'unblock', $2, NOW());
+      `,
+        [blockedUserId, blockerId]
       );
     }
 
-    // Step 5: Update the online status and last action of the visitor
+    // Update the blocker's online status and last action
     const currentDate = new Date().toISOString();
     const updatedUserResult = await client.query(
       `
@@ -59,19 +145,19 @@ export async function POST(req: Request) {
       WHERE id = $1
       RETURNING id, last_action, online;
     `,
-      [visitorId, currentDate]
+      [blockerId, currentDate]
     );
 
     const updatedUser = updatedUserResult.rows[0];
 
-    // Return the updated user to the frontend
     return NextResponse.json({
-      message: 'visit-logged-successfully',
+      message:
+        blockAction === 'block' ? 'user-blocked-successfully' : 'user-unblocked-successfully',
       user: { ...updatedUser },
     });
   } catch (error) {
-    console.error('Error logging visit:', error);
-    return NextResponse.json({ error: 'visit-logging-failed' }, { status: 500 });
+    console.error('Error processing block/unblock:', error);
+    return NextResponse.json({ error: 'block-processing-failed' }, { status: 500 });
   } finally {
     client.release();
   }

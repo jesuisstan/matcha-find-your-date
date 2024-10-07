@@ -4,7 +4,7 @@ const HeaderSkeleton = () => {
   return (
     <div className="flex w-full animate-pulse flex-col justify-start">
       {/* Skeleton for Title */}
-      <div className="flex flex-row flex-wrap items-center gap-x-2">
+      <div className="mb-4 flex flex-row flex-wrap items-center gap-x-2">
         <div className="h-8 w-8 self-center rounded-full bg-muted"></div>
         <div className="mb-2 h-12 w-60 rounded-2xl bg-muted"></div>
       </div>

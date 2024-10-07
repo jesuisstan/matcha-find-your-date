@@ -21,9 +21,15 @@ import { TDateProfile } from '@/types/date-profile';
 const ActionsWrapper = ({
   dateProfile,
   setDateProfile,
+  isMatch,
+  isLiked,
+  isBlocked,
 }: {
   dateProfile: TDateProfile;
   setDateProfile: Dispatch<SetStateAction<TDateProfile | null>>;
+  isMatch: boolean;
+  isLiked: boolean;
+  isBlocked: boolean;
 }) => {
   const t = useTranslations();
   const { user, setUser } = useUserStore((state) => ({
@@ -32,44 +38,6 @@ const ActionsWrapper = ({
   }));
   const { updateSuggestion } = useSearchStore();
   const [loading, setLoading] = useState(false);
-  const [isMatch, setIsMatch] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [isBlocked, setIsBlocked] = useState(false);
-  const [isBlockedBy, setIsBlockedBy] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const checkProfileStatus = async () => {
-      if (!user || !dateProfile) return;
-
-      try {
-        const response = await fetch('/api/activity/check-profile', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId: user.id,
-            profileToCheckId: dateProfile.id,
-          }),
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-          setIsLiked(result.isLiked);
-          setIsMatch(result.isMatch);
-          setIsBlocked(result.isBlocked);
-          setIsBlockedBy(result.isBlockedBy); // todo
-        }
-      } catch (error) {
-        console.error('Error checking profile status:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkProfileStatus();
-  }, [user, dateProfile]);
 
   const handleLikeClick = async () => {
     setLoading(true);
@@ -125,12 +93,57 @@ const ActionsWrapper = ({
     }
   };
 
+  const handleReportClick = async () => {
+    if (!isBlocked) {
+      setLoading(true);
+      try {
+        const response = await fetch('/api/interactions/block', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            blockerId: user?.id,
+            blockedUserId: dateProfile.id,
+            blockAction: 'block',
+          }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          setUser({ ...user, ...result.user });
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    // Open mail client with prefilled email, subject, and body
+    const supportEmail = process.env.NEXT_PUBLIC_SUPPORT_EMAIL;
+    const subject = `Report user ${dateProfile.nickname} as fake account`;
+    const body = `Hello,
+
+I would like to report the user ${dateProfile.nickname} (ID: ${dateProfile.id}) as a fake account. 
+
+I suspect that this account violates the platform's guidelines, and I believe further investigation is needed.
+
+REPORTER'S DETAILS:
+${user?.firstname} ${user?.lastname} (${user?.nickname} / ID: ${user?.id})`;
+
+    const mailtoLink = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Open the mail client
+    window.location.href = mailtoLink;
+  };
+
   return loading ? (
     <ActionsSkeleton />
   ) : (
     <div className={clsx('flex max-w-fit flex-row self-center rounded-2xl bg-card')}>
       {/* MATCH ? */}
-      <MatchWrapper isMatch={isMatch} />
+      <MatchWrapper isMatch={isMatch} isBlocked={isBlocked} isLiked={isLiked} />
       {/* vertical divider */}
       <div className={clsx('my-3 block w-[1px] bg-secondary opacity-40')} />
       {/* ACTIONS */}
@@ -146,6 +159,7 @@ const ActionsWrapper = ({
             size="default"
             className="group relative hover:bg-transparent"
             onClick={handleLikeClick}
+            disabled={isBlocked}
           >
             {!isLiked ? (
               <>
@@ -170,6 +184,7 @@ const ActionsWrapper = ({
             variant="ghost"
             size="default"
             className="group relative hover:bg-transparent"
+            disabled={!isMatch || isBlocked}
           >
             <MessageCircleMore />
             <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
@@ -208,6 +223,7 @@ const ActionsWrapper = ({
             variant="ghost"
             size="default"
             className="group relative hover:bg-transparent"
+            onClick={handleReportClick}
           >
             <ShieldAlert />
             <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">

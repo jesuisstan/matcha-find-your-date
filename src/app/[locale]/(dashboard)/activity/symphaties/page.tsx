@@ -44,8 +44,6 @@ const MatchaSymphaties = () => {
       });
 
       const result = await response.json();
-      console.log(result);
-
       if (response.ok) {
         selectedOption === '0'
           ? setProfilesLiked(result.likes)

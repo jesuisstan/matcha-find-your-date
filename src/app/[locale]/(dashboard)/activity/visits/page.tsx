@@ -44,8 +44,6 @@ const MatchaVisits = () => {
       });
 
       const result = await response.json();
-      console.log(result);
-
       if (response.ok) {
         selectedOption === '0'
           ? setProfilesVisited(result.visits)

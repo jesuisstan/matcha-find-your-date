@@ -19,7 +19,23 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'cannot-visit-own-profile' });
     }
 
-    // Step 3: Log the visit (update the visit time if it already exists)
+    // Step 3: Check if either user has blocked the other
+    const blockCheck = await client.query(
+      `
+      SELECT 1 FROM blocked_users
+      WHERE (blocker_id = $1 AND blocked_user_id = $2)
+      OR (blocker_id = $2 AND blocked_user_id = $1)
+      LIMIT 1;
+      `,
+      [visitorId, visitedUserId]
+    );
+
+    // Step 4: If either user blocked the other, return 204 (No Content)
+    if (blockCheck?.rowCount && blockCheck.rowCount > 0) {
+      return new NextResponse(null, { status: 204 });
+    }
+
+    // Step 5: Log the visit (update the visit time if it already exists)
     await client.query(
       `
       INSERT INTO visits (visitor_id, visited_user_id, visit_time)
@@ -30,7 +46,7 @@ export async function POST(req: Request) {
       [visitorId, visitedUserId]
     );
 
-    // Step 4: Check if a notification was recently sent (in the last 42 minutes)
+    // Step 6: Check if a notification was recently sent (in the last 42 minutes)
     const recentNotificationCheck = await client.query(
       `
       SELECT 1
@@ -44,7 +60,7 @@ export async function POST(req: Request) {
       [visitedUserId, visitorId]
     );
 
-    // Step 5: Add a notification if no recent notification exists
+    // Step 7: Add a notification if no recent notification exists
     if (recentNotificationCheck.rowCount === 0) {
       await client.query(
         `
@@ -55,7 +71,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Step 6: Update the online status and last action of the visitor
+    // Step 8: Update the online status and last action of the visitor
     const currentDate = new Date().toISOString();
     const updatedUserResult = await client.query(
       `

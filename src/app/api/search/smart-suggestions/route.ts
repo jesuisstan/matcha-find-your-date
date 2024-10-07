@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     // ! debug  to fetch photos:
     // id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address, biography, last_action, online, confirmed, complete
 
-    // Query to select matching users based on tags intersection and rating
+    // Query to select matching users based on tags intersection and rating. EXCLUDE BLOCKED USERS!
     const queryString = `
       SELECT 
         id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, address, biography, last_action, online, confirmed, complete
@@ -89,6 +89,12 @@ export async function POST(request: Request) {
           FROM unnest(tags) AS tag 
           WHERE tag = ANY($3)
         ) >= 1
+        AND id NOT IN (
+          SELECT blocked_user_id FROM blocked_users WHERE blocker_id = $1
+        )
+        AND id NOT IN (
+          SELECT blocker_id FROM blocked_users WHERE blocked_user_id = $1
+        )
     `;
 
     const result = await client.query(queryString, [userId, minRaiting, userTags]);

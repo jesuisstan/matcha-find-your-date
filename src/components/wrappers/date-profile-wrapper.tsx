@@ -1,6 +1,7 @@
 'use client';
 
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import clsx from 'clsx';
 
@@ -20,9 +21,15 @@ import { TDateProfile } from '@/types/date-profile';
 const DateProfileWrapper = ({
   dateProfile,
   setDateProfile,
+  isMatch,
+  isLiked,
+  isBlocked,
 }: {
   dateProfile: TDateProfile;
   setDateProfile: Dispatch<SetStateAction<TDateProfile | null>>;
+  isMatch: boolean;
+  isLiked: boolean;
+  isBlocked: boolean;
 }) => {
   return (
     <div>
@@ -62,7 +69,13 @@ const DateProfileWrapper = ({
               lastAction={dateProfile?.last_action}
             />
             {/* ACTION BUTTONS GROUP */}
-            <ActionsWrapper dateProfile={dateProfile} setDateProfile={setDateProfile} />
+            <ActionsWrapper
+              dateProfile={dateProfile}
+              setDateProfile={setDateProfile}
+              isMatch={isMatch}
+              isLiked={isLiked}
+              isBlocked={isBlocked}
+            />
           </div>
         </div>
       </div>

@@ -363,5 +363,9 @@
   "profile-check-failed": "Échec de la vérification du profil",
   "blocked": "Bloqué",
   "error-fetching-blocked-profiles": "Erreur lors de la récupération des profils bloqués. Veuillez réessayer",
-  "no-blocked-profiles": "Aucun profil bloqué"
+  "no-blocked-profiles": "Aucun profil bloqué",
+  "user-blocked": "Utilisateur bloqué",
+  "like-sent": "Aime envoyé",
+  "blocked-profile": "Bloqué",
+  "user-is-already-blocked": "L'utilisateur est déjà bloqué"
 }

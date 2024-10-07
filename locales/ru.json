@@ -363,5 +363,9 @@
   "profile-check-failed": "Проверка профиля не удалась",
   "blocked": "Заблокированные",
   "error-fetching-blocked-profiles": "Ошибка загрузки заблокированных профилей. Попробуйте ещё раз",
-  "no-blocked-profiles": "Нет заблокированных профилей"
+  "no-blocked-profiles": "Нет заблокированных профилей",
+  "user-blocked": "Пользователь заблокирован",
+  "like-sent": "Лайк отправлен",
+  "blocked-profile": "Заблокирован",
+  "user-is-already-blocked": "Пользователь уже заблокирован"
 }

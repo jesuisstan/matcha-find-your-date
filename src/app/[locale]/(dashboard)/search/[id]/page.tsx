@@ -26,6 +26,11 @@ const DateProfilePage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const [isMatch, setIsMatch] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
+  const [isBlockedBy, setIsBlockedBy] = useState(null);
+
   useEffect(() => {
     // Redirect to /profile if the user tries to visit their own profile
     if (user && profileToFindId && user.id === profileToFindId) {
@@ -101,7 +106,48 @@ const DateProfilePage = () => {
 
       logVisit();
     }
-  }, [user, dateProfile]); // Add user and dateProfile to the dependency array
+  }, [user, dateProfile]); // Keep user and dateProfile in the dependency array
+
+  useEffect(() => {
+    setLoading(true);
+    const checkProfileStatus = async () => {
+      if (!user || !dateProfile) return;
+
+      try {
+        const response = await fetch('/api/activity/check-profile', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: user.id,
+            profileToCheckId: dateProfile.id,
+          }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          setIsLiked(result.isLiked);
+          setIsMatch(result.isMatch);
+          setIsBlocked(result.isBlocked);
+          setIsBlockedBy(result.isBlockedBy);
+        }
+      } catch (error) {
+        console.error('Error checking profile status:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkProfileStatus();
+  }, [user, dateProfile]);
+
+  useEffect(() => {
+    if (isBlockedBy) {
+      router.push('/dashboard'); // Redirect to /dashboard if a current user is blocked by this profile
+      return;
+    }
+  }, [dateProfile, isBlockedBy]);
 
   return error ? (
     <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
@@ -110,10 +156,16 @@ const DateProfilePage = () => {
       </div>
       <p className="text-center text-lg">{error ? t(`${error}`) : t(`profile-not-found`)}</p>
     </div>
-  ) : loading || globalLoading || !user ? (
+  ) : loading || globalLoading || !user || isBlockedBy === null || isBlockedBy ? (
     <ProfilePageSkeleton />
   ) : (
-    <DateProfileWrapper dateProfile={dateProfile!} setDateProfile={setDateProfile} />
+    <DateProfileWrapper
+      dateProfile={dateProfile!}
+      setDateProfile={setDateProfile}
+      isMatch={isMatch}
+      isLiked={isLiked}
+      isBlocked={isBlocked}
+    />
   );
 };
 
