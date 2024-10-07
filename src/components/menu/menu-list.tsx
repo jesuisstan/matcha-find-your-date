@@ -128,7 +128,7 @@ const MenuList = ({
             <Link
               href={pathname !== '/activity/symphaties' ? `/activity/symphaties` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
-                `group flex mb-1 w-full items-center text-secondary smooth42transition`,
+                `group mb-1 flex w-full items-center text-secondary smooth42transition`,
                 `hover:text-c42orange`
               )}
               onClick={onClick}
@@ -151,7 +151,7 @@ const MenuList = ({
             <Link
               href={pathname !== '/activity/matches' ? `/activity/matches` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
               className={clsx(
-                `group flex w-full items-center text-secondary smooth42transition`,
+                `group mb-1 flex w-full items-center text-secondary smooth42transition`,
                 `hover:text-c42orange`
               )}
               onClick={onClick}
@@ -166,6 +166,29 @@ const MenuList = ({
               />
               <div title={translate(`matches`)} className="max-w-[170px] truncate">
                 {translate(`matches`)}
+              </div>
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href={pathname !== '/activity/blocked' ? `/activity/blocked` : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
+              className={clsx(
+                `group flex w-full items-center text-secondary smooth42transition`,
+                `hover:text-c42orange`
+              )}
+              onClick={onClick}
+              scroll={false}
+            >
+              <div
+                id="chosen-pointer"
+                className={clsx('ml-[-5px] mr-4 h-2 w-2 rounded-full', {
+                  'bg-secondary': pathname === '/activity/blocked',
+                  'bg-transparent': pathname !== '/activity/blocked',
+                })}
+              />
+              <div title={translate(`blocked`)} className="max-w-[170px] truncate">
+                {translate(`blocked`)}
               </div>
             </Link>
           </li>

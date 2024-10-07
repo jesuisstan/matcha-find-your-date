@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { Frown } from 'lucide-react';
+import { Frown, Smile } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
@@ -12,17 +12,17 @@ import ProfileCardWrapper from '@/components/wrappers/profile-card-wrapper';
 import useUserStore from '@/stores/user';
 import { TDateProfile } from '@/types/date-profile';
 
-const MatchaMatches = () => {
+const MatchaBlockedProfiles = () => {
   const t = useTranslations();
   const { user, setUser, globalLoading } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [matches, setMatches] = useState<TDateProfile[]>([]);
+  const [blockedProfiles, setBlockedProfiles] = useState<TDateProfile[]>([]);
 
   const fetchMatches = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/activity/get-matches', {
+      const response = await fetch('/api/activity/get-blocked', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,16 +33,14 @@ const MatchaMatches = () => {
       });
 
       const result = await response.json();
-      console.log(result);
-
       if (response.ok) {
-        setMatches(result.matches);
+        setBlockedProfiles(result.blockedProfiles);
         setUser({ ...user, ...result.updatedUserData });
       } else {
-        setError(result.error ? result.error : 'error-fetching-matches');
+        setError(result.error ? result.error : 'error-fetching-blocked-profiles');
       }
     } catch (error) {
-      setError('error-fetching-matches');
+      setError('error-fetching-blocked-profiles');
     } finally {
       setLoading(false);
     }
@@ -60,7 +58,7 @@ const MatchaMatches = () => {
           {/* HEADER */}
           <div className="mb-2 flex w-fit flex-wrap smooth42transition">
             <h1 className="max-w-96 truncate text-wrap p-2 text-4xl font-bold xs:max-w-fit">
-              {t(`matches`)}
+              {t(`blocked`)}
             </h1>
           </div>
         </div>
@@ -69,16 +67,16 @@ const MatchaMatches = () => {
       {/* MAIN CONTENT */}
       {loading || globalLoading || !user ? (
         <SuggestionsSkeleton />
-      ) : !matches || matches?.length === 0 || error ? (
+      ) : !blockedProfiles || blockedProfiles?.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
-            <Frown size={84} />
+            {error ? <Frown size={84} /> : <Smile size={84} />}
           </div>
-          <p className="text-center text-lg">{error ? t(`${error}`) : t(`no-matches`)}</p>
+          <p className="text-center text-lg">{error ? t(`${error}`) : t(`no-blocked-profiles`)}</p>
         </div>
       ) : (
         <div className="flex flex-row flex-wrap items-center justify-center gap-5 smooth42transition">
-          {matches.map((dateProfile: TDateProfile, index: number) => (
+          {blockedProfiles.map((dateProfile: TDateProfile, index: number) => (
             <ProfileCardWrapper key={`${dateProfile.id}-${index}`} profile={dateProfile} />
           ))}
         </div>
@@ -87,4 +85,4 @@ const MatchaMatches = () => {
   );
 };
 
-export default MatchaMatches;
+export default MatchaBlockedProfiles;

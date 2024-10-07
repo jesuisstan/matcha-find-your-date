@@ -347,8 +347,8 @@
   "report": "Signaler",
   "block": "Bloquer",
   "unblock": "Débloquer",
-  "match": "Match",
-  "no-match": "Pas d'Match",
+  "match": "C'est un Match!",
+  "no-match": "Pas de Match",
   "error-fetching-liked": "Erreur lors de la récupération des profils que vous avez aimés. Veuillez réessayer",
   "error-fetching-liked-by": "Erreur lors de la récupération des profils qui vous ont aimé. Veuillez réessayer",
   "invalid-category": "Catégorie invalide",
@@ -359,5 +359,9 @@
   "like-logging-failed": "Échec de l'enregistrement de l'aimer",
   "unlike-logged-successfully": "N'aimer enregistré avec succès",
   "error-fetching-matches": "Erreur lors de la récupération des matchs. Veuillez réessayer",
-  "no-matches": "Pas de matchs pour le moment"
+  "no-matches": "Pas de matchs pour le moment",
+  "profile-check-failed": "Échec de la vérification du profil",
+  "blocked": "Bloqué",
+  "error-fetching-blocked-profiles": "Erreur lors de la récupération des profils bloqués. Veuillez réessayer",
+  "no-blocked-profiles": "Aucun profil bloqué"
 }

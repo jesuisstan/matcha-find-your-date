@@ -1,3 +1,5 @@
+import MatchSkeleton from '@/components/ui/skeletons/match-skeleton';
+
 const HeaderSkeleton = () => {
   return (
     <div className="flex w-full animate-pulse flex-col justify-start">
@@ -21,6 +23,7 @@ const HeaderSkeleton = () => {
         <div className="flex flex-col space-y-3">
           <div className="h-14 rounded-2xl bg-muted lg:h-[104px] lg:w-40"></div>
         </div>
+        <MatchSkeleton />
       </div>
     </div>
   );

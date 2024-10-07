@@ -350,8 +350,8 @@
   "report": "Report",
   "block": "Block",
   "unblock": "Unblock",
-  "match": "Match",
-  "no-match": "No Match",
+  "match": "It is a Match!",
+  "no-match": "It is not a Match",
   "error-fetching-liked": "Error fetching liked profiles. Please try again",
   "error-fetching-liked-by": "Error fetching profiles that liked you. Please try again",
   "invalid-category": "Invalid category",
@@ -362,5 +362,9 @@
   "like-logging-failed": "Like logging failed",
   "unlike-logged-successfully": "Unlike logged successfully",
   "error-fetching-matches": "Error fetching matches. Please try again",
-  "no-matches": "No matches yet"
+  "no-matches": "No matches yet",
+  "profile-check-failed": "Profile check failed",
+  "blocked": "Blocked",
+  "error-fetching-blocked-profiles": "Error fetching blocked profiles. Please try again",
+  "no-blocked-profiles": "No profiles blocked"
 }

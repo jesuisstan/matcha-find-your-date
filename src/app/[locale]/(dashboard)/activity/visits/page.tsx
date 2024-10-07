@@ -22,7 +22,7 @@ const MatchaVisits = () => {
     { value: '0', label: t('visited') },
     { value: '1', label: t('visited-by') },
   ]);
-  const [selectedOption, setSelectedOption] = useState('0'); // <"0" | "1">
+  const [selectedOption, setSelectedOption] = useState('1'); // <"0" | "1">
   const [errorVisited, setErrorVisited] = useState('');
   const [errorVisitedBy, setErrorVisitedBy] = useState('');
 

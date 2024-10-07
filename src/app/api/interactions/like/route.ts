@@ -7,10 +7,10 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { likerId, likedUserId, likeAction } = body; // 'likeAction' will be true for like, false for unlike
+    const { likerId, likedUserId, likeAction } = body; // 'like' | 'unlike'
 
     // Step 1: Validate input
-    if (!likerId || !likedUserId) {
+    if (!likerId || !likedUserId || !likeAction) {
       return NextResponse.json({ error: 'invalid-input' }, { status: 400 });
     }
 
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'cannot-like-own-profile' });
     }
 
-    if (likeAction) {
+    if (likeAction === 'like') {
       // Insert a like
       await client.query(
         `
@@ -43,9 +43,9 @@ export async function POST(req: Request) {
       if (mutualLikeCheck?.rowCount && mutualLikeCheck.rowCount > 0) {
         await client.query(
           `
-          INSERT INTO matches (user1_id, user2_id, match_time)
+          INSERT INTO matches (user_one_id, user_two_id, created_at)
           VALUES ($1, $2, NOW())
-          ON CONFLICT (user1_id, user2_id) DO NOTHING;
+          ON CONFLICT (user_one_id, user_two_id) DO NOTHING;
         `,
           [likerId, likedUserId]
         );
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
       `,
         [likedUserId, likerId]
       );
-    } else {
+    } else if (likeAction === 'unlike') {
       // Unlike case: Remove the like
       await client.query(
         `
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
       const matchCheck = await client.query(
         `
         SELECT 1 FROM matches
-        WHERE (user1_id = $1 AND user2_id = $2) OR (user1_id = $2 AND user2_id = $1);
+        WHERE (user_one_id = $1 AND user_two_id = $2) OR (user_one_id = $2 AND user_two_id = $1);
       `,
         [likerId, likedUserId]
       );
@@ -92,7 +92,7 @@ export async function POST(req: Request) {
         await client.query(
           `
           DELETE FROM matches
-          WHERE (user1_id = $1 AND user2_id = $2) OR (user1_id = $2 AND user2_id = $1);
+          WHERE (user_one_id = $1 AND user_two_id = $2) OR (user_one_id = $2 AND user_two_id = $1);
         `,
           [likerId, likedUserId]
         );

@@ -30,6 +30,7 @@ export async function POST(req: Request) {
 
     if (category === '0') {
       // Profiles the user has liked
+      // todo add photos (delete the line after)
       query = `
         SELECT 
           users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
@@ -44,6 +45,7 @@ export async function POST(req: Request) {
       queryParams = [userId];
     } else if (category === '1') {
       // Profiles that have liked the user
+      // todo add photos (delete the line after)
       query = `
         SELECT 
           users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 

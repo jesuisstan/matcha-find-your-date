@@ -22,7 +22,7 @@ const MatchaSymphaties = () => {
     { value: '0', label: t('liked') },
     { value: '1', label: t('liked-by') },
   ]);
-  const [selectedOption, setSelectedOption] = useState('0'); // <"0" | "1">
+  const [selectedOption, setSelectedOption] = useState('1'); // <"0" | "1">
   const [errorLiked, setErrorLiked] = useState('');
   const [errorLikedBy, setErrorLikedBy] = useState('');
 
@@ -48,8 +48,8 @@ const MatchaSymphaties = () => {
 
       if (response.ok) {
         selectedOption === '0'
-          ? setProfilesLiked(result.visits)
-          : setProfilesLikedBy(result.visits);
+          ? setProfilesLiked(result.likes)
+          : setProfilesLikedBy(result.likes);
         setUser({ ...user, ...result.updatedUserData });
       } else {
         selectedOption === '0'

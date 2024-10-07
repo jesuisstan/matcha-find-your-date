@@ -10,7 +10,6 @@ import DescriptionWrapper from '@/components/wrappers/description-wrapper';
 import InterestsWrapper from '@/components/wrappers/interests-wrapper';
 import LabelsWrapper from '@/components/wrappers/labels-wrapper';
 import LocationWrapper from '@/components/wrappers/location-wrapper';
-import MatchnWrapper from '@/components/wrappers/match-wrapper';
 import PhotoGalleryWrapper from '@/components/wrappers/photo-gallery-wrapper';
 import RaitingWrapper from '@/components/wrappers/raiting-wrapper';
 import SexPreferenceWrapper from '@/components/wrappers/sex-preference-wrapper';
@@ -23,17 +22,16 @@ const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
       {/* HEADER */}
       <div className={clsx('mb-4 flex items-center justify-between')}>
         <div className="flex min-w-full flex-col justify-start">
-          <div id="user-nickname" className="mb-2 flex w-fit flex-wrap gap-x-2 smooth42transition">
+          <div className="mb-2 flex w-fit flex-wrap gap-x-2 smooth42transition">
             {/* CONFIRMED ? */}
             <ConfirmationWrapper confirmed={dateProfile?.confirmed} />
             <h1
+              id="user-nickname"
               title={dateProfile?.nickname ?? '???'}
               className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit"
             >
               {dateProfile?.nickname ?? '???'}
             </h1>
-            {/* MATCH ? */}
-            <MatchnWrapper dateProfile={dateProfile} />
           </div>
           <div
             className={clsx(
