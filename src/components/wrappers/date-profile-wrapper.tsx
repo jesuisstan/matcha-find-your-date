@@ -1,10 +1,11 @@
 'use client';
 
+import { Dispatch, SetStateAction } from 'react';
+
 import clsx from 'clsx';
 
-import ActionsWrapper from './actions-wrapper';
-
 import ToastNotification from '@/components/toast-notification';
+import ActionsWrapper from '@/components/wrappers/actions-wrapper';
 import ConfirmationWrapper from '@/components/wrappers/confirmation-wrapper';
 import DescriptionWrapper from '@/components/wrappers/description-wrapper';
 import InterestsWrapper from '@/components/wrappers/interests-wrapper';
@@ -16,7 +17,13 @@ import SexPreferenceWrapper from '@/components/wrappers/sex-preference-wrapper';
 import StatusWrapper from '@/components/wrappers/status-wrapper';
 import { TDateProfile } from '@/types/date-profile';
 
-const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
+const DateProfileWrapper = ({
+  dateProfile,
+  setDateProfile,
+}: {
+  dateProfile: TDateProfile;
+  setDateProfile: Dispatch<SetStateAction<TDateProfile | null>>;
+}) => {
   return (
     <div>
       {/* HEADER */}
@@ -55,7 +62,7 @@ const DateProfileWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
               lastAction={dateProfile?.last_action}
             />
             {/* ACTION BUTTONS GROUP */}
-            <ActionsWrapper dateProfile={dateProfile} />
+            <ActionsWrapper dateProfile={dateProfile} setDateProfile={setDateProfile} />
           </div>
         </div>
       </div>

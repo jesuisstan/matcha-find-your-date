@@ -37,7 +37,7 @@ const MatchaMatches = () => {
 
       if (response.ok) {
         setMatches(result.matches);
-        setUser({ ...user, ...result.updatedUserData });
+        setUser({ ...user, ...result.user });
       } else {
         setError(result.error ? result.error : 'error-fetching-matches');
       }

@@ -88,7 +88,7 @@ export async function POST(req: Request) {
     // Step 5: Return the blocked users and updated user data
     return NextResponse.json({
       blockedProfiles: transformedBlockedUsers,
-      updatedUserData: updatedUser,
+      user: updatedUser,
     });
   } catch (error) {
     console.error('Error fetching blocked users:', error);

@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
+import { calculateAge } from '@/utils/format-string';
+
 // Define the POST request handler for fetching profile data
 export async function POST(request: Request) {
   const { userId, profileToFindId } = await request.json();
@@ -51,14 +53,17 @@ export async function POST(request: Request) {
 
     // If no user is found, return an error response
     if (!result.rows || result.rows.length === 0) {
-      return NextResponse.json({ message: 'profile-not-found', updatedUserData }, { status: 200 });
+      return NextResponse.json(
+        { message: 'profile-not-found', user: updatedUserData },
+        { status: 200 }
+      );
     }
 
     // Extract the user's profile data from the result
-    const matchingUserProfile = result.rows[0];
+    const matchingUserProfile = { ...result.rows[0], age: calculateAge(result.rows[0].birthdate) };
 
     // Return the profile data as a response
-    return NextResponse.json({ updatedUserData, matchingUserProfile }, { status: 200 });
+    return NextResponse.json({ user: updatedUserData, matchingUserProfile }, { status: 200 });
   } catch (error) {
     console.error('Error fetching profile:', error);
     return NextResponse.json({ error: 'error-fetching-profile' }, { status: 500 });

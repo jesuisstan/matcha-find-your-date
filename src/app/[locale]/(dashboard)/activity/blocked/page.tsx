@@ -35,7 +35,7 @@ const MatchaBlockedProfiles = () => {
       const result = await response.json();
       if (response.ok) {
         setBlockedProfiles(result.blockedProfiles);
-        setUser({ ...user, ...result.updatedUserData });
+        setUser({ ...user, ...result.user });
       } else {
         setError(result.error ? result.error : 'error-fetching-blocked-profiles');
       }

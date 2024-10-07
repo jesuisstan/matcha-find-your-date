@@ -110,7 +110,7 @@ export async function POST(req: Request) {
     // Step 5: Return the likes and updated user data
     return NextResponse.json({
       likes: transformedLikes,
-      updatedUserData: updatedUser,
+      user: updatedUser,
     });
   } catch (error) {
     console.error('Error fetching likes:', error);

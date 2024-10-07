@@ -110,7 +110,7 @@ export async function POST(req: Request) {
     // Step 5: Return the visits and updated user data
     return NextResponse.json({
       visits: transformedVisits,
-      updatedUserData: updatedUser,
+      user: updatedUser,
     });
   } catch (error) {
     console.error('Error fetching visits:', error);

@@ -107,7 +107,7 @@ const SmartSuggestions = () => {
         });
 
         setSmartSuggestions(matchingUsers);
-        setUser({ ...user, ...result.updatedUserData });
+        setUser({ ...user, ...result.user });
 
         // Update filter options based on unique values
         setAgeOptions((prevOptions) =>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
@@ -12,17 +12,25 @@ import {
 } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
-import MatchSkeleton from '@/components/ui/skeletons/match-skeleton';
+import ActionsSkeleton from '@/components/ui/skeletons/actions-skeleton';
 import MatchWrapper from '@/components/wrappers/match-wrapper';
+import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 import { TDateProfile } from '@/types/date-profile';
 
-const ActionsWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
+const ActionsWrapper = ({
+  dateProfile,
+  setDateProfile,
+}: {
+  dateProfile: TDateProfile;
+  setDateProfile: Dispatch<SetStateAction<TDateProfile | null>>;
+}) => {
   const t = useTranslations();
   const { user, setUser } = useUserStore((state) => ({
     user: state.user,
     setUser: state.setUser,
   }));
+  const { updateSuggestion } = useSearchStore();
   const [loading, setLoading] = useState(false);
   const [isMatch, setIsMatch] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -80,9 +88,9 @@ const ActionsWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
 
       const result = await response.json();
       if (response.ok) {
-        setUser({ ...user, ...result.updatedUserData });
-        setIsLiked(result.isLiked);
-        setIsMatch(result.isMatched); // Update match status based on result
+        setUser({ ...user, ...result.user });
+        updateSuggestion(result.likedUser);
+        setDateProfile({ ...dateProfile, ...result.likedUser });
       }
     } catch (error) {
       console.error(error);
@@ -108,8 +116,7 @@ const ActionsWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
 
       const result = await response.json();
       if (response.ok) {
-        setUser({ ...user, ...result.updatedUserData });
-        setIsBlocked(result.isBlocked);
+        setUser({ ...user, ...result.user });
       }
     } catch (error) {
       console.error(error);
@@ -119,12 +126,13 @@ const ActionsWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
   };
 
   return loading ? (
-    <div className="flex animate-pulse flex-row items-center space-x-3 self-center">
-      <div className="h-[74px] w-[256px] rounded-2xl bg-muted lg:h-[104px] lg:w-36"></div>
-      <MatchSkeleton />
-    </div>
+    <ActionsSkeleton />
   ) : (
-    <div className={clsx('flex max-w-fit flex-row gap-4 self-center')}>
+    <div className={clsx('flex max-w-fit flex-row self-center rounded-2xl bg-card')}>
+      {/* MATCH ? */}
+      <MatchWrapper isMatch={isMatch} />
+      {/* vertical divider */}
+      <div className={clsx('my-3 block w-[1px] bg-secondary opacity-40')} />
       {/* ACTIONS */}
       <div
         className={clsx(
@@ -208,9 +216,6 @@ const ActionsWrapper = ({ dateProfile }: { dateProfile: TDateProfile }) => {
           </ButtonMatcha>
         </div>
       </div>
-
-      {/* MATCH ? */}
-      <MatchWrapper isMatch={isMatch} loading={loading} />
     </div>
   );
 };

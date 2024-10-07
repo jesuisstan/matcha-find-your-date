@@ -2,15 +2,11 @@ import { useTranslations } from 'next-intl';
 
 import { HeartCrack, HeartPulse } from 'lucide-react';
 
-import MatchSkeleton from '@/components/ui/skeletons/match-skeleton';
-
-const MatchWrapper = ({ isMatch, loading }: { isMatch: boolean; loading: boolean }) => {
+const MatchWrapper = ({ isMatch }: { isMatch: boolean }) => {
   const t = useTranslations();
 
-  return loading ? (
-    <MatchSkeleton />
-  ) : (
-    <div className="w-24 self-center rounded-2xl bg-card p-4 smooth42transition">
+  return (
+    <div className="w-24 self-center smooth42transition">
       {isMatch ? (
         <div className="group relative flex flex-col items-center justify-center gap-2 align-middle text-positive">
           <HeartPulse size={42} className="animate-ping" />

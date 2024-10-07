@@ -27,6 +27,7 @@ export type TSearchStore = {
   advancedSuggestions: TDateProfile[];
   setAdvancedSuggestions: (newSuggestions: TDateProfile[]) => void;
   getAdvancedSuggestionById: (id: string) => TDateProfile | undefined;
+  addAdvancedSuggestion: (newSuggestion: TDateProfile) => void;
   resetAdvancedSuggestions: () => void;
 
   searchFilters: TSearchFilters;
@@ -39,6 +40,7 @@ export type TSearchStore = {
   resetSearchFilters: () => void;
 
   resetSearchStore: () => void;
+  updateSuggestion: (updatedUser: Partial<TDateProfile>) => void;
 };
 
 // initial state
@@ -82,6 +84,17 @@ const useSearchStore = create<TSearchStore>()(
             {
               return get().advancedSuggestions.find((suggestion) => suggestion.id === id);
             }
+          },
+
+          addAdvancedSuggestion: (newSuggestion: TDateProfile) => {
+            set((state) => ({
+              advancedSuggestions: [
+                ...state.advancedSuggestions.filter(
+                  (suggestion) => suggestion.id !== newSuggestion.id
+                ),
+                newSuggestion,
+              ],
+            }));
           },
 
           setValueOfSearchFilter: (
@@ -174,6 +187,18 @@ const useSearchStore = create<TSearchStore>()(
               smartSuggestions: [],
               advancedSuggestions: [],
             });
+          },
+
+          // update a suggestion in both arrays if the user exists
+          updateSuggestion: (updatedUser: Partial<TDateProfile>) => {
+            set((state) => ({
+              smartSuggestions: state.smartSuggestions.map((suggestion) =>
+                suggestion.id === updatedUser.id ? { ...suggestion, ...updatedUser } : suggestion
+              ),
+              advancedSuggestions: state.advancedSuggestions.map((suggestion) =>
+                suggestion.id === updatedUser.id ? { ...suggestion, ...updatedUser } : suggestion
+              ),
+            }));
           },
         }),
         { name: 'matcha-search-store', storage: createJSONStorage(() => localStorage) }

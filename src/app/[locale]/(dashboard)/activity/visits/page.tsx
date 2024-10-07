@@ -50,7 +50,7 @@ const MatchaVisits = () => {
         selectedOption === '0'
           ? setProfilesVisited(result.visits)
           : setProfilesVisitedBy(result.visits);
-        setUser({ ...user, ...result.updatedUserData });
+        setUser({ ...user, ...result.user });
       } else {
         selectedOption === '0'
           ? setErrorVisited(result.error ? result.error : 'error-fetching-visited')

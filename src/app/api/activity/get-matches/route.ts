@@ -86,7 +86,7 @@ export async function POST(req: Request) {
     // Step 5: Return the matches and updated user data
     return NextResponse.json({
       matches: transformedMatches,
-      updatedUserData: updatedUser,
+      user: updatedUser,
     });
   } catch (error) {
     console.error('Error fetching matches:', error);

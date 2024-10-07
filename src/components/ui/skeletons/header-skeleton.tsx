@@ -1,4 +1,4 @@
-import MatchSkeleton from '@/components/ui/skeletons/match-skeleton';
+import ActionsSkeleton from '@/components/ui/skeletons/actions-skeleton';
 
 const HeaderSkeleton = () => {
   return (
@@ -11,19 +11,16 @@ const HeaderSkeleton = () => {
       <div className="flex flex-col space-y-4 lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0">
         {/* Skeleton for Labels */}
         <div className="flex flex-col space-y-3">
-          <div className="h-24 rounded-2xl bg-muted lg:w-64"></div>
+          <div className="h-[104px] rounded-2xl bg-muted lg:w-64"></div>
         </div>
         {/* Skeleton for Description */}
-        <div className="h-24 flex-grow rounded-2xl bg-muted"></div>
+        <div className="h-[104px] flex-grow rounded-2xl bg-muted"></div>
         {/* Skeleton for Status Group */}
         <div className="flex flex-col space-y-3">
           <div className="h-14 rounded-2xl bg-muted lg:h-[104px] lg:w-52"></div>
         </div>
         {/* Skeleton for Actions Group */}
-        <div className="flex flex-col space-y-3">
-          <div className="h-14 rounded-2xl bg-muted lg:h-[104px] lg:w-40"></div>
-        </div>
-        <MatchSkeleton />
+        <ActionsSkeleton />
       </div>
     </div>
   );

@@ -119,7 +119,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: 'suggestions-retrieved-successfully',
       matchingUsers,
-      updatedUserData,
+      user: updatedUserData,
     });
   } catch (error) {
     console.error('Error fetching suggestions:', error);

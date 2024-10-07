@@ -239,7 +239,7 @@ const AdvancedSearch = () => {
           };
         });
 
-        setUser({ ...user, ...result.updatedUserData });
+        setUser({ ...user, ...result.user });
         setSearchResult(matchingUsers);
         setAdvancedSuggestions(matchingUsers);
         // Update filter options based on unique values

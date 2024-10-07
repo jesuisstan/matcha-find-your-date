@@ -30,6 +30,16 @@ export async function POST(req: Request) {
         [likerId, likedUserId]
       );
 
+      // Increment rating for both users (max 100)
+      await client.query(
+        `
+        UPDATE users
+        SET raiting = LEAST(raiting + 1, 100)
+        WHERE id = $1 OR id = $2;
+      `,
+        [likerId, likedUserId]
+      );
+
       // Check if the liked user already liked the liker
       const mutualLikeCheck = await client.query(
         `
@@ -78,6 +88,16 @@ export async function POST(req: Request) {
         [likerId, likedUserId]
       );
 
+      // Decrement rating for both users (min 0)
+      await client.query(
+        `
+        UPDATE users
+        SET raiting = GREATEST(raiting - 1, 0)
+        WHERE id = $1 OR id = $2;
+      `,
+        [likerId, likedUserId]
+      );
+
       // Check if this action breaks a match
       const matchCheck = await client.query(
         `
@@ -115,16 +135,23 @@ export async function POST(req: Request) {
       UPDATE users
       SET last_action = $2, online = true
       WHERE id = $1
-      RETURNING id, last_action, online;
+      RETURNING id, last_action, online, raiting;
     `,
       [likerId, currentDate]
     );
 
+    const likedUserUpdatedResult = await client.query(
+      `SELECT id, raiting FROM users WHERE id = $1;`,
+      [likedUserId]
+    );
+
     const updatedUser = updatedUserResult.rows[0];
+    const likedUserUpdated = likedUserUpdatedResult.rows[0];
 
     return NextResponse.json({
-      message: likeAction ? 'like-logged-successfully' : 'unlike-logged-successfully',
+      message: likeAction === 'like' ? 'like-logged-successfully' : 'unlike-logged-successfully',
       user: { ...updatedUser },
+      likedUser: { ...likedUserUpdated },
     });
   } catch (error) {
     console.error('Error logging like/unlike:', error);

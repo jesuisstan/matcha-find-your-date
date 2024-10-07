@@ -50,7 +50,7 @@ const MatchaSymphaties = () => {
         selectedOption === '0'
           ? setProfilesLiked(result.likes)
           : setProfilesLikedBy(result.likes);
-        setUser({ ...user, ...result.updatedUserData });
+        setUser({ ...user, ...result.user });
       } else {
         selectedOption === '0'
           ? setErrorLiked(result.error ? result.error : 'error-fetching-liked')

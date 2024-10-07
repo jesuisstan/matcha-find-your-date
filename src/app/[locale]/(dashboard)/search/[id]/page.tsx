@@ -16,7 +16,8 @@ const DateProfilePage = () => {
   const router = useRouter();
   const { id: profileToFindId } = useParams(); // Grab the id from the dynamic route
   const { user, setUser, globalLoading } = useUserStore();
-  const { getSmartSuggestionById, getAdvancedSuggestionById } = useSearchStore();
+  const { getSmartSuggestionById, getAdvancedSuggestionById, addAdvancedSuggestion } =
+    useSearchStore();
   const [dateProfile, setDateProfile] = useState(
     getAdvancedSuggestionById(profileToFindId as string) ??
       getSmartSuggestionById(profileToFindId as string) ??
@@ -59,10 +60,11 @@ const DateProfilePage = () => {
         if (response.ok) {
           if (result.message) {
             setError(result.message);
-            setUser({ ...user, ...result.updatedUserData });
+            setUser({ ...user, ...result.user });
           } else {
-            setDateProfile(result.matchingUserProfile);
-            setUser({ ...user, ...result.updatedUserData });
+            addAdvancedSuggestion(result.matchingUserProfile);
+            setDateProfile(result.matchingUserProfile); // add a newly fetched profile to advancedSuggestions
+            setUser({ ...user, ...result.user });
           }
         } else {
           setError(result.error ? result.error : 'error-fetching-profile');
@@ -111,7 +113,7 @@ const DateProfilePage = () => {
   ) : loading || globalLoading || !user ? (
     <ProfilePageSkeleton />
   ) : (
-    <DateProfileWrapper dateProfile={dateProfile!} />
+    <DateProfileWrapper dateProfile={dateProfile!} setDateProfile={setDateProfile} />
   );
 };
 
