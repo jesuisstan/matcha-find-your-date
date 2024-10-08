@@ -1,5 +1,5 @@
 /**
- * Update the user's rating if at least one day has passed since their last action.
+ * Update the user's rating on login.
  *
  * @param lastActionDate - The last time the user performed an action (as a string)
  * @param currentRaiting - The user's current rating
@@ -17,12 +17,21 @@ export function updateUserRaitingForLogin(
   const lastAction = new Date(lastActionDate);
   const timeDifference = now.getTime() - lastAction.getTime();
   const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+  const halfDayInMilliseconds = 12 * 60 * 60 * 1000; // 12 hours
 
-  // If more than 1 day has passed and the raiting is less than the max limit
-  if (timeDifference >= oneDayInMilliseconds && currentRaiting < maxRaiting) {
-    return currentRaiting + 1;
+  // If the last action was within the same calendar day or within 12 hours, no change in rating
+  if (timeDifference < halfDayInMilliseconds) {
+    return currentRaiting;
   }
 
-  // Return the original raiting if conditions aren't met
-  return currentRaiting;
+  // If the last action was performed more than 12 hours ago but less than 24 hours ago, add 1 point
+  if (timeDifference >= halfDayInMilliseconds && timeDifference < oneDayInMilliseconds) {
+    return Math.min(currentRaiting + 1, maxRaiting);
+  }
+
+  // If more than 1 day has passed, calculate how many full days have passed and subtract points
+  const daysPassed = Math.floor(timeDifference / oneDayInMilliseconds);
+
+  // Decrease rating by the number of days passed, ensuring it doesn't go below 0
+  return Math.max(currentRaiting - daysPassed, 0);
 }
