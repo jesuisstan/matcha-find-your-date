@@ -297,7 +297,7 @@
   "settings": "Paramètres",
   "raiting": "Facteur de Flirt",
   "what-is-this": "Qu'est-ce que c'est?",
-  "raiting-description-message": "Flirt Factor est une note qui montre à quel point vous êtes attrayant pour les autres utilisateurs.\nPlus la note est élevée, plus vous avez de chances de trouver un match.\nLa note est calculée en fonction:\n - de l’exhaustivité de votre profil,\n - du nombre de photos,\n - du nombre de likes que vous recevez des autres utilisateurs,\n - de votre activité quotidienne.\nPlus vous êtes actif, plus votre cote sera élevée.\nMoins vous êtes actif, plus votre cote est basse",
+  "raiting-description-message": "Flirt Factor est une note qui montre à quel point vous êtes attrayant pour les autres utilisateurs.\nPlus la note est élevée, plus vous avez de chances de trouver un match.\n\nLa note est calculée en fonction:\n - de l’exhaustivité de votre profil,\n - du nombre de photos,\n - du nombre de likes que vous recevez des autres utilisateurs,\n - de votre activité quotidienne.\n\nPlus vous êtes actif, plus votre cote sera élevée.\nMoins vous êtes actif, plus votre cote est basse",
   "theme": "Thème",
   "refresh": "Actualiser",
   "his-her": " (son/sa)",
@@ -367,5 +367,9 @@
   "user-blocked": "Utilisateur bloqué",
   "like-sent": "Aime envoyé",
   "blocked-profile": "Bloqué",
-  "user-is-already-blocked": "L'utilisateur est déjà bloqué"
+  "user-is-already-blocked": "L'utilisateur est déjà bloqué",
+  "error-fetching-notifications": "Erreur lors de la récupération des notifications. Veuillez réessayer",
+  "error-fetching-unread-notifications": "Erreur lors de la récupération des notifications non lues. Veuillez réessayer",
+  "failed-mark-notification-read": "Impossible de marquer la notification comme lue",
+  "notifications": "Notifications"
 }

@@ -14,6 +14,7 @@ import MenuList from '@/components/menu/menu-list';
 import SideBarHeader from '@/components/menu/side-bar-header';
 import MenuSkeleton from '@/components/ui/skeletons/menu-skeleton';
 import { usePathname } from '@/navigation';
+import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
 
 const Menu: React.FC = () => {
@@ -27,6 +28,7 @@ const Menu: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
   const [isClient, setIsClient] = useState(false);
+  const { unreadCount } = useNotificationStore();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -171,6 +173,7 @@ const Menu: React.FC = () => {
                 }}
                 pathname={pathname}
                 translate={t}
+                unreadCount={unreadCount}
               />
 
               {/* horizontal divider */}

@@ -9,10 +9,12 @@ const MenuList = ({
   onClick,
   pathname,
   translate,
+  unreadCount,
 }: {
   onClick: MouseEventHandler<HTMLAnchorElement>;
   pathname: string;
   translate: (key: string) => string;
+  unreadCount: number;
 }) => {
   return (
     <ul className="space-y-4 overflow-y-auto text-sm font-bold text-foreground">
@@ -38,6 +40,29 @@ const MenuList = ({
               />
               <div title={translate(`profile`)} className="max-w-[170px] truncate">
                 {translate(`profile`)}
+              </div>
+            </Link>
+          </li>
+          {/* NOTIFICATIONS */}
+          <li>
+            <Link
+              href={pathname !== '/notifications' ? '/notifications' : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
+              className={clsx(
+                `group flex w-full items-center text-secondary smooth42transition`,
+                `hover:text-c42orange`
+              )}
+              onClick={onClick}
+              scroll={false}
+            >
+              <div
+                id="smartdata-chosen-pointer"
+                className={clsx('ml-[-5px] mr-4 h-2 w-2 rounded-full', {
+                  'bg-secondary': pathname === '/notifications',
+                  'bg-transparent': pathname !== '/notifications',
+                })}
+              />
+              <div title={translate(`notifications`)} className="max-w-[170px] truncate">
+                {translate(`notifications`)} {<span>{unreadCount}</span>}
               </div>
             </Link>
           </li>

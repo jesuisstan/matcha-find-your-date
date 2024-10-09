@@ -1,11 +1,9 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Dispatch, SetStateAction } from 'react';
 
 import clsx from 'clsx';
 
-import ToastNotification from '@/components/toast-notification';
 import ActionsWrapper from '@/components/wrappers/actions-wrapper';
 import ConfirmationWrapper from '@/components/wrappers/confirmation-wrapper';
 import DescriptionWrapper from '@/components/wrappers/description-wrapper';
@@ -104,9 +102,6 @@ const DateProfileWrapper = ({
         <div className={clsx('col-span-12 space-y-5', 'lg:col-span-3')}>
           {/* INTERESTS */}
           <InterestsWrapper tagsList={dateProfile?.tags!} />
-
-          {/* DEBUG TODO: DELETE*/}
-          <ToastNotification />
         </div>
       </div>
     </div>
