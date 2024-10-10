@@ -36,7 +36,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         if (response.ok && result.unreadNotifications.length > 0) {
           addNotifications(result.unreadNotifications);
         }
-        console.log('result', result); // debug
       } catch (error) {
         console.error('Error fetching unread notifications:', error);
       }

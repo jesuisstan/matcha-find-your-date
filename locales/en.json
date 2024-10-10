@@ -329,6 +329,7 @@
   "error-no-tags-selected": "No tags selected! Please select at least 1 tag",
   "no-matching-users-on-distance": "No matching users found within the selected distance",
   "activity": "Activity",
+  "visit": "Visit",
   "visits": "Visits",
   "visited": "You visited their profiles",
   "visited-by": "They visited your profile",
@@ -374,5 +375,12 @@
   "error-fetching-notifications": "Error fetching notifications. Please try again",
   "error-fetching-unread-notifications": "Error fetching unread notifications. Please try again",
   "failed-mark-notification-read": "Failed to mark notification as read",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "new": "New",
+  "viewed": "Viewed",
+  "time": "Time",
+  "category": "Category",
+  "from-user": "From user",
+  "unmatch": "Unmatch",
+  "notification-marked-as-read": "Notification marked as read"
 }

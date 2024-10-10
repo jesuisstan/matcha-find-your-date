@@ -326,6 +326,7 @@
   "error-no-tags-selected": "Не выбраны тэги! Выберите хотя бы 1 тэг",
   "no-matching-users-on-distance": "Нет пользователей в выбранном радиусе",
   "activity": "Активность",
+  "visit": "Посещение",
   "visits": "Посещения",
   "visited": "Вы посетили их профиль",
   "visited-by": "Они посетили Ваш профиль",
@@ -371,5 +372,12 @@
   "error-fetching-notifications": "Ошибка загрузки уведомлений. Попробуйте ещё раз",
   "error-fetching-unread-notifications": "Ошибка загрузки непрочитанных уведомлений. Попробуйте ещё раз",
   "failed-mark-notification-read": "Не удалось пометить уведомление как прочитанное",
-  "notifications": "Уведомления"
+  "notifications": "Уведомления",
+  "new": "Новое",
+  "viewed": "Просмотрено",
+  "time": "Время",
+  "category": "Категория",
+  "from-user": "От пользователя",
+  "unmatch": "Размэтч",
+  "notification-marked-as-read": "Уведомление помечено как прочитанное"
 }

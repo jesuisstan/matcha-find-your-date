@@ -1,11 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+
+import clsx from 'clsx';
 
 import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
+import { formatApiDateLastUpdate } from '@/utils/format-date';
 
 const NotificationsPage = () => {
+  const t = useTranslations();
   const { notifications, markAsRead, addNotifications } = useNotificationStore();
   const { user } = useUserStore((state) => ({
     user: state.user,
@@ -46,20 +52,55 @@ const NotificationsPage = () => {
   }, [user?.id]);
 
   return (
-    <div>
-      <h1>Your Notifications</h1>
-      <div>
+    <div className="relative flex h-[92vh] flex-col">
+      {/* Fixed Header */}
+      <div id="user-nickname" className="mb-2 flex w-fit flex-wrap gap-x-2 smooth42transition">
+        <h1 className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit">
+          {t('notifications')}
+        </h1>
+      </div>
+
+      {/* Scrollable Notification List */}
+      <div className="flex-grow space-y-2 overflow-y-auto">
         {notifications.map((notification) => (
           <div
             key={notification.id}
-            className={`card ${notification.viewed ? 'opacity-50' : ''} cursor-pointer rounded-lg p-4 shadow`}
-            //onMouseEnter={() => markAsRead(notification.id)}
-            onClick={() => markAsRead(notification.id)}
+            className={clsx(
+              `card rounded-2xl bg-card p-4 text-sm shadow`,
+              notification.viewed ? 'opacity-50' : ''
+            )}
+            //onClick={() => markAsRead(notification.id)}
+            onMouseEnter={() => markAsRead(notification.id)}
           >
-            <p>{`Type: ${notification.type}`}</p>
-            <p>{`From user: ${notification.from_user_id}`}</p>
-            <p>{`Time: ${new Date(notification.notification_time).toLocaleString()}`}</p>
-            <p>{notification.viewed ? 'Read' : 'Unread'}</p>
+            <p
+              className={clsx(
+                'smooth42transition',
+                notification.viewed ? 'text-secondary' : 'animate-pulse text-positive'
+              )}
+            >
+              {notification.viewed ? t('viewed') : t('new')}
+            </p>
+
+            <div className="flex flex-row space-x-2">
+              <p className="italic">{`${t('category')}:`}</p>
+              <p>{`${t(notification.type)}`}</p>
+            </div>
+
+            <div className="flex flex-row space-x-2">
+              <p className="italic">{`${t('time')}:`}</p>
+              <p>{`${formatApiDateLastUpdate(notification.notification_time)}`}</p>
+            </div>
+
+            <div className="flex flex-row space-x-2">
+              <p className="italic">{`${t('from-user')}: `}</p>
+              <Link
+                href={`/search/${notification.from_user_id}`}
+                passHref
+                className={clsx(notification.type === 'block' ? 'text-negative' : 'text-positive')}
+              >
+                {`${notification.firstname} "${notification.nickname}" ${notification.lastname}`}
+              </Link>
+            </div>
           </div>
         ))}
       </div>

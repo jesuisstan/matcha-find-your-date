@@ -326,6 +326,7 @@
   "error-no-tags-selected": "Aucun tag sélectionné! Sélectionnez au moins 1 tag",
   "no-matching-users-on-distance": "Aucun utilisateur correspondant à la distance sélectionnée",
   "activity": "Activité",
+  "visit": "Visite",
   "visits": "Visites",
   "visited": "Vous avez visité leur profil",
   "visited-by": "Ils ont visité votre profil",
@@ -371,5 +372,12 @@
   "error-fetching-notifications": "Erreur lors de la récupération des notifications. Veuillez réessayer",
   "error-fetching-unread-notifications": "Erreur lors de la récupération des notifications non lues. Veuillez réessayer",
   "failed-mark-notification-read": "Impossible de marquer la notification comme lue",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "new": "Nouveau",
+  "viewed": "Vu",
+  "time": "Temps",
+  "category": "Catégorie",
+  "from-user": "De l'utilisateur",
+  "unmatch": "Désaccord",
+  "notification-marked-as-read": "Notification marquée comme lue"
 }

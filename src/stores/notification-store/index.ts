@@ -6,6 +6,9 @@ interface Notification {
   from_user_id: string;
   notification_time: string;
   viewed: boolean;
+  firstname: string;
+  lastname: string;
+  nickname: string;
 }
 
 interface NotificationStore {
@@ -20,7 +23,7 @@ export const useNotificationStore = create<NotificationStore>((set, get) => ({
   notifications: [],
   unreadCount: 0,
 
-  // Function to add new notifications
+  // Add new notifications, prepending them to the list
   addNotifications: (newNotifications) => {
     set((state) => {
       // Filter only unique notifications
@@ -31,15 +34,16 @@ export const useNotificationStore = create<NotificationStore>((set, get) => ({
       // Update unread notifications count
       const newUnreadCount = uniqueNotifications.filter((notif) => !notif.viewed).length;
 
+      // Prepend new notifications to the top of the list
       return {
-        notifications: [...state.notifications, ...uniqueNotifications],
+        notifications: [...uniqueNotifications, ...state.notifications],
         unreadCount: state.unreadCount + newUnreadCount,
       };
     });
   },
 
-  // Function to mark a notification as read
-  markAsRead: (id) => {
+  // Mark a notification as read and update it in the backend
+  markAsRead: async (id: string) => {
     set((state) => {
       const updatedNotifications = state.notifications.map((n) =>
         n.id === id ? { ...n, viewed: true } : n
@@ -53,8 +57,25 @@ export const useNotificationStore = create<NotificationStore>((set, get) => ({
         unreadCount: newUnreadCount,
       };
     });
+
+    // Update the notification in the backend
+    try {
+      const response = await fetch('/api/notifications/mark-read', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ notificationId: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to mark notification as read');
+      }
+    } catch (error) {
+      console.error('Error marking notification as read in the backend:', error);
+    }
   },
 
-  // Set the unread notifications count manually
+  // Set unread count manually
   setUnreadCount: (count) => set({ unreadCount: count }),
 }));
