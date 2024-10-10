@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
@@ -149,88 +149,77 @@ ${user?.firstname} ${user?.lastname} (${user?.nickname} / ID: ${user?.id})`;
       {/* ACTIONS */}
       <div
         className={clsx(
-          'relative grid max-h-28 grid-flow-col grid-rows-1 items-center justify-center overflow-x-auto rounded-2xl bg-card p-4 pb-2 pt-2',
+          'relative grid min-h-16 grid-flow-col grid-rows-1 items-center justify-center gap-x-6 overflow-x-auto rounded-2xl bg-card px-6 pb-2 pt-2',
           'lg:min-h-[104px] lg:max-w-fit lg:grid-rows-2 lg:overflow-visible'
         )}
       >
-        <div id="like-button">
-          <ButtonMatcha
-            variant="ghost"
-            size="default"
-            className="group relative hover:bg-transparent"
-            onClick={handleLikeClick}
-            disabled={isBlocked}
-          >
-            {!isLiked ? (
-              <>
-                <Heart />
-                <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
-                  {t('like')}
-                </div>
-              </>
-            ) : (
-              <>
-                <HeartOff />
-                <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
-                  {t('unlike')}
-                </div>
-              </>
-            )}
-          </ButtonMatcha>
-        </div>
+        <button
+          id="like-button"
+          className="group relative z-40 flex cursor-pointer flex-col items-center justify-center gap-2 align-middle disabled:cursor-default disabled:opacity-50"
+          onClick={handleLikeClick}
+          disabled={isBlocked}
+        >
+          {!isLiked ? (
+            <>
+              <Heart size={25} className={clsx(isBlocked ? '' : 'text-positive')} />
+              <div className="absolute -bottom-3 hidden w-fit max-w-20 transform truncate text-nowrap rounded-2xl border bg-foreground/90 px-2 py-1 text-xs text-background group-hover:block">
+                {t('like')}
+              </div>
+            </>
+          ) : (
+            <>
+              <HeartOff size={25} className="text-negative" />
+              <div className="absolute -bottom-3 hidden w-fit max-w-20 transform truncate text-nowrap rounded-2xl border bg-foreground/90 px-2 py-1 text-xs text-background group-hover:block">
+                {t('unlike')}
+              </div>
+            </>
+          )}
+        </button>
 
-        <div id="chat-button">
-          <ButtonMatcha
-            variant="ghost"
-            size="default"
-            className="group relative hover:bg-transparent"
-            disabled={!isMatch || isBlocked}
-          >
-            <MessageCircleMore />
-            <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
-              {t('chat')}
-            </div>
-          </ButtonMatcha>
-        </div>
+        <button
+          id="chat-button"
+          className="group relative z-40 flex cursor-pointer flex-col items-center justify-center gap-2 align-middle disabled:cursor-default disabled:opacity-50"
+          onClick={() => console.log('chat')}
+          disabled={!isMatch || isBlocked}
+        >
+          <MessageCircleMore size={25} />
+          <div className="absolute -bottom-3 hidden w-fit max-w-20 transform truncate text-nowrap rounded-2xl border bg-foreground/90 px-2 py-1 text-xs text-background group-hover:block">
+            {t('chat')}
+          </div>
+        </button>
 
-        <div id="block-button">
-          <ButtonMatcha
-            variant="ghost"
-            size="default"
-            className="group relative hover:bg-transparent"
-            onClick={handleBlockClick}
-          >
-            {!isBlocked ? (
-              <>
-                <CircleX />
-                <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
-                  {t('block')}
-                </div>
-              </>
-            ) : (
-              <>
-                <CirclePower />
-                <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
-                  {t('unblock')}
-                </div>
-              </>
-            )}
-          </ButtonMatcha>
-        </div>
+        <button
+          id="block-button"
+          className="group relative z-40 flex cursor-pointer flex-col items-center justify-center gap-2 align-middle disabled:cursor-default disabled:opacity-50"
+          onClick={handleBlockClick}
+        >
+          {!isBlocked ? (
+            <>
+              <CircleX size={25} className="text-negative" />
+              <div className="absolute -bottom-3 hidden w-fit max-w-20 transform truncate text-nowrap rounded-2xl border bg-foreground/90 px-2 py-1 text-xs text-background group-hover:block">
+                {t('block')}
+              </div>
+            </>
+          ) : (
+            <>
+              <CirclePower size={25} className="text-positive" />
+              <div className="absolute -bottom-3 hidden w-fit max-w-20 transform truncate text-nowrap rounded-2xl border bg-foreground/90 px-2 py-1 text-xs text-background group-hover:block">
+                {t('unblock')}
+              </div>
+            </>
+          )}
+        </button>
 
-        <div id="report-button">
-          <ButtonMatcha
-            variant="ghost"
-            size="default"
-            className="group relative hover:bg-transparent"
-            onClick={handleReportClick}
-          >
-            <ShieldAlert />
-            <div className="absolute bottom-0 left-1/2 hidden -translate-x-1/2 transform rounded-2xl border bg-foreground/90 px-1 text-xs text-background group-hover:block">
-              {t('report')}
-            </div>
-          </ButtonMatcha>
-        </div>
+        <button
+          id="report-button"
+          className="group relative z-40 flex cursor-pointer flex-col items-center justify-center gap-2 align-middle"
+          onClick={handleReportClick}
+        >
+          <ShieldAlert size={25} className="text-negative" />
+          <div className="absolute -bottom-3 hidden w-fit max-w-20 transform truncate text-nowrap rounded-2xl border bg-foreground/90 px-2 py-1 text-xs text-background group-hover:block">
+            {t('report')}
+          </div>
+        </button>
       </div>
     </div>
   );

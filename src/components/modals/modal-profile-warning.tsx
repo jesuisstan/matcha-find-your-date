@@ -38,7 +38,7 @@ const ModalProfileWarning = ({ user }: { user: TUser }) => {
       </div>
 
       <div className="flex flex-row justify-center">
-        <ButtonMatcha type="button" onClick={handleProceed} className="min-w-32">
+        <ButtonMatcha type="button" variant="default" onClick={handleProceed} className="min-w-32">
           {t('proceed')}
         </ButtonMatcha>
       </div>

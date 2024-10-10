@@ -156,8 +156,20 @@ const ModalChangeEmail = ({
             </div>
           </div>
 
-          <ButtonMatcha type="submit" size="icon" loading={loading} title={t('save')}>
-            <Save size={24} />
+          <ButtonMatcha
+            variant="default"
+            title={t('save')}
+            size="default"
+            className="w-full min-w-32"
+            type="submit"
+            loading={loading}
+          >
+            <div className="flex flex-row items-center space-x-2">
+              <span>{t('save')}</span>
+              <div>
+                <Save size={15} />
+              </div>
+            </div>
           </ButtonMatcha>
         </form>
         <div className="min-h-6">

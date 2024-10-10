@@ -126,6 +126,7 @@ const PasswordResetPage = () => {
               </>
               <ButtonMatcha
                 type="submit"
+                variant="default"
                 className="mb-5"
                 loading={loading}
                 disabled={loading || !!successMessage}

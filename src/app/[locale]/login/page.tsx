@@ -357,7 +357,7 @@ const Login = () => {
               </div>
             </>
           )}
-          <ButtonMatcha type="submit" className="mb-5" loading={loading}>
+          <ButtonMatcha type="submit" variant="default" className="mb-5" loading={loading}>
             {pageLayout === 'login' && t(`auth.sign-in`)}
             {pageLayout === 'register' && t(`auth.sign-up`)}
             {pageLayout === 'confirmation' && t(`auth.resend-confirmation-email`)}

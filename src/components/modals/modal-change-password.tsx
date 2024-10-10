@@ -41,7 +41,13 @@ const ModalChangePassword = ({
       </div>
 
       <div className="flex flex-row justify-center">
-        <ButtonMatcha type="button" onClick={handleProceed} className="min-w-32" loading={loading}>
+        <ButtonMatcha
+          type="button"
+          variant="default"
+          onClick={handleProceed}
+          className="min-w-32"
+          loading={loading}
+        >
           {t('proceed')}
         </ButtonMatcha>
       </div>

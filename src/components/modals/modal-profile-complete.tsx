@@ -564,6 +564,7 @@ const ModalProfileComplete = ({
         {layout !== 'basics' && (
           <ButtonMatcha
             type="button"
+            variant="default"
             onClick={handlePrevious}
             className="min-w-32"
             disabled={loading}
@@ -571,7 +572,13 @@ const ModalProfileComplete = ({
             {t('back')}
           </ButtonMatcha>
         )}
-        <ButtonMatcha type="button" onClick={handleNext} className="min-w-32" disabled={loading}>
+        <ButtonMatcha
+          type="button"
+          variant="default"
+          onClick={handleNext}
+          className="min-w-32"
+          disabled={loading}
+        >
           {layout !== 'photos' ? t('next') : t('finish')}
         </ButtonMatcha>
       </div>
