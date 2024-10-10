@@ -173,11 +173,12 @@ const SmartSuggestions = () => {
 
           {/* SUBHEADER */}
           <div className="mb-2 flex flex-col items-stretch justify-center gap-2 align-middle xs:flex-row">
-            <div className="w-full min-w-28 flex-col items-center justify-center self-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
-              <p className="text-left text-sm italic">{t(`use-smart-suggestions`)}</p>
+            <div className="flex min-h-10 w-full min-w-28 items-center justify-start overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
+              <p className="text-left text-base italic">{t(`use-smart-suggestions`)}</p>
             </div>
             <div className="flex items-center justify-center text-c42orange">
               <ButtonMatcha
+                variant="default"
                 size="default"
                 disabled={!user || loading}
                 title={t(`search.refresh-suggestions`)}

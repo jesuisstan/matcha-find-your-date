@@ -17,7 +17,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }));
 
   const { notifications, addNotifications } = useNotificationStore();
-  console.log('notifications', notifications); // debug delete notifications
 
   useEffect(() => {
     const fetchUnreadNotifications = async () => {
@@ -33,8 +32,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         });
 
         const result = await response.json();
-        if (response.ok && result.unreadNotifications.length > 0) {
-          addNotifications(result.unreadNotifications);
+        if (response.ok) {
+          console.log('Unread notifications:', result.unreadNotifications);
+          console.log('Current notifications:', notifications);
+          if (result.unreadNotifications.length > 0) {
+            addNotifications(result.unreadNotifications);
+          } else if (notifications === null) {
+            addNotifications([]);
+          }
         }
       } catch (error) {
         console.error('Error fetching unread notifications:', error);
@@ -64,7 +69,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       />
       <Menu />
       <div className="flex w-full flex-grow flex-col items-center justify-between">
-        <main id="main-content" className={clsx('mb-auto w-full max-w-[1700px] items-center p-4')}>
+        <main
+          id="main-content"
+          role="main"
+          className={clsx('mb-auto w-full max-w-[1700px] items-center p-4')}
+        >
           {children}
         </main>
         <Footer />

@@ -16,6 +16,7 @@ import MenuSkeleton from '@/components/ui/skeletons/menu-skeleton';
 import { usePathname } from '@/navigation';
 import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
+import { ButtonMatcha } from '../ui/button-matcha';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
@@ -112,7 +113,7 @@ const Menu: React.FC = () => {
           <div
             id="menu-sidebar"
             className={clsx(
-              `fixed left-0 top-0 z-50 h-fit w-fit bg-transparent p-4 transition-transform`, // basic part
+              `fixed left-0 top-0 z-50 h-fit max-h-screen w-fit bg-transparent p-4 transition-transform`, // basic part
               `lg:translate-x-0`, // sm + md + xl (responsive part)
               isSidebarOpen ? 'translate-x-0 drop-shadow-2xl' : ' -translate-x-96' // Conditional style
             )}
@@ -121,7 +122,7 @@ const Menu: React.FC = () => {
           >
             <div
               id="rounded-menu-container"
-              className="relative flex max-h-full w-64 flex-col space-y-5 rounded-2xl bg-card px-3 pt-5"
+              className="relative flex max-h-[97vh] w-64 flex-col space-y-5 rounded-2xl bg-card px-3 pt-5"
             >
               <div className="flex justify-center">
                 <Image

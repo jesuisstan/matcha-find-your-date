@@ -34,7 +34,7 @@ const RaitingWrapper = ({ raiting }: { raiting: number | undefined }) => {
               <div className="flex items-center gap-2">
                 <Star
                   size={28}
-                  className={clsx('animate-bounce smooth42transition', getColorByRating(raiting))}
+                  className={clsx('animate-pulse smooth42transition', getColorByRating(raiting))}
                 />
 
                 <span

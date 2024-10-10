@@ -311,11 +311,12 @@ const AdvancedSearch = () => {
             <div className="flex items-center justify-center text-c42orange">
               <OctagonAlert size={21} />
             </div>
-            <div className="w-full min-w-28 flex-row items-center justify-center self-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
-              <p className="text-left text-sm italic">{t(`search.advanced-search-note`)}</p>
+            <div className="flex min-h-10 w-full min-w-28 items-center justify-start self-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
+              <p className="text-left text-base italic">{t(`search.advanced-search-note`)}</p>
             </div>
             <div className="flex items-center justify-center text-c42orange">
               <ButtonMatcha
+                variant="default"
                 size="default"
                 disabled={!user || loading || globalLoading}
                 title={t(`search.refresh-suggestions`)}
@@ -538,6 +539,7 @@ const AdvancedSearch = () => {
               />
             </div>
             <ButtonMatcha
+              variant="default"
               size="default"
               disabled={!user || loading || globalLoading}
               title={t(`search.refresh-suggestions`)}
@@ -564,7 +566,7 @@ const AdvancedSearch = () => {
       ) : searchResult.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
-            <Frown size={84} onClick={toggleSidebar} className='cursor-pointer' />
+            <Frown size={84} onClick={toggleSidebar} className="cursor-pointer" />
           </div>
           <p className="text-center text-lg">
             {error

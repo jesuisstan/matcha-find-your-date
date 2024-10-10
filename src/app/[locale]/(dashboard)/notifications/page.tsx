@@ -62,7 +62,7 @@ const NotificationsPage = () => {
 
       {/* Scrollable Notification List */}
       <div className="flex-grow space-y-2 overflow-y-auto">
-        {notifications.map((notification) => (
+        {notifications?.map((notification) => (
           <div
             key={notification.id}
             className={clsx(
@@ -75,7 +75,7 @@ const NotificationsPage = () => {
             <p
               className={clsx(
                 'smooth42transition',
-                notification.viewed ? 'text-secondary' : 'animate-pulse text-positive'
+                notification.viewed ? 'text-secondary' : 'animate-bounce text-positive'
               )}
             >
               {notification.viewed ? t('viewed') : t('new')}
@@ -83,7 +83,15 @@ const NotificationsPage = () => {
 
             <div className="flex flex-row space-x-2">
               <p className="italic">{`${t('category')}:`}</p>
-              <p>{`${t(notification.type)}`}</p>
+              <p
+                className={clsx(
+                  notification.type === 'block' ? 'text-negative' : '',
+                  notification.type === 'like' ? 'text-positive' : '',
+                  notification.type === 'unmatch' ? 'text-negative' : '',
+                  notification.type === 'match' ? 'text-positive' : '',
+                  notification.type === 'match' && !notification.viewed ? 'animate-pulse' : ''
+                )}
+              >{`${t(notification.type)}`}</p>
             </div>
 
             <div className="flex flex-row space-x-2">

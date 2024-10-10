@@ -12,32 +12,40 @@ interface Notification {
 }
 
 interface NotificationStore {
-  notifications: Notification[];
-  unreadCount: number;
+  notifications: Notification[] | null;
+  unreadCount: number | null;
   addNotifications: (newNotifications: Notification[]) => void;
   markAsRead: (id: string) => void;
   setUnreadCount: (count: number) => void;
 }
 
 export const useNotificationStore = create<NotificationStore>((set, get) => ({
-  notifications: [],
-  unreadCount: 0,
+  notifications: null, // Set notifications to null initially
+  unreadCount: null, // Set unread count to null initially
 
-  // Add new notifications, prepending them to the list
+  // Add new notifications, sort them by notification_time (most recent first)
   addNotifications: (newNotifications) => {
     set((state) => {
+      // If notifications are null, initialize with the new notifications
+      const currentNotifications = state.notifications || [];
+
       // Filter only unique notifications
       const uniqueNotifications = newNotifications.filter(
-        (newNotif) => !state.notifications.some((existingNotif) => existingNotif.id === newNotif.id)
+        (newNotif) =>
+          !currentNotifications.some((existingNotif) => existingNotif.id === newNotif.id)
+      );
+
+      // Combine and sort notifications by notification_time (newest first)
+      const sortedNotifications = [...uniqueNotifications, ...currentNotifications].sort(
+        (a, b) => new Date(b.notification_time).getTime() - new Date(a.notification_time).getTime()
       );
 
       // Update unread notifications count
-      const newUnreadCount = uniqueNotifications.filter((notif) => !notif.viewed).length;
+      const newUnreadCount = sortedNotifications.filter((notif) => !notif.viewed).length;
 
-      // Prepend new notifications to the top of the list
       return {
-        notifications: [...uniqueNotifications, ...state.notifications],
-        unreadCount: state.unreadCount + newUnreadCount,
+        notifications: sortedNotifications,
+        unreadCount: newUnreadCount,
       };
     });
   },
@@ -45,7 +53,10 @@ export const useNotificationStore = create<NotificationStore>((set, get) => ({
   // Mark a notification as read and update it in the backend
   markAsRead: async (id: string) => {
     set((state) => {
-      const updatedNotifications = state.notifications.map((n) =>
+      // Handle case where notifications might still be null
+      const currentNotifications = state.notifications || [];
+
+      const updatedNotifications = currentNotifications.map((n) =>
         n.id === id ? { ...n, viewed: true } : n
       );
 

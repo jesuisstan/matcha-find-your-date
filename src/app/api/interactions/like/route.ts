@@ -40,6 +40,15 @@ export async function POST(req: Request) {
         [likerId, likedUserId]
       );
 
+      // Add a notification for the liked user about the like
+      await client.query(
+        `
+        INSERT INTO notifications (user_id, type, from_user_id, notification_time)
+        VALUES ($1, 'like', $2, NOW());
+      `,
+        [likedUserId, likerId]
+      );
+
       // Check if the liked user already liked the liker
       const mutualLikeCheck = await client.query(
         `
@@ -60,7 +69,7 @@ export async function POST(req: Request) {
           [likerId, likedUserId]
         );
 
-        // Add notifications for both users about the match
+        // Add notifications for both users about the match (after the like notification)
         await client.query(
           `
           INSERT INTO notifications (user_id, type, from_user_id, notification_time)
@@ -69,15 +78,6 @@ export async function POST(req: Request) {
           [likerId, likedUserId]
         );
       }
-
-      // Add a notification for the liked user about the like
-      await client.query(
-        `
-        INSERT INTO notifications (user_id, type, from_user_id, notification_time)
-        VALUES ($1, 'like', $2, NOW());
-      `,
-        [likedUserId, likerId]
-      );
     } else if (likeAction === 'unlike') {
       // Unlike case: Remove the like
       await client.query(

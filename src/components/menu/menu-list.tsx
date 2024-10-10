@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import clsx from 'clsx';
 
+import NotificationsCounterWrapper from '@/components/wrappers/notifications-counter-wrapper';
 import { capitalize } from '@/utils/format-string';
 
 const MenuList = ({
@@ -14,7 +15,7 @@ const MenuList = ({
   onClick: MouseEventHandler<HTMLAnchorElement>;
   pathname: string;
   translate: (key: string) => string;
-  unreadCount: number;
+  unreadCount: number | null;
 }) => {
   return (
     <ul className="space-y-4 overflow-y-auto text-sm font-bold text-foreground">
@@ -61,8 +62,12 @@ const MenuList = ({
                   'bg-transparent': pathname !== '/notifications',
                 })}
               />
-              <div title={translate(`notifications`)} className="max-w-[170px] truncate">
-                {translate(`notifications`)} {<span>{unreadCount}</span>}
+              <div
+                title={translate(`notifications`)}
+                className="flex max-w-[170px] flex-row items-center gap-2"
+              >
+                <span className="max-w-32 truncate">{translate(`notifications`)}</span>
+                <NotificationsCounterWrapper unreadCount={unreadCount} />
               </div>
             </Link>
           </li>
