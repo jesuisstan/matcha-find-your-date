@@ -16,7 +16,6 @@ import MenuSkeleton from '@/components/ui/skeletons/menu-skeleton';
 import { usePathname } from '@/navigation';
 import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
-import { ButtonMatcha } from '../ui/button-matcha';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
