@@ -379,5 +379,7 @@
   "category": "Catégorie",
   "from-user": "De l'utilisateur",
   "unmatch": "Désaccord",
-  "notification-marked-as-read": "Notification marquée comme lue"
+  "notification-marked-as-read": "Notification marquée comme lue",
+  "like-received": "Aime reçu",
+  "unread-notifications": "Notifications non lues"
 }

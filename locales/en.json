@@ -382,5 +382,7 @@
   "category": "Category",
   "from-user": "From user",
   "unmatch": "Unmatch",
-  "notification-marked-as-read": "Notification marked as read"
+  "notification-marked-as-read": "Notification marked as read",
+  "like-received": "Like received",
+  "unread-notifications": "Unread notifications"
 }

@@ -378,6 +378,8 @@
   "time": "Время",
   "category": "Категория",
   "from-user": "От пользователя",
-  "unmatch": "Размэтч",
-  "notification-marked-as-read": "Уведомление помечено как прочитанное"
+  "unmatch": "Разрыв",
+  "notification-marked-as-read": "Уведомление помечено как прочитанное",
+  "like-received": "Лайк получен",
+  "unread-notifications": "Непрочитанные уведомления"
 }

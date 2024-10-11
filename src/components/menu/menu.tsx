@@ -16,6 +16,7 @@ import MenuSkeleton from '@/components/ui/skeletons/menu-skeleton';
 import { usePathname } from '@/navigation';
 import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
+import NotificationsCounterWrapper from '@/components/wrappers/notifications-counter-wrapper';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
@@ -77,7 +78,7 @@ const Menu: React.FC = () => {
       {/* Menu on small screens */}
       <div
         className={clsx(
-          `ml-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-foreground`,
+          `ml-3 mt-2 inline-flex items-center space-x-1 rounded-lg p-2 text-sm text-foreground`,
           `lg:hidden`
         )}
       >
@@ -104,6 +105,13 @@ const Menu: React.FC = () => {
             />
           )}
         </button>
+        <Link
+          href={pathname !== '/notifications' ? '/notifications' : ''}
+          scroll={false}
+          className="scale-90"
+        >
+          <NotificationsCounterWrapper unreadCount={unreadCount} />
+        </Link>
       </div>
 
       {/* Menu Sidebar */}

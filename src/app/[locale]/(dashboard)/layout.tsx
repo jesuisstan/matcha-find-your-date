@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 
 import clsx from 'clsx';
@@ -33,8 +33,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
         const result = await response.json();
         if (response.ok) {
-          console.log('Unread notifications:', result.unreadNotifications);
-          console.log('Current notifications:', notifications);
           if (result.unreadNotifications.length > 0) {
             addNotifications(result.unreadNotifications);
           } else if (notifications === null) {

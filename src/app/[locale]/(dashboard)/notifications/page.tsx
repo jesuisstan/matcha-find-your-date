@@ -61,57 +61,63 @@ const NotificationsPage = () => {
       </div>
 
       {/* Scrollable Notification List */}
-      <div className="flex-grow space-y-2 overflow-y-auto">
-        {notifications?.map((notification) => (
-          <div
-            key={notification.id}
-            className={clsx(
-              `card rounded-2xl bg-card p-4 text-sm shadow`,
-              notification.viewed ? 'opacity-50' : ''
-            )}
-            //onClick={() => markAsRead(notification.id)}
-            onMouseEnter={() => markAsRead(notification.id)}
-          >
-            <p
+      {loading ? (
+        <p className="animate-pulse">Loading...</p>
+      ) : (
+        <div className="flex-grow space-y-2 overflow-y-auto">
+          {notifications?.map((notification) => (
+            <div
+              key={notification.id}
               className={clsx(
-                'smooth42transition',
-                notification.viewed ? 'text-secondary' : 'animate-bounce text-positive'
+                `card rounded-2xl bg-card p-4 text-sm shadow`,
+                notification.viewed ? 'opacity-50' : ''
               )}
+              //onClick={() => markAsRead(notification.id)}
+              onMouseEnter={() => markAsRead(notification.id)}
             >
-              {notification.viewed ? t('viewed') : t('new')}
-            </p>
-
-            <div className="flex flex-row space-x-2">
-              <p className="italic">{`${t('category')}:`}</p>
               <p
                 className={clsx(
-                  notification.type === 'block' ? 'text-negative' : '',
-                  notification.type === 'like' ? 'text-positive' : '',
-                  notification.type === 'unmatch' ? 'text-negative' : '',
-                  notification.type === 'match' ? 'text-positive' : '',
-                  notification.type === 'match' && !notification.viewed ? 'animate-pulse' : ''
+                  'smooth42transition',
+                  notification.viewed ? 'text-secondary' : 'animate-bounce text-positive'
                 )}
-              >{`${t(notification.type)}`}</p>
-            </div>
-
-            <div className="flex flex-row space-x-2">
-              <p className="italic">{`${t('time')}:`}</p>
-              <p>{`${formatApiDateLastUpdate(notification.notification_time)}`}</p>
-            </div>
-
-            <div className="flex flex-row space-x-2">
-              <p className="italic">{`${t('from-user')}: `}</p>
-              <Link
-                href={`/search/${notification.from_user_id}`}
-                passHref
-                className={clsx(notification.type === 'block' ? 'text-negative' : 'text-positive')}
               >
-                {`${notification.firstname} "${notification.nickname}" ${notification.lastname}`}
-              </Link>
+                {notification.viewed ? t('viewed') : t('new')}
+              </p>
+
+              <div className="flex flex-row space-x-2">
+                <p className="italic">{`${t('category')}:`}</p>
+                <p
+                  className={clsx(
+                    notification.type === 'block' ? 'text-negative' : '',
+                    notification.type === 'like' ? 'text-positive' : '',
+                    notification.type === 'unmatch' ? 'text-negative' : '',
+                    notification.type === 'match' ? 'text-positive' : '',
+                    notification.type === 'match' && !notification.viewed ? 'animate-pulse' : ''
+                  )}
+                >{`${t(notification.type)}`}</p>
+              </div>
+
+              <div className="flex flex-row space-x-2">
+                <p className="italic">{`${t('time')}:`}</p>
+                <p>{`${formatApiDateLastUpdate(notification.notification_time)}`}</p>
+              </div>
+
+              <div className="flex flex-row space-x-2">
+                <p className="italic">{`${t('from-user')}: `}</p>
+                <Link
+                  href={`/search/${notification.from_user_id}`}
+                  passHref
+                  className={clsx(
+                    notification.type === 'block' ? 'text-negative' : 'text-positive'
+                  )}
+                >
+                  {`${notification.firstname} "${notification.nickname}" ${notification.lastname}`}
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

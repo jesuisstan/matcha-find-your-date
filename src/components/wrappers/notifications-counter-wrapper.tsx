@@ -1,10 +1,13 @@
 import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
 
 interface NotificationsCounterWrapperProps {
   unreadCount: number | null;
 }
 
 const NotificationsCounterWrapper = ({ unreadCount }: NotificationsCounterWrapperProps) => {
+  const t = useTranslations();
+
   return (
     <div
       className={clsx(
@@ -12,6 +15,7 @@ const NotificationsCounterWrapper = ({ unreadCount }: NotificationsCounterWrappe
         unreadCount === null ? 'animate-pulse' : '',
         unreadCount && unreadCount > 0 ? 'animate-bounce' : ''
       )}
+      title={t('unread-notifications')}
     >
       {unreadCount === null ? '?' : unreadCount}
     </div>

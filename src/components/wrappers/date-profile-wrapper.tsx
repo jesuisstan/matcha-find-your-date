@@ -21,12 +21,14 @@ const DateProfileWrapper = ({
   setDateProfile,
   isMatch,
   isLiked,
+  isLikedBy,
   isBlocked,
 }: {
   dateProfile: TDateProfile;
   setDateProfile: Dispatch<SetStateAction<TDateProfile | null>>;
   isMatch: boolean;
   isLiked: boolean;
+  isLikedBy: boolean;
   isBlocked: boolean;
 }) => {
   return (
@@ -72,6 +74,7 @@ const DateProfileWrapper = ({
               setDateProfile={setDateProfile}
               isMatch={isMatch}
               isLiked={isLiked}
+              isLikedBy={isLikedBy}
               isBlocked={isBlocked}
             />
           </div>

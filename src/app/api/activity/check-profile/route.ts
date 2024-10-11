@@ -24,7 +24,18 @@ export async function POST(req: Request) {
     );
     const isLiked = likeCheck && likeCheck.rowCount ? likeCheck.rowCount > 0 : false;
 
-    // 2. Check if the user is matched with the profile
+    // 2. Check if the user has been liked by the profile
+    const likedByCheck = await client.query(
+      `
+      SELECT 1
+      FROM likes
+      WHERE liker_id = $2 AND liked_user_id = $1
+      `,
+      [userId, profileToCheckId]
+    );
+    const isLikedBy = likedByCheck && likedByCheck.rowCount ? likedByCheck.rowCount > 0 : false;
+
+    // 3. Check if the user is matched with the profile
     const matchCheck = await client.query(
       `
       SELECT 1
@@ -36,7 +47,7 @@ export async function POST(req: Request) {
     );
     const isMatch = matchCheck && matchCheck.rowCount ? matchCheck.rowCount > 0 : false;
 
-    // 3. Check if the user has blocked the profile
+    // 4. Check if the user has blocked the profile
     const blockCheck = await client.query(
       `
       SELECT 1
@@ -47,7 +58,7 @@ export async function POST(req: Request) {
     );
     const isBlocked = blockCheck && blockCheck.rowCount ? blockCheck.rowCount > 0 : false;
 
-    // 4. Check if the user has been blocked by the profile
+    // 5. Check if the user has been blocked by the profile
     const blockedByCheck = await client.query(
       `
       SELECT 1
@@ -61,6 +72,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       isLiked,
+      isLikedBy,
       isMatch,
       isBlocked,
       isBlockedBy,

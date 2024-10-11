@@ -11,7 +11,6 @@ import {
   ShieldAlert,
 } from 'lucide-react';
 
-import { ButtonMatcha } from '@/components/ui/button-matcha';
 import ActionsSkeleton from '@/components/ui/skeletons/actions-skeleton';
 import MatchWrapper from '@/components/wrappers/match-wrapper';
 import useSearchStore from '@/stores/search';
@@ -23,12 +22,14 @@ const ActionsWrapper = ({
   setDateProfile,
   isMatch,
   isLiked,
+  isLikedBy,
   isBlocked,
 }: {
   dateProfile: TDateProfile;
   setDateProfile: Dispatch<SetStateAction<TDateProfile | null>>;
   isMatch: boolean;
   isLiked: boolean;
+  isLikedBy: boolean;
   isBlocked: boolean;
 }) => {
   const t = useTranslations();
@@ -143,7 +144,12 @@ ${user?.firstname} ${user?.lastname} (${user?.nickname} / ID: ${user?.id})`;
   ) : (
     <div className={clsx('flex max-w-fit flex-row self-center rounded-2xl bg-card')}>
       {/* MATCH ? */}
-      <MatchWrapper isMatch={isMatch} isBlocked={isBlocked} isLiked={isLiked} />
+      <MatchWrapper
+        isMatch={isMatch}
+        isBlocked={isBlocked}
+        isLiked={isLiked}
+        isLikedBy={isLikedBy}
+      />
       {/* vertical divider */}
       <div className={clsx('my-3 block w-[1px] bg-secondary opacity-40')} />
       {/* ACTIONS */}
