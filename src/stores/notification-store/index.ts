@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface Notification {
+export type TNotification = {
   id: string;
   type: string;
   from_user_id: string;
@@ -9,12 +9,14 @@ interface Notification {
   firstname: string;
   lastname: string;
   nickname: string;
-}
+  liker_rating: number | null;
+  liked_user_rating: number | null;
+};
 
 interface NotificationStore {
-  notifications: Notification[] | null;
+  notifications: TNotification[] | null;
   unreadCount: number | null;
-  addNotifications: (newNotifications: Notification[]) => void;
+  addNotifications: (newNotifications: TNotification[]) => void;
   markAsRead: (id: string) => void;
   setUnreadCount: (count: number) => void;
 }

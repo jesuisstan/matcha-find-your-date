@@ -7,10 +7,9 @@ import clsx from 'clsx';
 import { Star } from 'lucide-react';
 import { MapPinned } from 'lucide-react';
 
-import { getColorByRating } from './raiting-wrapper';
-import { SexPreferenceIcon } from './sex-preference-wrapper';
-
 import AvatarMini from '@/components/ui/avatar-mini';
+import { getColorByRating } from '@/components/wrappers/rating-wrapper';
+import { SexPreferenceIcon } from '@/components/wrappers/sex-preference-wrapper';
 import { TDateProfile } from '@/types/date-profile';
 
 const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
@@ -24,11 +23,11 @@ const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
       <div className="relative flex max-w-72 cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border bg-card p-2 smooth42transition hover:scale-105 hover:border-c42green">
         {/* RAITING */}
         <div
-          title={t(`raiting`)}
+          title={t(`rating`)}
           className="absolute -right-3 -top-3 flex w-8 flex-col items-center justify-center gap-1 rounded-2xl border bg-muted/70 p-1 "
         >
-          <Star size={18} className={getColorByRating(profile?.raiting)} />
-          <p className="text-sm">{profile?.raiting}</p>
+          <Star size={18} className={getColorByRating(profile?.rating)} />
+          <p className="text-sm">{profile?.rating}</p>
         </div>
 
         {/* STATUS */}

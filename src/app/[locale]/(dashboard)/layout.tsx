@@ -7,15 +7,11 @@ import clsx from 'clsx';
 
 import Footer from '@/components/footer';
 import Menu from '@/components/menu/menu';
-import ToastNotification from '@/components/toast-notification';
-import { useNotificationStore } from '@/stores/notification-store';
+import { TNotification, useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useUserStore((state) => ({
-    user: state.user,
-  }));
-
+  const { user, setUser } = useUserStore();
   const { notifications, addNotifications } = useNotificationStore();
 
   useEffect(() => {
@@ -35,6 +31,20 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         if (response.ok) {
           if (result.unreadNotifications.length > 0) {
             addNotifications(result.unreadNotifications);
+            console.log('Unread notifications:', result.unreadNotifications); // debug
+
+            // Find the most recent "like" or "unlike" notification
+            const recentLikeNotification = result.unreadNotifications.find(
+              (notif: TNotification) => notif.type === 'like' || notif.type === 'unlike'
+            );
+
+            // If a recent "like" or "unlike" notification is found, update the user rating
+            if (recentLikeNotification && user) {
+              setUser({
+                ...user, // Spread the existing user properties
+                rating: recentLikeNotification.liked_user_rating, // Update only the rating field
+              });
+            }
           } else if (notifications === null) {
             addNotifications([]);
           }

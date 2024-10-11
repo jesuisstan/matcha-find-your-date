@@ -39,13 +39,13 @@ export async function POST(req: Request) {
     const updateQuery = `
       UPDATE users
       SET latitude = $2, longitude = $3, address = $4, last_action = $5, online = true,
-          raiting = CASE
+          rating = CASE
                 WHEN latitude IS NULL OR longitude IS NULL OR address IS NULL THEN
-                  LEAST(raiting + 5, 100)
-                ELSE raiting
+                  LEAST(rating + 5, 100)
+                ELSE rating
               END
       WHERE id = $1
-      RETURNING id, latitude, longitude, address, last_action, online, raiting;
+      RETURNING id, latitude, longitude, address, last_action, online, rating;
     `;
     const updateValues = [id, latitude, longitude, address, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);

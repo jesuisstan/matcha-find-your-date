@@ -15,7 +15,7 @@ import InterestsWrapper from '@/components/wrappers/interests-wrapper';
 import LabelsWrapper from '@/components/wrappers/labels-wrapper';
 import LocationWrapper from '@/components/wrappers/location-wrapper';
 import PhotoGalleryWrapper from '@/components/wrappers/photo-gallery-wrapper';
-import RaitingWrapper from '@/components/wrappers/raiting-wrapper';
+import RatingWrapper from '@/components/wrappers/rating-wrapper';
 import SexPreferenceWrapper from '@/components/wrappers/sex-preference-wrapper';
 import StatusWrapper from '@/components/wrappers/status-wrapper';
 import useUserStore from '@/stores/user';
@@ -99,7 +99,7 @@ const ProfilePage = () => {
         {/* LEFT SECTOR */}
         <div className={clsx('col-span-12 h-max space-y-5', 'lg:col-span-3')}>
           {/* RAITING */}
-          <RaitingWrapper raiting={user?.raiting} />
+          <RatingWrapper rating={user?.rating} />
 
           {/* LOCATION */}
           <LocationWrapper

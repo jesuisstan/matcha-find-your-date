@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     // Fetch the date profile based on the provided profileToFindId
     const query = `
       SELECT id, firstname, lastname, nickname, birthdate, sex, biography, tags, last_action, latitude, longitude, 
-             address, online, raiting, sex_preferences, photos, confirmed, complete
+             address, online, rating, sex_preferences, photos, confirmed, complete
       FROM users 
       WHERE id = $1
       AND confirmed = true

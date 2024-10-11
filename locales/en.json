@@ -298,9 +298,9 @@
   "not-confirmed": "Unconfirmed",
   "confirmed": "Confirmed",
   "settings": "Settings",
-  "raiting": "Flirt Factor",
+  "rating": "Flirt Factor",
   "what-is-this": "What is this?",
-  "raiting-description-message": "Flirt Factor is a rating that shows how attractive you are to other users.\nThe higher the rating, the more likely you are to find a match.\n\nThe rating is calculated based on:\n - the completeness of your profile,\n - the number of photos,\n - the number of likes you receive from other users,\n - your daily activity.\n\nThe more active you are, the higher your rating will be.\nThe less active you are, the lower your rating.",
+  "rating-description-message": "Flirt Factor is a rating that shows how attractive you are to other users.\nThe higher the rating, the more likely you are to find a match.\n\nThe rating is calculated based on:\n - the completeness of your profile,\n - the number of photos,\n - the number of likes you receive from other users,\n - your daily activity.\n\nThe more active you are, the higher your rating will be.\nThe less active you are, the lower your rating.",
   "theme": "Theme",
   "refresh": "Refresh",
   "his-her": " (his/her)",
@@ -384,5 +384,6 @@
   "unmatch": "Unmatch",
   "notification-marked-as-read": "Notification marked as read",
   "like-received": "Like received",
-  "unread-notifications": "Unread notifications"
+  "unread-notifications": "Unread notifications",
+  "no-notifications": "No notifications"
 }

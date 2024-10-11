@@ -18,7 +18,8 @@ export async function POST(req: Request) {
       SELECT 
         notifications.id, notifications.type, notifications.notification_time, 
         notifications.viewed, notifications.from_user_id, 
-        users.firstname, users.lastname, users.nickname
+        users.firstname, users.lastname, users.nickname,
+        notifications.liker_rating, notifications.liked_user_rating
       FROM notifications
       JOIN users ON notifications.from_user_id = users.id
       WHERE notifications.user_id = $1

@@ -41,10 +41,10 @@ export async function POST(request: Request) {
       sex,
       sex_preferences: sexPreferences,
       tags: userTags,
-      raiting: userRaiting,
+      rating: userRaiting,
     } = user;
 
-    // Calculate min raiting for matching users based on user's raiting but not less than 42% lower or 0
+    // Calculate min rating for matching users based on user's rating but not less than 42% lower or 0
     const minRaiting = Math.max(Math.round(userRaiting * (1 - 0.42)), 0);
 
     // Filter users by sex & sex-preferences
@@ -71,17 +71,17 @@ export async function POST(request: Request) {
 
     // todo add photos (delete the line after)
     // ! debug  to fetch photos:
-    // id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, photos, address, biography, last_action, online, confirmed, complete
+    // id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, photos, address, biography, last_action, online, confirmed, complete
 
     // Query to select matching users based on tags intersection and rating. EXCLUDE BLOCKED USERS!
     const queryString = `
       SELECT 
-        id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, address, biography, last_action, online, confirmed, complete
+        id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, address, biography, last_action, online, confirmed, complete
       FROM users
       WHERE 
         id != $1
         AND ${sexFilter}
-        AND raiting >= $2
+        AND rating >= $2
         AND confirmed
         AND complete
         AND (

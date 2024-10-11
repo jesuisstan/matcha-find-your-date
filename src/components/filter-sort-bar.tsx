@@ -48,9 +48,9 @@ const FilterSortBar = ({
   const t = useTranslations();
 
   // State to store the currently selected sorting criterion and order
-  const [sortCriterion, setSortCriterion] = useState<
-    'raiting' | 'location' | 'age' | 'tags' | null
-  >(null);
+  const [sortCriterion, setSortCriterion] = useState<'rating' | 'location' | 'age' | 'tags' | null>(
+    null
+  );
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
 
   const [filterCities, setFilterCities] = useState<string[]>(citiesOptions);
@@ -80,9 +80,9 @@ const FilterSortBar = ({
 
       const matchesRating =
         filterRaiting === '0' ||
-        (filterRaiting === '1' && dateProfile.raiting >= 40) ||
-        (filterRaiting === '2' && dateProfile.raiting >= 60) ||
-        (filterRaiting === '3' && dateProfile.raiting >= 80);
+        (filterRaiting === '1' && dateProfile.rating >= 40) ||
+        (filterRaiting === '2' && dateProfile.rating >= 60) ||
+        (filterRaiting === '3' && dateProfile.rating >= 80);
 
       const matchesOnline = filterOnline === '0' || dateProfile.online === true;
       const matchesCity = filterCities.includes(dateProfile.address);
@@ -118,8 +118,8 @@ const FilterSortBar = ({
     return [...filteredSuggestions].sort((a, b) => {
       let compareValue = 0;
       switch (sortCriterion) {
-        case 'raiting':
-          compareValue = a.raiting - b.raiting;
+        case 'rating':
+          compareValue = a.rating - b.rating;
           break;
         case 'age':
           compareValue = a.age - b.age;
@@ -167,10 +167,7 @@ const FilterSortBar = ({
   };
 
   // Handler to set sorting
-  const handleSort = (
-    criterion: 'raiting' | 'location' | 'age' | 'tags',
-    order: 'asc' | 'desc'
-  ) => {
+  const handleSort = (criterion: 'rating' | 'location' | 'age' | 'tags', order: 'asc' | 'desc') => {
     if (sortCriterion === criterion && sortOrder === order) {
       // Toggle off sorting if clicked again
       setSortCriterion(null);
@@ -276,7 +273,7 @@ const FilterSortBar = ({
                   { value: '3', label: '>= 80' },
                 ]}
                 defaultValue="0"
-                label={t('raiting') + ':'}
+                label={t('rating') + ':'}
                 selectedItem={filterRaiting}
                 setSelectedItem={setFilterRaiting}
                 disabled={loading}
@@ -287,9 +284,9 @@ const FilterSortBar = ({
                   title={t('sort-ascending')}
                   className={clsx(
                     'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
-                    sortCriterion === 'raiting' && sortOrder === 'asc' && 'text-c42orange'
+                    sortCriterion === 'rating' && sortOrder === 'asc' && 'text-c42orange'
                   )}
-                  onClick={() => handleSort('raiting', 'asc')}
+                  onClick={() => handleSort('rating', 'asc')}
                 >
                   <ArrowUpWideNarrow size={20} />
                 </div>
@@ -297,9 +294,9 @@ const FilterSortBar = ({
                   title={t('sort-descending')}
                   className={clsx(
                     'cursor-pointer rounded-full smooth42transition hover:text-c42orange',
-                    sortCriterion === 'raiting' && sortOrder === 'desc' && 'text-c42orange'
+                    sortCriterion === 'rating' && sortOrder === 'desc' && 'text-c42orange'
                   )}
-                  onClick={() => handleSort('raiting', 'desc')}
+                  onClick={() => handleSort('rating', 'desc')}
                 >
                   <ArrowDownWideNarrow size={20} />
                 </div>

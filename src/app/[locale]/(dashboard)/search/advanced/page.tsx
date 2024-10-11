@@ -17,7 +17,7 @@ import { RequiredInput } from '@/components/ui/required-input';
 import FiltersBarSkeleton from '@/components/ui/skeletons/filters-bar-skeleton';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/wrappers/profile-card-wrapper';
-import { getColorByRating } from '@/components/wrappers/raiting-wrapper';
+import { getColorByRating } from '@/components/wrappers/rating-wrapper';
 import { TAGS_LIST } from '@/constants/tags-list';
 import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
@@ -182,7 +182,7 @@ const AdvancedSearch = () => {
       distance: formData.get('distance'),
       ageMin: formData.get('age-min'),
       ageMax: formData.get('age-max'),
-      flirtFactorMin: formData.get('raiting'),
+      flirtFactorMin: formData.get('rating'),
       sex: sex,
       sexPreferences: sexPreferences,
       tags: selectedTags,
@@ -465,7 +465,7 @@ const AdvancedSearch = () => {
 
               {/* RAITING */}
               <div className="flex flex-col items-start gap-3 rounded-2xl bg-card">
-                <Label>{capitalize(t('raiting') + ' (' + t('min') + ')' + ':')}</Label>
+                <Label>{capitalize(t('rating') + ' (' + t('min') + ')' + ':')}</Label>
                 <div className="flex flex-row items-center gap-2">
                   <Star
                     size={28}
@@ -476,8 +476,8 @@ const AdvancedSearch = () => {
                   />
                   <RequiredInput
                     type="number"
-                    id="raiting"
-                    name="raiting"
+                    id="rating"
+                    name="rating"
                     placeholder={t(`min`)}
                     value={flirtFactorMin}
                     errorMessage="0-100"

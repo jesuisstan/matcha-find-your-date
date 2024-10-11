@@ -34,19 +34,30 @@ export async function POST(req: Request) {
       await client.query(
         `
         UPDATE users
-        SET raiting = LEAST(raiting + 1, 100)
+        SET rating = LEAST(rating + 1, 100)
         WHERE id = $1 OR id = $2;
       `,
         [likerId, likedUserId]
       );
 
-      // Add a notification for the liked user about the like
+      // Fetch the updated ratings
+      const likerRatingResult = await client.query(`SELECT rating FROM users WHERE id = $1`, [
+        likerId,
+      ]);
+      const likedUserRatingResult = await client.query(`SELECT rating FROM users WHERE id = $1`, [
+        likedUserId,
+      ]);
+
+      const likerRating = likerRatingResult.rows[0].rating;
+      const likedUserRating = likedUserRatingResult.rows[0].rating;
+
+      // Add a notification for the liked user about the like with updated ratings
       await client.query(
         `
-        INSERT INTO notifications (user_id, type, from_user_id, notification_time)
-        VALUES ($1, 'like', $2, NOW());
+        INSERT INTO notifications (user_id, type, from_user_id, notification_time, liker_rating, liked_user_rating)
+        VALUES ($1, 'like', $2, NOW(), $3, $4);
       `,
-        [likedUserId, likerId]
+        [likedUserId, likerId, likerRating, likedUserRating]
       );
 
       // Check if the liked user already liked the liker
@@ -69,13 +80,14 @@ export async function POST(req: Request) {
           [likerId, likedUserId]
         );
 
-        // Add notifications for both users about the match (after the like notification)
+        // Add notifications for both users about the match with updated ratings
         await client.query(
           `
-          INSERT INTO notifications (user_id, type, from_user_id, notification_time)
-          VALUES ($1, 'match', $2, NOW()), ($2, 'match', $1, NOW());
+          INSERT INTO notifications (user_id, type, from_user_id, notification_time, liker_rating, liked_user_rating)
+          VALUES ($1, 'match', $2, NOW(), $3, $4), 
+                 ($2, 'match', $1, NOW(), $4, $3);
         `,
-          [likerId, likedUserId]
+          [likerId, likedUserId, likerRating, likedUserRating]
         );
       }
     } else if (likeAction === 'unlike') {
@@ -92,10 +104,30 @@ export async function POST(req: Request) {
       await client.query(
         `
         UPDATE users
-        SET raiting = GREATEST(raiting - 1, 0)
+        SET rating = GREATEST(rating - 1, 0)
         WHERE id = $1 OR id = $2;
       `,
         [likerId, likedUserId]
+      );
+
+      // Fetch the updated ratings after unlike
+      const likerRatingResult = await client.query(`SELECT rating FROM users WHERE id = $1`, [
+        likerId,
+      ]);
+      const likedUserRatingResult = await client.query(`SELECT rating FROM users WHERE id = $1`, [
+        likedUserId,
+      ]);
+
+      const likerRating = likerRatingResult.rows[0].rating;
+      const likedUserRating = likedUserRatingResult.rows[0].rating;
+
+      // Notify the liked user about the unlike with updated ratings
+      await client.query(
+        `
+        INSERT INTO notifications (user_id, type, from_user_id, notification_time, liker_rating, liked_user_rating)
+        VALUES ($1, 'unlike', $2, NOW(), $3, $4);
+      `,
+        [likedUserId, likerId, likerRating, likedUserRating]
       );
 
       // Check if this action breaks a match
@@ -117,13 +149,13 @@ export async function POST(req: Request) {
           [likerId, likedUserId]
         );
 
-        // Notify the liked user that the match has been removed
+        // Notify both users about the unmatch with updated ratings
         await client.query(
           `
-          INSERT INTO notifications (user_id, type, from_user_id, notification_time)
-          VALUES ($1, 'unmatch', $2, NOW());
+          INSERT INTO notifications (user_id, type, from_user_id, notification_time, liker_rating, liked_user_rating)
+          VALUES ($1, 'unmatch', $2, NOW(), $3, $4);
         `,
-          [likedUserId, likerId]
+          [likedUserId, likerId, likerRating, likedUserRating]
         );
       }
     }
@@ -135,13 +167,13 @@ export async function POST(req: Request) {
       UPDATE users
       SET last_action = $2, online = true
       WHERE id = $1
-      RETURNING id, last_action, online, raiting;
+      RETURNING id, last_action, online, rating;
     `,
       [likerId, currentDate]
     );
 
     const likedUserUpdatedResult = await client.query(
-      `SELECT id, raiting FROM users WHERE id = $1;`,
+      `SELECT id, rating FROM users WHERE id = $1;`,
       [likedUserId]
     );
 

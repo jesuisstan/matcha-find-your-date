@@ -40,7 +40,7 @@ async function insertUsers() {
     // Insert unconfirmed users
     for (const user of unconfirmedUsers) {
       await client.query(
-        `INSERT INTO users (email, password, firstname, lastname, nickname, birthdate, sex, sex_preferences, registration_date, confirmed, online, raiting, biography, tags, latitude, longitude, address, photos, last_action, complete, service_token)
+        `INSERT INTO users (email, password, firstname, lastname, nickname, birthdate, sex, sex_preferences, registration_date, confirmed, online, rating, biography, tags, latitude, longitude, address, photos, last_action, complete, service_token)
 				 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)`,
         [
           user.email,
@@ -54,7 +54,7 @@ async function insertUsers() {
           user.registration_date,
           user.confirmed,
           user.online,
-          user.raiting,
+          user.rating,
           user.biography,
           user.tags,
           user.latitude,
@@ -73,7 +73,7 @@ async function insertUsers() {
     // Insert confirmed users-men
     for (const user of confirmedUsersMale) {
       await client.query(
-        `INSERT INTO users (email, password, firstname, lastname, nickname, birthdate, sex, sex_preferences, biography, latitude, longitude, address, tags, photos, registration_date, last_action, online, confirmed, complete, raiting, service_token)
+        `INSERT INTO users (email, password, firstname, lastname, nickname, birthdate, sex, sex_preferences, biography, latitude, longitude, address, tags, photos, registration_date, last_action, online, confirmed, complete, rating, service_token)
 				 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)`,
         [
           user.email,
@@ -95,7 +95,7 @@ async function insertUsers() {
           user.online,
           user.confirmed,
           user.complete,
-          user.raiting,
+          user.rating,
           user.service_token,
         ]
       );
@@ -106,7 +106,7 @@ async function insertUsers() {
     // Insert confirmed users-women
     for (const user of confirmedUsersFemale) {
       await client.query(
-        `INSERT INTO users (email, password, firstname, lastname, nickname, birthdate, sex, sex_preferences, biography, latitude, longitude, address, tags, photos, registration_date, last_action, online, confirmed, complete, raiting, service_token)
+        `INSERT INTO users (email, password, firstname, lastname, nickname, birthdate, sex, sex_preferences, biography, latitude, longitude, address, tags, photos, registration_date, last_action, online, confirmed, complete, rating, service_token)
              VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)`,
         [
           user.email,
@@ -128,7 +128,7 @@ async function insertUsers() {
           user.online,
           user.confirmed,
           user.complete,
-          user.raiting,
+          user.rating,
           user.service_token,
         ]
       );

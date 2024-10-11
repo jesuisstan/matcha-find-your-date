@@ -51,7 +51,7 @@ async function createTables() {
         sex_preferences sex_preferences_enum,
         photos TEXT[] DEFAULT '{}' NOT NULL,
         complete BOOLEAN DEFAULT false,
-        raiting INT DEFAULT 21,
+        rating INT DEFAULT 21,
         registration_date TIMESTAMP WITH TIME ZONE,
         last_action TIMESTAMP WITH TIME ZONE,
         online BOOLEAN DEFAULT false,

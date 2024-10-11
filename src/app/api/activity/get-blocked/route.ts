@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       SELECT 
         users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
         users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-        users.address, users.online, users.raiting, users.sex_preferences, users.confirmed, users.complete, users.photos
+        users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete, users.photos
       FROM blocked_users
       JOIN users ON blocked_users.blocked_user_id = users.id
       WHERE blocked_users.blocker_id = $1
@@ -64,7 +64,7 @@ export async function POST(req: Request) {
         longitude: blockedUser.longitude,
         address: blockedUser.address,
         online: blockedUser.online,
-        raiting: blockedUser.raiting,
+        rating: blockedUser.rating,
         sex_preferences: blockedUser.sex_preferences,
         confirmed: blockedUser.confirmed,
         complete: blockedUser.complete,

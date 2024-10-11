@@ -16,7 +16,7 @@ export const userSchema = z.object({
   longitude: z.number().nullable(),
   address: z.string().nullable(),
   online: z.boolean(),
-  raiting: z.number(),
+  rating: z.number(),
   sex_preferences: z.enum(['men', 'women', 'bisexual']).nullable(),
   photos: z.array(z.string()),
   confirmed: z.boolean(),

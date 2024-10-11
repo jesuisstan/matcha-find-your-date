@@ -59,20 +59,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'login-failed' }, { status: 500 });
   }
 
-  // Update the last_action, online status and raiting of the user
+  // Update the last_action, online status and rating of the user
   try {
     const currentDate = new Date();
     const updatedRaiting = updateUserRaitingForLogin(
       user.last_action,
-      user.raiting,
+      user.rating,
       100,
       currentDate
     );
     const updateQuery = `
         UPDATE users 
-        SET last_action = $2, online = true, raiting = $3
+        SET last_action = $2, online = true, rating = $3
         WHERE id = $1
-        RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_action, online, raiting, sex_preferences, photos;
+        RETURNING id, email, confirmed, firstname, lastname, nickname, birthdate, sex, biography, tags, complete, latitude, longitude, address, registration_date, last_action, online, rating, sex_preferences, photos;
       `;
     const updateValues = [user.id, currentDate.toISOString(), updatedRaiting];
     const updatedUserResult = await client.query(updateQuery, updateValues);

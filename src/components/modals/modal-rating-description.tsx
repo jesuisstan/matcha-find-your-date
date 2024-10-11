@@ -16,12 +16,12 @@ const ModalRaitingDescription = ({
   const t = useTranslations();
 
   return (
-    <ModalBasic isOpen={show} setIsOpen={setShow} title={t('raiting')}>
+    <ModalBasic isOpen={show} setIsOpen={setShow} title={t('rating')}>
       <div className="flex min-h-[30vh] flex-col items-center justify-center space-y-10 text-center">
         <div className="mb-5 text-c42orange">
           <CircleHelp size={60} className="smooth42transition hover:scale-150" />
         </div>
-        <TextWithLineBreaks text={t('raiting-description-message')} />
+        <TextWithLineBreaks text={t('rating-description-message')} />
       </div>
     </ModalBasic>
   );

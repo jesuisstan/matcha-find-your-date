@@ -30,7 +30,7 @@ export async function POST(req: Request) {
       SELECT 
         users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
         users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-        users.address, users.online, users.raiting, users.sex_preferences, users.confirmed, users.complete
+        users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete
       FROM matches
       JOIN users ON (matches.user_one_id = users.id OR matches.user_two_id = users.id)
       WHERE (matches.user_one_id = $1 OR matches.user_two_id = $1)
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
         longitude: match.longitude,
         address: match.address,
         online: match.online,
-        raiting: match.raiting,
+        rating: match.rating,
         sex_preferences: match.sex_preferences,
         confirmed: match.confirmed,
         complete: match.complete,

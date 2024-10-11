@@ -35,13 +35,13 @@ export async function POST(req: Request) {
     const updateQuery = `
       UPDATE users
       SET sex_preferences = $2, last_action = $3, online = true,
-          raiting = CASE
+          rating = CASE
                       WHEN sex_preferences IS NULL THEN 
-                        LEAST(raiting + 5, 100)
-                      ELSE raiting
+                        LEAST(rating + 5, 100)
+                      ELSE rating
                     END
       WHERE id = $1
-      RETURNING id, sex_preferences, last_action, online, raiting;
+      RETURNING id, sex_preferences, last_action, online, rating;
     `;
     const updateValues = [id, sex_preferences, currentDate];
     const updatedUserResult = await client.query(updateQuery, updateValues);

@@ -48,14 +48,14 @@ export async function POST(request: Request) {
     // todo add "photos" to SELECT on release to fetch photos
     // Prepare the SQL query (EXCLUDE BLOCKED USERS!)
     const queryString = `
-      SELECT id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, raiting, address, biography, last_action, online, confirmed, complete
+      SELECT id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, address, biography, last_action, online, confirmed, complete
       FROM users
       WHERE 
         id != $1
         AND sex = $2
         AND sex_preferences = $3
         AND EXTRACT(YEAR FROM AGE(CAST(birthdate AS DATE))) BETWEEN $4 AND $5
-        AND raiting >= $6
+        AND rating >= $6
         AND confirmed = true
         AND complete = true
         AND (

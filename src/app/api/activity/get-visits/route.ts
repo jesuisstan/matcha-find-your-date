@@ -35,7 +35,7 @@ export async function POST(req: Request) {
         SELECT 
           users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
           users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-          users.address, users.online, users.raiting, users.sex_preferences, users.confirmed, users.complete
+          users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete
         FROM visits
         JOIN users ON visits.visited_user_id = users.id
         WHERE visits.visitor_id = $1
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
         SELECT 
           users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
           users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-          users.address, users.online, users.raiting, users.sex_preferences, users.confirmed, users.complete
+          users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete
         FROM visits
         JOIN users ON visits.visitor_id = users.id
         WHERE visits.visited_user_id = $1
@@ -86,7 +86,7 @@ export async function POST(req: Request) {
         longitude: visit.longitude,
         address: visit.address,
         online: visit.online,
-        raiting: visit.raiting,
+        rating: visit.rating,
         sex_preferences: visit.sex_preferences,
         confirmed: visit.confirmed,
         complete: visit.complete,

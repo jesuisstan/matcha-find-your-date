@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { CircleHelp, Star } from 'lucide-react';
 
-import ModalRaitingDescription from '@/components/modals/modal-raiting-description';
+import ModalRaitingDescription from '@/components/modals/modal-rating-description';
 
 export const getColorByRating = (rating: number) => {
   if (rating >= 80) return 'text-c42green';
@@ -15,7 +15,7 @@ export const getColorByRating = (rating: number) => {
   return 'text-negative';
 };
 
-const RaitingWrapper = ({ raiting }: { raiting: number | undefined }) => {
+const RatingWrapper = ({ rating }: { rating: number | undefined }) => {
   const t = useTranslations();
   const [showModalRaitingDescription, setShowModalRaitingDescription] = useState(false);
 
@@ -26,24 +26,24 @@ const RaitingWrapper = ({ raiting }: { raiting: number | undefined }) => {
         setShow={setShowModalRaitingDescription}
       />
       <div className="flex flex-col justify-start">
-        <h3 className="text-xl font-bold">{t('raiting')}</h3>
+        <h3 className="text-xl font-bold">{t('rating')}</h3>
 
         <div className="mt-4">
           <div className="flex items-center gap-2">
-            {raiting !== undefined ? (
+            {rating !== undefined ? (
               <div className="flex items-center gap-2">
                 <Star
                   size={28}
-                  className={clsx('animate-pulse smooth42transition', getColorByRating(raiting))}
+                  className={clsx('animate-pulse smooth42transition', getColorByRating(rating))}
                 />
 
                 <span
                   className={clsx(
                     'text-3xl font-bold transition-all duration-300 ease-in-out',
-                    getColorByRating(raiting)
+                    getColorByRating(rating)
                   )}
                 >
-                  {raiting}
+                  {rating}
                 </span>
 
                 <span className="text-xl">/ 100</span>
@@ -67,4 +67,4 @@ const RaitingWrapper = ({ raiting }: { raiting: number | undefined }) => {
   );
 };
 
-export default RaitingWrapper;
+export default RatingWrapper;

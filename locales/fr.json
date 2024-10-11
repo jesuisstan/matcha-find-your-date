@@ -295,9 +295,9 @@
   "not-confirmed": "Non confirmé",
   "confirmed": "Confirmé",
   "settings": "Paramètres",
-  "raiting": "Facteur de Flirt",
+  "rating": "Facteur de Flirt",
   "what-is-this": "Qu'est-ce que c'est?",
-  "raiting-description-message": "Flirt Factor est une note qui montre à quel point vous êtes attrayant pour les autres utilisateurs.\nPlus la note est élevée, plus vous avez de chances de trouver un match.\n\nLa note est calculée en fonction:\n - de l’exhaustivité de votre profil,\n - du nombre de photos,\n - du nombre de likes que vous recevez des autres utilisateurs,\n - de votre activité quotidienne.\n\nPlus vous êtes actif, plus votre cote sera élevée.\nMoins vous êtes actif, plus votre cote est basse",
+  "rating-description-message": "Flirt Factor est une note qui montre à quel point vous êtes attrayant pour les autres utilisateurs.\nPlus la note est élevée, plus vous avez de chances de trouver un match.\n\nLa note est calculée en fonction:\n - de l’exhaustivité de votre profil,\n - du nombre de photos,\n - du nombre de likes que vous recevez des autres utilisateurs,\n - de votre activité quotidienne.\n\nPlus vous êtes actif, plus votre cote sera élevée.\nMoins vous êtes actif, plus votre cote est basse",
   "theme": "Thème",
   "refresh": "Actualiser",
   "his-her": " (son/sa)",
@@ -381,5 +381,6 @@
   "unmatch": "Désaccord",
   "notification-marked-as-read": "Notification marquée comme lue",
   "like-received": "Aime reçu",
-  "unread-notifications": "Notifications non lues"
+  "unread-notifications": "Notifications non lues",
+  "no-notifications": "Pas de notifications"
 }

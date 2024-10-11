@@ -64,7 +64,9 @@ async function createActivityTables() {
         type VARCHAR(50) NOT NULL CHECK (type IN ('visit', 'like', 'unlike', 'match', 'unmatch', 'block', 'unblock')),
         from_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         notification_time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-        viewed BOOLEAN DEFAULT false
+        viewed BOOLEAN DEFAULT false,
+        liker_rating INTEGER CHECK (liker_rating >= 0 AND liker_rating <= 100),
+        liked_user_rating INTEGER CHECK (liked_user_rating >= 0 AND liked_user_rating <= 100)
       );
     `);
 
