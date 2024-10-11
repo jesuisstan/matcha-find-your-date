@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
+
+import clsx from 'clsx';
 
 interface NotificationsCounterWrapperProps {
   unreadCount: number | null;

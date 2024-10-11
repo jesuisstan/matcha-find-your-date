@@ -8,9 +8,9 @@ import { Frown } from 'lucide-react';
 
 import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 import DateProfileWrapper from '@/components/wrappers/date-profile-wrapper';
+import { useNotificationStore } from '@/stores/notification-store';
 import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
-import { useNotificationStore } from '@/stores/notification-store';
 
 const DateProfilePage = () => {
   const t = useTranslations();

@@ -13,10 +13,10 @@ import ContactSupportBlock from '@/components/menu/contact-support-block';
 import MenuList from '@/components/menu/menu-list';
 import SideBarHeader from '@/components/menu/side-bar-header';
 import MenuSkeleton from '@/components/ui/skeletons/menu-skeleton';
+import NotificationsCounterWrapper from '@/components/wrappers/notifications-counter-wrapper';
 import { usePathname } from '@/navigation';
 import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
-import NotificationsCounterWrapper from '@/components/wrappers/notifications-counter-wrapper';
 
 const Menu: React.FC = () => {
   const { theme } = useTheme();
