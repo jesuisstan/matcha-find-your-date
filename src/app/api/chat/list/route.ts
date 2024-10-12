@@ -30,6 +30,7 @@ export async function POST(req: Request) {
         users.firstname,
         users.lastname,
         users.nickname,
+        users.online,
         COUNT(*) FILTER (WHERE seen = false AND recipient_id = $1) AS unread_count
       FROM chat
       JOIN users ON users.id = CASE
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
         WHEN recipient_id = $1 THEN sender_id
       END
       WHERE sender_id = $1 OR recipient_id = $1
-      GROUP BY chat_partner, users.firstname, users.lastname, users.nickname;
+      GROUP BY chat_partner, users.firstname, users.lastname, users.nickname, users.online;
     `;
 
     const result = await client.query(chatListQuery, [userId]);

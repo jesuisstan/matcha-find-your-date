@@ -3,8 +3,10 @@ import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
+import { TChatPartner } from '@/stores/chat-store';
+
 type Props = {
-  partner: any;
+  partner: TChatPartner;
   isSelected: boolean;
   onClick: () => void;
 };
@@ -15,7 +17,7 @@ const ChatPartnerWrapper: React.FC<Props> = ({ partner, isSelected, onClick }) =
   return (
     <div
       className={clsx(
-        'h-16 cursor-pointer rounded-2xl bg-card p-4 text-sm shadow transition-all hover:opacity-100',
+        'flex h-20 cursor-pointer flex-col gap-2 rounded-2xl bg-card px-4 py-2 text-sm shadow transition-all hover:opacity-100',
         isSelected ? 'bg-muted opacity-100' : 'opacity-60'
       )}
       onClick={onClick}
@@ -26,6 +28,12 @@ const ChatPartnerWrapper: React.FC<Props> = ({ partner, isSelected, onClick }) =
       >
         {`"${partner.nickname}" ${partner.firstname} ${partner.lastname}`}
       </p>
+      <p
+        className={clsx(
+          'truncate text-xs font-normal',
+          partner.online ? 'animate-pulse text-positive' : 'text-negative'
+        )}
+      >{`${partner.online ? t('online') : t('offline')}`}</p>
       {partner.unread_count > 0 && (
         <p className="truncate text-xs text-negative">
           {partner.unread_count} {t('unread')}{' '}

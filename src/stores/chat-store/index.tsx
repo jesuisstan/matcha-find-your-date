@@ -5,6 +5,7 @@ export type TChatPartner = {
   firstname: string;
   lastname: string;
   nickname: string;
+  online: boolean;
   unread_count: number;
 };
 

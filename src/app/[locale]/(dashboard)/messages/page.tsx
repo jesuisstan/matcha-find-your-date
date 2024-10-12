@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import ChatHistory from '@/components/chat/chat-history';
 import ChatCardSkeleton from '@/components/ui/skeletons/chart-card-skeleton';
 import ChatPartnerWrapper from '@/components/wrappers/chat-partner-wrapper';
-import { useChatStore } from '@/stores/chat-store';
+import { TChatPartner, useChatStore } from '@/stores/chat-store';
 import useUserStore from '@/stores/user';
 
 const MessagesPage = () => {
@@ -40,7 +40,10 @@ const MessagesPage = () => {
       {/* Left Section: Chat Partner List */}
       <div className="relative w-1/3 border-r">
         {/* Fixed header */}
-        <div id="chats-header" className="sticky top-0 z-10 bg-transparent pr-4 pb-4 text-xl font-bold">
+        <div
+          id="chats-header"
+          className="sticky top-0 z-10 bg-transparent pb-4 pr-4 text-xl font-bold"
+        >
           {t('chats')}
         </div>
 
@@ -58,7 +61,7 @@ const MessagesPage = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-2 smooth42transition">
-              {chatList.map((chatPartner: any) => (
+              {chatList.map((chatPartner: TChatPartner) => (
                 <ChatPartnerWrapper
                   key={chatPartner.chat_partner}
                   partner={chatPartner}
