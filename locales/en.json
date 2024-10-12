@@ -385,5 +385,6 @@
   "notification-marked-as-read": "Notification marked as read",
   "like-received": "Like received",
   "unread-notifications": "Unread notifications",
-  "no-notifications": "No notifications"
+  "no-notifications": "No notifications",
+  "error-fetching-blocked-users": "Error fetching blocked users. Please try again"
 }

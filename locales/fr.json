@@ -382,5 +382,6 @@
   "notification-marked-as-read": "Notification marquée comme lue",
   "like-received": "Aime reçu",
   "unread-notifications": "Notifications non lues",
-  "no-notifications": "Pas de notifications"
+  "no-notifications": "Pas de notifications",
+  "error-fetching-blocked-users": "Erreur lors de la récupération des utilisateurs bloqués. Veuillez réessayer"
 }

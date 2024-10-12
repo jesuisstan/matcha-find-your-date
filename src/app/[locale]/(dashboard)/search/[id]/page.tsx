@@ -8,21 +8,15 @@ import { Frown } from 'lucide-react';
 
 import ProfilePageSkeleton from '@/components/ui/skeletons/profile-page-skeleton';
 import DateProfileWrapper from '@/components/wrappers/date-profile-wrapper';
-import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
+import { TDateProfile } from '@/types/date-profile';
 
 const DateProfilePage = () => {
   const t = useTranslations();
   const router = useRouter();
   const { id: profileToFindId } = useParams(); // Grab the id from the dynamic route
   const { user, setUser, globalLoading } = useUserStore();
-  const { getSmartSuggestionById, getAdvancedSuggestionById, addAdvancedSuggestion } =
-    useSearchStore();
-  const [dateProfile, setDateProfile] = useState(
-    getAdvancedSuggestionById(profileToFindId as string) ??
-      getSmartSuggestionById(profileToFindId as string) ??
-      null
-  );
+  const [dateProfile, setDateProfile] = useState<TDateProfile | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -69,7 +63,6 @@ const DateProfilePage = () => {
             setError(result.message);
             setUser({ ...user, ...result.user });
           } else {
-            addAdvancedSuggestion(result.matchingUserProfile); // add a newly fetched profile to advancedSuggestions
             setDateProfile(result.matchingUserProfile);
             setUser({ ...user, ...result.user });
           }
@@ -88,7 +81,7 @@ const DateProfilePage = () => {
 
   useEffect(() => {
     // Log the visit once the user and dateProfile are available
-    if (user && dateProfile && user.id !== dateProfile.id) {
+    if (user && dateProfile && user.id !== dateProfile?.id) {
       const logVisit = async () => {
         try {
           await fetch('/api/interactions/visit', {

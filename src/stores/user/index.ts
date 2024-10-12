@@ -6,6 +6,7 @@ import { TUser } from '@/types/user';
 type UserStore = {
   user: TUser | null;
   setUser: (userData: TUser) => void;
+  updateUserRating: (newRating: number) => void;
   clearUser: () => void;
   logout: () => void;
   globalLoading: boolean;
@@ -14,9 +15,17 @@ type UserStore = {
 
 const useUserStore = create<UserStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       setUser: (userData: TUser) => set({ user: userData }),
+      updateUserRating: (newRating: number) => {
+        set((state) => {
+          if (state.user) {
+            return { user: { ...state.user, rating: newRating } };
+          }
+          return state;
+        });
+      },
       clearUser: () => set({ user: null }),
       logout: () => {
         set({ user: null });

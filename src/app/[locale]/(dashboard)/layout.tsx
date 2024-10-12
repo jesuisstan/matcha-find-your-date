@@ -11,7 +11,7 @@ import { TNotification, useNotificationStore } from '@/stores/notification-store
 import useUserStore from '@/stores/user';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const { user, setUser } = useUserStore();
+  const { user, updateUserRating } = useUserStore();
   const { notifications, addNotifications } = useNotificationStore();
 
   useEffect(() => {
@@ -40,10 +40,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
             // If a recent "like" or "unlike" notification is found, update the user rating
             if (recentLikeNotification && user) {
-              setUser({
-                ...user, // Spread the existing user properties
-                rating: recentLikeNotification.liked_user_rating, // Update only the rating field
-              });
+              updateUserRating(recentLikeNotification.liked_user_rating);
             }
           } else if (notifications === null) {
             addNotifications([]);

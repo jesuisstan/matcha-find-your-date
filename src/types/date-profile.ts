@@ -6,6 +6,7 @@ export const dateProfileSchema = z.object({
   lastname: z.string(),
   nickname: z.string(),
   age: z.number(),
+  birthdate: z.string().optional(),
   sex: z.enum(['male', 'female']),
   biography: z.string(),
   tags: z.array(z.string()),

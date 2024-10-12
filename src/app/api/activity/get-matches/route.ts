@@ -28,9 +28,8 @@ export async function POST(req: Request) {
     // todo add photos (delete the line after)
     const query = `
       SELECT 
-        users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
-        users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-        users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete
+        users.id, users.nickname, users.birthdate, users.sex, ARRAY[photos[1]] AS photos,
+        users.address, users.online, users.rating, users.sex_preferences
       FROM matches
       JOIN users ON (matches.user_one_id = users.id OR matches.user_two_id = users.id)
       WHERE (matches.user_one_id = $1 OR matches.user_two_id = $1)
@@ -40,36 +39,8 @@ export async function POST(req: Request) {
     `;
 
     const matchesResult = await client.query(query, [userId]);
-    const matches = matchesResult.rows;
 
-    // Step 3: Transform each match to include `age` and `tags_in_common`
-    const transformedMatches = matches.map((match) => {
-      const tagsInCommon = match.tags.filter((tag: string) => userTags.includes(tag)).length || 0;
-      const age = calculateAge(match.birthdate);
-
-      return {
-        id: match.id,
-        firstname: match.firstname,
-        lastname: match.lastname,
-        nickname: match.nickname,
-        age, // Calculated age from birthdate
-        sex: match.sex,
-        biography: match.biography,
-        tags: match.tags,
-        tags_in_common: tagsInCommon, // Calculated tags in common with the current user
-        last_action: match.last_action,
-        latitude: match.latitude,
-        longitude: match.longitude,
-        address: match.address,
-        online: match.online,
-        rating: match.rating,
-        sex_preferences: match.sex_preferences,
-        confirmed: match.confirmed,
-        complete: match.complete,
-      };
-    });
-
-    // Step 4: Update user's last_action and online status
+    // Step 3: Update user's last_action and online status
     const currentDate = new Date().toISOString();
     const updatedUserResult = await client.query(
       `
@@ -83,9 +54,9 @@ export async function POST(req: Request) {
 
     const updatedUser = updatedUserResult.rows[0];
 
-    // Step 5: Return the matches and updated user data
+    // Step 4: Return the matches and updated user data
     return NextResponse.json({
-      matches: transformedMatches,
+      matches: matchesResult.rows,
       user: updatedUser,
     });
   } catch (error) {

@@ -11,6 +11,7 @@ import AvatarMini from '@/components/ui/avatar-mini';
 import { getColorByRating } from '@/components/wrappers/rating-wrapper';
 import { SexPreferenceIcon } from '@/components/wrappers/sex-preference-wrapper';
 import { TDateProfile } from '@/types/date-profile';
+import { calculateAge } from '@/utils/format-string';
 
 const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
   const t = useTranslations();
@@ -51,11 +52,15 @@ const ProfileCardWrapper = ({ profile }: { profile: TDateProfile }) => {
               {profile?.nickname}
             </p>
             {'/'}
-            <p className="text-base">{profile?.age}</p>
+            <p className="text-base">
+              {profile?.age ? profile?.age : calculateAge(profile?.birthdate)}
+            </p>
           </div>
 
           <div className="m-2 flex flex-row items-center justify-center gap-2">
-            <MapPinned size={15} />
+            <div>
+              <MapPinned size={20} />
+            </div>
             <p className="truncate text-sm" title={profile?.address}>
               {profile?.address}
             </p>

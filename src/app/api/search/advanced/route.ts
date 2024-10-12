@@ -44,11 +44,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'failed-to-update-user-activity' }, { status: 500 });
     }
 
-    // todo add photos (delete the line after)
-    // todo add "photos" to SELECT on release to fetch photos
-    // Prepare the SQL query (EXCLUDE BLOCKED USERS!)
+    // Prepare the SQL query (EXCLUDE BLOCKED USERS! Fetch only 1 photo-url)
     const queryString = `
-      SELECT id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, address, biography, last_action, online, confirmed, complete
+      SELECT id, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, address, online, ARRAY[photos[1]] AS photos
       FROM users
       WHERE 
         id != $1

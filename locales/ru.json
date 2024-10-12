@@ -382,5 +382,6 @@
   "notification-marked-as-read": "Уведомление помечено как прочитанное",
   "like-received": "Лайк получен",
   "unread-notifications": "Непрочитанные уведомления",
-  "no-notifications": "Нет уведомлений"
+  "no-notifications": "Нет уведомлений",
+  "error-fetching-blocked-users": "Ошибка загрузки заблокированных пользователей. Попробуйте ещё раз"
 }

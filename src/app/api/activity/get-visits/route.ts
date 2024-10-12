@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-import { calculateAge } from '@/utils/format-string';
-
 export async function POST(req: Request) {
   const client = await db.connect();
 
@@ -11,18 +9,10 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { userId, category } = body;
 
+    // Step 1: Ensure the user exists
     if (!userId) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 400 });
     }
-
-    // Step 1: Fetch the logged-in user's tags
-    const userTagsResult = await client.query(`SELECT tags FROM users WHERE id = $1`, [userId]);
-
-    if (userTagsResult.rowCount === 0) {
-      return NextResponse.json({ error: 'user-not-found' }, { status: 400 });
-    }
-
-    const userTags = userTagsResult.rows[0].tags || [];
 
     // Step 2: Fetch visits based on the selected category (visited or visited by)
     let query = '';
@@ -30,12 +20,10 @@ export async function POST(req: Request) {
 
     if (category === '0') {
       // Profiles the user has visited
-      // todo add photos (delete the line after)
       query = `
         SELECT 
-          users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
-          users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-          users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete
+          users.id, users.nickname, users.birthdate, users.sex, ARRAY[photos[1]] AS photos,
+          users.address, users.online, users.rating, users.sex_preferences
         FROM visits
         JOIN users ON visits.visited_user_id = users.id
         WHERE visits.visitor_id = $1
@@ -45,12 +33,10 @@ export async function POST(req: Request) {
       queryParams = [userId];
     } else if (category === '1') {
       // Profiles that have visited the user
-      // todo add photos (delete the line after)
       query = `
         SELECT 
-          users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
-          users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-          users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete
+          users.id, users.nickname, users.birthdate, users.sex, ARRAY[photos[1]] AS photos,
+          users.address, users.online, users.rating, users.sex_preferences
         FROM visits
         JOIN users ON visits.visitor_id = users.id
         WHERE visits.visited_user_id = $1
@@ -64,36 +50,8 @@ export async function POST(req: Request) {
 
     // Execute the query to get the visits
     const visitsResult = await client.query(query, queryParams);
-    const visits = visitsResult.rows;
 
-    // Step 3: Transform each visit to include `age` and `tags_in_common`
-    const transformedVisits = visits.map((visit) => {
-      const tagsInCommon = visit.tags.filter((tag: string) => userTags.includes(tag)).length || 0;
-      const age = calculateAge(visit.birthdate);
-
-      return {
-        id: visit.id,
-        firstname: visit.firstname,
-        lastname: visit.lastname,
-        nickname: visit.nickname,
-        age, // Calculated age from birthdate
-        sex: visit.sex,
-        biography: visit.biography,
-        tags: visit.tags,
-        tags_in_common: tagsInCommon, // Calculated tags in common with the current user
-        last_action: visit.last_action,
-        latitude: visit.latitude,
-        longitude: visit.longitude,
-        address: visit.address,
-        online: visit.online,
-        rating: visit.rating,
-        sex_preferences: visit.sex_preferences,
-        confirmed: visit.confirmed,
-        complete: visit.complete,
-      };
-    });
-
-    // Step 4: Update user's last_action and online status
+    // Step 3: Update user's last_action and online status
     const currentDate = new Date().toISOString();
     const updatedUserResult = await client.query(
       `
@@ -107,9 +65,9 @@ export async function POST(req: Request) {
 
     const updatedUser = updatedUserResult.rows[0];
 
-    // Step 5: Return the visits and updated user data
+    // Step 4: Return the visits and updated user data
     return NextResponse.json({
-      visits: transformedVisits,
+      visits: visitsResult.rows,
       user: updatedUser,
     });
   } catch (error) {

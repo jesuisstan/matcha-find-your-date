@@ -38,14 +38,9 @@ const AdvancedSearch = () => {
   const { user, setUser, globalLoading } = useUserStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const searchMenuRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
-  const {
-    getValueOfSearchFilter,
-    setValueOfSearchFilter,
-    replaceAllItemsOfSearchFilter,
-    advancedSuggestions,
-    setAdvancedSuggestions,
-  } = useSearchStore();
-
+  const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
+    useSearchStore();
+  const [advancedSuggestions, setAdvancedSuggestions] = useState<TDateProfile[]>([]);
   const [ageMin, setAgeMin] = useState<number>(getValueOfSearchFilter('age_min') as number);
   const [ageMax, setAgeMax] = useState<number>(getValueOfSearchFilter('age_max') as number);
   const [flirtFactorMin, setFlirtFactorMin] = useState<number>(
@@ -312,7 +307,7 @@ const AdvancedSearch = () => {
               <OctagonAlert size={21} />
             </div>
             <div className="flex min-h-10 w-full min-w-28 items-center justify-start self-center overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
-              <p className="text-left text-base italic">{t(`search.advanced-search-note`)}</p>
+              <p className="text-left text-sm italic">{t(`search.advanced-search-note`)}</p>
             </div>
             <div className="flex items-center justify-center text-c42orange">
               <ButtonMatcha

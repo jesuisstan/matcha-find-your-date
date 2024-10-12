@@ -12,7 +12,6 @@ import { ButtonMatcha } from '@/components/ui/button-matcha';
 import FiltersBarSkeleton from '@/components/ui/skeletons/filters-bar-skeleton';
 import SuggestionsSkeleton from '@/components/ui/skeletons/suggestions-skeleton';
 import ProfileCardWrapper from '@/components/wrappers/profile-card-wrapper';
-import useSearchStore from '@/stores/search';
 import useUserStore from '@/stores/user';
 import { TDateProfile } from '@/types/date-profile';
 import { TSelectorOption } from '@/types/general';
@@ -21,7 +20,7 @@ import { calculateAge } from '@/utils/format-string';
 const SmartSuggestions = () => {
   const t = useTranslations();
   const { user, setUser, globalLoading } = useUserStore();
-  const { smartSuggestions, setSmartSuggestions } = useSearchStore();
+  const [smartSuggestions, setSmartSuggestions] = useState<TDateProfile[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -69,7 +68,6 @@ const SmartSuggestions = () => {
 
       const result = await response.json();
       if (response.ok) {
-        const uniqueAges: number[] = [];
         const uniqueAgeRanges: Record<string, boolean> = {
           '1': false,
           '2': false,
@@ -87,7 +85,6 @@ const SmartSuggestions = () => {
           const tagsInCommon = user?.tags.filter((tag) => u.tags.includes(tag)).length || 0;
 
           // Add unique values
-          uniqueAges.push(age);
           uniqueSexOptions.add(u.sex);
           uniqueSexPrefsOptions.add(u.sex_preferences);
           uniqueCitiesOptions.add(u.address);
@@ -156,7 +153,7 @@ const SmartSuggestions = () => {
   };
 
   useEffect(() => {
-    if (user) fetchSmartSuggestions();
+    if (user && user.complete) fetchSmartSuggestions();
   }, []);
 
   return (
@@ -174,7 +171,7 @@ const SmartSuggestions = () => {
           {/* SUBHEADER */}
           <div className="mb-2 flex flex-col items-stretch justify-center gap-2 align-middle xs:flex-row">
             <div className="flex min-h-10 w-full min-w-28 items-center justify-start overflow-hidden text-ellipsis rounded-2xl bg-card px-4 py-1">
-              <p className="text-left text-base italic">{t(`use-smart-suggestions`)}</p>
+              <p className="text-left text-sm italic">{t(`use-smart-suggestions`)}</p>
             </div>
             <div className="flex items-center justify-center text-c42orange">
               <ButtonMatcha

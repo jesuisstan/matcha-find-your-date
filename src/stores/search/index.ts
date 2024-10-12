@@ -19,16 +19,12 @@ export type TSearchFilters = {
 };
 
 export type TSearchStore = {
-  smartSuggestions: TDateProfile[];
-  setSmartSuggestions: (newSuggestions: TDateProfile[]) => void;
-  getSmartSuggestionById: (id: string) => TDateProfile | undefined;
-  resetSmartSuggestions: () => void;
-
-  advancedSuggestions: TDateProfile[];
-  setAdvancedSuggestions: (newSuggestions: TDateProfile[]) => void;
-  getAdvancedSuggestionById: (id: string) => TDateProfile | undefined;
-  addAdvancedSuggestion: (newSuggestion: TDateProfile) => void;
-  resetAdvancedSuggestions: () => void;
+  suggestions: TDateProfile[];
+  setSuggestions: (newSuggestions: TDateProfile[]) => void;
+  getSuggestionById: (id: string) => TDateProfile | undefined;
+  addSuggestion: (newSuggestion: TDateProfile) => void;
+  resetSuggestions: () => void;
+  updateSuggestion: (updatedUser: Partial<TDateProfile>) => void;
 
   searchFilters: TSearchFilters;
   setValueOfSearchFilter: (filterKey: string, newValue: string | number) => string | number;
@@ -40,7 +36,6 @@ export type TSearchStore = {
   resetSearchFilters: () => void;
 
   resetSearchStore: () => void;
-  updateSuggestion: (updatedUser: Partial<TDateProfile>) => void;
 };
 
 // initial state
@@ -63,37 +58,33 @@ const useSearchStore = create<TSearchStore>()(
       persist(
         (set, get) => ({
           searchFilters: initialSearchFiltersState,
-          smartSuggestions: [],
-          advancedSuggestions: [],
+          suggestions: [],
 
-          setSmartSuggestions: (newSuggestions: TDateProfile[]) => {
-            set({ smartSuggestions: newSuggestions });
+          setSuggestions: (newSuggestions: TDateProfile[]) => {
+            set({ suggestions: newSuggestions });
           },
 
-          getSmartSuggestionById: (id: string) => {
+          getSuggestionById: (id: string) => {
             {
-              return get().smartSuggestions.find((suggestion) => suggestion.id === id);
+              return get().suggestions.find((suggestion) => suggestion.id === id);
             }
           },
 
-          setAdvancedSuggestions: (newSuggestions: TDateProfile[]) => {
-            set({ advancedSuggestions: newSuggestions });
-          },
-
-          getAdvancedSuggestionById: (id: string) => {
-            {
-              return get().advancedSuggestions.find((suggestion) => suggestion.id === id);
-            }
-          },
-
-          addAdvancedSuggestion: (newSuggestion: TDateProfile) => {
+          addSuggestion: (newSuggestion: TDateProfile) => {
             set((state) => ({
-              advancedSuggestions: [
-                ...state.advancedSuggestions.filter(
-                  (suggestion) => suggestion.id !== newSuggestion.id
-                ),
+              suggestions: [
+                ...state.suggestions.filter((suggestion) => suggestion.id !== newSuggestion.id),
                 newSuggestion,
               ],
+            }));
+          },
+
+          // update a suggestion in array if the user exists
+          updateSuggestion: (updatedUser: Partial<TDateProfile>) => {
+            set((state) => ({
+              suggestions: state.suggestions.map((suggestion) =>
+                suggestion.id === updatedUser.id ? { ...suggestion, ...updatedUser } : suggestion
+              ),
             }));
           },
 
@@ -173,32 +164,15 @@ const useSearchStore = create<TSearchStore>()(
             set({ searchFilters: initialSearchFiltersState });
           },
 
-          resetSmartSuggestions: () => {
-            set({ smartSuggestions: [] });
-          },
-
-          resetAdvancedSuggestions: () => {
-            set({ advancedSuggestions: [] });
+          resetSuggestions: () => {
+            set({ suggestions: [] });
           },
 
           resetSearchStore: () => {
             set({
               searchFilters: initialSearchFiltersState,
-              smartSuggestions: [],
-              advancedSuggestions: [],
+              suggestions: [],
             });
-          },
-
-          // update a suggestion in both arrays if the user exists
-          updateSuggestion: (updatedUser: Partial<TDateProfile>) => {
-            set((state) => ({
-              smartSuggestions: state.smartSuggestions.map((suggestion) =>
-                suggestion.id === updatedUser.id ? { ...suggestion, ...updatedUser } : suggestion
-              ),
-              advancedSuggestions: state.advancedSuggestions.map((suggestion) =>
-                suggestion.id === updatedUser.id ? { ...suggestion, ...updatedUser } : suggestion
-              ),
-            }));
           },
         }),
         { name: 'matcha-search-store', storage: createJSONStorage(() => localStorage) }

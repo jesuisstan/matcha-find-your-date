@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-import { calculateAge } from '@/utils/format-string';
-
 export async function POST(req: Request) {
   const client = await db.connect();
 
@@ -27,9 +25,8 @@ export async function POST(req: Request) {
     // Step 2: Fetch users that the current user has blocked but exclude those who also blocked the current user
     const query = `
       SELECT 
-        users.id, users.firstname, users.lastname, users.nickname, users.birthdate, users.sex, 
-        users.biography, users.tags, users.last_action, users.latitude, users.longitude, 
-        users.address, users.online, users.rating, users.sex_preferences, users.confirmed, users.complete, users.photos
+        users.id, users.nickname, users.birthdate, users.sex, ARRAY[photos[1]] AS photos,
+        users.address, users.online, users.rating, users.sex_preferences
       FROM blocked_users
       JOIN users ON blocked_users.blocked_user_id = users.id
       WHERE blocked_users.blocker_id = $1
@@ -41,37 +38,8 @@ export async function POST(req: Request) {
     `;
 
     const blockedProfilesResult = await client.query(query, [userId]);
-    const blockedProfiles = blockedProfilesResult.rows;
 
-    // Step 3: Transform each blocked user to include `age` and `tags_in_common`
-    const transformedBlockedUsers = blockedProfiles.map((blockedUser) => {
-      const tagsInCommon =
-        blockedUser.tags.filter((tag: string) => userTags.includes(tag)).length || 0;
-      const age = calculateAge(blockedUser.birthdate);
-
-      return {
-        id: blockedUser.id,
-        firstname: blockedUser.firstname,
-        lastname: blockedUser.lastname,
-        nickname: blockedUser.nickname,
-        age, // Calculated age from birthdate
-        sex: blockedUser.sex,
-        biography: blockedUser.biography,
-        tags: blockedUser.tags,
-        tags_in_common: tagsInCommon, // Calculated tags in common with the current user
-        last_action: blockedUser.last_action,
-        latitude: blockedUser.latitude,
-        longitude: blockedUser.longitude,
-        address: blockedUser.address,
-        online: blockedUser.online,
-        rating: blockedUser.rating,
-        sex_preferences: blockedUser.sex_preferences,
-        confirmed: blockedUser.confirmed,
-        complete: blockedUser.complete,
-      };
-    });
-
-    // Step 4: Update user's last_action and online status
+    // Step 3: Update user's last_action and online status
     const currentDate = new Date().toISOString();
     const updatedUserResult = await client.query(
       `
@@ -85,9 +53,9 @@ export async function POST(req: Request) {
 
     const updatedUser = updatedUserResult.rows[0];
 
-    // Step 5: Return the blocked users and updated user data
+    // Step 4: Return the blocked users and updated user data
     return NextResponse.json({
-      blockedProfiles: transformedBlockedUsers,
+      blockedProfiles: blockedProfilesResult.rows,
       user: updatedUser,
     });
   } catch (error) {

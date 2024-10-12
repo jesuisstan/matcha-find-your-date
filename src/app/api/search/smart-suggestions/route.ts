@@ -69,14 +69,10 @@ export async function POST(request: Request) {
       }
     }
 
-    // todo add photos (delete the line after)
-    // ! debug  to fetch photos:
-    // id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, photos, address, biography, last_action, online, confirmed, complete
-
-    // Query to select matching users based on tags intersection and rating. EXCLUDE BLOCKED USERS!
+    // Query to select matching users based on tags intersection and rating. EXCLUDE BLOCKED USERS! Fetch only 1 photo-url
     const queryString = `
       SELECT 
-        id, firstname, lastname, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, address, biography, last_action, online, confirmed, complete
+        id, nickname, birthdate, sex, sex_preferences, latitude, longitude, tags, rating, address, online, ARRAY[photos[1]] AS photos
       FROM users
       WHERE 
         id != $1
