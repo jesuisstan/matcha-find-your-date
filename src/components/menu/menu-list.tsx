@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import clsx from 'clsx';
 
+import MessagesCounterWrapper from '@/components/wrappers/messages-counter-wrapper';
 import NotificationsCounterWrapper from '@/components/wrappers/notifications-counter-wrapper';
 import { capitalize } from '@/utils/format-string';
 
@@ -10,12 +11,14 @@ const MenuList = ({
   onClick,
   pathname,
   translate,
-  unreadCount,
+  unreadCountNotifications,
+  unreadCountMessages,
 }: {
   onClick: MouseEventHandler<HTMLAnchorElement>;
   pathname: string;
   translate: (key: string) => string;
-  unreadCount: number | null;
+  unreadCountNotifications: number | null;
+  unreadCountMessages: number | null;
 }) => {
   return (
     <ul className="space-y-4 overflow-y-auto text-sm font-bold text-foreground">
@@ -67,7 +70,34 @@ const MenuList = ({
                 className="flex max-w-[170px] flex-row items-center gap-2"
               >
                 <span className="max-w-32 truncate">{translate(`notifications`)}</span>
-                <NotificationsCounterWrapper unreadCount={unreadCount} />
+                <NotificationsCounterWrapper unreadCount={unreadCountNotifications} />
+              </div>
+            </Link>
+          </li>
+          {/* MESSAGES */}
+          <li>
+            <Link
+              href={pathname !== '/messages' ? '/messages' : ''} // conditional href to prevent reloading of a page on clicking this link when user is already on this page
+              className={clsx(
+                `group flex w-full items-center text-secondary smooth42transition`,
+                `hover:text-c42orange`
+              )}
+              onClick={onClick}
+              scroll={false}
+            >
+              <div
+                id="smartdata-chosen-pointer"
+                className={clsx('ml-[-5px] mr-4 h-2 w-2 rounded-full', {
+                  'bg-secondary': pathname === '/messages',
+                  'bg-transparent': pathname !== '/messages',
+                })}
+              />
+              <div
+                title={translate(`messages`)}
+                className="flex max-w-[170px] flex-row items-center gap-2"
+              >
+                <span className="max-w-32 truncate">{translate(`messages`)}</span>
+                <MessagesCounterWrapper unreadCount={unreadCountMessages} />
               </div>
             </Link>
           </li>

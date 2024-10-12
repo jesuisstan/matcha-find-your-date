@@ -127,7 +127,7 @@ const NotificationsPage = () => {
                     notification.type === 'block' ? 'text-negative' : 'text-positive'
                   )}
                 >
-                  {`${notification.firstname} "${notification.nickname}" ${notification.lastname}`}
+                  {`"${notification.nickname}" ${notification.firstname} ${notification.lastname}`}
                 </Link>
               </div>
             </div>

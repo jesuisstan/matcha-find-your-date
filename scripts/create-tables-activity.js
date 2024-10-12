@@ -70,11 +70,24 @@ async function createActivityTables() {
       );
     `);
 
+    // Create the 'chat' table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS chat (
+        id SERIAL PRIMARY KEY,
+        match_id INTEGER NOT NULL REFERENCES matches(id) ON DELETE CASCADE,
+        sender_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        recipient_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        message TEXT NOT NULL,
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        seen BOOLEAN DEFAULT false
+      );
+    `);
+
     // Commit the transaction
     await client.query('COMMIT');
 
     console.log(
-      'Tables "notifications", "blocked_users", "matches", "likes" & "visits" created successfully'
+      'Tables "notifications", "blocked_users", "matches", "likes", "visits" & "chat" created successfully'
     );
   } catch (error) {
     // Rollback the transaction in case of an error

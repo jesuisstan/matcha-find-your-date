@@ -9,18 +9,10 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { userId } = body;
 
+    // Step 1: Ensure the user exists
     if (!userId) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 400 });
     }
-
-    // Step 1: Fetch the logged-in user's tags
-    const userTagsResult = await client.query(`SELECT tags FROM users WHERE id = $1`, [userId]);
-
-    if (userTagsResult.rowCount === 0) {
-      return NextResponse.json({ error: 'user-not-found' }, { status: 400 });
-    }
-
-    const userTags = userTagsResult.rows[0].tags || [];
 
     // Step 2: Fetch users that the current user has blocked but exclude those who also blocked the current user
     const query = `

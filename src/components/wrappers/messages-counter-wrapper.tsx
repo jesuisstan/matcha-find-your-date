@@ -2,11 +2,11 @@ import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
 
-type TNotificationsCounterWrapperProps = {
+type TMessagesCounterWrapper = {
   unreadCount: number | null;
 };
 
-const NotificationsCounterWrapper = ({ unreadCount }: TNotificationsCounterWrapperProps) => {
+const MessagesCounterWrapper = ({ unreadCount }: TMessagesCounterWrapper) => {
   const t = useTranslations();
 
   return (
@@ -16,11 +16,11 @@ const NotificationsCounterWrapper = ({ unreadCount }: TNotificationsCounterWrapp
         unreadCount === null ? 'animate-pulse' : '',
         unreadCount && unreadCount > 0 ? 'animate-bounce' : ''
       )}
-      title={t('unread-notifications')}
+      title={t('messages-unread')}
     >
       {unreadCount === null ? '?' : unreadCount}
     </div>
   );
 };
 
-export default NotificationsCounterWrapper;
+export default MessagesCounterWrapper;

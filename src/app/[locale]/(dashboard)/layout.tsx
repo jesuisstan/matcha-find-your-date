@@ -7,12 +7,14 @@ import clsx from 'clsx';
 
 import Footer from '@/components/footer';
 import Menu from '@/components/menu/menu';
+import { useChatStore } from '@/stores/chat-store';
 import { TNotification, useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, updateUserRating } = useUserStore();
   const { notifications, addNotifications } = useNotificationStore();
+  const { fetchUnreadCount } = useChatStore();
 
   useEffect(() => {
     const fetchUnreadNotifications = async () => {
@@ -31,7 +33,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         if (response.ok) {
           if (result.unreadNotifications.length > 0) {
             addNotifications(result.unreadNotifications);
-            console.log('Unread notifications:', result.unreadNotifications); // debug
 
             // Find the most recent "like" or "unlike" notification
             const recentLikeNotification = result.unreadNotifications.find(
@@ -51,12 +52,23 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       }
     };
 
+    const fetchUnreadMessages = async () => {
+      try {
+        if (user?.id) {
+          await fetchUnreadCount(user.id); // Fetch unread message count
+        }
+      } catch (error) {
+        console.error('Error fetching unread messages:', error);
+      }
+    };
+
     if (user?.id) {
       const interval = setInterval(() => {
         fetchUnreadNotifications();
-      }, 7000); // Check every 7 seconds
+        fetchUnreadMessages();
+      }, 7000);
 
-      return () => clearInterval(interval); // Clean up the interval on component unmount
+      return () => clearInterval(interval);
     }
   }, [user?.id]);
 

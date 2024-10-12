@@ -13,8 +13,10 @@ import ContactSupportBlock from '@/components/menu/contact-support-block';
 import MenuList from '@/components/menu/menu-list';
 import SideBarHeader from '@/components/menu/side-bar-header';
 import MenuSkeleton from '@/components/ui/skeletons/menu-skeleton';
+import MessagesCounterWrapper from '@/components/wrappers/messages-counter-wrapper';
 import NotificationsCounterWrapper from '@/components/wrappers/notifications-counter-wrapper';
 import { usePathname } from '@/navigation';
+import { useChatStore } from '@/stores/chat-store';
 import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
 
@@ -29,7 +31,8 @@ const Menu: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
   const [isClient, setIsClient] = useState(false);
-  const { unreadCount } = useNotificationStore();
+  const { unreadCount: unreadCountNotifications } = useNotificationStore();
+  const { unreadCount: unreadCountMessages } = useChatStore();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -110,7 +113,17 @@ const Menu: React.FC = () => {
           scroll={false}
           className="scale-90"
         >
-          <NotificationsCounterWrapper unreadCount={unreadCount} />
+          <NotificationsCounterWrapper unreadCount={unreadCountNotifications} />
+        </Link>
+
+        <p>{'/'}</p>
+
+        <Link
+          href={pathname !== '/messages' ? '/messages' : ''}
+          scroll={false}
+          className="scale-90"
+        >
+          <MessagesCounterWrapper unreadCount={unreadCountMessages} />
         </Link>
       </div>
 
@@ -181,7 +194,8 @@ const Menu: React.FC = () => {
                 }}
                 pathname={pathname}
                 translate={t}
-                unreadCount={unreadCount}
+                unreadCountNotifications={unreadCountNotifications}
+                unreadCountMessages={unreadCountMessages}
               />
 
               {/* horizontal divider */}

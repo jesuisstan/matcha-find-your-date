@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-import { calculateAge } from '@/utils/format-string';
-
 export async function POST(req: Request) {
   const client = await db.connect();
 
@@ -11,21 +9,12 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { userId } = body;
 
+    // Step 1: Ensure the user exists
     if (!userId) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 400 });
     }
 
-    // Step 1: Fetch the logged-in user's tags
-    const userTagsResult = await client.query(`SELECT tags FROM users WHERE id = $1`, [userId]);
-
-    if (userTagsResult.rowCount === 0) {
-      return NextResponse.json({ error: 'user-not-found' }, { status: 400 });
-    }
-
-    const userTags = userTagsResult.rows[0].tags || [];
-
     // Step 2: Fetch mutual matches (users that have liked each other)
-    // todo add photos (delete the line after)
     const query = `
       SELECT 
         users.id, users.nickname, users.birthdate, users.sex, ARRAY[photos[1]] AS photos,
