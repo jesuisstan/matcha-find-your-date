@@ -98,6 +98,7 @@
     "smart-suggestions": "Suggestions Intelligentes",
     "advanced": "Recherche Avancée",
     "no-suggestions": "Pas de suggestions pour le moment",
+    "no-advanced-suggestions": "Pas encore de suggestions. Vérifiez les critères et lancez la recherche avancée.",
     "refresh-suggestions": "Actualiser les Suggestions",
     "advanced-search-note": "Sélectionnez les caractéristiques que votre partenaire idéal devrait avoir (âge, intérêts, préférences, etc.), en vous concentrant sur ce que vous recherchez chez l'autre, pas sur vous-même.",
     "no-suggestions-for-filters-sorting": "Pas de suggestions pour les filtres / le tri"

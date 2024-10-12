@@ -99,6 +99,7 @@
     "smart-suggestions": "Smart Suggestions",
     "advanced": "Advanced Search",
     "no-suggestions": "No suggestions for your profile yet",
+    "no-advanced-suggestions": "No suggestions yet. Check the criteria and run the advanced search.",
     "refresh-suggestions": "Refresh Suggestions",
     "advanced-search-note": "Choose the characteristics your ideal match should have (age, tags, preferences, etc.), focusing on what you're looking for in a partner, not about yourself.",
     "no-suggestions-for-filters-sorting": "No suggestions found for the selected filters / sorting"

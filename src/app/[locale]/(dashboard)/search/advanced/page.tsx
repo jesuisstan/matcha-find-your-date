@@ -36,8 +36,7 @@ const AdvancedSearch = () => {
   const t = useTranslations();
   const formRef = useRef<HTMLFormElement>(null);
   const { user, setUser, globalLoading } = useUserStore();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const searchMenuRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
     useSearchStore();
   const [ageMin, setAgeMin] = useState<number>(getValueOfSearchFilter('age_min') as number);
@@ -253,21 +252,6 @@ const AdvancedSearch = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  /* Event listener to close Menu when clicking outside */
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchMenuRef.current && !searchMenuRef.current.contains(event.target as Node)) {
-        setIsSidebarOpen(false);
-      }
-    };
-    if (isSidebarOpen) {
-      document.addEventListener('click', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isSidebarOpen]);
-
   return (
     <div>
       {user && <ModalProfileWarning user={user} />}
@@ -318,7 +302,6 @@ const AdvancedSearch = () => {
           isSidebarOpen ? 'translate-x-0 drop-shadow-2xl' : 'translate-x-[900px]'
         )}
         aria-label="searchBar"
-        ref={searchMenuRef}
       >
         <div
           id="rounded-menu-container"
@@ -564,9 +547,9 @@ const AdvancedSearch = () => {
           <p className="text-center text-lg">
             {error
               ? t(`${error}`)
-              : sortedSuggestions.length === 0
+              : sortedSuggestions.length === 0 && searchResult?.length > 0
                 ? t(`search.no-suggestions-for-filters-sorting`)
-                : t(`search.no-suggestions`)}
+                : t(`search.no-advanced-suggestions`)}
           </p>
         </div>
       ) : (

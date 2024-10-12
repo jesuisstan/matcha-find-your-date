@@ -12,7 +12,7 @@ const NotificationsCounterWrapper = ({ unreadCount }: TNotificationsCounterWrapp
   return (
     <div
       className={clsx(
-        'relative flex h-6 w-auto min-w-6 items-center justify-center rounded-full bg-foreground p-1 text-sm text-background smooth42transition',
+        'relative flex h-5 w-auto min-w-5 items-center justify-center rounded-full bg-foreground p-1 text-sm text-background smooth42transition',
         unreadCount === null ? 'animate-pulse' : '',
         unreadCount && unreadCount > 0 ? 'animate-bounce' : ''
       )}
