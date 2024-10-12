@@ -5,7 +5,7 @@ import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { Frown, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
+import { CircleX, Frown, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
 
 import FilterSortBar from '@/components/filter-sort-bar';
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
@@ -36,11 +36,10 @@ const AdvancedSearch = () => {
   const t = useTranslations();
   const formRef = useRef<HTMLFormElement>(null);
   const { user, setUser, globalLoading } = useUserStore();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const searchMenuRef = useRef<HTMLDivElement | null>(null); // to handle closing on outside click
   const { getValueOfSearchFilter, setValueOfSearchFilter, replaceAllItemsOfSearchFilter } =
     useSearchStore();
-  const [advancedSuggestions, setAdvancedSuggestions] = useState<TDateProfile[]>([]);
   const [ageMin, setAgeMin] = useState<number>(getValueOfSearchFilter('age_min') as number);
   const [ageMax, setAgeMax] = useState<number>(getValueOfSearchFilter('age_max') as number);
   const [flirtFactorMin, setFlirtFactorMin] = useState<number>(
@@ -49,49 +48,17 @@ const AdvancedSearch = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>(
     getValueOfSearchFilter('tags') as string[]
   );
-  const [sex, setSex] = useState<string>(
-    String(
-      getValueOfSearchFilter('sex')
-        ? getValueOfSearchFilter('sex')
-        : setValueOfSearchFilter('sex', user?.sex === 'male' ? 'female' : 'male')
-    )
-  );
+  const [sex, setSex] = useState<string>(user?.sex === 'male' ? 'female' : 'male');
   const [sexPreferences, setSexPreferences] = useState<string>(
-    String(
-      getValueOfSearchFilter('sex_preferences')
-        ? getValueOfSearchFilter('sex_preferences')
-        : setValueOfSearchFilter(
-            'sex_preferences',
-            user?.sex_preferences === 'women'
-              ? 'men'
-              : user?.sex_preferences === 'men'
-                ? 'women'
-                : 'bisexual'
-          )
-    )
+    user?.sex_preferences === 'women'
+      ? 'men'
+      : user?.sex_preferences === 'men'
+        ? 'women'
+        : 'bisexual'
   );
-  const [latitude, setLatitude] = useState<number>(
-    Number(
-      getValueOfSearchFilter('latitude')
-        ? getValueOfSearchFilter('latitude')
-        : setValueOfSearchFilter('latitude', user?.latitude!)
-    )
-  );
-  const [longitude, setLongitude] = useState<number>(
-    Number(
-      getValueOfSearchFilter('longitude')
-        ? getValueOfSearchFilter('longitude')
-        : setValueOfSearchFilter('longitude', user?.longitude!)
-    )
-  );
-  const [address, setAddress] = useState<string>(
-    String(
-      getValueOfSearchFilter('address')
-        ? getValueOfSearchFilter('address')
-        : setValueOfSearchFilter('address', user?.address!)
-    )
-  );
-  const [distance, setDistance] = useState<number>(getValueOfSearchFilter('distance') as number);
+  const [latitude, setLatitude] = useState<number>(user?.latitude!);
+  const [longitude, setLongitude] = useState<number>(user?.longitude!);
+  const [address, setAddress] = useState<string>(user?.address!);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -100,6 +67,7 @@ const AdvancedSearch = () => {
   const [sortedSuggestions, setSortedSuggestions] = useState<TDateProfile[]>([]);
 
   // Location vars
+  const [distance, setDistance] = useState<number>(getValueOfSearchFilter('distance') as number);
   const [selectedCityOption, setSelectedCityOption] = useState<TSelectGeoOption | null>(
     address ? createTSelectGeoOption(address) : createTSelectGeoOption(user?.address)
   );
@@ -124,7 +92,19 @@ const AdvancedSearch = () => {
     setValueOfSearchFilter('longitude', longitude);
     setValueOfSearchFilter('address', address);
     setValueOfSearchFilter('distance', distance);
-  }, [ageMin, ageMax, flirtFactorMin, sex, sexPreferences, latitude, longitude, address, distance]);
+    replaceAllItemsOfSearchFilter('tags', selectedTags);
+  }, [
+    ageMin,
+    ageMax,
+    flirtFactorMin,
+    sex,
+    sexPreferences,
+    latitude,
+    longitude,
+    address,
+    distance,
+    selectedTags,
+  ]);
 
   // get user's location based on browser geolocation
   const handleGeoLocatorClick = async () => {
@@ -236,7 +216,6 @@ const AdvancedSearch = () => {
 
         setUser({ ...user, ...result.user });
         setSearchResult(matchingUsers);
-        setAdvancedSuggestions(matchingUsers);
         // Update filter options based on unique values
         setAgeOptions((prevOptions) =>
           prevOptions.map((option) => ({
@@ -533,21 +512,40 @@ const AdvancedSearch = () => {
                 }}
               />
             </div>
-            <ButtonMatcha
-              variant="default"
-              size="default"
-              disabled={!user || loading || globalLoading}
-              title={t(`search.refresh-suggestions`)}
-              loading={loading}
-              className="min-w-40"
-            >
-              <div className="flex flex-row items-center space-x-3">
-                <div>
-                  <UserRoundSearch size={20} />
+            <div className="flex flex-row gap-5">
+              <ButtonMatcha
+                variant="default"
+                type="button"
+                size="default"
+                title={t(`close`)}
+                loading={loading}
+                className="min-w-40"
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                <div className="flex flex-row items-center space-x-3">
+                  <div>
+                    <CircleX size={20} />
+                  </div>
+                  <span>{t('close')}</span>
                 </div>
-                <span>{t('search.search')}</span>
-              </div>
-            </ButtonMatcha>
+              </ButtonMatcha>
+              <ButtonMatcha
+                variant="default"
+                type="submit"
+                size="default"
+                disabled={!user || loading || globalLoading}
+                title={t(`search.refresh-suggestions`)}
+                loading={loading}
+                className="min-w-40"
+              >
+                <div className="flex flex-row items-center space-x-3">
+                  <div>
+                    <UserRoundSearch size={20} />
+                  </div>
+                  <span>{t('search.search')}</span>
+                </div>
+              </ButtonMatcha>
+            </div>
           </form>
         </div>
       </div>

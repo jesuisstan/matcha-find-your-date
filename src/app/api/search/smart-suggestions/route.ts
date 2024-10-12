@@ -63,9 +63,13 @@ export async function POST(request: Request) {
       }
     } else if (sexPreferences === 'bisexual') {
       if (sex === 'male') {
-        sexFilter = `(sex = 'female' AND sex_preferences IN ('men', 'bisexual')) OR (sex = 'male' AND sex_preferences = 'bisexual') OR (sex = 'male' AND sex_preferences = 'men')`;
+        sexFilter = `(sex = 'female' AND sex_preferences IN ('men', 'bisexual')) 
+                      OR (sex = 'male' AND sex_preferences = 'bisexual' AND id != $1) 
+                      OR (sex = 'male' AND sex_preferences = 'men' AND id != $1)`;
       } else if (sex === 'female') {
-        sexFilter = `(sex = 'male' AND sex_preferences IN ('women', 'bisexual')) OR (sex = 'female' AND sex_preferences = 'bisexual') OR (sex = 'female' AND sex_preferences = 'women')`;
+        sexFilter = `(sex = 'male' AND sex_preferences IN ('women', 'bisexual')) 
+                      OR (sex = 'female' AND sex_preferences = 'bisexual' AND id != $1) 
+                      OR (sex = 'female' AND sex_preferences = 'women' AND id != $1)`;
       }
     }
 
