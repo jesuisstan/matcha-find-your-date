@@ -23,7 +23,11 @@ const ChatPartnerWrapper: React.FC<Props> = ({ partner, isSelected, onClick }) =
       )}
       onClick={onClick}
     >
-      <Link href={`/search/${partner.chat_partner}`} passHref className="hover:underline">
+      <Link
+        href={`/search/${partner.chat_partner}`}
+        passHref
+        className="w-max max-w-full truncate hover:underline"
+      >
         <p
           className="truncate font-bold"
           title={`${partner.firstname} "${partner.nickname}" ${partner.lastname}`}

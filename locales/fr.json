@@ -406,5 +406,6 @@
   "select-a-chat": "Sélectionnez un chat",
   "no-messages": "Pas de messages",
   "chats": "Chats",
-  "no-chats": "Pas de chats"
+  "no-chats": "Pas de chats",
+  "you": "Vous"
 }
