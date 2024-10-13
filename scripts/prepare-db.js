@@ -58,6 +58,7 @@ const runCommand = (command) => {
 
 // Sequentially run each script
 const runCommands = () => {
+  runCommand('node ./scripts/delete-table.js chat');
   runCommand('node ./scripts/delete-table.js visits');
   runCommand('node ./scripts/delete-table.js likes');
   runCommand('node ./scripts/delete-table.js matches');
