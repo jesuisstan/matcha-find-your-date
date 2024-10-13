@@ -106,14 +106,14 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         }),
       });
 
-      const result = await response.json();
       if (response.ok) {
         await get().fetchChatHistory(userId, recipientId);
       } else {
-        console.error('Failed to send message:', result.error);
+        const errorData = await response.json();
+        throw new Error(errorData?.error);
       }
-    } catch (error) {
-      console.error('Error sending message:', error);
+    } catch (error: any) {
+      throw error;
     }
   },
 

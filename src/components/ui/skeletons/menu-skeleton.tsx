@@ -38,7 +38,7 @@ const MenuSkeleton = ({ isSidebarOpen }: { isSidebarOpen?: boolean }) => {
         id="rounded-menu-container"
         className="flex max-h-full w-64 animate-pulse flex-col space-y-6 rounded-2xl bg-card px-3 py-4"
       >
-        <div className="flex justify-center">
+        <div className="flex h-[99px] justify-center">
           <Image
             src="/identity/logo-transparent.png"
             alt="Q3"

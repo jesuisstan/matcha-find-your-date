@@ -19,6 +19,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'invalid-input' }, { status: 400 });
     }
 
+    // Step 0: Check if message is between 1 and 442 characters 
+    if (message.length < 1 || message.length > 442) {
+      return NextResponse.json({ error: 'invalid-message-length' }, { status: 400 });
+    }
+
     // Step 1: Check if the users have a match
     const matchCheckResult = await client.query(
       `

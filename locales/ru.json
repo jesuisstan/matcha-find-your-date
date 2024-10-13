@@ -412,5 +412,7 @@
   "send": "Отправить",
   "chat-initiated-successfully": "Чат успешно инициирован",
   "failed-to-initiate-chat": "Не удалось инициировать чат",
-  "failed-to-retrieve-all-chats-updates": "Не удалось получить обновления чатов"
+  "failed-to-retrieve-all-chats-updates": "Не удалось получить обновления чатов",
+  "max-442-characters": "макс 442 символа",
+  "invalid-message-length": "Неверная длина сообщения"
 }

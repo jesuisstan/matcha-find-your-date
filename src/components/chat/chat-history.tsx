@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
+import { SendHorizontal } from 'lucide-react';
 
 import { ButtonMatcha } from '@/components/ui/button-matcha';
 import Spinner from '@/components/ui/spinner';
 import { TChatPartner, useChatStore } from '@/stores/chat-store';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
+import { RequiredInput } from '../ui/required-input';
 
 type Props = {
   chatPartner: TChatPartner;
@@ -26,17 +28,11 @@ const ChatHistory: React.FC<Props> = ({ chatPartner, loading }) => {
     })
   );
   const [loadingSendMessage, setLoadingSendMessage] = useState(false);
+  const [error, setError] = useState<string>('');
   const [newMessage, setNewMessage] = useState<string>('');
 
-  useEffect(() => {
-    // Scroll to the bottom of the chat when new messages arrive
-    const chatContainer = document.getElementById('chat-container');
-    if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
-  }, [messages]);
-
   const handleSendMessage = async () => {
+    setError('');
     setLoadingSendMessage(true);
     // Trim the message to remove trailing spaces
     const trimmedMessage = newMessage.trim();
@@ -46,13 +42,27 @@ const ChatHistory: React.FC<Props> = ({ chatPartner, loading }) => {
       try {
         await sendMessage(user?.id!, chatPartner.chat_partner, trimmedMessage);
         setNewMessage(''); // Clear the input field after sending the message
-      } catch (error) {
-        console.error('Failed to send message:', error);
+      } catch (error: any) {
+        setError(error.message ? t(error.message) : t('failed-to-send-message'));
       } finally {
         setLoadingSendMessage(false);
       }
     }
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat when new messages arrive
+    const chatContainer = document.getElementById('chat-container');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }, [messages]);
 
   useEffect(() => {
     if (user?.id) {
@@ -71,12 +81,14 @@ const ChatHistory: React.FC<Props> = ({ chatPartner, loading }) => {
         )}
       >
         {loading ? (
-          <div className="flex flex-col items-center justify-center gap-2 self-center align-middle">
+          <div className="flex h-full flex-col items-center justify-center gap-2 self-center align-middle">
             <Spinner size={7} />
             <p className="animate-pulse">{t('loading')}</p>
           </div>
         ) : messages.length === 0 ? (
-          <p>{t('no-messages')}</p>
+          <div className="flex h-full items-center justify-center">
+            <p>{t('no-messages')}</p>
+          </div>
         ) : (
           <div className={clsx('w-full space-y-6 smooth42transition', 'lg:px-10')}>
             {messages.map(
@@ -119,26 +131,45 @@ const ChatHistory: React.FC<Props> = ({ chatPartner, loading }) => {
       </div>
 
       {/* Message input */}
-      <div className="flex-none border-t p-4">
+      <div className="flex flex-none flex-col border-t p-4">
         <div className="flex items-center gap-4">
           <input
+            id="message-input"
             type="text"
             value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
+            onChange={(e) => {
+              setError('');
+              setNewMessage(e.target.value);
+            }}
+            onKeyDown={handleKeyDown} // Trigger message send on Enter key
             placeholder={t('type-message')}
             className="flex-grow rounded-full border p-3 focus:outline-none"
           />
           <ButtonMatcha
-            size="default"
+            size="icon"
             variant="default"
+            title={t('send')}
             onClick={handleSendMessage}
             loading={loadingSendMessage}
-            disabled={loadingSendMessage || newMessage.trim().length === 0}
-            className="w-28"
+            disabled={
+              loadingSendMessage || newMessage.trim().length < 1 || newMessage.trim().length > 442
+            }
+            className="min-w-9"
           >
-            {t('send')}
+            <SendHorizontal size={21} />
           </ButtonMatcha>
         </div>
+        {!error && (
+          <p
+            className={clsx(
+              'ml-5 mt-1 text-xs',
+              newMessage.length > 442 ? 'text-negative' : 'text-secondary'
+            )}
+          >
+            {t('max-442-characters')}
+          </p>
+        )}
+        {error && <p className="ml-5 mt-1 text-xs text-negative">{error}</p>}
       </div>
     </div>
   );

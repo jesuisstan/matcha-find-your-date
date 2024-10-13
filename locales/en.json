@@ -415,5 +415,7 @@
   "send": "Send",
   "chat-initiated-successfully": "Chat initiated successfully",
   "failed-to-initiate-chat": "Failed to initiate a chat",
-  "failed-to-retrieve-all-chats-updates": "Failed to retrieve all chats updates"
+  "failed-to-retrieve-all-chats-updates": "Failed to retrieve all chats updates",
+  "max-442-characters": "max 442 chars",
+  "invalid-message-length": "Invalid message length"
 }

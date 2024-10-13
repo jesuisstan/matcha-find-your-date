@@ -191,16 +191,18 @@ const Login = () => {
           'lg:w-1/4'
         )}
       >
-        <Image
-          src="/identity/logo-transparent.png"
-          className="z-10 m-auto mb-2 mt-0 w-44"
-          alt="logo"
-          width={200}
-          height={200}
-          placeholder="blur"
-          blurDataURL="/identity/logo-transparent.png"
-          priority
-        />
+        <div className="h-[99px] mb-2">
+          <Image
+            src="/identity/logo-transparent.png"
+            className="z-10 m-auto mb-2 mt-0 w-44"
+            alt="logo"
+            width={200}
+            height={200}
+            placeholder="blur"
+            blurDataURL="/identity/logo-transparent.png"
+            priority
+          />
+        </div>
         <div className="mb-5 flex self-center">
           <LocaleSwitcher />
         </div>

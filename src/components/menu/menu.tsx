@@ -128,7 +128,7 @@ const Menu: React.FC = () => {
       </div>
 
       {/* Menu Sidebar */}
-      {isClient && !globalLoading ? (
+      {isClient && !globalLoading && user ? (
         <>
           <div
             id="menu-sidebar"
@@ -144,7 +144,7 @@ const Menu: React.FC = () => {
               id="rounded-menu-container"
               className="relative flex max-h-[97vh] w-64 flex-col space-y-3 rounded-2xl bg-card px-3 pt-5 shadow-md"
             >
-              <div className="flex justify-center">
+              <div className="flex h-[99px] justify-center">
                 <Image
                   src="/identity/logo-transparent.png"
                   alt="Matcha"
