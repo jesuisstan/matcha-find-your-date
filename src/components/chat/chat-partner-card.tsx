@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
@@ -22,12 +23,15 @@ const ChatPartnerWrapper: React.FC<Props> = ({ partner, isSelected, onClick }) =
       )}
       onClick={onClick}
     >
-      <p
-        className="truncate font-bold"
-        title={`${partner.firstname} "${partner.nickname}" ${partner.lastname}`}
-      >
-        {`"${partner.nickname}" ${partner.firstname} ${partner.lastname}`}
-      </p>
+      <Link href={`/search/${partner.chat_partner}`} passHref className="hover:underline">
+        <p
+          className="truncate font-bold"
+          title={`${partner.firstname} "${partner.nickname}" ${partner.lastname}`}
+        >
+          {`"${partner.nickname}" ${partner.firstname} ${partner.lastname}`}
+        </p>
+      </Link>
+
       <p
         className={clsx(
           'truncate text-xs font-normal',
@@ -35,7 +39,7 @@ const ChatPartnerWrapper: React.FC<Props> = ({ partner, isSelected, onClick }) =
         )}
       >{`${partner.online ? t('online') : t('offline')}`}</p>
       {partner.unread_count > 0 && (
-        <p className="truncate text-xs text-negative">
+        <p className="truncate text-xs text-c42orange">
           {partner.unread_count} {t('unread')}{' '}
         </p>
       )}

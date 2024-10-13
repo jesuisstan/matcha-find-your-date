@@ -405,5 +405,6 @@
   "failed-to-retrieve-chat-list": "Не удалось получить список чатов",
   "select-a-chat": "Выберите чат",
   "no-messages": "Нет сообщений",
-  "chats": "Чаты"
+  "chats": "Чаты",
+  "no-chats": "Нет чатов"
 }

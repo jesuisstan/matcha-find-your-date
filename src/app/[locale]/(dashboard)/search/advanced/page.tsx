@@ -5,7 +5,7 @@ import AsyncSelect from 'react-select/async';
 import { useTranslations } from 'next-intl';
 
 import clsx from 'clsx';
-import { CircleX, Frown, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
+import { CircleX, MapPinned, OctagonAlert, Star, UserRoundSearch } from 'lucide-react';
 
 import FilterSortBar from '@/components/filter-sort-bar';
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
@@ -542,7 +542,7 @@ const AdvancedSearch = () => {
       ) : searchResult.length === 0 || error ? (
         <div className="w-full min-w-28 flex-col items-center justify-center overflow-hidden text-ellipsis rounded-2xl bg-card p-4">
           <div className="m-5 flex items-center justify-center smooth42transition hover:scale-150">
-            <Frown size={84} onClick={toggleSidebar} className="cursor-pointer" />
+            <UserRoundSearch size={84} onClick={toggleSidebar} className="cursor-pointer" />
           </div>
           <p className="text-center text-lg">
             {error

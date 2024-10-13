@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
-import { useChatStore } from '@/stores/chat-store';
+import Spinner from '../ui/spinner';
+
+import { TChatPartner, useChatStore } from '@/stores/chat-store';
+import { formatApiDateLastUpdate } from '@/utils/format-date';
 
 type Props = {
-  chatPartner: any;
+  chatPartner: TChatPartner;
+  loading: boolean;
 };
 
-const ChatHistory: React.FC<Props> = ({ chatPartner }) => {
+const ChatHistory: React.FC<Props> = ({ chatPartner, loading }) => {
+  const t = useTranslations();
   const { messages } = useChatStore((state) => ({
     messages: state.messages,
   }));
@@ -20,9 +26,14 @@ const ChatHistory: React.FC<Props> = ({ chatPartner }) => {
   }, [messages]);
 
   return (
-    <div id="chat-container" className="overflow-y-auto p-4 h-full">
-      {messages.length === 0 ? (
-        <p>No messages yet.</p>
+    <div id="chat-container" className="h-full overflow-y-auto p-4">
+      {loading ? (
+        <div className="flex flex-col items-center justify-center gap-2 self-center align-middle">
+          <Spinner size={7} />
+          <p className="animate-pulse">{t('loading')}</p>
+        </div>
+      ) : messages.length === 0 ? (
+        <p>{t('no-messages')}</p>
       ) : (
         messages.map((msg) => (
           <div key={msg.id} className="mb-2">
@@ -30,7 +41,7 @@ const ChatHistory: React.FC<Props> = ({ chatPartner }) => {
               {msg.sender_id === chatPartner.chat_partner ? chatPartner.nickname : 'You'}
             </p>
             <p>{msg.message}</p>
-            <small>{msg.created_at}</small>
+            <small>{formatApiDateLastUpdate(msg.created_at)}</small>
           </div>
         ))
       )}

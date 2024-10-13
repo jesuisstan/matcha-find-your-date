@@ -124,6 +124,7 @@ const NotificationsPage = () => {
                   href={`/search/${notification.from_user_id}`}
                   passHref
                   className={clsx(
+                    'hover:underline',
                     notification.type === 'block' ? 'text-negative' : 'text-positive'
                   )}
                 >

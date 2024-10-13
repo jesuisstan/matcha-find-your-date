@@ -24,9 +24,9 @@ interface ChatStore {
   messages: TMessage[];
   unreadCount: number | null;
   fetchChatList: (userId: string) => Promise<void>;
-  fetchChatHistory: (partnerId: string) => Promise<void>;
+  fetchChatHistory: (userId: string, partnerId: string) => Promise<void>;
   fetchUnreadCount: (userId: string) => Promise<void>;
-  selectChatPartner: (partner: TChatPartner) => void;
+  selectChatPartner: (userId: string, partner: TChatPartner) => void;
 }
 
 export const useChatStore = create<ChatStore>((set, get) => ({
@@ -55,18 +55,18 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   },
 
   // Fetch the chat history for a specific partner
-  fetchChatHistory: async (partnerId) => {
+  fetchChatHistory: async (userId, partnerId) => {
     try {
       const response = await fetch('/api/chat/history', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ partnerId }),
+        body: JSON.stringify({ userId, chatPartnerId: partnerId }),
       });
       const result = await response.json();
       if (response.ok) {
-        set({ messages: result.messages });
+        set({ messages: result.chatHistory });
       }
     } catch (error) {
       console.error('Failed to fetch chat history:', error);
@@ -93,8 +93,8 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   },
 
   // Select a chat partner and load their chat history
-  selectChatPartner: (partner) => {
+  selectChatPartner: async (userId, partner) => {
     set({ selectedChatPartner: partner });
-    get().fetchChatHistory(partner.chat_partner);
+    await get().fetchChatHistory(userId, partner.chat_partner);
   },
 }));

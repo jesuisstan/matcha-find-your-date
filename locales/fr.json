@@ -405,5 +405,6 @@
   "failed-to-retrieve-chat-list": "Échec de la récupération de la liste des discussions",
   "select-a-chat": "Sélectionnez un chat",
   "no-messages": "Pas de messages",
-  "chats": "Chats"
+  "chats": "Chats",
+  "no-chats": "Pas de chats"
 }

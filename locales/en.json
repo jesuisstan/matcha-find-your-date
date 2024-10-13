@@ -408,5 +408,6 @@
   "failed-to-retrieve-chat-list": "Failed to retrieve chat list",
   "select-a-chat": "Select a chat",
   "no-messages": "No messages",
-  "chats": "Chats"
+  "chats": "Chats",
+  "no-chats": "No chats"
 }
