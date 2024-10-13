@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Documentation: Matcha Dating App
 
-## Getting Started
+## Objective
 
-First, run the development server:
+The primary goal of this project was to develop a full-stack dating application, enabling users to connect based on shared interests and preferences.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Implementation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project was implemented using functional components and popular hooks in ReactJS with TypeScript, leveraging the Next.js framework for server-side rendering and routing. The following steps were taken to complete the project:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Backend Implementation**: Connection to Vercel PostgreSQL cloud database created. PostgreSQL is used for data storage, ensuring reliability and scalability.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. **Frontend + Backend**: The application is a full-stack exxample, developed using Next.js, incorporating TypeScript for type safety. The application follows a responsive design, ensuring usability across various devices.
 
-## Learn More
+3. **Styling**: Tailwind CSS is used for styling, providing a modern and consistent design. The application features utility-first CSS, enabling rapid styling adjustments. The application supports 2 color themes: light and dark.
 
-To learn more about Next.js, take a look at the following resources:
+4. **Language Support**: Matcha the dating app allows users select between 3 main languages for the interface: English, Français & Русский.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Real-Time Features**: Implemented chat functionality allows users to communicate once matched. Notifications for likes and visits are provided to enhance user engagement.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+6. **Version Control**: The code is hosted on GitHub and made publicly accessible. The repository can be found at [https://github.com/jesuisstan/matcha-find-your-date](https://github.com/jesuisstan/matcha-find-your-date).
 
-## Deploy on Vercel
+7. **Deployment**: The application is deployed on Vercel, providing fast global access. Visit the application at [https://matcha-find-your-date.vercel.app](https://matcha-find-your-date.vercel.app)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Results
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The deployed version of the app allows users to:
+
+- Authenticate with email and password, creating new accounts or logging into existing ones.
+- Create and manage user profiles with interests, preferences, photos.
+- Connect with other users based on mutual interests and preferences.
+- Chat with users with whome you have matched.
+
+## Demonstration
+
+_(Add demonstration details, screenshots, or links to demo videos here)_ Coming soon...
