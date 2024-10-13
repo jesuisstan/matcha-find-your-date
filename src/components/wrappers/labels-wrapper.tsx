@@ -30,7 +30,7 @@ const LabelsWrapper = ({
   return (
     <div
       className={clsx(
-        'relative grid max-h-28 min-h-[104px] min-w-64 grid-flow-col grid-rows-2 gap-x-0 rounded-2xl bg-card p-4 pb-2 pt-2'
+        'relative grid max-h-28 min-h-[104px] min-w-64 grid-flow-col grid-rows-2 gap-x-0 rounded-2xl bg-card p-4 pb-2 pt-2 shadow-md'
       )}
     >
       <div className="w-max">

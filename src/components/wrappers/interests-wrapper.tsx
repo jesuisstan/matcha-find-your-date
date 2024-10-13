@@ -21,7 +21,7 @@ const InterestsWrapper = ({
   const t = useTranslations();
 
   return (
-    <div className="relative rounded-2xl bg-card p-5">
+    <div className="relative rounded-2xl bg-card p-5 shadow-md">
       <div className="flex flex-col justify-start">
         <h3 className="text-xl font-bold">{t(`interests`)}</h3>
         <div className="mt-4">

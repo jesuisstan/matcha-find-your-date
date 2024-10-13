@@ -190,7 +190,7 @@ const PhotoGalleryWrapper = ({
   }, [profile?.photos]);
 
   return (
-    <div className="relative self-center rounded-2xl bg-card p-5">
+    <div className="relative self-center rounded-2xl bg-card p-5 shadow-md">
       <div className="flex flex-col items-center">
         <div className="flex w-full max-w-screen-md flex-col items-center">
           {/*<h3 className="mb-4 text-left text-xl font-bold">{t('photo-gallery')}</h3>*/}

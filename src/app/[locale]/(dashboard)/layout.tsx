@@ -66,7 +66,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       const interval = setInterval(() => {
         fetchUnreadNotifications();
         fetchUnreadMessages();
-      }, 7000);
+      }, 5000);
 
       return () => clearInterval(interval);
     }

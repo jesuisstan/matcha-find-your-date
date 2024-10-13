@@ -40,7 +40,7 @@ const ActionsWrapper = ({
     user: state.user,
     setUser: state.setUser,
   }));
-  const { selectChatPartner } = useChatStore();
+  const { selectChatPartner, initiateChatIfNotExists } = useChatStore();
   const { updateSuggestion } = useSearchStore();
   const [loading, setLoading] = useState(false);
 
@@ -148,6 +148,10 @@ ${user?.firstname} ${user?.lastname} (${user?.nickname} / ID: ${user?.id})`;
       setLoading(true);
 
       try {
+        // Step 1: Ensure chat is initiated if it doesn't exist
+        await initiateChatIfNotExists(user?.id!, dateProfile.id);
+
+        // Step 2: Select the chat partner
         await selectChatPartner(user?.id!, {
           chat_partner: dateProfile.id,
           firstname: dateProfile.firstname,
@@ -157,10 +161,10 @@ ${user?.firstname} ${user?.lastname} (${user?.nickname} / ID: ${user?.id})`;
           unread_count: 0,
         });
 
-        // Navigate to the chat page
+        // Step 3: Navigate to the chat page
         router.push('/messages');
       } catch (error) {
-        console.error('Error selecting chat partner or navigating:', error);
+        console.error('Error initiating or selecting chat:', error);
       } finally {
         setLoading(false);
       }
@@ -170,7 +174,7 @@ ${user?.firstname} ${user?.lastname} (${user?.nickname} / ID: ${user?.id})`;
   return loading ? (
     <ActionsSkeleton />
   ) : (
-    <div className={clsx('flex max-w-fit flex-row self-center rounded-2xl bg-card')}>
+    <div className={clsx('flex max-w-fit flex-row self-center rounded-2xl bg-card shadow-md')}>
       {/* MATCH ? */}
       <MatchWrapper
         isMatch={isMatch}

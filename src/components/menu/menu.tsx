@@ -142,7 +142,7 @@ const Menu: React.FC = () => {
           >
             <div
               id="rounded-menu-container"
-              className="relative flex max-h-[97vh] w-64 flex-col space-y-3 rounded-2xl bg-card px-3 pt-5"
+              className="relative flex max-h-[97vh] w-64 flex-col space-y-3 rounded-2xl bg-card px-3 pt-5 shadow-md"
             >
               <div className="flex justify-center">
                 <Image

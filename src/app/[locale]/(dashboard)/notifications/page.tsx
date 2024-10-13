@@ -84,7 +84,7 @@ const NotificationsPage = () => {
             <div
               key={notification.id}
               className={clsx(
-                `card h-28 overflow-y-auto rounded-2xl bg-card p-4 text-sm shadow`,
+                `card h-28 overflow-y-auto rounded-2xl bg-card p-4 text-sm shadow-md`,
                 notification.viewed ? 'opacity-50' : ''
               )}
               onMouseEnter={() => {

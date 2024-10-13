@@ -410,5 +410,9 @@
   "no-messages": "No messages",
   "chats": "Chats",
   "no-chats": "No chats",
-  "you": "You"
+  "you": "You",
+  "type-message": "Type a message...",
+  "send": "Send",
+  "chat-initiated-successfully": "Chat initiated successfully",
+  "failed-to-initiate-chat": "Failed to initiate a chat"
 }

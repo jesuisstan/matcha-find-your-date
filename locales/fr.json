@@ -407,5 +407,9 @@
   "no-messages": "Pas de messages",
   "chats": "Chats",
   "no-chats": "Pas de chats",
-  "you": "Vous"
+  "you": "Vous",
+  "type-message": "Tapez un message...",
+  "send": "Envoyer",
+  "chat-initiated-successfully": "Chat initié avec succès",
+  "failed-to-initiate-chat": "Échec de l'initialisation du chat"
 }

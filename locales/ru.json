@@ -407,5 +407,9 @@
   "no-messages": "Нет сообщений",
   "chats": "Чаты",
   "no-chats": "Нет чатов",
-  "you": "Вы"
+  "you": "Вы",
+  "type-message": "Введите сообщение...",
+  "send": "Отправить",
+  "chat-initiated-successfully": "Чат успешно инициирован",
+  "failed-to-initiate-chat": "Не удалось инициировать чат"
 }
