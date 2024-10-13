@@ -55,12 +55,7 @@ export const setUserOffline = async (userId: string) => {
         id: userId,
       }),
     });
-
-    const result = await response.json();
-    if (response.ok) {
-      console.log('User is offline');
-    }
   } catch (error) {
-    console.log('Error setting user offline');
+    console.error('Error setting user offline');
   }
 };

@@ -23,12 +23,12 @@ interface ChatStore {
   selectedChatPartner: TChatPartner | null;
   messages: TMessage[];
   unreadCount: number | null;
-  fetchChatList: (userId: string) => Promise<void>;
+  fetchAllChatsUpdates: (userId: string) => Promise<void>;
   fetchChatHistory: (userId: string, partnerId: string) => Promise<void>;
-  fetchUnreadCount: (userId: string) => Promise<void>;
   selectChatPartner: (userId: string, partner: TChatPartner) => void;
   sendMessage: (userId: string, recipientId: string, message: string) => Promise<void>;
   initiateChatIfNotExists: (userId: string, partnerId: string) => Promise<void>;
+  triggerFetchChatHistoryOnUnread: (userId: string) => Promise<void>;
 }
 
 export const useChatStore = create<ChatStore>((set, get) => ({
@@ -37,22 +37,23 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   messages: [],
   unreadCount: null,
 
-  // Fetch the chat list (users the logged-in user has chatted with)
-  fetchChatList: async (userId) => {
+  // Fetch all chat information (chat list and total unread messages)
+  fetchAllChatsUpdates: async (userId) => {
     try {
-      const response = await fetch('/api/chat/list', {
+      const response = await fetch('/api/chat/unread', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userId }),
       });
+
       const result = await response.json();
       if (response.ok) {
-        set({ chatList: result.chatList });
+        set({ chatList: result.chatList, unreadCount: result.unreadCount });
       }
     } catch (error) {
-      console.error('Failed to fetch chat list:', error);
+      console.error('Failed to fetch chat information:', error);
     }
   },
 
@@ -68,7 +69,6 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       });
       const result = await response.json();
       if (response.ok) {
-        // Sort messages by `created_at` field
         const sortedMessages = result.chatHistory.sort(
           (a: TMessage, b: TMessage) =>
             new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
@@ -80,25 +80,6 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     }
   },
 
-  // Fetch unread message count
-  fetchUnreadCount: async (userId) => {
-    try {
-      const response = await fetch('/api/chat/unread', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId }),
-      });
-      const result = await response.json();
-      if (response.ok) {
-        set({ unreadCount: result.unreadCount });
-      }
-    } catch (error) {
-      console.error('Failed to fetch unread message count:', error);
-    }
-  },
-
   // Select a chat partner and load their chat history
   selectChatPartner: async (userId, partner) => {
     set({ selectedChatPartner: partner });
@@ -107,14 +88,12 @@ export const useChatStore = create<ChatStore>((set, get) => ({
 
   // Send a new message
   sendMessage: async (userId, recipientId, message) => {
-    // Trim the message and check if it's empty
     const trimmedMessage = message.trim();
     if (trimmedMessage.length === 0) {
-      return; // Do nothing if the message is empty
+      return;
     }
 
     try {
-      // Send the message to the API
       const response = await fetch('/api/chat/send', {
         method: 'POST',
         headers: {
@@ -128,9 +107,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       });
 
       const result = await response.json();
-
       if (response.ok) {
-        // After the message is sent, refetch the chat history to update the messages list
         await get().fetchChatHistory(userId, recipientId);
       } else {
         console.error('Failed to send message:', result.error);
@@ -156,6 +133,18 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       }
     } catch (error) {
       console.error('Error initiating chat:', error);
+    }
+  },
+
+  triggerFetchChatHistoryOnUnread: async (userId) => {
+    const { selectedChatPartner, chatList, fetchChatHistory } = get();
+    if (selectedChatPartner) {
+      const chatPartnerWithUnread = chatList.find(
+        (chat) => chat.chat_partner === selectedChatPartner.chat_partner && chat.unread_count > 0
+      );
+      if (chatPartnerWithUnread) {
+        await fetchChatHistory(userId, selectedChatPartner.chat_partner);
+      }
     }
   },
 }));

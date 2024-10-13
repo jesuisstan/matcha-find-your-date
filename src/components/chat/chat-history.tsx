@@ -17,11 +17,14 @@ type Props = {
 const ChatHistory: React.FC<Props> = ({ chatPartner, loading }) => {
   const t = useTranslations();
   const { user } = useUserStore((state) => ({ user: state.user }));
-  const { messages, sendMessage, fetchChatHistory } = useChatStore((state) => ({
-    messages: state.messages,
-    sendMessage: state.sendMessage,
-    fetchChatHistory: state.fetchChatHistory,
-  }));
+  const { unreadCount, messages, sendMessage, triggerFetchChatHistoryOnUnread } = useChatStore(
+    (state) => ({
+      unreadCount: state.unreadCount,
+      messages: state.messages,
+      sendMessage: state.sendMessage,
+      triggerFetchChatHistoryOnUnread: state.triggerFetchChatHistoryOnUnread,
+    })
+  );
   const [loadingSendMessage, setLoadingSendMessage] = useState(false);
   const [newMessage, setNewMessage] = useState<string>('');
 
@@ -51,15 +54,11 @@ const ChatHistory: React.FC<Props> = ({ chatPartner, loading }) => {
     }
   };
 
-  //useEffect(() => {
-  //  if (user?.id) {
-  //    const interval = setInterval(() => {
-  //      fetchChatHistory(user.id!, chatPartner.chat_partner);
-  //    }, 3000);
-
-  //    return () => clearInterval(interval);
-  //  }
-  //}, []);
+  useEffect(() => {
+    if (user?.id) {
+      triggerFetchChatHistoryOnUnread(user.id);
+    }
+  }, [user?.id, unreadCount]);
 
   return (
     <div className="relative flex h-full w-full flex-col">

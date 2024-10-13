@@ -414,5 +414,6 @@
   "type-message": "Type a message...",
   "send": "Send",
   "chat-initiated-successfully": "Chat initiated successfully",
-  "failed-to-initiate-chat": "Failed to initiate a chat"
+  "failed-to-initiate-chat": "Failed to initiate a chat",
+  "failed-to-retrieve-all-chats-updates": "Failed to retrieve all chats updates"
 }

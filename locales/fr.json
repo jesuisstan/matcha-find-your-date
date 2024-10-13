@@ -411,5 +411,6 @@
   "type-message": "Tapez un message...",
   "send": "Envoyer",
   "chat-initiated-successfully": "Chat initié avec succès",
-  "failed-to-initiate-chat": "Échec de l'initialisation du chat"
+  "failed-to-initiate-chat": "Échec de l'initialisation du chat",
+  "failed-to-retrieve-all-chats-updates": "Échec de la récupération de toutes les mises à jour des chats"
 }

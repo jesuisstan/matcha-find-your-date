@@ -14,7 +14,7 @@ import useUserStore from '@/stores/user';
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, updateUserRating } = useUserStore();
   const { notifications, addNotifications } = useNotificationStore();
-  const { fetchUnreadCount } = useChatStore();
+  const { fetchAllChatsUpdates } = useChatStore();
 
   useEffect(() => {
     const fetchUnreadNotifications = async () => {
@@ -55,7 +55,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const fetchUnreadMessages = async () => {
       try {
         if (user?.id) {
-          await fetchUnreadCount(user.id); // Fetch unread message count
+          await fetchAllChatsUpdates(user.id);
         }
       } catch (error) {
         console.error('Error fetching unread messages:', error);

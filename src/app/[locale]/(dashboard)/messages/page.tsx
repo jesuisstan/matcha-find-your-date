@@ -12,8 +12,13 @@ import useUserStore from '@/stores/user';
 const MessagesPage = () => {
   const t = useTranslations();
   const { user } = useUserStore((state) => ({ user: state.user }));
-  const { chatList, fetchChatList, selectedChatPartner, selectChatPartner, fetchChatHistory } =
-    useChatStore();
+  const {
+    chatList,
+    fetchAllChatsUpdates,
+    selectedChatPartner,
+    selectChatPartner,
+    fetchChatHistory,
+  } = useChatStore();
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
   const [error, setError] = useState('');
@@ -23,9 +28,9 @@ const MessagesPage = () => {
     const fetchChats = async () => {
       setLoading(true);
       try {
-        await fetchChatList(user?.id!);
+        await fetchAllChatsUpdates(user?.id!);
       } catch (error) {
-        setError('failed-to-retrieve-chat-list');
+        setError('failed-to-retrieve-all-chats-updates');
       } finally {
         setLoading(false);
       }
@@ -34,7 +39,7 @@ const MessagesPage = () => {
     if (user?.id) {
       fetchChats();
     }
-  }, [user?.id]);
+  }, []);
 
   // Fetch chat history for the selected chat partner
   const handleChatSelection = async (chatPartner: TChatPartner) => {
@@ -80,14 +85,20 @@ const MessagesPage = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-2 smooth42transition">
-              {chatList.map((chatPartner: TChatPartner) => (
-                <ChatPartnerWrapper
-                  key={chatPartner.chat_partner}
-                  partner={chatPartner}
-                  isSelected={selectedChatPartner?.chat_partner === chatPartner.chat_partner}
-                  onClick={() => handleChatSelection(chatPartner)}
-                />
-              ))}
+              {error ? (
+                <div className="p-4 text-center text-negative">
+                  <p>{t(error)}</p>
+                </div>
+              ) : (
+                chatList.map((chatPartner: TChatPartner) => (
+                  <ChatPartnerWrapper
+                    key={chatPartner.chat_partner}
+                    partner={chatPartner}
+                    isSelected={selectedChatPartner?.chat_partner === chatPartner.chat_partner}
+                    onClick={() => handleChatSelection(chatPartner)}
+                  />
+                ))
+              )}
             </div>
           )}
         </div>
