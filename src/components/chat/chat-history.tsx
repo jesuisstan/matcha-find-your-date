@@ -9,7 +9,6 @@ import Spinner from '@/components/ui/spinner';
 import { TChatPartner, useChatStore } from '@/stores/chat-store';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
-import { RequiredInput } from '../ui/required-input';
 
 type Props = {
   chatPartner: TChatPartner;
