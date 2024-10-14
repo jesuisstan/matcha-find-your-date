@@ -7,8 +7,8 @@ import ChatHistory from '@/components/chat/chat-history';
 import ChatPartnerWrapper from '@/components/chat/chat-partner-card';
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import ChatCardSkeleton from '@/components/ui/skeletons/chart-card-skeleton';
-import useUserStore from '@/stores/user';
 import { TChatPartner, useChatStore } from '@/stores/chat-store';
+import useUserStore from '@/stores/user';
 
 const MessagesPage = () => {
   const t = useTranslations();
