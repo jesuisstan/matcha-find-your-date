@@ -11,6 +11,7 @@ import NotificationCardSkeleton from '@/components/ui/skeletons/notification-car
 import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
+import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 
 const NotificationsPage = () => {
   const t = useTranslations();
@@ -48,13 +49,14 @@ const NotificationsPage = () => {
       }
     };
 
-    if (user?.id) {
+    if (user?.id && user?.complete) {
       fetchNotifications();
     }
-  }, [user?.id]);
+  }, [user?.id, user?.complete]);
 
   return (
     <div className="relative flex h-[92vh] flex-col">
+      {user && <ModalProfileWarning user={user} />}
       {/* Fixed Header */}
       <div id="user-nickname" className="mb-2 flex w-fit flex-wrap gap-x-2 smooth42transition">
         <h1 className="max-w-96 truncate p-2 text-4xl font-bold xs:max-w-fit">

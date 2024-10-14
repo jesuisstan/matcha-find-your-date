@@ -414,5 +414,12 @@
   "failed-to-initiate-chat": "Échec de l'initialisation du chat",
   "failed-to-retrieve-all-chats-updates": "Échec de la récupération de toutes les mises à jour des chats",
   "max-442-characters": "max 442 caractères",
-  "invalid-message-length": "Longueur de message invalide"
+  "invalid-message-length": "Longueur de message invalide",
+  "invalid-input": "Entrée invalide",
+  "cannot-block-own-profile": "Vous ne pouvez pas bloquer votre propre profil",
+  "block-processing-failed": "Échec du traitement du blocage",
+  "user-blocked-successfully": "Utilisateur bloqué avec succès",
+  "user-unblocked-successfully": "Utilisateur débloqué avec succès",
+  "failed-to-delete-user": "Échec de la suppression de l'utilisateur",
+  "user-deleted-successfully": "Utilisateur supprimé avec succès"
 }

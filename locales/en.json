@@ -417,5 +417,12 @@
   "failed-to-initiate-chat": "Failed to initiate a chat",
   "failed-to-retrieve-all-chats-updates": "Failed to retrieve all chats updates",
   "max-442-characters": "max 442 chars",
-  "invalid-message-length": "Invalid message length"
+  "invalid-message-length": "Invalid message length",
+  "invalid-input": "Invalid input",
+  "cannot-block-own-profile": "You cannot block your own profile",
+  "block-processing-failed": "Block processing failed",
+  "user-blocked-successfully": "User blocked successfully",
+  "user-unblocked-successfully": "User unblocked successfully",
+  "failed-to-delete-user": "Failed to delete user",
+  "user-deleted-successfully": "User deleted successfully"
 }

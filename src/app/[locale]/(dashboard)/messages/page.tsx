@@ -8,6 +8,7 @@ import ChatPartnerWrapper from '@/components/chat/chat-partner-card';
 import ChatCardSkeleton from '@/components/ui/skeletons/chart-card-skeleton';
 import { TChatPartner, useChatStore } from '@/stores/chat-store';
 import useUserStore from '@/stores/user';
+import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 
 const MessagesPage = () => {
   const t = useTranslations();
@@ -36,7 +37,7 @@ const MessagesPage = () => {
       }
     };
 
-    if (user?.id) {
+    if (user?.id && user?.complete) {
       fetchChats();
     }
   }, []);
@@ -61,6 +62,7 @@ const MessagesPage = () => {
 
   return (
     <div className="relative flex h-[92vh]">
+      {user && <ModalProfileWarning user={user} />}
       {/* Left Section: Chat Partner List */}
       <div className="relative w-1/3 border-r">
         {/* Fixed header */}

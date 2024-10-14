@@ -49,7 +49,7 @@ export async function POST(req: Request) {
         UPDATE users
         SET tags = $2, last_action = $3, online = true,
             rating = CASE
-                        WHEN tags IS NULL THEN 
+                        WHEN (tags IS NULL OR tags = '{}' OR array_length(tags, 1) = 0) THEN 
                           LEAST(rating + 5, 100)
                         ELSE rating
                       END

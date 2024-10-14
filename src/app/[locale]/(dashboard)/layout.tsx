@@ -62,7 +62,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       }
     };
 
-    if (user?.id) {
+    if (user?.id && user?.complete) {
       const interval = setInterval(() => {
         fetchUnreadNotifications();
         fetchUnreadMessages();
@@ -70,7 +70,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
       return () => clearInterval(interval);
     }
-  }, [user?.id]);
+  }, [user?.id, user?.complete]);
 
   return (
     <div className={clsx('relative flex min-h-screen w-full flex-col lg:flex-row')}>

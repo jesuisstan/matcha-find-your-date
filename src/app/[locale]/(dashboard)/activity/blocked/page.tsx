@@ -47,7 +47,7 @@ const MatchaBlockedProfiles = () => {
   };
 
   useEffect(() => {
-    if (user) fetchMatches();
+    if (user && user?.complete) fetchMatches();
   }, []);
 
   return (

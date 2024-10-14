@@ -64,7 +64,7 @@ const MatchaVisits = () => {
   };
 
   useEffect(() => {
-    if (user) fetchVisits();
+    if (user && user?.complete) fetchVisits();
   }, [selectedOption]);
 
   return (

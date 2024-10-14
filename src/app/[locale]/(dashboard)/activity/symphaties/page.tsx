@@ -45,9 +45,7 @@ const MatchaSymphaties = () => {
 
       const result = await response.json();
       if (response.ok) {
-        selectedOption === '0'
-          ? setProfilesLiked(result.likes)
-          : setProfilesLikedBy(result.likes);
+        selectedOption === '0' ? setProfilesLiked(result.likes) : setProfilesLikedBy(result.likes);
         setUser({ ...user, ...result.user });
       } else {
         selectedOption === '0'
@@ -64,7 +62,7 @@ const MatchaSymphaties = () => {
   };
 
   useEffect(() => {
-    if (user) fetchLikes();
+    if (user && user?.complete) fetchLikes();
   }, [selectedOption]);
 
   return (

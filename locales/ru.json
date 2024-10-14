@@ -414,5 +414,12 @@
   "failed-to-initiate-chat": "Не удалось инициировать чат",
   "failed-to-retrieve-all-chats-updates": "Не удалось получить обновления чатов",
   "max-442-characters": "макс 442 символа",
-  "invalid-message-length": "Неверная длина сообщения"
+  "invalid-message-length": "Неверная длина сообщения",
+  "invalid-input": "Неверный ввод",
+  "cannot-block-own-profile": "Вы не можете заблокировать свой собственный профиль",
+  "block-processing-failed": "Не удалось обработать блокировку",
+  "user-blocked-successfully": "Пользователь успешно заблокирован",
+  "user-unblocked-successfully": "Пользователь успешно разблокирован",
+  "failed-to-delete-user": "Не удалось удалить пользователя",
+  "user-deleted-successfully": "Пользователь успешно удалён"
 }
