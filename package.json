@@ -10,8 +10,7 @@
     "start": "npx concurrently -n matcha-app,cron-job -c blue,magenta \"node ./scripts/start-build.js\" \"node ./scripts/check-inactivity-cron-job.js\"",
     "lint": "next lint",
     "clean": "npx rimraf .swc && npx rimraf .next && npx rimraf node_modules && npx rimraf package-lock.json && npx rimraf coverage",
-    "c:i": "npm run clean && npm install",
-    "evaluation": "npm install && node ./scripts/prepare-db.js && npm run build && npm start"
+    "c:i": "npm run clean && npm install"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -71,7 +70,7 @@
     "concurrently": "^9.0.1",
     "cross-env": "^7.0.3",
     "eslint": "8.57.0",
-    "eslint-config-next": "^14.2.3",
+    "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "file-loader": "^6.2.0",
