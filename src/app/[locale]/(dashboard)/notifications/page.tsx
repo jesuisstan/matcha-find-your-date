@@ -9,9 +9,9 @@ import { Frown, Meh } from 'lucide-react';
 
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import NotificationCardSkeleton from '@/components/ui/skeletons/notification-card-skeleton';
-import { useNotificationStore } from '@/stores/notification-store';
 import useUserStore from '@/stores/user';
 import { formatApiDateLastUpdate } from '@/utils/format-date';
+import { useNotificationStore } from '@/stores/notification-store';
 
 const NotificationsPage = () => {
   const t = useTranslations();
