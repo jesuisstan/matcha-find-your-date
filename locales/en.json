@@ -424,5 +424,8 @@
   "user-blocked-successfully": "User blocked successfully",
   "user-unblocked-successfully": "User unblocked successfully",
   "failed-to-delete-user": "Failed to delete user",
-  "user-deleted-successfully": "User deleted successfully"
+  "user-deleted-successfully": "User deleted successfully",
+  "delete": "Delete",
+  "delete-account": "Delete account",
+  "are-you-sure": "Are you sure?"
 }

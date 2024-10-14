@@ -421,5 +421,8 @@
   "user-blocked-successfully": "Utilisateur bloqué avec succès",
   "user-unblocked-successfully": "Utilisateur débloqué avec succès",
   "failed-to-delete-user": "Échec de la suppression de l'utilisateur",
-  "user-deleted-successfully": "Utilisateur supprimé avec succès"
+  "user-deleted-successfully": "Utilisateur supprimé avec succès",
+  "delete": "Supprimer",
+  "delete-account": "Supprimer le compte",
+  "are-you-sure": "Êtes-vous sûr?"
 }

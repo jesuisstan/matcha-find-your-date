@@ -421,5 +421,8 @@
   "user-blocked-successfully": "Пользователь успешно заблокирован",
   "user-unblocked-successfully": "Пользователь успешно разблокирован",
   "failed-to-delete-user": "Не удалось удалить пользователя",
-  "user-deleted-successfully": "Пользователь успешно удалён"
+  "user-deleted-successfully": "Пользователь успешно удалён",
+  "delete": "Удалить",
+  "delete-account": "Удалить аккаунт",
+  "are-you-sure": "Вы уверены?"
 }
