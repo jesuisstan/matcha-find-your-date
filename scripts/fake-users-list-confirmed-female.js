@@ -6697,7 +6697,7 @@ module.exports = function (hashedPassword, yesterday) {
       sex_preferences: 'women',
       registration_date: yesterday.toISOString(),
       online: false,
-      rating: 21,
+      rating: 22,
       biography: 'Environmental activist and nature lover. I love spending time in the wilderness.',
       tags: [
         'eco-friendly',

@@ -427,5 +427,6 @@
   "user-deleted-successfully": "User deleted successfully",
   "delete": "Delete",
   "delete-account": "Delete account",
-  "are-you-sure": "Are you sure?"
+  "are-you-sure": "Are you sure?",
+  "incorrect-age-range": "Incorrect age range"
 }

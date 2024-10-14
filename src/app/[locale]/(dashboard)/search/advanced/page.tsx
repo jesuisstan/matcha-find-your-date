@@ -139,6 +139,7 @@ const AdvancedSearch = () => {
     setSuccessMessage('');
     if (selectedTags.length === 0) {
       setError('error-no-tags-selected');
+      setIsSidebarOpen(false);
       return;
     }
     setLoading(true);
@@ -375,10 +376,10 @@ const AdvancedSearch = () => {
                       name="distance"
                       placeholder={t(`max`)}
                       value={distance}
-                      errorMessage="0-9999"
+                      errorMessage="0-9969"
                       className="-mb-1 w-20"
                       min={0}
-                      max={9999}
+                      max={9969}
                       onChange={(e) => setValueOfSearchFilter('distance', Number(e.target.value))}
                     />
                     <p className="self-start pt-2">{t('km')}</p>
@@ -398,10 +399,10 @@ const AdvancedSearch = () => {
                     name="age-min"
                     placeholder={t(`from`)}
                     value={ageMin}
-                    errorMessage="18-99"
+                    errorMessage="18-169"
                     className="-mb-1 w-20"
                     min={18}
-                    max={99}
+                    max={169}
                     onChange={(e) => setValueOfSearchFilter('age_min', Number(e.target.value))}
                   />
                   <p className="self-start pt-2">{' - '}</p>
@@ -411,10 +412,10 @@ const AdvancedSearch = () => {
                     name="age-max"
                     placeholder={t(`to`)}
                     value={ageMax}
-                    errorMessage="18-999"
+                    errorMessage="18-169"
                     className="-mb-1 w-20"
                     min={18}
-                    max={999}
+                    max={169}
                     onChange={(e) => setValueOfSearchFilter('age_max', Number(e.target.value))}
                   />
                 </div>

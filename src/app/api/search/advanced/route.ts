@@ -29,6 +29,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'user-not-found' }, { status: 404 });
     }
 
+    if (ageMin < 18) {
+      return NextResponse.json({ error: 'under-18' }, { status: 403 });
+    }
+
+    if (ageMax < ageMin) {
+      return NextResponse.json({ error: 'incorrect-age-range' }, { status: 404 });
+    }
+
     // Update user's last action and set online status to true
     const currentDate = new Date().toISOString();
     const updateQuery = `

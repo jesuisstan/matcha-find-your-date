@@ -424,5 +424,6 @@
   "user-deleted-successfully": "Utilisateur supprimé avec succès",
   "delete": "Supprimer",
   "delete-account": "Supprimer le compte",
-  "are-you-sure": "Êtes-vous sûr?"
+  "are-you-sure": "Êtes-vous sûr?",
+  "incorrect-age-range": "Plage d'âge incorrecte"
 }
