@@ -6,9 +6,9 @@ import { useTranslations } from 'next-intl';
 import ChatHistory from '@/components/chat/chat-history';
 import ChatPartnerWrapper from '@/components/chat/chat-partner-card';
 import ChatCardSkeleton from '@/components/ui/skeletons/chart-card-skeleton';
+import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 import { TChatPartner, useChatStore } from '@/stores/chat-store';
 import useUserStore from '@/stores/user';
-import ModalProfileWarning from '@/components/modals/modal-profile-warning';
 
 const MessagesPage = () => {
   const t = useTranslations();
