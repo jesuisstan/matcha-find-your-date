@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 
 import ChatHistory from '@/components/chat/chat-history';
 import ChatPartnerWrapper from '@/components/chat/chat-partner-card';
-import ChatCardSkeleton from '@/components/ui/skeletons/chart-card-skeleton';
 import ModalProfileWarning from '@/components/modals/modal-profile-warning';
+import ChatCardSkeleton from '@/components/ui/skeletons/chart-card-skeleton';
 import useUserStore from '@/stores/user';
 import { TChatPartner, useChatStore } from '@/stores/chat-store';
 
