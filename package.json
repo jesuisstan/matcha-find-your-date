@@ -10,7 +10,8 @@
     "start": "npx concurrently -n matcha-app,cron-job -c blue,magenta \"node ./scripts/start-build.js\" \"node ./scripts/check-inactivity-cron-job.js\"",
     "lint": "next lint",
     "clean": "npx rimraf .swc && npx rimraf .next && npx rimraf node_modules && npx rimraf package-lock.json && npx rimraf coverage",
-    "c:i": "npm run clean && npm install"
+    "c:i": "npm run clean && npm install",
+    "evaluation": "npm install && node ./scripts/prepare-db.js && npm run build && npm start"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.5",
