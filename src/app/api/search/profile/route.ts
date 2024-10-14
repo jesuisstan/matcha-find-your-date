@@ -4,6 +4,10 @@ import { db } from '@vercel/postgres';
 
 import { calculateAge } from '@/utils/format-string';
 
+function isValidUUID(uuid: string): boolean {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(uuid);
+}
 // Define the POST request handler for fetching profile data
 export async function POST(request: Request) {
   const { userId, profileToFindId } = await request.json();
@@ -11,6 +15,9 @@ export async function POST(request: Request) {
   // If no profileToFindId is provided, return an error response
   if (!profileToFindId) {
     return NextResponse.json({ error: 'id-not-provided' }, { status: 400 });
+  }
+  if (!isValidUUID(profileToFindId)) {
+    return NextResponse.json({ error: 'invalid-input' }, { status: 400 });
   }
 
   const client = await db.connect();
