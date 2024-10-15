@@ -169,15 +169,15 @@ const Login = () => {
             <h2 className="mb-2 text-4xl">Make love, not war</h2>
             <p className="text-sm">
               Matcha Dating App{'. '}
-              {/*{t(`service-provided`)}{' '}
+              {t(`service-provided`)}{' '}
               <a
                 href={`https://www.krivtsoff.site/`}
                 target="_blank"
-                className="hover:text-c42green my-6 text-center text-sm text-c42orange transition-all duration-300 ease-in-out"
+                className="my-6 text-center text-sm text-c42orange transition-all duration-300 ease-in-out hover:text-c42green"
               >
                 Stan Krivtsoff
               </a>
-              {'. '}*/}
+              {'. '}
               {t(`rights-reserved`)}
               {'.'}
             </p>
@@ -191,7 +191,7 @@ const Login = () => {
           'lg:w-1/4'
         )}
       >
-        <div className="h-[99px] mb-2">
+        <div className="mb-2 h-[99px]">
           <Image
             src="/identity/logo-transparent.png"
             className="z-10 m-auto mb-2 mt-0 w-44"
