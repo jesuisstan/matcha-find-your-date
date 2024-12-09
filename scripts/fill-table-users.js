@@ -67,7 +67,7 @@ async function insertUsers() {
         ]
       );
     }
-    console.log('15 unconfirmed users are ready for inserting into database');
+    console.log('Unconfirmed users are ready for inserting into database');
     console.log('...');
 
     // Insert confirmed users-men
@@ -100,7 +100,7 @@ async function insertUsers() {
         ]
       );
     }
-    console.log('218 confirmed male users are ready for inserting into database');
+    console.log('Confirmed male users are ready for inserting into database');
     console.log('...');
 
     // Insert confirmed users-women
@@ -133,7 +133,7 @@ async function insertUsers() {
         ]
       );
     }
-    console.log('290 confirmed female users are ready for inserting into database');
+    console.log('Confirmed female users are ready for inserting into database');
     console.log('...');
 
     await client.query('COMMIT');
