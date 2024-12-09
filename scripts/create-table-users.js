@@ -55,7 +55,8 @@ async function createTables() {
         registration_date TIMESTAMP WITH TIME ZONE,
         last_action TIMESTAMP WITH TIME ZONE,
         online BOOLEAN DEFAULT false,
-        service_token TEXT
+        service_token TEXT,
+        prefered_lang TEXT DEFAULT 'en'
       );
     `);
 
