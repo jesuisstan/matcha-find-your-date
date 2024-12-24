@@ -51,7 +51,7 @@ const ModalBasic = ({
                 onClick={() => setIsOpen?.(false)}
                 aria-label="Close"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
             )}
           </AlertDialog.Title>
