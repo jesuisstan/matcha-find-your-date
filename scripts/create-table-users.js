@@ -36,7 +36,7 @@ async function createTables() {
       CREATE TABLE IF NOT EXISTS users (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
+        password TEXT,
         confirmed BOOLEAN DEFAULT false,
         firstname VARCHAR(255) NOT NULL,
         lastname VARCHAR(255) NOT NULL,
