@@ -425,5 +425,6 @@
   "delete": "Supprimer",
   "delete-account": "Supprimer le compte",
   "are-you-sure": "Êtes-vous sûr?",
-  "incorrect-age-range": "Plage d'âge incorrecte"
+  "incorrect-age-range": "Plage d'âge incorrecte",
+  "slide-show": "Diaporama"
 }

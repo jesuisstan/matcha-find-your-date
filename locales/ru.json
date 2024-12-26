@@ -425,5 +425,6 @@
   "delete": "Удалить",
   "delete-account": "Удалить аккаунт",
   "are-you-sure": "Вы уверены?",
-  "incorrect-age-range": "Неверный диапазон возраста"
+  "incorrect-age-range": "Неверный диапазон возраста",
+  "slide-show": "Слайд-шоу"
 }
