@@ -56,7 +56,7 @@ async function createTables() {
         last_action TIMESTAMP WITH TIME ZONE,
         online BOOLEAN DEFAULT false,
         service_token TEXT,
-        prefered_language TEXT DEFAULT 'en'
+        preferred_language TEXT DEFAULT 'en'
       );
     `);
 

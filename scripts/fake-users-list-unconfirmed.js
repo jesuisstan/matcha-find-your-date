@@ -24,7 +24,7 @@ module.exports = function (hashedPassword, yesterday) {
       address: null,
       last_action: null,
       service_token: null,
-      prefered_language: 'en',
+      preferred_language: 'en',
     },
     {
       email: 'scarlett.johansson@example.com',
@@ -48,7 +48,7 @@ module.exports = function (hashedPassword, yesterday) {
       address: null,
       last_action: null,
       service_token: null,
-      prefered_language: 'en',
+      preferred_language: 'en',
     },
     {
       email: 'angelina.jolie@example.com',
@@ -72,7 +72,7 @@ module.exports = function (hashedPassword, yesterday) {
       address: null,
       last_action: null,
       service_token: null,
-      prefered_language: 'en',
+      preferred_language: 'en',
     },
     {
       email: 'daniel.craig@example.com',
@@ -96,7 +96,7 @@ module.exports = function (hashedPassword, yesterday) {
       address: null,
       last_action: null,
       service_token: null,
-      prefered_language: 'en',
+      preferred_language: 'en',
     },
     {
       email: 'brad.pitt@example.com',
@@ -120,7 +120,7 @@ module.exports = function (hashedPassword, yesterday) {
       address: null,
       last_action: null,
       service_token: null,
-      prefered_language: 'en',
+      preferred_language: 'en',
     },
   ];
 };
