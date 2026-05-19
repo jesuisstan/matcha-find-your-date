@@ -171,7 +171,7 @@ const Login = () => {
               Matcha Dating App{'. '}
               {t(`service-provided`)}{' '}
               <a
-                href={`https://www.krivtsoff.site/`}
+                href={`https://www.krivtsoff.online/`}
                 target="_blank"
                 className="my-6 text-center text-sm text-c42green transition-all duration-300 ease-in-out hover:text-c42orange"
               >
